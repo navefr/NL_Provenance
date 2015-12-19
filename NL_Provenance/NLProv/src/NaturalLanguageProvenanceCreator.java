@@ -236,6 +236,9 @@ public class NaturalLanguageProvenanceCreator {
         System.out.println();
         System.out.println("Append Tree");
         System.out.println(SentenceBuilder.getInstance().buildAppendTree(queryOriginalParseTree, wordReplacementMap));
+        System.out.println();
+        System.out.println("Answer Tree");
+        System.out.println(AnswerParseTreeBuilder.getInstance().buildAnswerParseTree(queryOriginalParseTree, wordReplacementMap));
 
         return SentenceBuilder.getInstance().buildSentence(queryOriginalParseTree, wordReplacementMap);
     }
