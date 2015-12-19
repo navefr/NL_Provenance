@@ -1,0 +1,152 @@
+.background {
+    //-fx-background-color: DarkSlateGray;
+	-fx-background-image: url("background1.jpeg");
+}
+
+#outputMainPane, #inputMainPane {
+	-fx-background-color: LightSteelBlue;
+	//-fx-background-image: url("background1.jpeg");
+}
+
+#transitive, #labelDealsWith, #labelExport {
+	-fx-background-color: white
+}
+
+#res {
+	   -fx-font-size: 32px;
+	   -fx-font-family: "Arial Black";
+}
+
+#programLabel, #patternLabel, #DbLabel, #outDBLabel, #topKLabel, #top {
+	//-fx-font-weight: bold;
+	-fx-font-family: "Arial Black";
+	-fx-font-size: 18px;
+}
+
+#canvas {
+	-fx-background-color: Gray;
+	-fx-border-color: black;
+}
+
+.button {
+	-fx-background-color: 
+        #090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+}
+
+.button:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets: 2 0 0 0,2 0 3 0, 2 0 4 0, 2 0 5 0;
+}
+
+.button:hover {
+    -fx-background-color: 
+    	#090a0c,
+        linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+        linear-gradient(#20262b, #191d22),
+        radial-gradient(center 50% 0%, radius 100%, rgba(100,160,200,0.9), rgba(255,255,255,0));
+}
+
+.table-view {
+    -fx-padding: 2;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: aliceblue;
+}
+
+.table-view .filler {
+    -fx-size: 14;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: 
+        transparent
+        transparent
+        derive(-fx-base, 80%) 
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header {
+    -fx-font-size: 12pt;
+    -fx-font-weight: bolder;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+
+.table-view .table-cell {
+	-fx-font-size: 11pt;
+}
+
+
+.scroll-pane {
+	-fx-background-color: derive(#1d1d1d,50%);
+}
+
+
+.radio-button {
+	-fx-font-family: "Arial";
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+}
+
+
+.scroll-pane  {
+	-fx-text-fill: black;
+}
+
+.menu-bar {
+    -fx-background-color: derive(#1d1d1d,80%);
+}
+
+.context-menu {
+    -fx-background-color: derive(#1d1d1d,80%);
+}
+
+.menu-item .label {
+    -fx-padding: 0em; 
+	-fx-text-fill: white;
+}
+
+.menu-bar .menu {
+	-fx-font-size: 9pt;
+	-fx-font-family: "Segoe UI Light";
+	-fx-text-fill: white;
+}
+
+.menu-bar .menu .menu-item {
+	-fx-font-size: 9pt;
+	-fx-font-family: "Segoe UI Light";
+	-fx-text-fill: white;
+}
+
+.menu .left-container {
+    -fx-background-color: white;
+}
+
+.text-area {
+	-fx-text-fill: black;
+	-fx-font-size: 12pt;
+	-fx-font-family: "Arial";
+}
+
+.label {
+	-fx-background-radius: 5;
+}

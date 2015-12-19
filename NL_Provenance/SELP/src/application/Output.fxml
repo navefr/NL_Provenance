@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<Pane fx:id="outputMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OutputScreenController">
+   <children>
+      <ScrollPane layoutX="634.0" layoutY="132.0" prefHeight="529.0" prefWidth="470.0">
+        <content>
+          <AnchorPane fx:id="dbPane" minHeight="0.0" minWidth="0.0" prefHeight="3250.0" prefWidth="462.0">
+               <!-- <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="177.0" prefHeight="20.0" prefWidth="60.0" text="Import" textAlignment="CENTER">
+                     <font>
+                        <Font name="Guttman David" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="201.0" layoutY="4.0" prefHeight="20.0" prefWidth="48.0" text="Export" textAlignment="CENTER">
+                     <font>
+                        <Font name="Guttman David" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="193.0" layoutY="360.0" prefHeight="20.0" prefWidth="77.0" text="dealsWith" textAlignment="CENTER">
+                     <font>
+                        <Font name="Guttman David" size="14.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="DealsWithTable" layoutY="384.0" prefHeight="154.0" prefWidth="462.0">
+                     <columns>
+                        <TableColumn fx:id="DealsWithCountryC1" prefWidth="234.0" text="Country" />
+                        <TableColumn fx:id="DealsWithCountryC2" prefWidth="221.0" text="Country" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="ExportTable" editable="true" layoutY="26.0" prefHeight="145.0" prefWidth="462.0">
+                    <columns>
+                      <TableColumn fx:id="ExportCountryCol" prefWidth="228.0" text="Country" />
+                      <TableColumn fx:id="ExportProductCol" prefWidth="225.0" text="Product" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="ImportTable" layoutX="-3.0" layoutY="201.0" prefHeight="154.0" prefWidth="462.0">
+                    <columns>
+                      <TableColumn fx:id="ImportCountryCol" prefWidth="234.0" text="Country" />
+                      <TableColumn fx:id="ImportProductCol" prefWidth="221.0" text="Product" />
+                    </columns>
+                  </TableView>
+               </children> -->
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label fx:id="outDBLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="783.0" layoutY="93.0" prefHeight="39.0" prefWidth="173.0" text="Output DB" textAlignment="CENTER">
+         <font>
+            <Font name="Guttman David" size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="res" alignment="CENTER" layoutX="507.0" layoutY="40.0" prefHeight="59.0" prefWidth="216.0" text="Results" textAlignment="CENTER">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <Button fx:id="Back" layoutX="23.0" layoutY="48.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Back" />
+      <ImageView fitHeight="71.0" fitWidth="83.0" layoutX="1025.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Downloads/SelP_logo.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutX="-3.0" layoutY="-3.0" prefHeight="30.0" prefWidth="1121.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="close" mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label fx:id="topKLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="252.0" layoutY="93.0" prefHeight="39.0" prefWidth="161.0" text="Top-k" textAlignment="CENTER">
+         <font>
+            <Font name="Guttman David" size="28.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="scrollPane" layoutX="23.0" layoutY="131.0" prefHeight="529.0" prefWidth="594.0">
+         <!-- <content>
+            <Pane fx:id="treePane" prefHeight="3000.0" prefWidth="1500.0" />
+         </content> -->
+      </ScrollPane> 
+      <!-- <Button fx:id="showTrees" layoutX="23.0" layoutY="93.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Refresh" /> -->
+      <Button fx:id="prov" layoutX="23.0" layoutY="91.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="95.0" text="Full Prov" />
+   </children>
+</Pane>

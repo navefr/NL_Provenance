@@ -1,0 +1,723 @@
+Loading parser from serialized file edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz ... done [0.9 sec].
+1. ##2_query## show me the total citations of the papers in each conference in database area. 
+(1)ROOT
+    (2)show
+        (6)total
+            (4)citations
+                (8)papers
+                    (11)conference
+                        (14)area
+                            (15)database
+
+1. ROOT: ROOT; NA; ; (0) 
+2. show: CMT; NA; ; (0) 
+4. citations: NT; NA; ; (0) publication.title(1.0):| journal.name(0.97):| organization.name(0.93):| conference.name(0.84):| domain.name(0.82):| 
+6. total: FT; sum; ; (0) 
+8. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+11. conference: NT; NA; each; (0) conference.name(1.04):| organization.name(0.95):| conference.conference(0.87):ICONFERENCE (#iConfe; GREENCOM (#Green Com; RECONFIG (#Reconfigu; | publication.title(0.84):| publication.year(0.8):| 
+14. area: NT; NA; ; (0) domain.name(1.0):| publication.year(0.9):| publication.title(0.88):| journal.name(0.85):| organization.name(0.85):| 
+15. database: VTTEXT; NA; ; (0) domain.domain(0.98):Databases; Data Mining; Simulation; | publication.title(0.87):| journal.name(0.84):| conference.name(0.83):| domain.name(0.81):| 
+
+{"attributes":[{"node_id":1},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":2},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":6},{"label":"total"},{"type":"FT"},{"function":"sum"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":4},{"label":"citations"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":8},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":11},{"label":"conference"},{"type":"NT"},{"function":"NA"},{"quantifier":"each"},{"mappedSchemaElement":"conference.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":14},{"label":"area"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":15},{"label":"database"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain"},{"mappedValue":"Databases"},{"children":"NA"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}
+============
+
+2. ##2_query## show me the papers written by "H. V. Jagadish" and "Divesh Srivastava". 
+(17)ROOT
+    (18)show
+        (19)papers
+            (24)H. V. Jagadish
+            (26)Divesh Srivastava
+
+17. ROOT: ROOT; NA; ; (0) 
+18. show: CMT; NA; ; (0) 
+19. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+24. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+26. Divesh Srivastava: VTTEXT; NA; ; (0) author.author(0.87):Divesh Srivastava; Devesh Srivastava; Sanvesh Srivastava; | publication.publication(0.74):Srivastava codes.; Noncyclic Generaliza; Professor H.M. Sriva; | domain.domain(0.71):Databases; Security & Privacy; Distributed & Parall; | journal.journal(0.68):PERVASIVE (#IEEE Per; QUESTA (#Queueing Sy; ESTICAS (#IEEE Journ; | conference.conference(0.68):DESRIST (#DESRIST); PERVASIVE (#Pervasiv; VAST (#Virtual Reali; | 
+
+{"attributes":[{"node_id":17},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":18},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":19},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":24},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":26},{"label":"Divesh Srivastava"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Divesh Srivastava"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+3. ##2_query## show me the papers written by "H. V. Jagadish" and "Divesh Srivastava" before 2000. 
+(28)ROOT
+    (29)show
+        (30)papers
+            (35)H. V. Jagadish
+            (37)Divesh Srivastava
+            (38)before
+                (39)2000
+
+28. ROOT: ROOT; NA; ; (0) 
+29. show: CMT; NA; ; (0) 
+30. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+35. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+37. Divesh Srivastava: VTTEXT; NA; ; (0) author.author(0.87):Divesh Srivastava; Devesh Srivastava; Sanvesh Srivastava; | publication.publication(0.74):Srivastava codes.; Noncyclic Generaliza; Professor H.M. Sriva; | domain.domain(0.71):Databases; Security & Privacy; Distributed & Parall; | journal.journal(0.68):PERVASIVE (#IEEE Per; QUESTA (#Queueing Sy; ESTICAS (#IEEE Journ; | conference.conference(0.68):DESRIST (#DESRIST); PERVASIVE (#Pervasiv; VAST (#Virtual Reali; | 
+38. before: OT; <; ; (0) 
+39. 2000: VTNUM; NA; ; (0) publication.year(0.97):1936; 1936; 1936; | 
+
+{"attributes":[{"node_id":28},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":29},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":30},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":35},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":37},{"label":"Divesh Srivastava"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Divesh Srivastava"},{"children":"NA"}]},{"attributes":[{"node_id":38},{"label":"before"},{"type":"OT"},{"function":"<"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":39},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"1936"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+4. ##2_query## show me the papers written by "H. V. Jagadish" and "Yunyao Li" after 2005. 
+(41)ROOT
+    (42)show
+        (43)papers
+            (48)H. V. Jagadish
+            (50)Yunyao Li
+            (51)after
+                (52)2005
+
+41. ROOT: ROOT; NA; ; (0) 
+42. show: CMT; NA; ; (0) 
+43. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+48. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+50. Yunyao Li: VTTEXT; NA; ; (0) author.author(0.85):Yunyao Li; Yunyao Qu; Yunyao Zhang; | conference.conference(0.6):MODELLIERUNG (#Model; LICS (#Logic in Comp; LISA (#USENIX Large ; | journal.journal(0.6):AO (#Applied Ontolog; DLIB (#D-Lib Magazin; LIBT (#Library Trend; | domain.domain(0.51):Artificial Intellige; Programming Language; Networks & Communica; | 
+51. after: OT; >; ; (0) 
+52. 2005: VTNUM; NA; ; (0) publication.year(1.0):2006; 2006; 2006; | 
+
+{"attributes":[{"node_id":41},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":42},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":43},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":48},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":50},{"label":"Yunyao Li"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Yunyao Li"},{"children":"NA"}]},{"attributes":[{"node_id":51},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":52},{"label":"2005"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2006"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+5. ##2_query## show me the papers written by "H. V. Jagadish" and "Yunyao Li" on PVLDB. 
+(54)ROOT
+    (55)show
+        (56)papers
+            (61)H. V. Jagadish
+            (63)Yunyao Li
+            (65)PVLDB
+
+54. ROOT: ROOT; NA; ; (0) 
+55. show: CMT; NA; ; (0) 
+56. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+61. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+63. Yunyao Li: VTTEXT; NA; ; (0) author.author(0.85):Yunyao Li; Yunyao Qu; Yunyao Zhang; | conference.conference(0.6):MODELLIERUNG (#Model; LICS (#Logic in Comp; LISA (#USENIX Large ; | journal.journal(0.6):AO (#Applied Ontolog; DLIB (#D-Lib Magazin; LIBT (#Library Trend; | domain.domain(0.51):Artificial Intellige; Programming Language; Networks & Communica; | 
+65. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+
+{"attributes":[{"node_id":54},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":55},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":56},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":61},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":63},{"label":"Yunyao Li"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Yunyao Li"},{"children":"NA"}]},{"attributes":[{"node_id":65},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+6. ##2_query## show me the papers written by "H. V. Jagadish" and "Yunyao Li" on PVLDB after 2005. 
+(67)ROOT
+    (68)show
+        (71)papers
+        (74)H. V. Jagadish
+        (76)Yunyao Li
+        (78)PVLDB
+        (79)after
+            (80)2005
+
+67. ROOT: ROOT; NA; ; (0) 
+68. show: CMT; NA; ; (0) 
+71. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+74. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+76. Yunyao Li: VTTEXT; NA; ; (0) author.author(0.85):Yunyao Li; Yunyao Qu; Yunyao Zhang; | conference.conference(0.6):MODELLIERUNG (#Model; LICS (#Logic in Comp; LISA (#USENIX Large ; | journal.journal(0.6):AO (#Applied Ontolog; DLIB (#D-Lib Magazin; LIBT (#Library Trend; | domain.domain(0.51):Artificial Intellige; Programming Language; Networks & Communica; | 
+78. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+79. after: OT; >; ; (0) 
+80. 2005: VTNUM; NA; ; (0) publication.year(1.0):2006; 2006; 2006; | 
+
+{"attributes":[{"node_id":67},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":68},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":71},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":"NA"}]},{"attributes":[{"node_id":74},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":76},{"label":"Yunyao Li"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Yunyao Li"},{"children":"NA"}]},{"attributes":[{"node_id":78},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]},{"attributes":[{"node_id":79},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":80},{"label":"2005"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2006"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+7. ##2_query## show me the number of papers written by "H. V. Jagadish" and "Divesh Srivastava". 
+(82)ROOT
+    (83)show
+        (85)number of
+            (88)papers
+                (91)H. V. Jagadish
+                (93)Divesh Srivastava
+
+82. ROOT: ROOT; NA; ; (0) 
+83. show: CMT; NA; ; (0) 
+85. number of: FT; count; ; (0) 
+88. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+91. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+93. Divesh Srivastava: VTTEXT; NA; ; (0) author.author(0.87):Divesh Srivastava; Devesh Srivastava; Sanvesh Srivastava; | publication.publication(0.74):Srivastava codes.; Noncyclic Generaliza; Professor H.M. Sriva; | domain.domain(0.71):Databases; Security & Privacy; Distributed & Parall; | journal.journal(0.68):PERVASIVE (#IEEE Per; QUESTA (#Queueing Sy; ESTICAS (#IEEE Journ; | conference.conference(0.68):DESRIST (#DESRIST); PERVASIVE (#Pervasiv; VAST (#Virtual Reali; | 
+
+{"attributes":[{"node_id":82},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":83},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":85},{"label":"number of"},{"type":"FT"},{"function":"count"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":88},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":91},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":93},{"label":"Divesh Srivastava"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Divesh Srivastava"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+8. ##2_query## show me the number of papers written by "H. V. Jagadish" and "Divesh Srivastava" before 2000. 
+(95)ROOT
+    (96)show
+        (98)number of
+            (101)papers
+                (104)H. V. Jagadish
+                (106)Divesh Srivastava
+                (107)before
+                    (108)2000
+
+95. ROOT: ROOT; NA; ; (0) 
+96. show: CMT; NA; ; (0) 
+98. number of: FT; count; ; (0) 
+101. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+104. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+106. Divesh Srivastava: VTTEXT; NA; ; (0) author.author(0.87):Divesh Srivastava; Devesh Srivastava; Sanvesh Srivastava; | publication.publication(0.74):Srivastava codes.; Noncyclic Generaliza; Professor H.M. Sriva; | domain.domain(0.71):Databases; Security & Privacy; Distributed & Parall; | journal.journal(0.68):PERVASIVE (#IEEE Per; QUESTA (#Queueing Sy; ESTICAS (#IEEE Journ; | conference.conference(0.68):DESRIST (#DESRIST); PERVASIVE (#Pervasiv; VAST (#Virtual Reali; | 
+107. before: OT; <; ; (0) 
+108. 2000: VTNUM; NA; ; (0) publication.year(0.97):1936; 1936; 1936; | 
+
+{"attributes":[{"node_id":95},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":96},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":98},{"label":"number of"},{"type":"FT"},{"function":"count"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":101},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":104},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":106},{"label":"Divesh Srivastava"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Divesh Srivastava"},{"children":"NA"}]},{"attributes":[{"node_id":107},{"label":"before"},{"type":"OT"},{"function":"<"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":108},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"1936"},{"children":"NA"}]}]}]}]}]}]}]}]}]}]}]}
+============
+
+9. ##2_query## show me the number of papers written by "H. V. Jagadish" and "Yunyao Li" after 2000. 
+(110)ROOT
+    (111)show
+        (113)number of
+            (116)papers
+                (119)H. V. Jagadish
+                (121)Yunyao Li
+                (122)after
+                    (123)2000
+
+110. ROOT: ROOT; NA; ; (0) 
+111. show: CMT; NA; ; (0) 
+113. number of: FT; count; ; (0) 
+116. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+119. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+121. Yunyao Li: VTTEXT; NA; ; (0) author.author(0.85):Yunyao Li; Yunyao Qu; Yunyao Zhang; | conference.conference(0.6):MODELLIERUNG (#Model; LICS (#Logic in Comp; LISA (#USENIX Large ; | journal.journal(0.6):AO (#Applied Ontolog; DLIB (#D-Lib Magazin; LIBT (#Library Trend; | domain.domain(0.51):Artificial Intellige; Programming Language; Networks & Communica; | 
+122. after: OT; >; ; (0) 
+123. 2000: VTNUM; NA; ; (0) publication.year(1.0):2001; 2001; 2001; | 
+
+{"attributes":[{"node_id":110},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":111},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":113},{"label":"number of"},{"type":"FT"},{"function":"count"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":116},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":119},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":121},{"label":"Yunyao Li"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Yunyao Li"},{"children":"NA"}]},{"attributes":[{"node_id":122},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":123},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2001"},{"children":"NA"}]}]}]}]}]}]}]}]}]}]}]}
+============
+
+10. ##2_query## show me the papers written by "H. V. Jagadish" and "Divesh Srivastava" with more than 200 citations. 
+(125)ROOT
+    (126)show
+        (127)papers
+            (132)H. V. Jagadish
+            (134)Divesh Srivastava
+            (136)citations
+                (138)more than
+                    (137)200
+
+125. ROOT: ROOT; NA; ; (0) 
+126. show: CMT; NA; ; (0) 
+127. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+132. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+134. Divesh Srivastava: VTTEXT; NA; ; (0) author.author(0.87):Divesh Srivastava; Devesh Srivastava; Sanvesh Srivastava; | publication.publication(0.74):Srivastava codes.; Noncyclic Generaliza; Professor H.M. Sriva; | domain.domain(0.71):Databases; Security & Privacy; Distributed & Parall; | journal.journal(0.68):PERVASIVE (#IEEE Per; QUESTA (#Queueing Sy; ESTICAS (#IEEE Journ; | conference.conference(0.68):DESRIST (#DESRIST); PERVASIVE (#Pervasiv; VAST (#Virtual Reali; | 
+136. citations: NT; NA; ; (0) publication.title(1.0):| journal.name(0.97):| organization.name(0.93):| conference.name(0.84):| domain.name(0.82):| 
+137. 200: VTNUM; NA; ; (-1) publication.year(-7.68):1936; 1936; 1936; | 
+138. more than: OT; >; ; (0) 
+
+{"attributes":[{"node_id":125},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":126},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":127},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":132},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":134},{"label":"Divesh Srivastava"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Divesh Srivastava"},{"children":"NA"}]},{"attributes":[{"node_id":136},{"label":"citations"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":138},{"label":"more than"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":137},{"label":"200"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":"NA"}]}]}]}]}]}]}]}]}]}]}]}
+============
+
+11. ##2_query## show me the papers written by "H. V. Jagadish" and "Divesh Srivastava" with the most number of citations. 
+(141)ROOT
+    (142)show
+        (143)papers
+            (148)H. V. Jagadish
+            (150)Divesh Srivastava
+            (154)most
+                (152)number of
+                    (156)citations
+
+141. ROOT: ROOT; NA; ; (0) 
+142. show: CMT; NA; ; (0) 
+143. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+148. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+150. Divesh Srivastava: VTTEXT; NA; ; (0) author.author(0.87):Divesh Srivastava; Devesh Srivastava; Sanvesh Srivastava; | publication.publication(0.74):Srivastava codes.; Noncyclic Generaliza; Professor H.M. Sriva; | domain.domain(0.71):Databases; Security & Privacy; Distributed & Parall; | journal.journal(0.68):PERVASIVE (#IEEE Per; QUESTA (#Queueing Sy; ESTICAS (#IEEE Journ; | conference.conference(0.68):DESRIST (#DESRIST); PERVASIVE (#Pervasiv; VAST (#Virtual Reali; | 
+152. number of: FT; count; ; (0) 
+154. most: FT; max; ; (0) 
+156. citations: NT; NA; ; (0) publication.title(1.0):| journal.name(0.97):| organization.name(0.93):| conference.name(0.84):| domain.name(0.82):| 
+
+{"attributes":[{"node_id":141},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":142},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":143},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":148},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":150},{"label":"Divesh Srivastava"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"Divesh Srivastava"},{"children":"NA"}]},{"attributes":[{"node_id":154},{"label":"most"},{"type":"FT"},{"function":"max"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":152},{"label":"number of"},{"type":"FT"},{"function":"count"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":156},{"label":"citations"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":"NA"}]}]}]}]}]}]}]}]}]}]}]}
+============
+
+12. ##2_query## show me the homepage of "University of Michigan". 
+(158)ROOT
+    (159)show
+        (161)homepage
+            (164)University of Michigan
+
+158. ROOT: ROOT; NA; ; (0) 
+159. show: CMT; NA; ; (0) 
+161. homepage: NT; NA; ; (3) author.homepage(1.1):| conference.homepage(1.1):| journal.homepage(1.1):| organization.homepage(1.1):| conference.conference(0.69):COMPIMAGE (#Computat; SOMET (#Software Met; AGENTS (#Internation; | 
+164. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+
+{"attributes":[{"node_id":158},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":159},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":161},{"label":"homepage"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization.homepage"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":164},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+13. ##2_query## show me the researchers in "University of Michigan". 
+(166)ROOT
+    (167)show
+        (169)researchers
+            (172)University of Michigan
+
+166. ROOT: ROOT; NA; ; (0) 
+167. show: CMT; NA; ; (0) 
+169. researchers: NT; NA; ; (0) author.name(0.95):| conference.name(0.88):| journal.name(0.88):| domain.name(0.87):| organization.name(0.82):| 
+172. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+
+{"attributes":[{"node_id":166},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":167},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":169},{"label":"researchers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":172},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+14. ##2_query## show me the researchers in "University of Michigan" in database area. 
+(174)ROOT
+    (175)show
+        (177)researchers
+            (180)University of Michigan
+            (182)area
+                (183)database
+
+174. ROOT: ROOT; NA; ; (0) 
+175. show: CMT; NA; ; (0) 
+177. researchers: NT; NA; ; (0) author.name(0.95):| conference.name(0.88):| journal.name(0.88):| domain.name(0.87):| organization.name(0.82):| 
+180. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+182. area: NT; NA; ; (0) domain.name(1.0):| publication.year(0.9):| publication.title(0.88):| journal.name(0.85):| organization.name(0.85):| 
+183. database: VTTEXT; NA; ; (0) domain.domain(0.98):Databases; Data Mining; Simulation; | publication.title(0.87):| journal.name(0.84):| conference.name(0.83):| domain.name(0.81):| 
+
+{"attributes":[{"node_id":174},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":175},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":177},{"label":"researchers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":180},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]},{"attributes":[{"node_id":182},{"label":"area"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":183},{"label":"database"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain"},{"mappedValue":"Databases"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+15. ##2_query## show me the number of researchers in "University of Michigan". 
+(185)ROOT
+    (186)show
+        (188)number of
+            (191)researchers
+                (193)University of Michigan
+
+185. ROOT: ROOT; NA; ; (0) 
+186. show: CMT; NA; ; (0) 
+188. number of: FT; count; ; (0) 
+191. researchers: NT; NA; ; (0) author.name(0.95):| conference.name(0.88):| journal.name(0.88):| domain.name(0.87):| organization.name(0.82):| 
+193. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+
+{"attributes":[{"node_id":185},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":186},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":188},{"label":"number of"},{"type":"FT"},{"function":"count"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":191},{"label":"researchers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":193},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+16. ##2_query## show me the number of researchers in database area in "University of Michigan". 
+(195)ROOT
+    (196)show
+        (198)number of
+            (201)researchers
+                (203)area
+                    (204)database
+                    (206)University of Michigan
+
+195. ROOT: ROOT; NA; ; (0) 
+196. show: CMT; NA; ; (0) 
+198. number of: FT; count; ; (0) 
+201. researchers: NT; NA; ; (0) author.name(0.95):| conference.name(0.88):| journal.name(0.88):| domain.name(0.87):| organization.name(0.82):| 
+203. area: NT; NA; ; (0) domain.name(1.0):| publication.year(0.9):| publication.title(0.88):| journal.name(0.85):| organization.name(0.85):| 
+204. database: VTTEXT; NA; ; (0) domain.domain(0.98):Databases; Data Mining; Simulation; | publication.title(0.87):| journal.name(0.84):| conference.name(0.83):| domain.name(0.81):| 
+206. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+
+{"attributes":[{"node_id":195},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":196},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":198},{"label":"number of"},{"type":"FT"},{"function":"count"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":201},{"label":"researchers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":203},{"label":"area"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":204},{"label":"database"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain"},{"mappedValue":"Databases"},{"children":"NA"}]},{"attributes":[{"node_id":206},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]}]}]}]}]}]}]}]}]}]}]}
+============
+
+17. ##2_query## show me the homepage of VLDB. 
+(208)ROOT
+    (209)show
+        (211)homepage
+            (214)VLDB
+
+208. ROOT: ROOT; NA; ; (0) 
+209. show: CMT; NA; ; (0) 
+211. homepage: NT; NA; ; (1) author.homepage(1.1):| conference.homepage(1.1):| journal.homepage(1.1):| organization.homepage(1.1):| conference.conference(0.69):COMPIMAGE (#Computat; SOMET (#Software Met; AGENTS (#Internation; | 
+214. VLDB: VTTEXT; NA; ; (0) conference.conference(0.93):VLDB (#Very Large Da; NLDB (#Applications ; VLDBW (#Workshops Co; | journal.journal(0.89):VLDB (#The VLDB Jour; PVLDB (#Proceedings ; DB (#DATA BASE); | domain.domain(0.57):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.57):Best papers of VLDB ; A 20/20 Vision of th; Anyone for a VLDB in; | 
+
+{"attributes":[{"node_id":208},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":209},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":211},{"label":"homepage"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference.homepage"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":214},{"label":"VLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"VLDB"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+18. ##2_query## show me the area of VLDB. 
+(216)ROOT
+    (217)show
+        (219)area
+            (222)VLDB
+
+216. ROOT: ROOT; NA; ; (0) 
+217. show: CMT; NA; ; (0) 
+219. area: NT; NA; ; (0) domain.name(1.0):| publication.year(0.9):| publication.title(0.88):| journal.name(0.85):| organization.name(0.85):| 
+222. VLDB: VTTEXT; NA; ; (0) conference.conference(0.93):VLDB (#Very Large Da; NLDB (#Applications ; VLDBW (#Workshops Co; | journal.journal(0.89):VLDB (#The VLDB Jour; PVLDB (#Proceedings ; DB (#DATA BASE); | domain.domain(0.57):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.57):Best papers of VLDB ; A 20/20 Vision of th; Anyone for a VLDB in; | 
+
+{"attributes":[{"node_id":216},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":217},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":219},{"label":"area"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":222},{"label":"VLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"VLDB"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+19. ##2_query## show me the papers on VLDB. 
+(224)ROOT
+    (225)show
+        (227)papers
+            (230)VLDB
+
+224. ROOT: ROOT; NA; ; (0) 
+225. show: CMT; NA; ; (0) 
+227. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+230. VLDB: VTTEXT; NA; ; (0) conference.conference(0.93):VLDB (#Very Large Da; NLDB (#Applications ; VLDBW (#Workshops Co; | journal.journal(0.89):VLDB (#The VLDB Jour; PVLDB (#Proceedings ; DB (#DATA BASE); | domain.domain(0.57):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.57):Best papers of VLDB ; A 20/20 Vision of th; Anyone for a VLDB in; | 
+
+{"attributes":[{"node_id":224},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":225},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":227},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":230},{"label":"VLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"VLDB"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+20. ##2_query## show me the papers on VLDB after 2000. 
+(232)ROOT
+    (233)show
+        (234)papers
+            (238)VLDB
+            (239)after
+                (240)2000
+
+232. ROOT: ROOT; NA; ; (0) 
+233. show: CMT; NA; ; (0) 
+234. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+238. VLDB: VTTEXT; NA; ; (0) conference.conference(0.93):VLDB (#Very Large Da; NLDB (#Applications ; VLDBW (#Workshops Co; | journal.journal(0.89):VLDB (#The VLDB Jour; PVLDB (#Proceedings ; DB (#DATA BASE); | domain.domain(0.57):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.57):Best papers of VLDB ; A 20/20 Vision of th; Anyone for a VLDB in; | 
+239. after: OT; >; ; (0) 
+240. 2000: VTNUM; NA; ; (0) publication.year(1.0):2001; 2001; 2001; | 
+
+{"attributes":[{"node_id":232},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":233},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":234},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":238},{"label":"VLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"VLDB"},{"children":"NA"}]},{"attributes":[{"node_id":239},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":240},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2001"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+21. ##2_query## show me the authors who have papers in VLDB. 
+(242)ROOT
+    (243)show
+        (245)authors
+            (249)papers
+                (251)VLDB
+
+242. ROOT: ROOT; NA; ; (0) 
+243. show: CMT; NA; ; (0) 
+245. authors: NT; NA; ; (0) author.name(1.02):| journal.name(0.88):| domain.name(0.87):| organization.name(0.85):| conference.name(0.81):| 
+249. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+251. VLDB: VTTEXT; NA; ; (0) conference.conference(0.93):VLDB (#Very Large Da; NLDB (#Applications ; VLDBW (#Workshops Co; | journal.journal(0.89):VLDB (#The VLDB Jour; PVLDB (#Proceedings ; DB (#DATA BASE); | domain.domain(0.57):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.57):Best papers of VLDB ; A 20/20 Vision of th; Anyone for a VLDB in; | 
+
+{"attributes":[{"node_id":242},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":243},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":245},{"label":"authors"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":249},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":251},{"label":"VLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"VLDB"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+22. ##2_query## show me the papers in VLDB in "University of Michigan". 
+(253)ROOT
+    (254)show
+        (256)papers
+            (259)VLDB
+            (261)University of Michigan
+
+253. ROOT: ROOT; NA; ; (0) 
+254. show: CMT; NA; ; (0) 
+256. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+259. VLDB: VTTEXT; NA; ; (0) conference.conference(0.93):VLDB (#Very Large Da; NLDB (#Applications ; VLDBW (#Workshops Co; | journal.journal(0.89):VLDB (#The VLDB Jour; PVLDB (#Proceedings ; DB (#DATA BASE); | domain.domain(0.57):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.57):Best papers of VLDB ; A 20/20 Vision of th; Anyone for a VLDB in; | 
+261. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+
+{"attributes":[{"node_id":253},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":254},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":256},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":259},{"label":"VLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"VLDB"},{"children":"NA"}]},{"attributes":[{"node_id":261},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+23. ##2_query## show me the papers in VLDB after 2000 in "University of Michigan". 
+(263)ROOT
+    (264)show
+        (265)papers
+            (269)VLDB
+            (270)after
+                (271)2000
+            (273)University of Michigan
+
+263. ROOT: ROOT; NA; ; (0) 
+264. show: CMT; NA; ; (0) 
+265. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+269. VLDB: VTTEXT; NA; ; (0) conference.conference(0.93):VLDB (#Very Large Da; NLDB (#Applications ; VLDBW (#Workshops Co; | journal.journal(0.89):VLDB (#The VLDB Jour; PVLDB (#Proceedings ; DB (#DATA BASE); | domain.domain(0.57):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.57):Best papers of VLDB ; A 20/20 Vision of th; Anyone for a VLDB in; | 
+270. after: OT; >; ; (0) 
+271. 2000: VTNUM; NA; ; (0) publication.year(1.0):2001; 2001; 2001; | 
+273. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+
+{"attributes":[{"node_id":263},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":264},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":265},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":269},{"label":"VLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"VLDB"},{"children":"NA"}]},{"attributes":[{"node_id":270},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":271},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2001"},{"children":"NA"}]}]}]},{"attributes":[{"node_id":273},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+24. ##2_query## show me the homepage of PVLDB. 
+(275)ROOT
+    (276)show
+        (278)homepage
+            (281)PVLDB
+
+275. ROOT: ROOT; NA; ; (0) 
+276. show: CMT; NA; ; (0) 
+278. homepage: NT; NA; ; (2) author.homepage(1.1):| conference.homepage(1.1):| journal.homepage(1.1):| organization.homepage(1.1):| conference.conference(0.69):COMPIMAGE (#Computat; SOMET (#Software Met; AGENTS (#Internation; | 
+281. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+
+{"attributes":[{"node_id":275},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":276},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":278},{"label":"homepage"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal.homepage"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":281},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+25. ##2_query## show me the area of PVLDB. 
+(283)ROOT
+    (284)show
+        (286)area
+            (289)PVLDB
+
+283. ROOT: ROOT; NA; ; (0) 
+284. show: CMT; NA; ; (0) 
+286. area: NT; NA; ; (0) domain.name(1.0):| publication.year(0.9):| publication.title(0.88):| journal.name(0.85):| organization.name(0.85):| 
+289. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+
+{"attributes":[{"node_id":283},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":284},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":286},{"label":"area"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":289},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+26. ##2_query## show me the papers on PVLDB. 
+(291)ROOT
+    (292)show
+        (294)papers
+            (297)PVLDB
+
+291. ROOT: ROOT; NA; ; (0) 
+292. show: CMT; NA; ; (0) 
+294. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+297. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+
+{"attributes":[{"node_id":291},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":292},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":294},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":297},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+27. ##2_query## show me the papers on PVLDB after 2000. 
+(299)ROOT
+    (300)show
+        (301)papers
+            (305)PVLDB
+            (306)after
+                (307)2000
+
+299. ROOT: ROOT; NA; ; (0) 
+300. show: CMT; NA; ; (0) 
+301. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+305. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+306. after: OT; >; ; (0) 
+307. 2000: VTNUM; NA; ; (0) publication.year(1.0):2001; 2001; 2001; | 
+
+{"attributes":[{"node_id":299},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":300},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":301},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":305},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]},{"attributes":[{"node_id":306},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":307},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2001"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+28. ##2_query## show me the papers in PVLDB in "University of Michigan". 
+(309)ROOT
+    (310)show
+        (312)papers
+            (315)PVLDB
+            (317)University of Michigan
+
+309. ROOT: ROOT; NA; ; (0) 
+310. show: CMT; NA; ; (0) 
+312. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+315. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+317. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+
+{"attributes":[{"node_id":309},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":310},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":312},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":315},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]},{"attributes":[{"node_id":317},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+29. ##2_query## show me the papers in PVLDB after 2000 in "University of Michigan". 
+(319)ROOT
+    (320)show
+        (321)papers
+            (325)PVLDB
+            (326)after
+                (327)2000
+            (329)University of Michigan
+
+319. ROOT: ROOT; NA; ; (0) 
+320. show: CMT; NA; ; (0) 
+321. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+325. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+326. after: OT; >; ; (0) 
+327. 2000: VTNUM; NA; ; (0) publication.year(1.0):2001; 2001; 2001; | 
+329. University of Michigan: VTTEXT; NA; ; (0) organization.organization(0.87):University of Michig; | publication.publication(0.76):The University of Mi; The University of Mi; Universisty of Michi; | conference.conference(0.68):ICHIT (#Internationa; PERSUASIVE (#Persuas; SICHERHEIT (#Sicherh; | journal.journal(0.65):SIGARCH (#SIGARCH Co; PERVASIVE (#IEEE Per; SIGACT (#SIGACT News; | domain.domain(0.65):Security & Privacy; Data Mining; Machine Learning & P; | 
+
+{"attributes":[{"node_id":319},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":320},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":321},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":325},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]},{"attributes":[{"node_id":326},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":327},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2001"},{"children":"NA"}]}]}]},{"attributes":[{"node_id":329},{"label":"University of Michigan"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"organization"},{"mappedValue":"University of Michigan"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+30. ##2_query## show me the number of papers on PVLDB. 
+(331)ROOT
+    (332)show
+        (334)number of
+            (337)papers
+                (339)PVLDB
+
+331. ROOT: ROOT; NA; ; (0) 
+332. show: CMT; NA; ; (0) 
+334. number of: FT; count; ; (0) 
+337. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+339. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+
+{"attributes":[{"node_id":331},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":332},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":334},{"label":"number of"},{"type":"FT"},{"function":"count"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":337},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":339},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+31. ##2_query## show me the authors who have papers in PVLDB. 
+(341)ROOT
+    (342)show
+        (344)authors
+            (348)papers
+                (350)PVLDB
+
+341. ROOT: ROOT; NA; ; (0) 
+342. show: CMT; NA; ; (0) 
+344. authors: NT; NA; ; (0) author.name(1.02):| journal.name(0.88):| domain.name(0.87):| organization.name(0.85):| conference.name(0.81):| 
+348. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+350. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+
+{"attributes":[{"node_id":341},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":342},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":344},{"label":"authors"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":348},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":350},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+32. ##2_query## show me the keywords related to "H. V. Jagadish". 
+(352)ROOT
+    (353)show
+        (355)keywords
+            (359)H. V. Jagadish
+
+352. ROOT: ROOT; NA; ; (0) 
+353. show: CMT; NA; ; (0) 
+355. keywords: NT; NA; ; (0) keyword.keyword(1.0):| keyword.keyword_short(0.87):| conference.conference(0.82):WORDS (#Workshop on ; CWORDS (#Combinatori; SRDS (#Symposium on ; | journal.journal(0.69):ORDER (#Order - A Jo; NETWORKS (#Networks); CORR (#The Computing; | publication.publication(0.66):Text Generation from; SQAK: doing more wit; Beyond Keywords and ; | 
+359. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+
+{"attributes":[{"node_id":352},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":353},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":355},{"label":"keywords"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword.keyword"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":359},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+33. ##2_query## show me the papers, which contain the keyword "Natural Language". 
+(361)ROOT
+    (362)show
+        (364)papers
+            (370)keyword
+                (368)Natural Language
+
+361. ROOT: ROOT; NA; ; (0) 
+362. show: CMT; NA; ; (0) 
+364. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+368. Natural Language: VTTEXT; NA; ; (0) keyword.keyword(0.94):Natural Language (#N; | domain.domain(0.91):Natural Language & S; Programming Language; Distributed & Parall; | publication.publication(0.78):Natural Language Sys; Natural Language Upd; Learning in Natural ; | journal.name(0.74):| journal.journal(0.67):ANNALS (#IEEE Annals; NEUROIMAGE (#NeuroIm; LINGUAMATICA (#Lingu; | 
+370. keyword: NT; NA; ; (0) keyword.keyword(0.99):| keyword.keyword_short(0.9):| conference.conference(0.78):WORDS (#Workshop on ; CWORDS (#Combinatori; WORM (#Workshop on R; | journal.journal(0.7):ORDER (#Order - A Jo; NETWORKS (#Networks); CORR (#The Computing; | publication.publication(0.68):Keyword Query Routin; Keyword query cleani; Oblivious keyword se; | 
+
+{"attributes":[{"node_id":361},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":362},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":364},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":370},{"label":"keyword"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword.keyword"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":368},{"label":"Natural Language"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword"},{"mappedValue":"Natural Language"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+34. ##2_query## show me the papers of "H. V. Jagadish" containing keyword "User Study". 
+(372)ROOT
+    (373)show
+        (375)papers
+            (378)H. V. Jagadish
+            (381)keyword
+                (380)User Study
+
+372. ROOT: ROOT; NA; ; (0) 
+373. show: CMT; NA; ; (0) 
+375. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+378. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+380. User Study: VTTEXT; NA; ; (0) keyword.keyword(0.93):User Study; | conference.conference(0.72):CLUSTER (#Cluster Co; ISER (#International; SERP (#Software Engi; | journal.journal(0.7):CLUSTER (#Cluster Co; GAMESTUDIES (#Game S; DUD (#Datenschutz un; | publication.publication(0.68):A study of user acce; Penn State Visual Im; Study on Public User; | domain.domain(0.67):Operating Systems; Computer Vision; Computer Education; | 
+381. keyword: NT; NA; ; (0) keyword.keyword(0.99):| keyword.keyword_short(0.9):| conference.conference(0.78):WORDS (#Workshop on ; CWORDS (#Combinatori; WORM (#Workshop on R; | journal.journal(0.7):ORDER (#Order - A Jo; NETWORKS (#Networks); CORR (#The Computing; | publication.publication(0.68):Keyword Query Routin; Keyword query cleani; Oblivious keyword se; | 
+
+{"attributes":[{"node_id":372},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":373},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":375},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":378},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":381},{"label":"keyword"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword.keyword"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":380},{"label":"User Study"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword"},{"mappedValue":"User Study"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+35. ##2_query## show me the papers in PVLDB containing keyword "User Study". 
+(383)ROOT
+    (384)show
+        (386)papers
+            (389)PVLDB
+            (392)keyword
+                (391)User Study
+
+383. ROOT: ROOT; NA; ; (0) 
+384. show: CMT; NA; ; (0) 
+386. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+389. PVLDB: VTTEXT; NA; ; (0) journal.journal(0.91):PVLDB (#Proceedings ; VLDB (#The VLDB Jour; DB (#DATA BASE); | conference.conference(0.89):VLDB (#Very Large Da; VLDBW (#Workshops Co; NLDB (#Applications ; | domain.domain(0.56):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.46):Errata for Crowdsour; Errata for Building ; | 
+391. User Study: VTTEXT; NA; ; (0) keyword.keyword(0.93):User Study; | conference.conference(0.72):CLUSTER (#Cluster Co; ISER (#International; SERP (#Software Engi; | journal.journal(0.7):CLUSTER (#Cluster Co; GAMESTUDIES (#Game S; DUD (#Datenschutz un; | publication.publication(0.68):A study of user acce; Penn State Visual Im; Study on Public User; | domain.domain(0.67):Operating Systems; Computer Vision; Computer Education; | 
+392. keyword: NT; NA; ; (0) keyword.keyword(0.99):| keyword.keyword_short(0.9):| conference.conference(0.78):WORDS (#Workshop on ; CWORDS (#Combinatori; WORM (#Workshop on R; | journal.journal(0.7):ORDER (#Order - A Jo; NETWORKS (#Networks); CORR (#The Computing; | publication.publication(0.68):Keyword Query Routin; Keyword query cleani; Oblivious keyword se; | 
+
+{"attributes":[{"node_id":383},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":384},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":386},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":389},{"label":"PVLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PVLDB"},{"children":"NA"}]},{"attributes":[{"node_id":392},{"label":"keyword"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword.keyword"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":391},{"label":"User Study"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword"},{"mappedValue":"User Study"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+36. ##2_query## show me the papers in VLDB containing keyword "User Study". 
+(394)ROOT
+    (395)show
+        (397)papers
+            (400)VLDB
+            (403)keyword
+                (402)User Study
+
+394. ROOT: ROOT; NA; ; (0) 
+395. show: CMT; NA; ; (0) 
+397. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+400. VLDB: VTTEXT; NA; ; (0) conference.conference(0.93):VLDB (#Very Large Da; NLDB (#Applications ; VLDBW (#Workshops Co; | journal.journal(0.89):VLDB (#The VLDB Jour; PVLDB (#Proceedings ; DB (#DATA BASE); | domain.domain(0.57):World Wide Web; Security & Privacy; Hardware & Architect; | publication.publication(0.57):Best papers of VLDB ; A 20/20 Vision of th; Anyone for a VLDB in; | 
+402. User Study: VTTEXT; NA; ; (0) keyword.keyword(0.93):User Study; | conference.conference(0.72):CLUSTER (#Cluster Co; ISER (#International; SERP (#Software Engi; | journal.journal(0.7):CLUSTER (#Cluster Co; GAMESTUDIES (#Game S; DUD (#Datenschutz un; | publication.publication(0.68):A study of user acce; Penn State Visual Im; Study on Public User; | domain.domain(0.67):Operating Systems; Computer Vision; Computer Education; | 
+403. keyword: NT; NA; ; (0) keyword.keyword(0.99):| keyword.keyword_short(0.9):| conference.conference(0.78):WORDS (#Workshop on ; CWORDS (#Combinatori; WORM (#Workshop on R; | journal.journal(0.7):ORDER (#Order - A Jo; NETWORKS (#Networks); CORR (#The Computing; | publication.publication(0.68):Keyword Query Routin; Keyword query cleani; Oblivious keyword se; | 
+
+{"attributes":[{"node_id":394},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":395},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":397},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":400},{"label":"VLDB"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"VLDB"},{"children":"NA"}]},{"attributes":[{"node_id":403},{"label":"keyword"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword.keyword"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":402},{"label":"User Study"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"keyword"},{"mappedValue":"User Study"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+37. ##2_query## show me the authors in database area who have more papers than "H. V. Jagadish". 
+(405)ROOT
+    (406)show
+        (408)authors
+            (411)area
+                (412)database
+            (415)papers
+                (416)more
+            (418)H. V. Jagadish
+
+405. ROOT: ROOT; NA; ; (0) 
+406. show: CMT; NA; ; (0) 
+408. authors: NT; NA; ; (0) author.name(1.02):| journal.name(0.88):| domain.name(0.87):| organization.name(0.85):| conference.name(0.81):| 
+411. area: NT; NA; ; (0) domain.name(1.0):| publication.year(0.9):| publication.title(0.88):| journal.name(0.85):| organization.name(0.85):| 
+412. database: VTTEXT; NA; ; (0) domain.domain(0.98):Databases; Data Mining; Simulation; | publication.title(0.87):| journal.name(0.84):| conference.name(0.83):| domain.name(0.81):| 
+415. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+416. more: OT; >; ; (0) 
+418. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+
+{"attributes":[{"node_id":405},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":406},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":408},{"label":"authors"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":411},{"label":"area"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":412},{"label":"database"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain"},{"mappedValue":"Databases"},{"children":"NA"}]}]}]},{"attributes":[{"node_id":415},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":416},{"label":"more"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":"NA"}]}]}]},{"attributes":[{"node_id":418},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+38. ##2_query## show me the authors who have more papers than "H. V. Jagadish" in SIGMOD. 
+(420)ROOT
+    (421)show
+        (423)authors
+            (427)papers
+                (428)more
+            (430)H. V. Jagadish
+            (432)SIGMOD
+
+420. ROOT: ROOT; NA; ; (0) 
+421. show: CMT; NA; ; (0) 
+423. authors: NT; NA; ; (0) author.name(1.02):| journal.name(0.88):| domain.name(0.87):| organization.name(0.85):| conference.name(0.81):| 
+427. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+428. more: OT; >; ; (0) 
+430. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+432. SIGMOD: VTTEXT; NA; ; (0) conference.conference(0.93):SIGMOD (#ACM SIGMOD ; SIGMAP (#Signal Proc; SIGIR (#Internationa; | journal.journal(0.91):SIGMOD (#SIGMOD Reco; SIGMOBILE (#ACM SIGM; SIGPRO (#Signal Proc; | publication.publication(0.65):SIGMOD Program Revie; SIGMOD Chair's Messa; SIGMOD Sister Societ; | domain.domain(0.59):Simulation; Computer Vision; Artificial Intellige; | 
+
+{"attributes":[{"node_id":420},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":421},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":423},{"label":"authors"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":427},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":428},{"label":"more"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":"NA"}]}]}]},{"attributes":[{"node_id":430},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":432},{"label":"SIGMOD"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"SIGMOD"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+
+39. ##2_query## show me the authors in database area who have more papers than "H. V. Jagadish" after 2000. 
+(434)ROOT
+    (435)show
+        (437)authors
+            (440)area
+                (441)database
+            (444)papers
+                (445)more
+                (447)H. V. Jagadish
+            (448)after
+                (449)2000
+
+434. ROOT: ROOT; NA; ; (0) 
+435. show: CMT; NA; ; (0) 
+437. authors: NT; NA; ; (0) author.name(1.02):| journal.name(0.88):| domain.name(0.87):| organization.name(0.85):| conference.name(0.81):| 
+440. area: NT; NA; ; (0) domain.name(1.0):| publication.year(0.9):| publication.title(0.88):| journal.name(0.85):| organization.name(0.85):| 
+441. database: VTTEXT; NA; ; (0) domain.domain(0.98):Databases; Data Mining; Simulation; | publication.title(0.87):| journal.name(0.84):| conference.name(0.83):| domain.name(0.81):| 
+444. papers: NT; NA; ; (0) publication.title(0.98):| journal.name(0.97):| organization.name(0.93):| conference.name(0.92):| author.name(0.9):| 
+445. more: OT; >; ; (0) 
+447. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+448. after: OT; >; ; (0) 
+449. 2000: VTNUM; NA; ; (0) publication.year(1.0):2001; 2001; 2001; | 
+
+{"attributes":[{"node_id":434},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":435},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":437},{"label":"authors"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":440},{"label":"area"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":441},{"label":"database"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"domain"},{"mappedValue":"Databases"},{"children":"NA"}]}]}]},{"attributes":[{"node_id":444},{"label":"papers"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.title"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":445},{"label":"more"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":"NA"}]},{"attributes":[{"node_id":447},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]}]}]},{"attributes":[{"node_id":448},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":449},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2001"},{"children":"NA"}]}]}]}]}]}]}]}]}]}
+============
+
+40. ##2_query## show me the authors who have more pappers than "H. V. Jagadish" in SIGMOD after 2000. 
+(451)ROOT
+    (452)show
+        (454)authors
+            (458)pappers
+            (461)H. V. Jagadish
+            (464)after
+                (465)2000
+            (459)more
+            (463)SIGMOD
+
+451. ROOT: ROOT; NA; ; (0) 
+452. show: CMT; NA; ; (0) 
+454. authors: NT; NA; ; (0) author.name(1.02):| journal.name(0.88):| domain.name(0.87):| organization.name(0.85):| conference.name(0.81):| 
+458. pappers: VTTEXT; NA; ; (0) journal.journal(0.78):PAAPP (#Internationa; APAL (#Annals of Pur; APPML (#Applied Math; | conference.conference(0.75):INTERSPEECH (#INTERS; PPAM (#Parallel Proc; ERSA (#Engineering o; | domain.domain(0.62):Operating Systems; Graphics; Machine Learning & P; | 
+459. more: OT; >; ; (0) 
+461. H. V. Jagadish: VTTEXT; NA; ; (0) author.author(0.89):H. V. Jagadish; V. Jagadish; G. Jagadish; | conference.conference(0.7):IADIS (#IADIS Confer; ADIS (#Apoyo a la De; DIS (#Discovery Scie; | journal.journal(0.65):JASIS (#Journal of t; JAIS (#Journal of th; AGIS (#Annals of GIS; | domain.domain(0.6):Computer Vision; Multimedia; Distributed & Parall; | 
+463. SIGMOD: VTTEXT; NA; ; (0) conference.conference(0.93):SIGMOD (#ACM SIGMOD ; SIGMAP (#Signal Proc; SIGIR (#Internationa; | journal.journal(0.91):SIGMOD (#SIGMOD Reco; SIGMOBILE (#ACM SIGM; SIGPRO (#Signal Proc; | publication.publication(0.65):SIGMOD Program Revie; SIGMOD Chair's Messa; SIGMOD Sister Societ; | domain.domain(0.59):Simulation; Computer Vision; Artificial Intellige; | 
+464. after: OT; >; ; (0) 
+465. 2000: VTNUM; NA; ; (0) publication.year(1.0):2001; 2001; 2001; | 
+
+{"attributes":[{"node_id":451},{"label":"ROOT"},{"type":"ROOT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":452},{"label":"show"},{"type":"CMT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":454},{"label":"authors"},{"type":"NT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author.name"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":458},{"label":"pappers"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"journal"},{"mappedValue":"PAAPP"},{"children":"NA"}]},{"attributes":[{"node_id":461},{"label":"H. V. Jagadish"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"author"},{"mappedValue":"H. V. Jagadish"},{"children":"NA"}]},{"attributes":[{"node_id":464},{"label":"after"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":[{"attributes":[{"node_id":465},{"label":"2000"},{"type":"VTNUM"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"publication.year"},{"mappedValue":"2001"},{"children":"NA"}]}]}]},{"attributes":[{"node_id":459},{"label":"more"},{"type":"OT"},{"function":">"},{"quantifier":"NA"},{"mappedSchemaElement":"NA"},{"mappedValue":"NA"},{"children":"NA"}]},{"attributes":[{"node_id":463},{"label":"SIGMOD"},{"type":"VTTEXT"},{"function":"NA"},{"quantifier":"NA"},{"mappedSchemaElement":"conference"},{"mappedValue":"SIGMOD"},{"children":"NA"}]}]}]}]}]}]}]}
+============
+

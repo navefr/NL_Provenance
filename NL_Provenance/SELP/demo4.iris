@@ -1,0 +1,10 @@
+imports('aa','kk').
+imports('bb','ll').
+imports('cc','mm').
+imports('dd','nn').
+
+exports('aa','nn').
+exports('bb','kk').
+exports('cc','kk').
+exports('dd','ll').
+exports('dd','mm').

@@ -1,0 +1,33 @@
+dealsWith(a,b) :- imports(a,f), exports(b,f) & 0.6
+dealsWith(a,b) :- dealsWith(a,f), dealsWith(f,b) &0.9
+dealsWith(a,b) :- dealsWith(b,a) & 0.9
+
+hasChild(a,b) :- isMarriedTo(e,a), hasChild(e,b) & 0.5
+hasChild(a,b) :- isMarriedTo(a,f), hasChild(f,b) & 0.5
+isMarriedTo(a,b) :- isMarriedTo(b,a) & 0.5
+isMarriedTo(a,b) :- hasChild(a,c), hasChild(b,c) & 0.5
+produced(a,b) :- directed(a,b) & 0.5
+influences(a,b) :- influences(a,f), influences(f,b) & 0.5
+isCitizenOf(a,b) :- wasBornIn(a,f), isLocatedIn(f,b) & 0.5
+diedIn(a,b) :- wasBornIn(a,b) & 0.5
+directed(a,b) :- created(a,b) & 0.5
+influences(a,b) :- influences(a,f), influences(b,f) & 0.5
+isPoliticianOf(a,b) :- diedIn(a,f), isLocatedIn(f,b) & 0.5
+isPoliticianOf(a,b) :- livesIn(a,f), isLocatedIn(f,b) & 0.5
+isInterestedIn(a,b) :- influences(a,f), isInterestedIn(f,b) & 0.5
+worksAt(a,b) :- graduatedFrom(a,b) & 0.5
+influences(a,b) :- influences(e,a), influences(e,b) & 0.5
+isInterestedIn(a,b) :- isInterestedIn(e,b), influences(e,a) & 0.5
+produced(a,b) :- created(a,b) & 0.5
+isPoliticianOf(a,b) :- wasBornIn(a,f), isLocatedIn(f,b) & 0.5
+
+
+dealsWith(Angola,Dubai)
+
+dealsWith(Angola,*)
+imports(Angola, Oil)
+dealsWith(Dubai,Angola)
+
+dealsWith(bb,cc)
+
+.label
