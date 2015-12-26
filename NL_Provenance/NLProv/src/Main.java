@@ -52,6 +52,7 @@ public class Main {
         String query4 = "return me the authors from \"Tel Aviv University\" who published papers in VLDB. ";
         String query41 = "which authors have published papers in SIGMOD after 2005";
         String query5 = "return the papers whose title contains \"OASSIS\"";
+        String query6 = "return the authors who published papers in SIGMOD before 2015 and after 2005. ";
 
         String ans1 = "\"http://www.sigmod2011.org/\" is the homepage of SIGMOD.";
         String ans2 = "VLDB is a conference in Databases area.";
@@ -67,7 +68,7 @@ public class Main {
         String query15 = "return the author with maximum number of papers in VLDB in 2014";
         String query16 = "return the paper with minimum number of citations in SIGMOD in 2013";
 
-        String querySentence = query3;
+        String querySentence = query5;
         Query query = new Query(querySentence, db.schemaGraph);
 
 

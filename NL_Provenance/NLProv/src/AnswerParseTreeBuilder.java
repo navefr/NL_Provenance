@@ -1,15 +1,12 @@
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
-import simplenlg.framework.DocumentElement;
-import simplenlg.framework.NLGElement;
-import simplenlg.framework.NLGFactory;
-import simplenlg.lexicon.Lexicon;
-import simplenlg.realiser.english.Realiser;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
 /**
- * Created by nfrost on 11/30/2015
+ * Created by nfrost on 12/19/2015
  */
 public class AnswerParseTreeBuilder {
 
@@ -34,20 +31,65 @@ public class AnswerParseTreeBuilder {
 
     }
 
-    public ParseTree buildAnswerParseTree(ParseTree parseTree, Map<Integer, String> wordReplacementMap) {
-        // Initialize
+    public ParseTree initialize(ParseTree parseTree) {
         ParseTree answerTree = copyTree(parseTree);
         deleteReturnPhrase(answerTree);
-        ParseTreeNode objectNode = answerTree.root.children.get(0);
-        if (wordReplacementMap.containsKey(objectNode.wordOrder)) {
-            objectNode.label = wordReplacementMap.get(objectNode.wordOrder);
+
+        return answerTree;
+    }
+
+    private void checkPrep(ParseTree answerTree, ParseTreeNode node, Map<Integer, String> wordReplacementMap, boolean flag) {
+        if (node.relationship.equals("prep")) {
+            if (flag == true) {
+                if (!node.function.equals("NA")) {
+                    if (prepMap.containsKey(node.label.toLowerCase())) {
+                        ParseTreeNode grandchildInAnswerTree = answerTree.searchNodeByOrder(node.wordOrder);
+                        grandchildInAnswerTree.label = prepMap.get(node.label.toLowerCase());
+                        ParseTreeNode childOfPrep = node.children.get(0);
+
+                        if (wordReplacementMap.containsKey(childOfPrep.wordOrder)) {
+                            ParseTreeNode childOfPrepInAnswerTree = answerTree.searchNodeByOrder(childOfPrep.wordOrder);
+                            childOfPrepInAnswerTree.label = wordReplacementMap.get(childOfPrep.wordOrder);
+                        }
+                    }
+                }
+            } else {
+                // Todo nave - complete switch part
+            }
         }
+    }
+
+    public ParseTree buildAnswerParseTree(ParseTree parseTree, Map<Integer, String> wordReplacementMap) {
+        // Initialize
+        ParseTree answerTree = initialize(parseTree);
+        ParseTreeNode objectNode = answerTree.root.children.get(0);
 
         // Algorithm
         ParseTreeNode objectNodeInParseTree = parseTree.searchNodeByOrder(objectNode.wordOrder);
+        boolean isNoModifierOrVerbChild = true;
         for (ParseTreeNode child : objectNodeInParseTree.children) {
-            if (child.relationship.equals("rcmod")) {
-                if (child.pos.startsWith("VB")) {
+            if (isModifier(child) || isVerb(child)) {
+                isNoModifierOrVerbChild = false;
+            }
+        }
+
+        if (isNoModifierOrVerbChild) {
+            if (wordReplacementMap.containsKey(objectNode.wordOrder)) {
+                String objectValue = wordReplacementMap.get(objectNode.wordOrder);
+                answerTree.buildNode((new String[]{String.valueOf(-1), objectValue, "NA", String.valueOf(objectNode.wordOrder), "NA"}));
+                answerTree.buildNode((new String[]{String.valueOf(-1), "is", "NA", String.valueOf(objectNode.wordOrder), "NA"}));
+                answerTree.buildNode((new String[]{String.valueOf(-1), "the", "NA", String.valueOf(objectNode.wordOrder), "NA"}));
+                for (ParseTreeNode child : objectNodeInParseTree.children) {
+                    checkPrep(answerTree, child, wordReplacementMap, false);
+                }
+            }
+        } else {
+            if (wordReplacementMap.containsKey(objectNode.wordOrder)) {
+                objectNode.label = wordReplacementMap.get(objectNode.wordOrder);
+            }
+
+            for (ParseTreeNode child : objectNodeInParseTree.children) {
+                if (isModifier(child) && isVerb(child)) {
                     for (ParseTreeNode grandchild : child.children) {
                         if (!grandchild.relationship.equals("nsubj")) {
                             if (wordReplacementMap.containsKey(grandchild.wordOrder)) {
@@ -55,18 +97,7 @@ public class AnswerParseTreeBuilder {
                                 grandchildInAnswerTree.label = wordReplacementMap.get(grandchild.wordOrder);
                             }
                             // Check Prep
-                            if (grandchild.relationship.equals("prep")) {
-                                if (prepMap.containsKey(grandchild.label.toLowerCase())) {
-                                    ParseTreeNode grandchildInAnswerTree = answerTree.searchNodeByOrder(grandchild.wordOrder);
-                                    grandchildInAnswerTree.label = prepMap.get(grandchild.label.toLowerCase());
-                                    ParseTreeNode childOfPrep = grandchild.children.get(0);
-
-                                    if (wordReplacementMap.containsKey(childOfPrep.wordOrder)) {
-                                        ParseTreeNode childOfPrepInAnswerTree = answerTree.searchNodeByOrder(childOfPrep.wordOrder);
-                                        childOfPrepInAnswerTree.label = wordReplacementMap.get(childOfPrep.wordOrder);
-                                    }
-                                }
-                            }
+                            checkPrep(answerTree, grandchild, wordReplacementMap, true);
                         } else {
                             ParseTreeNode grandchildInAnswerTree = answerTree.searchNodeByOrder(grandchild.wordOrder);
                             if (grandchildInAnswerTree != null) {
@@ -75,12 +106,10 @@ public class AnswerParseTreeBuilder {
                         }
                     }
                 } else {
-                    // TODO Nave - set is somewhere
-                }
-            } else {
-                ParseTreeNode childInAnswerTree = answerTree.searchNodeByOrder(child.wordOrder);
-                if (childInAnswerTree != null) {
-                    answerTree.deleteNode(childInAnswerTree);
+                    ParseTreeNode childInAnswerTree = answerTree.searchNodeByOrder(child.wordOrder);
+                    if (childInAnswerTree != null) {
+                        answerTree.deleteNode(childInAnswerTree);
+                    }
                 }
             }
         }
@@ -115,5 +144,13 @@ public class AnswerParseTreeBuilder {
                 }
             }
         }
+    }
+
+    private boolean isModifier(ParseTreeNode node) {
+        return node.relationship.equals("rcmod");
+    }
+
+    private boolean isVerb(ParseTreeNode node) {
+        return node.pos.startsWith("VB");
     }
 }
