@@ -129,13 +129,13 @@ public class SentenceBuilder {
         ParseTreeNode parseTreeNode1 = parseTree.searchNodeByOrder(1);
         ParseTreeNode parseTreeNode2 = parseTree.searchNodeByOrder(2);
         ParseTreeNode parseTreeNode3 = parseTree.searchNodeByOrder(3);
-        if (parseTreeNode1.label.equalsIgnoreCase("return")) {
+        if (parseTreeNode1 != null && parseTreeNode1.label.equalsIgnoreCase("return")) {
             parseTree.deleteNode(parseTreeNode1);
-            if (parseTreeNode2.label.equalsIgnoreCase("the")) {
+            if (parseTreeNode2 != null && parseTreeNode2.label.equalsIgnoreCase("the")) {
                 parseTree.deleteNode(parseTreeNode2);
-            } else if (parseTreeNode2.label.equalsIgnoreCase("me")) {
+            } else if (parseTreeNode2 != null && parseTreeNode2.label.equalsIgnoreCase("me")) {
                 parseTree.deleteNode(parseTreeNode2);
-                if (parseTreeNode3.label.equalsIgnoreCase("the")) {
+                if (parseTreeNode3 != null && parseTreeNode3.label.equalsIgnoreCase("the")) {
                     parseTree.deleteNode(parseTreeNode3);
                 }
             }
