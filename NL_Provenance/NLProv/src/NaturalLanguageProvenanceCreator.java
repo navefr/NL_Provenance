@@ -50,7 +50,6 @@ public class NaturalLanguageProvenanceCreator {
         // TODO NAVE - add more predicates
         predicateSymbolMapping.put("GREATER", ">");
         predicateSymbolMapping.put("LESS", "<");
-        predicateSymbolMapping.put("EQUAL", "=");
 
     }
 

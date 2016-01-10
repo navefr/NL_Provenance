@@ -53,6 +53,7 @@ public class Main {
         String query41 = "which authors have published papers in SIGMOD after 2005";
         String query5 = "return the papers whose title contains \"OASSIS\"";
         String query6 = "return the authors who published papers in SIGMOD before 2015 and after 2005. ";
+        String query7 = "return the papers which were published in conferences in database area";
 
         String ans1 = "\"http://www.sigmod2011.org/\" is the homepage of SIGMOD.";
         String ans2 = "VLDB is a conference in Databases area.";
@@ -68,7 +69,7 @@ public class Main {
         String query15 = "return the author with maximum number of papers in VLDB in 2014";
         String query16 = "return the paper with minimum number of citations in SIGMOD in 2013";
 
-        String querySentence = query5;
+        String querySentence = query4;
         Query query = new Query(querySentence, db.schemaGraph);
 
 
@@ -99,10 +100,10 @@ public class Main {
 
         // TODO Nave - remove
         if (query.blocks.size() > 0) {
-            String sql = query.blocks.get(0).SQL;
-            for (ArrayList<String> result : db.conductSQL(sql)) {
-                System.out.println(result);
-            }
+//            String sql = query.blocks.get(0).SQL;
+//            for (ArrayList<String> result : db.conductSQL(sql)) {
+//                System.out.println(result);
+//            }
 
             Block block = query.blocks.get(0);
             System.out.println();

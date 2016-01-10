@@ -1,9 +1,8 @@
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by nfrost on 12/19/2015
@@ -101,14 +100,14 @@ public class AnswerParseTreeBuilder {
                         } else {
                             ParseTreeNode grandchildInAnswerTree = answerTree.searchNodeByOrder(grandchild.wordOrder);
                             if (grandchildInAnswerTree != null) {
-                                answerTree.deleteNode(grandchildInAnswerTree);
+                                answerTree.deleteSubTree(grandchildInAnswerTree);
                             }
                         }
                     }
                 } else {
                     ParseTreeNode childInAnswerTree = answerTree.searchNodeByOrder(child.wordOrder);
                     if (childInAnswerTree != null) {
-                        answerTree.deleteNode(childInAnswerTree);
+                        answerTree.deleteSubTree(childInAnswerTree);
                     }
                 }
             }

@@ -134,8 +134,21 @@ public class ParseTree implements Serializable
 			this.deletedNodes.add(node); 
 		}
 	}
-	
-	public String toString() 
+
+    public void deleteSubTree(ParseTreeNode node)
+    {
+        ParseTreeNode[] childrenCopy = new ParseTreeNode[node.children.size()];
+        if (node.children != null) {
+            node.children.toArray(childrenCopy);
+        }
+
+        deleteNode(node);
+        for (ParseTreeNode childNode : childrenCopy) {
+            deleteSubTree(childNode);
+        }
+    }
+
+    public String toString()
 	{
 		String result = "";
 		LinkedList<ParseTreeNode> nodeList = new LinkedList<ParseTreeNode>(); 
