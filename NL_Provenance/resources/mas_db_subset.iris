@@ -1,6 +1,6 @@
 author(892590,"Tova Milo",16045,"http://www.cs.tau.ac.il/~milo/").
-author(16786, 'Amr Magdy', 4488, 'http://www.alexeng.edu.eg/~amr/').
-conference(3204, 'SIGMOD', 'http://www.sigmod2011.org/').
+author(16786, "Amr Magdy", 4488, "http://www.alexeng.edu.eg/~amr/").
+conference(3204, "SIGMOD", "http://www.sigmod2011.org/").
 conference(3558,"VLDB","http://www.vldb.org/2011/").
 writes(16786, 514553).
 writes(16786, 514984).
@@ -12,8 +12,8 @@ writes(16786, 1402603).
 writes(16786, 1405318).
 writes(16786, 1453205).
 writes(892590,851469).
-publication(1402603, 'Exploiting Geo-tagged Tweets to Understand Localized Language Diversity.', '', 2014, 3204, 0, 0, 8).
-publication(1405318, 'Sindbad: a location-based social networking system.', '', 2012, 3204, 0, 0, 8).
+publication(1402603, "Exploiting Geo-tagged Tweets to Understand Localized Language Diversity.", "", 2014, 3204, 0, 0, 8).
+publication(1405318, "Sindbad: a location-based social networking system.", "", 2012, 3204, 0, 0, 8).
 publication(1402740, "OASSIS: query driven crowd mining.", "", 2014, 3204, 0, 0, 8).
 publication(851469, "XML Repository and Active Views Demonstration.", "", 2000, 3558, 0, 0, 0).
 organization(16045,"Tel Aviv University","Asia & Oceania","http://www.tau.ac.il/").
