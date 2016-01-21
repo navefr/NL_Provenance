@@ -10,7 +10,7 @@ public class EquationTopK2
 {	
 	static Set<Atom> treesUpdatedLastIter = new HashSet<Atom>();
 	
-	static int k = 1;
+	static int k = 100;
 	
 	boolean factsUpdated = false;
 	
@@ -239,7 +239,7 @@ public class EquationTopK2
 						topKTrees.remove(topKTrees.size() - 1);
 					}
 		
-					topKTrees.add(InitializeTreeOfCompareNode(key, arr, chosenNode, b));//topKTrees.add(chosenNode.getTree());
+					topKTrees.add(InitializeTreeOfCompareNode(key, arr, chosenNode, b));//topKTrees.add(chosenNode.getTrees());
 					compareTree.BuildLeaves(chosenNode);
 					Collections.sort(topKTrees); //sort in descending order
 				}
@@ -247,7 +247,7 @@ public class EquationTopK2
 		}
 		/*if (topKTrees.isEmpty()) {
 			System.out.println("EMPTY TREES!!! for atom " + key);
-			System.out.println("where trees of body are " + b.get(0).getTree());
+			System.out.println("where trees of body are " + b.get(0).getTrees());
 		}*/
 	}
 	
@@ -302,7 +302,7 @@ public class EquationTopK2
 			}
 		}
 		
-		if (true == validTree && (false == online || key.getTree() == null || key.getTree().getWeight() < weight)) //confirm it is not empty tree
+		if (validTree) //confirm it is not empty tree
 		{
 			v.setWeight(weight);
 		}
@@ -320,7 +320,7 @@ public class EquationTopK2
 		for (ITuple child : b) 
 		{
 			List<DerivationTree2> tree = new ArrayList<DerivationTree2>();
-			tree.add(child.getTree());
+			tree.add(child.getTrees().iterator().next());
 			arr.add(tree);
 		}
     }
@@ -383,10 +383,32 @@ public class EquationTopK2
 			atom.setTreesChangedLastIteration(true);
 		}
 	}*/
-	
-	
-	
-	/*************************************************************************************************************/
+
+    /*************************************************************************************************************/
+    /** Title: UpdateTreesWhileSemiNaive
+     /** Description: Given an atom and a new derivation, Updates the Trees of this atom While Semi-Naive is running
+     /*************************************************************************************************************/
+
+    public static List<DerivationTree2> UpdateWhileSemiNaive(ITuple key, List<ITuple> body, List<DerivationTree2.Condition> conditions, List<ILiteral> literals)
+    {
+        for (int i = 0; i < body.size(); i++) {
+            ITuple bodyAtom = body.get(i);
+            DerivationTree2.Condition condition = conditions.get(i);
+            ILiteral literal = literals.get(i);
+            if (bodyAtom.isFact())
+            {
+                SetTreeForFact(bodyAtom, condition, literal);
+            }
+        }
+
+        List<DerivationTree2> topKTrees = new Vector<DerivationTree2>();
+        GetTopKTreesForBody(key, body, topKTrees);
+        SiftTopKTrees(key, topKTrees);
+        return topKTrees;
+    }
+
+
+    /*************************************************************************************************************/
 	/** Title: UpdateTreesWhileSemiNaive																					
 	/** Description: Given an atom and a new derivation, Updates the Trees of this atom While Semi-Naive is running 									
 	/*************************************************************************************************************/
@@ -397,7 +419,7 @@ public class EquationTopK2
 		{
 			for (ITuple bodyAtom : body) 
 			{
-				System.out.println("trees of body: " + bodyAtom + " tree: " + bodyAtom.getTree());
+				System.out.println("trees of body: " + bodyAtom + " tree: " + bodyAtom.getTrees());
 				System.out.println("topk found? " + bodyAtom.isTop1Found());
 			}
 		}*/
@@ -424,10 +446,10 @@ public class EquationTopK2
 		{
 			for (ITuple bodyAtom : body) 
 			{
-				System.out.println("trees of body: " + bodyAtom + " tree: " + bodyAtom.getTree());
+				System.out.println("trees of body: " + bodyAtom + " tree: " + bodyAtom.getTrees());
 			}
 			
-			System.out.println("trees of head: " + key + " tree: " + key.getTree());
+			System.out.println("trees of head: " + key + " tree: " + key.getTrees());
 		}*/
 	}
 	
@@ -440,25 +462,10 @@ public class EquationTopK2
 	
 	public static void SiftTopKTrees (ITuple key, List<DerivationTree2> topKTrees)
 	{
-		if (false == topKTrees.isEmpty())
-		{
-			key.setTopKUpdated(true);
-			key.setTree(topKTrees.get(0));
-			/*if (true == online) 
-			{
-				UpdateForTop1(key, topKTrees);
-			/*}
-			
-			else if (null == key.getTree() || false == key.getTree().equals(topKTrees)) 
-			{
-				if (null != key.getTree()) 
-				{
-					topKTrees.add(key.getTree());
-				}
-
-				Update(key, topKTrees, r);
-			}*/		
-		}	
+        for (DerivationTree2 tree : topKTrees) {
+            key.setTopKUpdated(true);
+            key.addTree(tree);
+        }
 	}
 	
 	
@@ -471,7 +478,7 @@ public class EquationTopK2
 	public static void UpdateForTop1 (ITuple key, List<DerivationTree2> topKTrees)
 	{
 		key.setTopKUpdated(true);
-		key.setTree(topKTrees.get(0));
+		key.addTree(topKTrees.get(0));
 		//treesUpdatedLastIter.add(key);
 	}
 	
@@ -486,7 +493,7 @@ public class EquationTopK2
 		ChooseTopKTrees(topKTrees);
 		key.setTopKUpdated(true);
 		topKTrees.get(0).setRulePointer(r);
-		key.setTree(topKTrees.get(0));
+		key.addTree(topKTrees.get(0));
 		//treesUpdatedLastIter.add(key);
 		//key.setTreesChangedLastIteration(true);
 	}
@@ -503,7 +510,7 @@ public class EquationTopK2
 		DerivationTree2 curTree = new DerivationTree2();
 		curTree.setWeight(1);
 		curTree.setDerivedFact(fact);
-		fact.setTree(curTree);
+		fact.addTree(curTree);
 		fact.setTopKUpdated(true);
 		fact.setTop1Found(true);
         curTree.setCondition(condition);

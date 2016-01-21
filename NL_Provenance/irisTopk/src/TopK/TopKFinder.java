@@ -1,16 +1,9 @@
 package TopK;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
-
+import Top1.DerivationTree2;
+import Top1.ModifiedDerivationTrees;
+import Top1.ModifiedDerivationTrees.ModifiedTreesNode;
+import TopKBasics.KeyMap2;
 import org.deri.iris.api.basics.ITuple;
 import org.deri.iris.api.terms.ITerm;
 import org.deri.iris.api.terms.IVariable;
@@ -18,10 +11,7 @@ import org.deri.iris.factory.Factory;
 import org.deri.iris.rules.compiler.ICompiledRule;
 import org.deri.iris.rules.compiler.RuleElement;
 
-import Top1.DerivationTree2;
-import Top1.ModifiedDerivationTrees;
-import Top1.ModifiedDerivationTrees.ModifiedTreesNode;
-import TopKBasics.KeyMap2;
+import java.util.*;
 
 public class TopKFinder 
 {	
@@ -56,7 +46,7 @@ public class TopKFinder
 		
 		for (ITuple root : roots) 
 		{ 
-			DerivationTree2 curTree = root.getTree();
+			DerivationTree2 curTree = root.getTrees().iterator().next();
 			List<DerivationTree2> rootTopK = TopkFromTree(curTree);
 			Collections.sort(rootTopK);
 			topkTrees.put( root, rootTopK );
@@ -83,9 +73,9 @@ public class TopKFinder
 		ITuple root = KeyMap2.getInstance().Get(relation, rootTuple);
 		if (null != root) 
 		{
-			DerivationTree2 curTree = root.getTree();
+			DerivationTree2 curTree = root.getTrees().iterator().next();
 			treeMaxHeap.AddLeaf( new ModifiedTreesNode(root, GetBodyFromTrees(curTree), curTree.getRulePointer(), curTree.getWeight(), curTree) );
-			return TopkFromTree(treeMaxHeap.PopMax().getTreeNode().getTree());
+			return TopkFromTree(treeMaxHeap.PopMax().getTreeNode().getTrees().iterator().next());
 		}
 		
 		else
@@ -107,7 +97,7 @@ public class TopKFinder
 		List<DerivationTree2> trees = new ArrayList<DerivationTree2>();
 		for (ITuple iTuple : roots) 
 		{
-			trees.add( iTuple.getTree() );
+			trees.add( iTuple.getTrees().iterator().next() );
 		}
 		
 		return trees;
@@ -203,9 +193,9 @@ public class TopKFinder
 			 best = treeMaxHeap.PopMax();
 		}*/
 		
-		best.getTreeNode().getTree().setRulePointer( best.getRule() );
-		//best.getTreeNode().getTree().setWeight( best.getWeight() );
-		best.getTreeNode().getTree().setChildren( GetTreesFromBody(best.getRule(), best.getBody()) );
+		best.getTreeNode().getTrees().iterator().next().setRulePointer( best.getRule() );
+		//best.getTreeNode().getTrees().setWeight( best.getWeight() );
+		best.getTreeNode().getTrees().iterator().next().setChildren( GetTreesFromBody(best.getRule(), best.getBody()) );
 		best.getTree().setWeight(best.getWeight());
 		
 		return best.getTree();
@@ -223,14 +213,14 @@ public class TopKFinder
 		for (ICompiledRule rule : mRules) 
 		{
 			String ruleHead = rule.headPredicate().getPredicateSymbol();
-			String nodeRel = node.getTree().getRulePointer().headPredicate().getPredicateSymbol();
-			if (ruleHead.equals(nodeRel))//node.getTree().getRulePointer() != rule &&   
+			String nodeRel = node.getTrees().iterator().next().getRulePointer().headPredicate().getPredicateSymbol();
+			if (ruleHead.equals(nodeRel))//node.getTrees().getRulePointer() != rule &&
 			{				
 				List<ITuple> curBody = ArgMax ( FindAllRelInst (rule, node), node );
 				if (curBody != null) 
 				{
 					double curw = curTree.getWeight() * BodyWeight(curBody) * rule.getWeight();
-					curw = curw / ( node.getTree().getRulePointer().getWeight() * GetChildrensWeight(node) );
+					curw = curw / ( node.getTrees().iterator().next().getRulePointer().getWeight() * GetChildrensWeight(node) );
 					if (curw <= curTree.getWeight()) //the change makes sense because can't improve tree. only worsen it.
 					{
 						treeMaxHeap.AddLeaf( new ModifiedTreesNode(node, curBody, rule, curw, curTree) );
@@ -278,8 +268,8 @@ public class TopKFinder
 		double retVal = 1;
 		for (ITuple instTuple : relInst) // multiply all top-1 weights in new rule's body 
 		{
-			retVal *= instTuple.getTree().getWeight();
-			//retVal = Math.min(retVal, instTuple.getTree().getWeight());
+			retVal *= instTuple.getTrees().iterator().next().getWeight();
+			//retVal = Math.min(retVal, instTuple.getTrees().getWeight());
 		}
 		
 		return retVal;
@@ -301,11 +291,11 @@ public class TopKFinder
 			double instw = 1;
 			for (ITuple tuple : list) 
 			{
-				instw *= tuple.getTree().getWeight();
-				//instw = Math.min(instw, tuple.getTree().getWeight());
+				instw *= tuple.getTrees().iterator().next().getWeight();
+				//instw = Math.min(instw, tuple.getTrees().getWeight());
 			}
 			
-			List<ITuple> body = node.getTree().getBodyOfRoot();
+			List<ITuple> body = node.getTrees().iterator().next().getBodyOfRoot();
 			if (instw > maxw && false == list.equals(body)) 
 			{
 				argMax = list;
@@ -330,7 +320,7 @@ public class TopKFinder
 		{
 			ITuple tuple = body.get(i);
 			RuleElement element = rule.getElements().get(i);
-			trees.add( KeyMap2.getInstance().Get(element.getPredicate().getPredicateSymbol(), tuple).getTree() );
+			trees.add( KeyMap2.getInstance().Get(element.getPredicate().getPredicateSymbol(), tuple).getTrees().iterator().next());
 		}
 		
 		return trees;
@@ -573,7 +563,7 @@ public class TopKFinder
 	private double GetChildrensWeight(ITuple node)
 	{
 		double retVal = 1;
-		for (DerivationTree2 tree : node.getTree().getChildren()) 
+		for (DerivationTree2 tree : node.getTrees().iterator().next().getChildren())
 		{
 			retVal *= tree.getWeight();
 			//retVal = Math.min(retVal, tree.getWeight());

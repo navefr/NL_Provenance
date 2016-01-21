@@ -52,7 +52,7 @@ public class DerivationTree2 implements Comparable<DerivationTree2>
 		weight = tree.getWeight();
 		derivedFact = Factory.BASIC.createTuple(tree.getDerivedFact().getTerms().clone());
 		derivedFact.setPredicate( tree.getDerivedFact().getPredicate() );
-		derivedFact.setTree(this);
+		derivedFact.addTree(this);
 		derivedFact.setTop1Found(true);
 		derivedFact.setFact(true);
 		if (null != tree.getChildren()) 

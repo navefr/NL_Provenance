@@ -142,7 +142,7 @@ public class SemiNaiveEvaluator implements IRuleEvaluator
 			ITuple tuple = delta.get( t );
 			
 			//Amir added
-			IRelation programFacts = facts.get( tuple.getTree().getRulePointer().headPredicate() );
+			IRelation programFacts = facts.get( tuple.getTrees().iterator().next().getRulePointer().headPredicate() );
 			if( programFacts.size() == 0 )
 				return delta;
 			////////////
@@ -168,7 +168,7 @@ public class SemiNaiveEvaluator implements IRuleEvaluator
 		for ( int i = 0; i < delta.size(); i++ ) 
 		{
 			ITuple tuple = delta.get(i);
-			IPredicate predicate = tuple.getTree().getRulePointer().headPredicate();
+			IPredicate predicate = tuple.getTrees().iterator().next().getRulePointer().headPredicate();
 			deltas.get(predicate).add(tuple);
 		}
 	}

@@ -11,11 +11,33 @@ writes(16786, 783731).
 writes(16786, 1402603).
 writes(16786, 1405318).
 writes(16786, 1453205).
-writes(892590,851469).
+writes(892590,1505524).
+writes(892590,1505525).
+writes(892590,1505526).
+writes(892590,1505527).
+writes(892590,1505528).
+writes(892590,1505529).
+writes(892590,1505530).
+writes(892590,1505732).
+writes(892590,1505735).
+writes(892590,1505737).
+writes(892590,1507178).
+writes(892590,1507878).
 publication(1402603, "Exploiting Geo-tagged Tweets to Understand Localized Language Diversity.", "", 2014, 3204, 0, 0, 8).
 publication(1405318, "Sindbad: a location-based social networking system.", "", 2012, 3204, 0, 0, 8).
 publication(1402740, "OASSIS: query driven crowd mining.", "", 2014, 3204, 0, 0, 8).
-publication(851469, "XML Repository and Active Views Demonstration.", "", 2000, 3558, 0, 0, 0).
+publication(1505524, "XML Repository and Active Views Demonstration.", "", 1999, 3558, 0, 6, 4).
+publication(1505525, "Schema-driven Customization of Web Services.", "", 2003, 3558, 0, 6, 0).
+publication(1505526, "An Electronic Patient Record on Steroids: Distributed, Peer-to-Peer, Secure and Privacy-conscious.", "", 2004, 3558, 0, 5, 9).
+publication(1505527, "Active Views for Electronic Commerce.", "", 1999, 3558, 0, 51, 13).
+publication(1505528, "Managing Distributed Workspaces with Active XML.", "", 2003, 3558, 0, 2, 0).
+publication(1505529, "Active XML: Peer-to-Peer Data and Web Services Integration.", "", 2002, 3558, 0, 49, 1).
+publication(1505530, "Querying and Updating the File.", "", 1993, 3558, 0, 94, 13).
+publication(1505732, "Querying Business Processes.", "", 2006, 558, 0, 33, 18).
+publication(1505735, "A Model for Active Object Oriented Databases.", "", 1991, 3558, 0, 60, 14).
+publication(1505737, "Monitoring Business Processes with Queries.", "", 2007, 3558, 0, 20, 22).
+publication(1507178, "Using Schema Matching to Simplify Heterogeneous Data Translation.", "", 1998, 3558, 0, 171, 24).
+publication(1507878, "Querying Business Processes with BP-QL.","",  2005, 3558, 0, 12, 17).
 organization(16045,"Tel Aviv University","Asia & Oceania","http://www.tau.ac.il/").
 domain_conference(3558,18).
 domain(18,"Databases").

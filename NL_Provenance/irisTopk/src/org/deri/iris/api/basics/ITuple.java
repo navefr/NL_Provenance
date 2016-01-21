@@ -22,15 +22,13 @@
  */
 package org.deri.iris.api.basics;
 
+import Top1.DerivationTree2;
+import org.deri.iris.api.terms.ITerm;
+import org.deri.iris.api.terms.IVariable;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
-import org.deri.iris.api.terms.ITerm;
-import org.deri.iris.api.terms.IVariable;
-import org.deri.iris.rules.compiler.ICompiledRule;
-
-import Top1.DerivationTree2;
 
 /**
  * <p>
@@ -88,9 +86,9 @@ public interface ITuple extends List<ITerm>, Comparable<ITuple> {
 
 	public void setTopKUpdated(boolean isTopKUpdated);
 
-	public DerivationTree2 getTree();
+	public Collection<DerivationTree2> getTrees();
 
-	public void setTree(DerivationTree2 tree);
+	public void addTree(DerivationTree2 tree);
 	
 	public boolean isTop1Found();
 	

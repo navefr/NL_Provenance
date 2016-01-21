@@ -9,6 +9,7 @@ import org.deri.iris.Configuration;
 import org.deri.iris.EvaluationException;
 import org.deri.iris.api.basics.IPredicate;
 import org.deri.iris.api.basics.IRule;
+import org.deri.iris.api.basics.ITuple;
 import org.deri.iris.compiler.Parser;
 import org.deri.iris.evaluation.stratifiedbottomup.seminaive.SemiNaiveEvaluator;
 import org.deri.iris.facts.Facts;
@@ -69,7 +70,7 @@ public class Main {
         String query15 = "return the author with maximum number of papers in VLDB in 2014";
         String query16 = "return the paper with minimum number of citations in SIGMOD in 2013";
 
-        String querySentence = query7;
+        String querySentence = query4;
 
         Query query = new Query(querySentence, db.schemaGraph);
 
@@ -125,26 +126,33 @@ public class Main {
                 System.out.println(String.format("(%d) %s -->  %s", node.nodeID, node.label, literal));
             }
 
-            Set<DerivationTree2> provenanceTrees = measSN(block.DATALOGQuery);
+            Map<ITuple, Collection<DerivationTree2>> tupleProvenanceTrees = measSN(block.DATALOGQuery);
 
             // ToDo Nave - return as value and remove
             System.out.println();
             System.out.println("Provenance Trees");
-            for (DerivationTree2 derivationTree : provenanceTrees) {
-                System.out.println(derivationTree);
+            for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
+                ITuple tuple = tupleWithProvenanceTrees.getKey();
+                Collection<DerivationTree2> provenanceTrees = tupleWithProvenanceTrees.getValue();
+                System.out.println(tuple);
+                for (DerivationTree2 provenanceTree : provenanceTrees) {
+                    System.out.println(provenanceTree);
+                }
             }
 
             System.out.println();
             NaturalLanguageProvenanceCreator nlProvenanceCreator = new NaturalLanguageProvenanceCreator(querySentence, block, query.originalParseTree);
-            for (DerivationTree2 provenanceTree : provenanceTrees) {
-                System.out.println(provenanceTree.getDerivedFact());
-                System.out.println(nlProvenanceCreator.getNaturalLanguageProvenance(provenanceTree));
-                System.out.println(nlProvenanceCreator.getNaturalLanguageProvenance2(provenanceTree));
+            for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
+                ITuple tuple = tupleWithProvenanceTrees.getKey();
+                Collection<DerivationTree2> provenanceTrees = tupleWithProvenanceTrees.getValue();
+                System.out.println(tuple);
+                System.out.println(nlProvenanceCreator.getNaturalLanguageProvenance(provenanceTrees));
+                System.out.println(nlProvenanceCreator.getNaturalLanguageProvenance2(provenanceTrees));
             }
         }
     }
 
-    private static Set<DerivationTree2> measSN (String query) throws Exception {
+    private static Map<ITuple, Collection<DerivationTree2>> measSN (String query) throws Exception {
         KeyMap2.getInstance().Reset();
 
         // Create a Reader on the Datalog program file.
@@ -175,14 +183,20 @@ public class Main {
         SemiNaiveEvaluator sn = new SemiNaiveEvaluator();
         sn.evaluateRules(cr, facts, configuration);
 
-        Set<DerivationTree2> provenanceTrees = new HashSet<>();
+        Map<ITuple, Collection<DerivationTree2>> provenanceTrees = new HashMap<>();
         for (ICompiledRule compiledRule : cr) {
-            provenanceTrees.addAll(((CompiledRule) compiledRule).evaluatedProvenanceTrees);
+            for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithTrees : ((CompiledRule) compiledRule).evaluatedProvenanceTrees.entrySet()) {
+                ITuple tuple = tupleWithTrees.getKey();
+                Collection<DerivationTree2> trees = tupleWithTrees.getValue();
+                if (!provenanceTrees.containsKey(tuple)) {
+                    provenanceTrees.put(tuple, new ArrayList<>());
+                }
+                provenanceTrees.get(tuple).addAll(trees);
+            }
+
         }
         return provenanceTrees;
     }
-
-
 
     private static List<ICompiledRule> compile( List<IRule> rules, IFacts facts, Configuration mConfiguration ) throws EvaluationException
     {

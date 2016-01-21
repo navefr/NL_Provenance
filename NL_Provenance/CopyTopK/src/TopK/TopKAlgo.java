@@ -123,9 +123,9 @@ public class TopKAlgo
 			// select the best node of the leaves
 			chosenNode = compareTree.getLeaves().get(0);
 			
-			/*if (chosenNode.getTree() != null) 
+			/*if (chosenNode.getTrees() != null)
 			{
-				treeArr.add(chosenNode.getTree());
+				treeArr.add(chosenNode.getTrees());
 				compareTree.BuildLeaves(chosenNode);
 			}*/
 		}
@@ -160,7 +160,7 @@ public class TopKAlgo
 		{
 			curTree.setWeight(weight);
 			curTree.setDerivedFact(circuitNode);		
-			//v.setTree(curTree);;
+			//v.addTree(curTree);;
 		}
 	}
 	

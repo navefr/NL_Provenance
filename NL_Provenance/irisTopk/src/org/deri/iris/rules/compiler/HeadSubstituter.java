@@ -34,7 +34,6 @@ import org.deri.iris.api.terms.IStringTerm;
 import org.deri.iris.api.terms.ITerm;
 import org.deri.iris.api.terms.IVariable;
 import org.deri.iris.api.terms.concrete.IIntegerTerm;
-import org.deri.iris.basics.Literal;
 import org.deri.iris.factory.Factory;
 import org.deri.iris.storage.IRelation;
 import org.deri.iris.utils.TermMatchingAndSubstitution;
@@ -244,11 +243,13 @@ public class HeadSubstituter extends RuleElement
 	public void HandleTop1Scenario (ITuple ihead, List<ITuple> ibody, List<DerivationTree2.Condition> conditions, List<ILiteral> literals,
                                     CompiledRule r, Set<DerivationTree2> treesWaiting)
 	{
-		EquationTopK2.UpdateTop1WhileSemiNaive(ihead, ibody, conditions, literals);
-		ihead.getTree().setRulePointer(r);
-		ihead.getTree().setRulePointer(r);
-		ihead.getTree().setLiteral(r.getLiteral());
-		treesWaiting.add( ihead.getTree() );
+        List<DerivationTree2> derivationTrees = EquationTopK2.UpdateWhileSemiNaive(ihead, ibody, conditions, literals);
+        for (DerivationTree2 derivationTree : derivationTrees) {
+            derivationTree.setRulePointer(r);
+            derivationTree.setRulePointer(r);
+            derivationTree.setLiteral(r.getLiteral());
+        }
+		treesWaiting.addAll(derivationTrees);
 	}
 	
 	

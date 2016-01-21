@@ -27,6 +27,7 @@ import org.deri.iris.Configuration;
 import org.deri.iris.EvaluationException;
 import org.deri.iris.api.basics.ILiteral;
 import org.deri.iris.api.basics.IPredicate;
+import org.deri.iris.api.basics.ITuple;
 import org.deri.iris.api.terms.IVariable;
 import org.deri.iris.factory.Factory;
 import org.deri.iris.facts.IFacts;
@@ -41,7 +42,8 @@ import java.util.*;
 public class CompiledRule implements ICompiledRule
 {
 
-    public Set<DerivationTree2> evaluatedProvenanceTrees = new HashSet<>();
+    public Map<ITuple, Collection<DerivationTree2>> evaluatedProvenanceTrees = new HashMap<>();
+
 
 	/**
 	 * Constructor.
@@ -89,8 +91,9 @@ public class CompiledRule implements ICompiledRule
 				break;
 		}
 
-        for (DerivationTree2 derivationTree : treesWaiting) {
-            evaluatedProvenanceTrees.add(derivationTree);
+        for (int i = 0; i < output.size(); i++) {
+            ITuple tuple = output.get(i);
+            evaluatedProvenanceTrees.put(tuple, tuple.getTrees());
         }
 
         //treesWaiting = FindTop1(firstIteration, treesWaiting);
@@ -228,8 +231,8 @@ public class CompiledRule implements ICompiledRule
 		if (false == ihead.isTop1Found()) 
 		{
 			EquationTopK2.UpdateTop1WhileSemiNaive(ihead, ibody);
-			ihead.getTree().setRulePointer(this);
-			treesWaiting.add( ihead.getTree() );
+			ihead.getTrees().setRulePointer(this);
+			treesWaiting.add( ihead.getTrees() );
 		//}
 		
 		for (ITuple bodyAtom : ibody) 

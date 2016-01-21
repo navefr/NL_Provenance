@@ -243,7 +243,7 @@ public class EquationTopK
 						topKTrees.remove(topKTrees.size() - 1);
 					}
 		
-					topKTrees.add(InitializeTreeOfCompareNode(key, arr, chosenNode, b));//topKTrees.add(chosenNode.getTree());
+					topKTrees.add(InitializeTreeOfCompareNode(key, arr, chosenNode, b));//topKTrees.add(chosenNode.getTrees());
 					compareTree.BuildLeaves(chosenNode);
 					Collections.sort(topKTrees); //sort in descending order
 				}

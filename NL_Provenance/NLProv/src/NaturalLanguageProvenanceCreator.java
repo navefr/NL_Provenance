@@ -53,7 +53,12 @@ public class NaturalLanguageProvenanceCreator {
 
     }
 
-    public String getNaturalLanguageProvenance(DerivationTree2 provenanceTree) {
+    public String getNaturalLanguageProvenance(Collection<DerivationTree2> provenanceTrees) {
+
+        // Todo Nave - remove and support multiple derivations
+        DerivationTree2 provenanceTree = provenanceTrees.iterator().next();
+
+
         Set<DerivationTree2> provenanceTreeNodes = new HashSet<>();
         extractTreeNodes(provenanceTree, provenanceTreeNodes);
 
@@ -164,7 +169,11 @@ public class NaturalLanguageProvenanceCreator {
         }
     }
 
-    public String getNaturalLanguageProvenance2(DerivationTree2 provenanceTree) {
+    public String getNaturalLanguageProvenance2(Collection<DerivationTree2> provenanceTrees) {
+
+        // Todo Nave - remove and support multiple derivations
+        DerivationTree2 provenanceTree = provenanceTrees.iterator().next();
+
         Set<DerivationTree2> provenanceTreeNodes = new HashSet<>();
         extractTreeNodes(provenanceTree, provenanceTreeNodes);
 

@@ -59,7 +59,7 @@ public class Tuple extends AbstractList<ITerm> implements ITuple {
 	
 	private boolean isTop1Found;
 	
-	private DerivationTree2 tree;
+	private Collection<DerivationTree2> trees = new ArrayList<>();
 	
 	private double curRuleWeight;
 	
@@ -230,12 +230,12 @@ public class Tuple extends AbstractList<ITerm> implements ITuple {
 		this.isTopKUpdated = isTopKUpdated;
 	}
 
-	public DerivationTree2 getTree() {
-		return tree;
+	public Collection<DerivationTree2> getTrees() {
+		return trees;
 	}
 
-	public void setTree(DerivationTree2 tree) {
-		this.tree = tree;
+	public void addTree(DerivationTree2 tree) {
+        this.trees.add(tree);
 	}
 
 	public boolean isTop1Found() {
