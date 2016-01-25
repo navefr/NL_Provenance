@@ -136,18 +136,24 @@ public class NaturalLanguageProvenanceCreator {
         // TODO nave - Remove
         System.out.println();
         System.out.println("Single Derivation Answer Tree");
-        ParseTree singleDerivationAnswerTree = AnswerParseTreeBuilder.getInstance().buildSingleDerivationAnswerParseTree(queryOriginalParseTree, wordReplacementMap);
+        ParseTree singleDerivationAnswerTree = SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap);
         System.out.println(singleDerivationAnswerTree);
         System.out.println();
         System.out.println("Single Derivation Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(singleDerivationAnswerTree));
         System.out.println();
         System.out.println("Multiple Derivation Answer Tree");
-        ParseTree multipleDerivationAnswerTree = AnswerParseTreeBuilder.getInstance().buildMultipleDerivationAnswerParseTree(queryOriginalParseTree, wordReplacementMap);
+        ParseTree multipleDerivationAnswerTree = MultipleDerivationAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap);
         System.out.println(multipleDerivationAnswerTree);
         System.out.println();
         System.out.println("Multiple Derivation Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationAnswerTree));
+        System.out.println();
+        System.out.println("Multiple Derivation Summarized Answer Tree");
+        ParseTree multipleDerivationSummarizedAnswerTree = MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap);
+        System.out.println(multipleDerivationAnswerTree);
+        System.out.println("Multiple Derivation Summarized Answer Sentence");
+        System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationSummarizedAnswerTree));
         System.out.println();
         System.out.println("Multiple Derivation Factorization");
         System.out.println(wordReplacementMap.createFactorizeExpression());
