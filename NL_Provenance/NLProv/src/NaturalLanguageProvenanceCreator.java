@@ -50,112 +50,8 @@ public class NaturalLanguageProvenanceCreator {
         // TODO NAVE - add more predicates
         predicateSymbolMapping.put("GREATER", ">");
         predicateSymbolMapping.put("LESS", "<");
+        predicateSymbolMapping.put("EQUAL", "=");
 
-    }
-
-    public String getNaturalLanguageProvenance(Collection<DerivationTree2> provenanceTrees) {
-
-        // Todo Nave - remove and support multiple derivations
-        DerivationTree2 provenanceTree = provenanceTrees.iterator().next();
-
-
-        Set<DerivationTree2> provenanceTreeNodes = new HashSet<>();
-        extractTreeNodes(provenanceTree, provenanceTreeNodes);
-
-        Map<String, DerivationTree2> literalToProvenanceNode = new HashMap<>();
-        for (DerivationTree2 provenanceTreeNode : provenanceTreeNodes) {
-            if (provenanceTreeNode.getLiteral() != null) {
-                // TODO NAVE - modification in literal string in order to match the same format as in literalToParseTreeNode
-                IAtom atom = provenanceTreeNode.getLiteral().getAtom();
-                ITuple tuple = atom.getTuple();
-                String predicate = atom.getPredicate().getPredicateSymbol();
-                if (tuple.size() == 2 && predicateSymbolMapping.containsKey(predicate)) {
-                    literalToProvenanceNode.put(String.format("%s %s %s", tuple.get(0), predicateSymbolMapping.get(predicate), tuple.get(1)), provenanceTreeNode);
-                } else {
-                    literalToProvenanceNode.put(provenanceTreeNode.getLiteral().toString(), provenanceTreeNode);
-                }
-            }
-        }
-
-        Map<ParseTreeNode, ITerm> freeQueryNodesToValues = new HashMap<ParseTreeNode, ITerm>();
-        for (ParseTreeNode freeQueryNode : freeQueryNodes) {
-            SchemaElement schemaElement = freeQueryNode.mappedElements.get(0).schemaElement;
-            String relevantVariableName = schemaElement.relation.name + schemaElement.name;
-
-            for (DerivationTree2 provenanceTreeNode : provenanceTreeNodes) {
-                DerivationTree2.Condition condition = provenanceTreeNode.getCondition();
-                ILiteral literal = provenanceTreeNode.getLiteral();
-                if (literal != null && (condition == null || !condition.getType().equalsIgnoreCase("JOIN"))) {
-                    boolean foundRelevantVariableName = false;
-                    int relevantVariableIndex = -1;
-                    int currentIndex = 0;
-                    for (IVariable iVariable : literal.getAtom().getTuple().getAllVariables()) {
-                        if (iVariable.getValue().equalsIgnoreCase(relevantVariableName)) {
-                            foundRelevantVariableName = true;
-                            relevantVariableIndex = currentIndex;
-                        }
-                        currentIndex++;
-                    }
-                    if (foundRelevantVariableName) {
-                        ITerm freeNodeTerm = provenanceTreeNode.getDerivedFact().get(relevantVariableIndex);
-                        freeQueryNodesToValues.put(freeQueryNode, freeNodeTerm);
-                    }
-                }
-            }
-        }
-
-        Map<Integer, DerivationTree2> wordIndexToProvenanceNode = new HashMap<>();
-        for (String literal : literalToProvenanceNode.keySet()) {
-            if (literalToParseTreeNode.containsKey(literal)) {
-                ParseTreeNode parseTreeNode = literalToParseTreeNode.get(literal);
-                wordIndexToProvenanceNode.put(parseTreeNode.wordOrder, literalToProvenanceNode.get(literal));
-            } else {
-                String literalModified = literal.replaceAll("'", "\"");
-                if (literalToParseTreeNode.containsKey(literalModified)) {
-                    ParseTreeNode parseTreeNode = literalToParseTreeNode.get(literalModified);
-                    wordIndexToProvenanceNode.put(parseTreeNode.wordOrder, literalToProvenanceNode.get(literal));
-                }
-            }
-        }
-
-        Map<Integer, ITerm> wordIndexFreeQueryNodeValue = new HashMap<>();
-        for (ParseTreeNode freeQueryNode : freeQueryNodesToValues.keySet()) {
-            wordIndexFreeQueryNodeValue.put(freeQueryNode.wordOrder, freeQueryNodesToValues.get(freeQueryNode));
-        }
-
-        StringBuilder nlProvenance = new StringBuilder();
-
-
-        ArrayList<ParseTreeNode> orderedOriginalTreeNodes = new ArrayList<>();
-        for (ParseTreeNode originalParseTreeNode : queryOriginalParseTree.allNodes) {
-            orderedOriginalTreeNodes.add(originalParseTreeNode);
-        }
-        Collections.sort(orderedOriginalTreeNodes, new Comparator<ParseTreeNode>(){
-            public int compare(ParseTreeNode o1, ParseTreeNode o2){
-                return o1.wordOrder - o2.wordOrder;
-            }
-        });
-
-        for (ParseTreeNode originalParseTreeNode : orderedOriginalTreeNodes) {
-            int wordOrder = originalParseTreeNode.wordOrder;
-
-            // Skip the "return me the" prefix
-            if (wordOrder > 2) {
-                if (wordOrder != 3) {
-                    nlProvenance.append(" ");
-                }
-
-                if (wordIndexToProvenanceNode.containsKey(wordOrder )) {
-                    nlProvenance.append(wordIndexToProvenanceNode.get(wordOrder).getDerivedFact().get(0).toString());
-                } else if (wordIndexFreeQueryNodeValue.containsKey(wordOrder)){
-                    nlProvenance.append(wordIndexFreeQueryNodeValue.get(wordOrder).getValue());
-                } else {
-                    nlProvenance.append(originalParseTreeNode.label);
-                }
-            }
-        }
-
-        return nlProvenance.toString();
     }
 
     private void extractTreeNodes(DerivationTree2 node, Set<DerivationTree2> nodes) {
@@ -169,90 +65,94 @@ public class NaturalLanguageProvenanceCreator {
         }
     }
 
-    public String getNaturalLanguageProvenance2(Collection<DerivationTree2> provenanceTrees) {
+    public String getNaturalLanguageProvenance(Collection<DerivationTree2> provenanceTrees) {
+        WordMappings wordReplacementMap = new WordMappings();
 
-        // Todo Nave - remove and support multiple derivations
-        DerivationTree2 provenanceTree = provenanceTrees.iterator().next();
+        for (DerivationTree2 provenanceTree : provenanceTrees) {
+            Set<DerivationTree2> provenanceTreeNodes = new HashSet<>();
+            extractTreeNodes(provenanceTree, provenanceTreeNodes);
 
-        Set<DerivationTree2> provenanceTreeNodes = new HashSet<>();
-        extractTreeNodes(provenanceTree, provenanceTreeNodes);
-
-        Map<String, DerivationTree2> literalToProvenanceNode = new HashMap<>();
-        for (DerivationTree2 provenanceTreeNode : provenanceTreeNodes) {
-            if (provenanceTreeNode.getLiteral() != null) {
-                // TODO NAVE - modification in literal string in order to match the same format as in literalToParseTreeNode
-                IAtom atom = provenanceTreeNode.getLiteral().getAtom();
-                ITuple tuple = atom.getTuple();
-                String predicate = atom.getPredicate().getPredicateSymbol();
-                if (tuple.size() == 2 && predicateSymbolMapping.containsKey(predicate)) {
-                    literalToProvenanceNode.put(String.format("%s %s %s", tuple.get(0), predicateSymbolMapping.get(predicate), tuple.get(1)), provenanceTreeNode);
-                } else {
-                    literalToProvenanceNode.put(provenanceTreeNode.getLiteral().toString(), provenanceTreeNode);
-                }
-            }
-        }
-
-        Map<ParseTreeNode, ITerm> freeQueryNodesToValues = new HashMap<ParseTreeNode, ITerm>();
-        for (ParseTreeNode freeQueryNode : freeQueryNodes) {
-            SchemaElement schemaElement = freeQueryNode.mappedElements.get(0).schemaElement;
-            String relevantVariableName = schemaElement.relation.name + schemaElement.name;
-
+            Map<String, DerivationTree2> literalToProvenanceNode = new HashMap<>();
             for (DerivationTree2 provenanceTreeNode : provenanceTreeNodes) {
-                DerivationTree2.Condition condition = provenanceTreeNode.getCondition();
-                ILiteral literal = provenanceTreeNode.getLiteral();
-                if (literal != null && (condition == null || !condition.getType().equalsIgnoreCase("JOIN"))) {
-                    boolean foundRelevantVariableName = false;
-                    int relevantVariableIndex = -1;
-                    int currentIndex = 0;
-                    for (IVariable iVariable : literal.getAtom().getTuple().getAllVariables()) {
-                        if (iVariable.getValue().equalsIgnoreCase(relevantVariableName)) {
-                            foundRelevantVariableName = true;
-                            relevantVariableIndex = currentIndex;
+                if (provenanceTreeNode.getLiteral() != null) {
+                    // TODO NAVE - modification in literal string in order to match the same format as in literalToParseTreeNode
+                    IAtom atom = provenanceTreeNode.getLiteral().getAtom();
+                    ITuple tuple = atom.getTuple();
+                    String predicate = atom.getPredicate().getPredicateSymbol();
+                    if (tuple.size() == 2 && predicateSymbolMapping.containsKey(predicate)) {
+                        literalToProvenanceNode.put(String.format("%s %s %s", tuple.get(0), predicateSymbolMapping.get(predicate), tuple.get(1)), provenanceTreeNode);
+                    } else {
+                        literalToProvenanceNode.put(provenanceTreeNode.getLiteral().toString(), provenanceTreeNode);
+                    }
+                }
+            }
+
+            Map<ParseTreeNode, ITerm> freeQueryNodesToValues = new HashMap<ParseTreeNode, ITerm>();
+            for (ParseTreeNode freeQueryNode : freeQueryNodes) {
+                SchemaElement schemaElement = freeQueryNode.mappedElements.get(0).schemaElement;
+                String relevantVariableName = schemaElement.relation.name + schemaElement.name;
+
+                for (DerivationTree2 provenanceTreeNode : provenanceTreeNodes) {
+                    DerivationTree2.Condition condition = provenanceTreeNode.getCondition();
+                    ILiteral literal = provenanceTreeNode.getLiteral();
+                    if (literal != null && (condition == null || !condition.getType().equalsIgnoreCase("JOIN"))) {
+                        boolean foundRelevantVariableName = false;
+                        int relevantVariableIndex = -1;
+                        int currentIndex = 0;
+                        for (IVariable iVariable : literal.getAtom().getTuple().getAllVariables()) {
+                            if (iVariable.getValue().equalsIgnoreCase(relevantVariableName)) {
+                                foundRelevantVariableName = true;
+                                relevantVariableIndex = currentIndex;
+                            }
+                            currentIndex++;
                         }
-                        currentIndex++;
-                    }
-                    if (foundRelevantVariableName) {
-                        ITerm freeNodeTerm = provenanceTreeNode.getDerivedFact().get(relevantVariableIndex);
-                        freeQueryNodesToValues.put(freeQueryNode, freeNodeTerm);
+                        if (foundRelevantVariableName) {
+                            ITerm freeNodeTerm = provenanceTreeNode.getDerivedFact().get(relevantVariableIndex);
+                            freeQueryNodesToValues.put(freeQueryNode, freeNodeTerm);
+                        }
                     }
                 }
             }
-        }
 
-        Map<Integer, String> wordReplacementMap  = new HashMap<>();
-        for (String literal : literalToProvenanceNode.keySet()) {
-            if (literalToParseTreeNode.containsKey(literal)) {
-                ParseTreeNode parseTreeNode = literalToParseTreeNode.get(literal);
-                wordReplacementMap.put(parseTreeNode.wordOrder, literalToProvenanceNode.get(literal).getDerivedFact().get(0).toString());
-            } else {
-                String literalModified = literal.replaceAll("'", "\"");
-                if (literalToParseTreeNode.containsKey(literalModified)) {
-                    ParseTreeNode parseTreeNode = literalToParseTreeNode.get(literalModified);
-                    wordReplacementMap.put(parseTreeNode.wordOrder, literalToProvenanceNode.get(literal).getDerivedFact().get(0).toString());
+            int derivationIndex = wordReplacementMap.getLastDerivation() + 1;
+            for (String literal : literalToProvenanceNode.keySet()) {
+                if (literalToParseTreeNode.containsKey(literal)) {
+                    ParseTreeNode parseTreeNode = literalToParseTreeNode.get(literal);
+                    wordReplacementMap.add(derivationIndex, parseTreeNode.wordOrder, literalToProvenanceNode.get(literal).getDerivedFact().get(0).toString());
+                } else {
+                    String literalModified = literal.replaceAll("'", "\"");
+                    if (literalToParseTreeNode.containsKey(literalModified)) {
+                        ParseTreeNode parseTreeNode = literalToParseTreeNode.get(literalModified);
+                        wordReplacementMap.add(derivationIndex, parseTreeNode.wordOrder, literalToProvenanceNode.get(literal).getDerivedFact().get(0).toString());
+                    }
                 }
             }
-        }
 
-        for (ParseTreeNode freeQueryNode : freeQueryNodesToValues.keySet()) {
-            wordReplacementMap.put(freeQueryNode.wordOrder, freeQueryNodesToValues.get(freeQueryNode).getValue().toString());
+            for (ParseTreeNode freeQueryNode : freeQueryNodesToValues.keySet()) {
+                wordReplacementMap.add(derivationIndex, freeQueryNode.wordOrder, freeQueryNodesToValues.get(freeQueryNode).getValue().toString());
+            }
         }
 
         // TODO nave - Remove
         System.out.println();
-        System.out.println("Substitute Tree");
-        System.out.println(SentenceBuilder.getInstance().buildSubstituteTree(queryOriginalParseTree, wordReplacementMap));
+        System.out.println("Single Derivation Answer Tree");
+        ParseTree singleDerivationAnswerTree = AnswerParseTreeBuilder.getInstance().buildSingleDerivationAnswerParseTree(queryOriginalParseTree, wordReplacementMap);
+        System.out.println(singleDerivationAnswerTree);
         System.out.println();
-        System.out.println("Append Tree");
-        System.out.println(SentenceBuilder.getInstance().buildAppendTree(queryOriginalParseTree, wordReplacementMap));
+        System.out.println("Single Derivation Answer Sentence");
+        System.out.println(SentenceBuilder.getInstance().buildSentence(singleDerivationAnswerTree));
         System.out.println();
-        System.out.println("Answer Tree");
-        ParseTree answerTree = AnswerParseTreeBuilder.getInstance().buildAnswerParseTree(queryOriginalParseTree, wordReplacementMap);
-        System.out.println(answerTree);
+        System.out.println("Multiple Derivation Answer Tree");
+        ParseTree multipleDerivationAnswerTree = AnswerParseTreeBuilder.getInstance().buildMultipleDerivationAnswerParseTree(queryOriginalParseTree, wordReplacementMap);
+        System.out.println(multipleDerivationAnswerTree);
         System.out.println();
-        System.out.println("Answer Sentence");
-        System.out.println(SentenceBuilder.getInstance().buildSentence(answerTree));
+        System.out.println("Multiple Derivation Answer Sentence");
+        System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationAnswerTree));
+        System.out.println();
+        System.out.println("Multiple Derivation Factorization");
+        System.out.println(wordReplacementMap.createFactorizeExpression());
         System.out.println();
 
-        return SentenceBuilder.getInstance().buildSentence(queryOriginalParseTree, wordReplacementMap);
+        return SentenceBuilder.getInstance().buildSentence(singleDerivationAnswerTree);
     }
 }

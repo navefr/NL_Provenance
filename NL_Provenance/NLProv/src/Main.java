@@ -55,6 +55,8 @@ public class Main {
         String query5 = "return the papers whose title contains \"OASSIS\"";
         String query6 = "return the authors who published papers in SIGMOD before 2015 and after 2005. ";
         String query7 = "return the papers which were published in conferences in database area";
+        String query8 = "return the area of conferences";
+        String query9 = "return the authors who published papers in database conferences. ";
 
         String ans1 = "\"http://www.sigmod2011.org/\" is the homepage of SIGMOD.";
         String ans2 = "VLDB is a conference in Databases area.";
@@ -70,10 +72,9 @@ public class Main {
         String query15 = "return the author with maximum number of papers in VLDB in 2014";
         String query16 = "return the paper with minimum number of citations in SIGMOD in 2013";
 
-        String querySentence = query4;
+        String querySentence = query9;
 
         Query query = new Query(querySentence, db.schemaGraph);
-
 
         components.StanfordNLParser.parse(query, lexiParser);
         components.NodeMapper.phraseProcess(query, db, tokens);
@@ -147,7 +148,6 @@ public class Main {
                 Collection<DerivationTree2> provenanceTrees = tupleWithProvenanceTrees.getValue();
                 System.out.println(tuple);
                 System.out.println(nlProvenanceCreator.getNaturalLanguageProvenance(provenanceTrees));
-                System.out.println(nlProvenanceCreator.getNaturalLanguageProvenance2(provenanceTrees));
             }
         }
     }

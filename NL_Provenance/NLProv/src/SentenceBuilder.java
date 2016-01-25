@@ -35,7 +35,25 @@ public class SentenceBuilder {
     }
 
     public String buildSentence(ParseTree parseTree) {
-        return buildSentence(parseTree, Collections.<Integer, String>emptyMap());
+
+        ArrayList<ParseTreeNode> orderedTreeNodes = new ArrayList<>();
+        for (ParseTreeNode originalParseTreeNode : parseTree.allNodes) {
+            orderedTreeNodes.add(originalParseTreeNode);
+        }
+        Collections.sort(orderedTreeNodes, new Comparator<ParseTreeNode>() {
+            public int compare(ParseTreeNode o1, ParseTreeNode o2) {
+                return o1.wordOrder - o2.wordOrder;
+            }
+        });
+
+        StringBuilder sentence = new StringBuilder();
+        for (ParseTreeNode parseTreeNode : orderedTreeNodes) {
+            if (parseTreeNode.parent != null && !parseTreeNode.tokenType.equals("CMT")) {
+                sentence.append(parseTreeNode.label).append(" ");
+            }
+        }
+        sentence.deleteCharAt(sentence.length() - 1);
+        return sentence.toString();
     }
 
     public String buildSentence(ParseTree parseTree, Map<Integer, String> wordReplacementMap) {

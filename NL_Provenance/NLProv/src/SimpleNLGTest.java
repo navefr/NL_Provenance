@@ -114,7 +114,7 @@ public class SimpleNLGTest {
         components.SQLTranslator.translate(query, db);
 
         ParseTree queryTree = query.originalParseTree;
-        String output = SentenceBuilder.getInstance().buildSentence(queryTree);
+        String output = SentenceBuilder.getInstance().buildSentence(queryTree, Collections.<Integer, String>emptyMap());
 
         System.out.println();
         System.out.println(output);

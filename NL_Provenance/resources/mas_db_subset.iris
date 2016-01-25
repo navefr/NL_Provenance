@@ -12,6 +12,16 @@ writes(16786, 1402603).
 writes(16786, 1405318).
 writes(16786, 1453205).
 writes(892590,1505524).
+writes(892590,1402611).
+writes(892590,1402740).
+writes(892590,1402741).
+writes(892590,1402860).
+writes(892590,1402897).
+writes(892590,1403006).
+writes(892590,1403535).
+writes(892590,1404813).
+writes(892590,1405341).
+writes(892590,1405743).
 writes(892590,1505525).
 writes(892590,1505526).
 writes(892590,1505527).
@@ -23,9 +33,18 @@ writes(892590,1505735).
 writes(892590,1505737).
 writes(892590,1507178).
 writes(892590,1507878).
+publication(1402611, "Auto-completion learning for XML.", "", 2012, 3204, 0, 0, 0).
+publication(1402740, "OASSIS: query driven crowd mining.", "", 2014, 3204, 0, 0, 0).
+publication(1402741, "Crowd mining.", "", 2013, 3204, 0, 0, 0).
+publication(1402860, "Labeling recursive workflow executions on-the-fly.", "", 2011, 3204, 0, 0, 0).
+publication(1402897, "Query-based monitoring of BPEL business processes.", "", 2007, 3204, 0, 7, 10).
+publication(1403006, "Enriching topic-based publish-subscribe systems with related content.", "", 2008, 3204, 0, 0, 7).
+publication(1403535, "Mob data sourcing.", "", 2012, 3204, 0, 0, 0).
+publication(1404813, "Boosting topic-based publish-subscribe systems with dynamic clustering.", "", 2007, 3204, 0, 17, 21).
+publication(1405341, "COLT: continuous on-line tuning.", "", 2006, 3204, 0, 17, 9).
+publication(1405743, "A sample-and-clean framework for fast and accurate query processing on dirty data.", "", 2014, 3204, 0, 0, 0).
 publication(1402603, "Exploiting Geo-tagged Tweets to Understand Localized Language Diversity.", "", 2014, 3204, 0, 0, 8).
 publication(1405318, "Sindbad: a location-based social networking system.", "", 2012, 3204, 0, 0, 8).
-publication(1402740, "OASSIS: query driven crowd mining.", "", 2014, 3204, 0, 0, 8).
 publication(1505524, "XML Repository and Active Views Demonstration.", "", 1999, 3558, 0, 6, 4).
 publication(1505525, "Schema-driven Customization of Web Services.", "", 2003, 3558, 0, 6, 0).
 publication(1505526, "An Electronic Patient Record on Steroids: Distributed, Peer-to-Peer, Secure and Privacy-conscious.", "", 2004, 3558, 0, 5, 9).
@@ -39,6 +58,7 @@ publication(1505737, "Monitoring Business Processes with Queries.", "", 2007, 35
 publication(1507178, "Using Schema Matching to Simplify Heterogeneous Data Translation.", "", 1998, 3558, 0, 171, 24).
 publication(1507878, "Querying Business Processes with BP-QL.","",  2005, 3558, 0, 12, 17).
 organization(16045,"Tel Aviv University","Asia & Oceania","http://www.tau.ac.il/").
+domain_conference(3204,18).
 domain_conference(3558,18).
 domain(18,"Databases").
 
