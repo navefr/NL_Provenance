@@ -52,7 +52,6 @@ public class SentenceBuilder {
                 sentence.append(parseTreeNode.label).append(" ");
             }
         }
-        sentence.deleteCharAt(sentence.length() - 1);
         return sentence.toString();
     }
 

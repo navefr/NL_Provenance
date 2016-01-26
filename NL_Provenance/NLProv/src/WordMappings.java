@@ -38,31 +38,44 @@ public class WordMappings {
         return expression;
     }
 
-    private static class Expression {
+    public static class Expression {
         private Set<Expression> expressions;
         private Set<Variable> variables;
-        private Expression parent;
 
         private Expression() {
             expressions = new HashSet<>();
-            variables = new HashSet<>();
-            parent = null;
+            variables = new TreeSet<Variable>(new Comparator<Variable>() {
+                @Override
+                public int compare(Variable o1, Variable o2) {
+                    int wordOrderCompare = o1.getWordOrder() - o2.getWordOrder();
+                    if (wordOrderCompare != 0) {
+                        return wordOrderCompare;
+                    } else {
+                        return o1.getValue().compareTo(o2.getValue());
+                    }
+                }
+            });
         }
 
         private Expression(Map<Integer, Map<Integer, String>> wordMappingByDerivation) {
-            expressions = new HashSet<>();
-            variables = new HashSet<>();
-            parent = null;
+            this();
 
             for (Map.Entry<Integer, Map<Integer, String>> derivationWordMapping : wordMappingByDerivation.entrySet()) {
                 Expression expression = new Expression();
                 for (Map.Entry<Integer, String> variable : derivationWordMapping.getValue().entrySet()) {
                     expression.variables.add(new Variable(variable.getKey(), variable.getValue()));
                 }
-                expression.parent = this;
                 expressions.add(expression);
             }
 
+        }
+
+        public Set<Expression> getExpressions() {
+            return expressions;
+        }
+
+        public Set<Variable> getVariables() {
+            return variables;
         }
 
         private void factorize() {
@@ -103,13 +116,11 @@ public class WordMappings {
             Set<Expression> newExpressions = new HashSet<>();
             Expression variableExpression = new Expression();
             variableExpression.variables.add(variable);
-            variableExpression.parent = this;
             newExpressions.add(variableExpression);
 
             for (Expression expression : expressions) {
                 if (expression.variables.contains(variable)) {
                     expression.variables.remove(variable);
-                    expression.parent = variableExpression;
                     variableExpression.expressions.add(expression);
                 } else {
                     newExpressions.add(expression);
@@ -158,7 +169,7 @@ public class WordMappings {
         }
     }
 
-    private static class Variable {
+    public static class Variable {
         private int wordOrder;
         private String value;
 
