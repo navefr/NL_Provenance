@@ -86,14 +86,4 @@ public class MultipleDerivationSummarizedAnswerTreeBuilder extends AbstractAnswe
         }
         return mappings;
     }
-
-    private String getQuoatedString(String str) {
-        if (str.startsWith("'") && str.endsWith("'")) {
-            return str;
-        } else if (str.startsWith("\"") && str.endsWith("\"")) {
-            return str;
-        } else {
-            return "\"" + str + "\"";
-        }
-    }
 }

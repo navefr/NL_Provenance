@@ -77,11 +77,13 @@ public abstract class AbstractAnswerParseTreeBuilder {
         }
     }
 
-    private Collection<ParseTreeNode> getSiblings(ParseTreeNode node) {
+    protected Collection<ParseTreeNode> getSiblings(ParseTreeNode node) {
         Collection<ParseTreeNode> siblings = new ArrayList<>();
-        for (ParseTreeNode possibleSibling : node.parent.children) {
-            if (!possibleSibling.equals(node)) {
-                siblings.add(possibleSibling);
+        if (node.parent != null) {
+            for (ParseTreeNode possibleSibling : node.parent.children) {
+                if (!possibleSibling.equals(node)) {
+                    siblings.add(possibleSibling);
+                }
             }
         }
         return siblings;
@@ -168,7 +170,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
         checkPrep(answerTree, currNode);
     }
 
-    private ParseTree copyTree(ParseTree parseTree) {
+    protected ParseTree copyTree(ParseTree parseTree) {
         ParseTree copyTree = new ParseTree();
         for (ParseTreeNode node : parseTree.allNodes) {
             if (node.parent != null) {
@@ -205,4 +207,14 @@ public abstract class AbstractAnswerParseTreeBuilder {
     }
 
     protected abstract String getNodeValue(WordMappings wordReplacementMap, ParseTreeNode node);
+
+    protected String getQuoatedString(String str) {
+        if (str.startsWith("'") && str.endsWith("'")) {
+            return str;
+        } else if (str.startsWith("\"") && str.endsWith("\"")) {
+            return str;
+        } else {
+            return "\"" + str + "\"";
+        }
+    }
 }
