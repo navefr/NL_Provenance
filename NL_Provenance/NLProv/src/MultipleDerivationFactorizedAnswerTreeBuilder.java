@@ -26,16 +26,20 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
 
         ParseTree finalAnswerTree = copyTree(answerParseTree);
 
-        Collection<ParseTreeNode> processedNodeVariables = new ArrayList<>();
-        handleExpression(finalAnswerTree, factorizeExpression, processedNodeVariables);
+        Map<Integer, Integer> wordOrderToNodeId = new HashMap<>();
+        for (ParseTreeNode node : finalAnswerTree.allNodes) {
+            wordOrderToNodeId.put(node.wordOrder, node.nodeID);
+        }
 
+        Collection<ParseTreeNode> processedNodeVariables = new ArrayList<>();
+        handleExpression(finalAnswerTree, factorizeExpression, processedNodeVariables, wordOrderToNodeId);
 
         return finalAnswerTree;
     }
 
-    private void handleExpression(ParseTree finalAnswerTree, WordMappings.Expression expression, Collection<ParseTreeNode> processedNodeVariables) {
+    private void handleExpression(ParseTree finalAnswerTree, WordMappings.Expression expression, Collection<ParseTreeNode> processedNodeVariables, Map<Integer, Integer> wordOrderToNodeId) {
         for (WordMappings.Variable variable : expression.getVariables()) {
-            ParseTreeNode variableNode = finalAnswerTree.searchNodeByOrder(variable.getWordOrder());
+            ParseTreeNode variableNode = getOriginalNodeByWordOrder(finalAnswerTree, variable.getWordOrder(), wordOrderToNodeId);
             ParseTreeNode variableNodeSubTreeRoot = variableNode;
             if (!variableNode.parent.relationship.equals("nsubj") && !variableNode.parent.label.equals("ROOT")) {
                 variableNodeSubTreeRoot = variableNode.parent;
@@ -85,7 +89,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             wordOrderValues.add(variable.getValue());
         }
         for (Map.Entry<Integer, List<String>> wordOrderToValues : singleVariableWordOrderToValues.entrySet()) {
-            ParseTreeNode node = finalAnswerTree.searchNodeByOrder(wordOrderToValues.getKey());
+            ParseTreeNode node = getOriginalNodeByWordOrder(finalAnswerTree, wordOrderToValues.getKey(), wordOrderToNodeId);
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < wordOrderToValues.getValue().size(); i++) {
                 if (i != 0) {
@@ -105,7 +109,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             Collection<ParseTreeNode> nodesInExpression = new ArrayList<>();
             Map<Integer, String> nodeValues = new HashMap<>();
             for (WordMappings.Variable variable : multiVariableUnNestedSubExpression.getVariables()) {
-                ParseTreeNode node = finalAnswerTree.searchNodeByOrder(variable.getWordOrder());
+                ParseTreeNode node = getOriginalNodeByWordOrder(finalAnswerTree, variable.getWordOrder(), wordOrderToNodeId);
                 nodesInExpression.add(node);
                 nodeValues.put(variable.getWordOrder(), variable.getValue());
             }
@@ -130,6 +134,9 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             }
         }
 
+        for (WordMappings.Expression nestedSubExpression : nestedSubExpressions) {
+            handleExpression(finalAnswerTree, nestedSubExpression, processedNodeVariables, wordOrderToNodeId);
+        }
 
     }
 
@@ -220,4 +227,10 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         }
 
     }
+
+    private ParseTreeNode getOriginalNodeByWordOrder(ParseTree parseTree, int wordOrder, Map<Integer, Integer> wordOrderToNodeId) {
+        Integer nodeId = wordOrderToNodeId.get(wordOrder);
+        return parseTree.searchNodeByID(nodeId);
+    }
+
 }
