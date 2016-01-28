@@ -1,4 +1,9 @@
 author(892590,"Tova Milo",16045,"http://www.cs.tau.ac.il/~milo/").
+author(631341,"Haim Kaplan",16045,"http://www.math.tau.ac.il/~haimk/").
+author(858063,"Yossi Matias",16045,"http://www.math.tau.ac.il/~matias/").
+author(298776, "Daniel Deutch", 16045, "http://www.cs.bgu.ac.il/~deutchd/").
+author(970684, "Slava Novgorodov", 16045, "").
+author(624699, "Simon Kamenkovich", 16045, "").
 author(16786, "Amr Magdy", 4488, "http://www.alexeng.edu.eg/~amr/").
 conference(3204, "SIGMOD", "http://www.sigmod2011.org/").
 conference(3558,"VLDB","http://www.vldb.org/2011/").
@@ -14,11 +19,13 @@ writes(16786, 1453205).
 writes(892590,1505524).
 writes(892590,1402611).
 writes(892590,1402740).
+writes(970684,1402740).
 writes(892590,1402741).
 writes(892590,1402860).
 writes(892590,1402897).
 writes(892590,1403006).
 writes(892590,1403535).
+writes(298776,1403535).
 writes(892590,1404813).
 writes(892590,1405341).
 writes(892590,1405743).
@@ -33,6 +40,7 @@ writes(892590,1505735).
 writes(892590,1505737).
 writes(892590,1507178).
 writes(892590,1507878).
+writes(624699,1507878).
 publication(1402611, "Auto-completion learning for XML.", "", 2012, 3204, 0, 0, 0).
 publication(1402740, "OASSIS: query driven crowd mining.", "", 2014, 3204, 0, 0, 0).
 publication(1402741, "Crowd mining.", "", 2013, 3204, 0, 0, 0).
