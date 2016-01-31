@@ -80,10 +80,6 @@ public class WordMappings {
 
         private void factorize() {
 
-            for (Expression expression : expressions) {
-                expression.factorize();
-            }
-
             Map<Variable, Integer> variableApps = new HashMap<>();
             for (Expression expression : expressions) {
                 for (Variable variable : expression.variables) {
@@ -95,7 +91,8 @@ public class WordMappings {
                 }
             }
 
-            for (Map.Entry<Variable, Integer> variableAppsEntry : variableApps.entrySet()) {
+            Map<Variable, Integer> variableAppsSorted = MapUtil.sortByValue(variableApps, true);
+            for (Map.Entry<Variable, Integer> variableAppsEntry : variableAppsSorted.entrySet()) {
                 if (variableAppsEntry.getValue() == expressions.size()) {
                     Variable variable = variableAppsEntry.getKey();
                     variables.add(variable);
@@ -105,30 +102,55 @@ public class WordMappings {
                 }
             }
 
-            for (Map.Entry<Variable, Integer> variableAppsEntry : variableApps.entrySet()) {
-                if (variableAppsEntry.getValue() < expressions.size() && variableAppsEntry.getValue() > 1) {
+            for (Map.Entry<Variable, Integer> variableAppsEntry : variableAppsSorted.entrySet()) {
+                if (variableAppsEntry.getValue() > 1) {
                     factorizePartialVariable(variableAppsEntry.getKey());
                 }
             }
+
+            Set<Expression> emptyExpressions = new HashSet<>();
+            for (Expression expression : expressions) {
+                if (expression.variables.isEmpty() && expression.expressions.isEmpty()) {
+                    emptyExpressions.add(expression);
+                }
+            }
+            for (Expression emptyExpression : emptyExpressions) {
+                expressions.remove(emptyExpression);
+            }
+
+            for (Expression expression : expressions) {
+                expression.factorize();
+            }
+
         }
 
         private void factorizePartialVariable(Variable variable) {
-            Set<Expression> newExpressions = new HashSet<>();
-            Expression variableExpression = new Expression();
-            variableExpression.variables.add(variable);
-            newExpressions.add(variableExpression);
-
+            int variableCurrentApps = 0;
             for (Expression expression : expressions) {
                 if (expression.variables.contains(variable)) {
-                    expression.variables.remove(variable);
-                    variableExpression.expressions.add(expression);
-                } else {
-                    newExpressions.add(expression);
+                    variableCurrentApps++;
                 }
             }
 
-            this.expressions = newExpressions;
+            if (variableCurrentApps > 1) {
+                Set<Expression> newExpressions = new HashSet<>();
+                Expression variableExpression = new Expression();
+                variableExpression.variables.add(variable);
+                newExpressions.add(variableExpression);
 
+                for (Expression expression : expressions) {
+                    if (expression.variables.contains(variable)) {
+                        expression.variables.remove(variable);
+                        if (!expression.variables.isEmpty() || !expression.expressions.isEmpty()) {
+                            variableExpression.expressions.add(expression);
+                        }
+                    } else {
+                        newExpressions.add(expression);
+                    }
+                }
+
+                this.expressions = newExpressions;
+            }
         }
 
         @Override
