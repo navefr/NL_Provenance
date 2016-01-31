@@ -18,7 +18,7 @@ public class ParseTree implements Serializable
 		root.tokenType = "ROOT"; 
 	}
 
-	public boolean buildNode(String [] input) // add a node when build a tree; 
+	public ParseTreeNode buildNode(String [] input) // add a node when build a tree;
 	{
 		ParseTreeNode node; 
 		
@@ -27,7 +27,7 @@ public class ParseTree implements Serializable
 			node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], root); 
 			root.children.add(node); 
 			allNodes.add(node); 
-			return true; 
+			return node;
 		}
 		else
 		{			
@@ -41,12 +41,12 @@ public class ParseTree implements Serializable
 					node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], parent); 
 					parent.children.add(node); 
 					allNodes.add(node); 
-					return true; 
+					return node;
 				}
 				list.addAll(parent.children); 
 			}
 		}
-		return false; 
+		return null;
 	}
 
     public boolean buildParentNode(String [] input) // add a node when build a tree;

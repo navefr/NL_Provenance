@@ -1,21 +1,16 @@
 package components;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import dataStructure.Query;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.Sentence;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
-import edu.stanford.nlp.trees.GrammaticalStructure;
-import edu.stanford.nlp.trees.GrammaticalStructureFactory;
-import edu.stanford.nlp.trees.PennTreebankLanguagePack;
-import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.TreebankLanguagePack;
-import edu.stanford.nlp.trees.TypedDependency;
+import edu.stanford.nlp.trees.*;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class StanfordNLParser 
 {
@@ -102,7 +97,7 @@ public class StanfordNLParser
     		{
     			if(doneList[i] == false)
     			{
-    				if(query.parseTree.buildNode(query.treeTable.get(i)) == true)
+    				if(query.parseTree.buildNode(query.treeTable.get(i)) != null)
     				{
     					doneList[i] = true; 
     					break; 

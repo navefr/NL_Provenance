@@ -174,8 +174,8 @@ public abstract class AbstractAnswerParseTreeBuilder {
         ParseTree copyTree = new ParseTree();
         for (ParseTreeNode node : parseTree.allNodes) {
             if (node.parent != null) {
-                copyTree.buildNode(new String[]{String.valueOf(node.wordOrder), node.label, node.pos, String.valueOf(node.parent.wordOrder), node.relationship});
-                copyTree.searchNodeByOrder(node.wordOrder).tokenType = node.tokenType;
+                ParseTreeNode newNode = copyTree.buildNode(new String[]{String.valueOf(node.wordOrder), node.label, node.pos, String.valueOf(node.parent.wordOrder), node.relationship});
+                newNode.tokenType = node.tokenType;
             }
         }
         return copyTree;

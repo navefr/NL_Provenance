@@ -32,16 +32,23 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         }
 
         Collection<ParseTreeNode> processedNodeVariables = new ArrayList<>();
-        handleExpression(finalAnswerTree, factorizeExpression, processedNodeVariables, wordOrderToNodeId);
+        Set<ParseTreeNode> nodesForDeletion = new HashSet<>();
+        handleExpression(finalAnswerTree, answerParseTree, factorizeExpression, processedNodeVariables, nodesForDeletion, wordOrderToNodeId, true);
+
+        for (ParseTreeNode node : nodesForDeletion) {
+            if (finalAnswerTree.searchNodeByID(node.nodeID) != null) {
+                finalAnswerTree.deleteSubTree(node);
+            }
+        }
 
         return finalAnswerTree;
     }
 
-    private void handleExpression(ParseTree finalAnswerTree, WordMappings.Expression expression, Collection<ParseTreeNode> processedNodeVariables, Map<Integer, Integer> wordOrderToNodeId) {
+    private void handleExpression(ParseTree finalAnswerTree, ParseTree initialAnswerTree, WordMappings.Expression expression, Collection<ParseTreeNode> processedNodeVariables, Set<ParseTreeNode> nodesForDeletion, Map<Integer, Integer> wordOrderToNodeId, boolean firstAnd) {
         for (WordMappings.Variable variable : expression.getVariables()) {
             ParseTreeNode variableNode = getOriginalNodeByWordOrder(finalAnswerTree, variable.getWordOrder(), wordOrderToNodeId);
             ParseTreeNode variableNodeSubTreeRoot = variableNode;
-            if (!variableNode.parent.relationship.equals("nsubj") && !variableNode.parent.label.equals("ROOT")) {
+            if (variableNode.parent.relationship.equals("prep") && !variableNode.parent.label.equals("ROOT")) {
                 variableNodeSubTreeRoot = variableNode.parent;
             }
 
@@ -52,7 +59,8 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
 
             if (!siblings.isEmpty()) {
                 int firstWordOrderInSiblingsSubTrees = getFirstWordOrderInSubTrees(siblings);
-                setWordOrderInSubTree(variableNodeSubTreeRoot, firstWordOrderInSiblingsSubTrees - 1);
+                attachCopyOfSubTreeBefore(finalAnswerTree, variableNodeSubTreeRoot.parent, variableNodeSubTreeRoot, Collections.emptyMap(), firstWordOrderInSiblingsSubTrees);
+                nodesForDeletion.add(variableNodeSubTreeRoot);
             }
             variableNode.label = variable.getValue();
             processedNodeVariables.add(variableNodeSubTreeRoot);
@@ -78,7 +86,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             }
         }
 
-        Map<Integer, List<String>> singleVariableWordOrderToValues = new HashMap<>();
+        Map<Integer, List<String>> singleVariableWordOrderToValues = new HashMap<Integer, List<String>>();
         for (WordMappings.Expression singleVariableUnNestedSubExpression : singleVariableUnNestedSubExpressions) {
             WordMappings.Variable variable = singleVariableUnNestedSubExpression.getVariables().iterator().next();
             List<String> wordOrderValues = singleVariableWordOrderToValues.get(variable.getWordOrder());
@@ -110,8 +118,8 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             Map<Integer, String> nodeValues = new HashMap<>();
             for (WordMappings.Variable variable : multiVariableUnNestedSubExpression.getVariables()) {
                 ParseTreeNode node = getOriginalNodeByWordOrder(finalAnswerTree, variable.getWordOrder(), wordOrderToNodeId);
+                nodeValues.put(node.nodeID, variable.getValue());
                 nodesInExpression.add(node);
-                nodeValues.put(variable.getWordOrder(), variable.getValue());
             }
             ParseTreeNode jointParent = getJointParent(nodesInExpression);
             int lastWordOrderInParentSubTree = getLastWordOrderInSubTree(jointParent);
@@ -123,21 +131,80 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
                 for (ParseTreeNode node : nodesInExpression) {
                     if (nodesInSubTree.contains(node)) {
                         nodesInExpressionSubTreeRoots.add(potentialSubTreeRoots);
+                        nodesForDeletion.add(potentialSubTreeRoots);
                     }
                 }
             }
 
-            finalAnswerTree.buildNode((new String[]{String.valueOf(lastWordOrderInParentSubTree + 1), "and\n", "NA", String.valueOf(jointParent.wordOrder), "NA"}));
-            ParseTreeNode andNode = finalAnswerTree.searchNodeByOrder(lastWordOrderInParentSubTree + 1);
+            ParseTreeNode parentNode;
+            if (firstAnd) {
+                parentNode = jointParent;
+                firstAnd = false;
+            } else {
+                parentNode = finalAnswerTree.buildNode((new String[]{String.valueOf(lastWordOrderInParentSubTree + 1), "and\n", "NA", String.valueOf(jointParent.wordOrder), "NA"}));
+            }
             for (ParseTreeNode node : nodesInExpressionSubTreeRoots) {
-                attachCopyOfSubTree(finalAnswerTree, andNode, node, nodeValues, lastWordOrderInParentSubTree + 2);
+                attachCopyOfSubTree(finalAnswerTree, parentNode, node, nodeValues, lastWordOrderInParentSubTree + 2);
             }
         }
 
         for (WordMappings.Expression nestedSubExpression : nestedSubExpressions) {
-            handleExpression(finalAnswerTree, nestedSubExpression, processedNodeVariables, wordOrderToNodeId);
+            // todo nave - theres alot of code reuse - try to unify
+            ParseTree subExpressionAnswerParseTree = copyTree(initialAnswerTree);
+            Map<Integer, Integer> subExpressionWordOrderToNodeId = new HashMap<>();
+            for (ParseTreeNode node : subExpressionAnswerParseTree.allNodes) {
+                subExpressionWordOrderToNodeId.put(node.wordOrder, node.nodeID);
+            }
+
+            handleExpression(subExpressionAnswerParseTree, initialAnswerTree, nestedSubExpression, processedNodeVariables, nodesForDeletion, subExpressionWordOrderToNodeId, firstAnd);
+
+            Collection<ParseTreeNode> nodesFromFinalTreeInExpression = getNodesInExpression(finalAnswerTree, wordOrderToNodeId, nestedSubExpression);
+            Collection<ParseTreeNode> nodesFromSubExpressionTreeInExpression = getNodesInExpression(subExpressionAnswerParseTree, subExpressionWordOrderToNodeId, nestedSubExpression);
+
+            ParseTreeNode jointParentFromFinalTree = getJointParent(nodesFromFinalTreeInExpression);
+            int lastWordOrderInParentSubTree = getLastWordOrderInSubTree(jointParentFromFinalTree);
+
+            ParseTreeNode jointParentFromSubExpressionTree = getJointParent(nodesFromSubExpressionTreeInExpression);
+            Collection<ParseTreeNode> nodesInExpressionSubTreeRoots = new HashSet<>();
+            for (ParseTreeNode potentialSubTreeRoots : jointParentFromSubExpressionTree.children) {
+                Collection<ParseTreeNode> nodesInSubTree = new HashSet<>();
+                getNodesInSubTree(nodesInSubTree, potentialSubTreeRoots);
+                for (ParseTreeNode node : nodesFromSubExpressionTreeInExpression) {
+                    if (nodesInSubTree.contains(node)) {
+                        nodesInExpressionSubTreeRoots.add(potentialSubTreeRoots);
+                        nodesForDeletion.add(potentialSubTreeRoots); // TODO Nave - delete??
+                    }
+                }
+            }
+
+            ParseTreeNode parentNode;
+            if (firstAnd) {
+                parentNode = jointParentFromFinalTree;
+                firstAnd = false;
+            } else {
+                parentNode = finalAnswerTree.buildNode((new String[]{String.valueOf(lastWordOrderInParentSubTree + 1), "and\n", "NA", String.valueOf(jointParentFromFinalTree.wordOrder), "NA"}));
+            }
+            for (ParseTreeNode node : nodesInExpressionSubTreeRoots) {
+                attachCopyOfSubTree(finalAnswerTree, parentNode, node, Collections.EMPTY_MAP, lastWordOrderInParentSubTree + 2);
+            }
         }
 
+    }
+
+    private Collection<ParseTreeNode> getNodesInExpression(ParseTree parseTree, Map<Integer, Integer> wordOrderToNodeId, WordMappings.Expression expression) {
+        Collection<ParseTreeNode> nodesInExpression = new HashSet<>();
+        getNodesInExpression(parseTree, wordOrderToNodeId, expression, nodesInExpression);
+        return nodesInExpression;
+    }
+
+    private void getNodesInExpression(ParseTree parseTree, Map<Integer, Integer> wordOrderToNodeId, WordMappings.Expression expression, Collection<ParseTreeNode> nodesInExpression) {
+        for (WordMappings.Variable variable : expression.getVariables()) {
+            ParseTreeNode node = getOriginalNodeByWordOrder(parseTree, variable.getWordOrder(), wordOrderToNodeId);
+            nodesInExpression.add(node);
+        }
+        for (WordMappings.Expression subExpression : expression.getExpressions()) {
+            getNodesInExpression(parseTree, wordOrderToNodeId, subExpression, nodesInExpression);
+        }
     }
 
     @Override
@@ -177,15 +244,6 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         return lastWordOrder;
     }
 
-
-    private void setWordOrderInSubTree(ParseTreeNode node, int wordOrder) {
-        Collection<ParseTreeNode> nodesInSubTree = new HashSet<>();
-        getNodesInSubTree(nodesInSubTree, node);
-        for (ParseTreeNode currNode : nodesInSubTree) {
-            currNode.wordOrder = wordOrder;
-        }
-    }
-
     private void getNodesInSubTree(Collection<ParseTreeNode> nodesInSubTree, ParseTreeNode node) {
         nodesInSubTree.add(node);
         for (ParseTreeNode child : node.children) {
@@ -212,15 +270,47 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         return true;
     }
 
-    private void attachCopyOfSubTree(ParseTree parseTree, ParseTreeNode parent, ParseTreeNode subTreeRoot, Map<Integer, String> nodeValues, int lastWordOrder) {
+    private void attachCopyOfSubTreeBefore(ParseTree parseTree, ParseTreeNode parent, ParseTreeNode subTreeRoot, Map<Integer, String> nodeValues, int wordOrder) {
         String nodeValue = nodeValues.get(subTreeRoot.wordOrder);
         if (nodeValue == null) {
             nodeValue = subTreeRoot.label;
         } else {
             nodeValue = getQuoatedString(nodeValue);
         }
-        parseTree.buildNode((new String[]{String.valueOf(lastWordOrder + subTreeRoot.wordOrder), nodeValue, "NA", String.valueOf(parent.wordOrder), "NA"}));
-        ParseTreeNode newNode = parseTree.searchNodeByOrder(lastWordOrder + subTreeRoot.wordOrder);
+
+        HashSet<ParseTreeNode> nodesInSubTree = new HashSet<>();
+        getNodesInSubTree(nodesInSubTree, subTreeRoot);
+        int minWordOrder = Integer.MAX_VALUE;
+        for (ParseTreeNode node : nodesInSubTree) {
+            minWordOrder = Math.min(minWordOrder, node.wordOrder);
+        }
+        int lastWordOrder = wordOrder - minWordOrder;
+
+        shiftWordOrders(parseTree, nodesInSubTree, wordOrder, nodesInSubTree.size());
+
+        ParseTreeNode newNode = parseTree.buildNode((new String[]{String.valueOf(lastWordOrder + subTreeRoot.wordOrder), nodeValue, "NA", String.valueOf(parent.wordOrder), "NA"}));
+
+        for (ParseTreeNode child : subTreeRoot.children) {
+            attachCopyOfSubTree(parseTree, newNode, child, nodeValues, lastWordOrder);
+        }
+    }
+
+    private void shiftWordOrders(ParseTree parseTree, Collection<ParseTreeNode> exclude, int from, int amount) {
+        for (ParseTreeNode node : parseTree.allNodes) {
+            if (node.wordOrder >= from && !exclude.contains(node)) {
+                node.wordOrder = node.wordOrder + amount;
+            }
+        }
+    }
+
+    private void attachCopyOfSubTree(ParseTree parseTree, ParseTreeNode parent, ParseTreeNode subTreeRoot, Map<Integer, String> nodeValues, int lastWordOrder) {
+        String nodeValue = nodeValues.get(subTreeRoot.nodeID);
+        if (nodeValue == null) {
+            nodeValue = subTreeRoot.label;
+        } else {
+            nodeValue = getQuoatedString(nodeValue);
+        }
+        ParseTreeNode newNode = parseTree.buildNode((new String[]{String.valueOf(lastWordOrder + subTreeRoot.wordOrder), nodeValue, "NA", String.valueOf(parent.wordOrder), "NA"}));
 
         for (ParseTreeNode child : subTreeRoot.children) {
             attachCopyOfSubTree(parseTree, newNode, child, nodeValues, lastWordOrder);
