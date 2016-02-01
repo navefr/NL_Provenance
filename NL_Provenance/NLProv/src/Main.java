@@ -56,8 +56,8 @@ public class Main {
         String query7 = "return the papers which were published in conferences in database area";
         String query8 = "return the area of conferences";
         String query9 = "return the authors who published papers in database conferences. ";
-        String query91 = "return the authors who published papers in database conferences after 2005. ";
-        String query92 = "return the organization of authors who published papers in database conferences after 2005. ";
+        String query10 = "return the authors who published papers in database conferences after 2005. ";
+        String query11 = "return the organization of authors who published papers in database conferences after 2005. ";
 
         String ans1 = "\"http://www.sigmod2011.org/\" is the homepage of SIGMOD.";
         String ans2 = "VLDB is a conference in Databases area.";
@@ -66,14 +66,14 @@ public class Main {
         String ans4 = "\"Tova Milo\" from \"Tel Aviv University\" who published \"XML Repository and Active Views Demonstration.\" in VLDB. ";
         String ans41 = "\"Tova Milo\" is an author from \"Tel Aviv University\" who published the paper \"XML Repository and Active Views Demonstration.\" in VLDB. ";
 
-        String query11 = "return the publications that contains the word \"SQL\" in their title.";
-        String query12 = "return the number of papers by \"H. V. Jagadish\" in SIGMOD. ";
-        String query13 = "return the authors who have more publications than \"H. V. Jagadish\" in SIGMOD after 2000. ";
-        String query14 = "return the conferences in database area, whose papers have more than 50000 total citations. ";
-        String query15 = "return the author with maximum number of papers in VLDB in 2014";
-        String query16 = "return the paper with minimum number of citations in SIGMOD in 2013";
+        String query100 = "return the publications that contains the word \"SQL\" in their title.";
+        String query101 = "return the number of papers by \"H. V. Jagadish\" in SIGMOD. ";
+        String query102 = "return the authors who have more publications than \"H. V. Jagadish\" in SIGMOD after 2000. ";
+        String query103 = "return the conferences in database area, whose papers have more than 50000 total citations. ";
+        String query104 = "return the author with maximum number of papers in VLDB in 2014";
+        String query105 = "return the paper with minimum number of citations in SIGMOD in 2013";
 
-        String querySentence = query3;
+        String querySentence = query11;
 
         Query query = new Query(querySentence, db.schemaGraph);
 
