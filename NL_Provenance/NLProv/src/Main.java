@@ -73,7 +73,7 @@ public class Main {
         String query104 = "return the author with maximum number of papers in VLDB in 2014";
         String query105 = "return the paper with minimum number of citations in SIGMOD in 2013";
 
-        String querySentence = query11;
+        String querySentence = query3;
 
         Query query = new Query(querySentence, db.schemaGraph);
 

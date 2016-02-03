@@ -49,6 +49,37 @@ public class ParseTree implements Serializable
 		return null;
 	}
 
+    public ParseTreeNode buildNodeByParentId(String [] input) // add a node when build a tree;
+    {
+        ParseTreeNode node;
+
+        if(root.children.isEmpty())
+        {
+            node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], root);
+            root.children.add(node);
+            allNodes.add(node);
+            return node;
+        }
+        else
+        {
+            LinkedList<ParseTreeNode> list = new LinkedList<ParseTreeNode>();
+            list.add(root);
+            while(!list.isEmpty())
+            {
+                ParseTreeNode parent = list.removeFirst();
+                if(parent.nodeID == Integer.parseInt(input[3]))
+                {
+                    node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], parent);
+                    parent.children.add(node);
+                    allNodes.add(node);
+                    return node;
+                }
+                list.addAll(parent.children);
+            }
+        }
+        return null;
+    }
+
     public boolean buildParentNode(String [] input) // add a node when build a tree;
     {
         ParseTreeNode newParent;
