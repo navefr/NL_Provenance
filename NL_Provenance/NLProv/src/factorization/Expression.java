@@ -87,5 +87,18 @@ public class Expression {
 
         return sb.toString();
     }
+
+    public Expression deepCopy() {
+        Expression copy = new Expression();
+
+        for (Variable variable : getVariables()) {
+            copy.getVariables().add(variable.deepCopy());
+        }
+
+        for (Expression subExpression : getExpressions()) {
+            copy.getExpressions().add(subExpression.deepCopy());
+        }
+        return copy;
+    }
 }
 

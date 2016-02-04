@@ -5,5 +5,5 @@ package factorization;
  */
 public interface Factorizer {
 
-    public void factorize(Expression expression);
+    public Expression factorize(WordMappings wordMappings);
 }

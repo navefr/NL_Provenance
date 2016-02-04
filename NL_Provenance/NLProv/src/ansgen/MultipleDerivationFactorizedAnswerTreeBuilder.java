@@ -29,8 +29,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
 
     @Override
     public ParseTree buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
-        Expression factorizeExpression = new Expression(wordReplacementMap);
-        SimpleFactorizer.getInstance().factorize(factorizeExpression);
+        Expression factorizeExpression = SimpleFactorizer.getInstance().factorize(wordReplacementMap);
 
         ParseTree answerParseTree = super.buildParseTree(parseTree, wordReplacementMap);
 

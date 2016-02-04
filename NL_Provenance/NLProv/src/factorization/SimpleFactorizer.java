@@ -22,7 +22,13 @@ public class SimpleFactorizer implements Factorizer {
     }
 
     @Override
-    public void factorize(Expression expression) {
+    public Expression factorize(WordMappings wordMappings){
+        Expression expression = new Expression(wordMappings);
+        factorize(expression);
+        return expression;
+    }
+
+    private void factorize(Expression expression) {
         Map<Variable, Integer> variableApps = new HashMap<Variable, Integer>();
 
         for (Expression subExpression : expression.getExpressions()) {

@@ -4,6 +4,7 @@ import dataStructure.Block;
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import factorization.Expression;
+import factorization.GreedyFactorizer;
 import factorization.SimpleFactorizer;
 import factorization.WordMappings;
 import org.deri.iris.api.basics.IAtom;
@@ -160,8 +161,7 @@ public class NaturalLanguageProvenanceCreator {
         System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationSummarizedAnswerTree));
         System.out.println();
         System.out.println("Multiple Derivation Factorization");
-        Expression factorizeExpression = new Expression(wordReplacementMap);
-        SimpleFactorizer.getInstance().factorize(factorizeExpression);
+        Expression factorizeExpression = SimpleFactorizer.getInstance().factorize(wordReplacementMap);
         System.out.println(factorizeExpression);
         System.out.println();
         System.out.println("Multiple Derivation Factorized Answer Tree");
@@ -170,6 +170,9 @@ public class NaturalLanguageProvenanceCreator {
         System.out.println("Multiple Derivation Factorized Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationFactorizedAnswerTree));
         System.out.println();
+        System.out.println("AAA");
+        System.out.println(new GreedyFactorizer(queryOriginalParseTree).factorize(wordReplacementMap));
+
 
         return SentenceBuilder.getInstance().buildSentence(singleDerivationAnswerTree);
     }
