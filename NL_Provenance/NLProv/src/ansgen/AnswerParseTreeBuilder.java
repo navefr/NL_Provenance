@@ -56,7 +56,7 @@
 //    }
 //
 //
-//    private void handleLogicalOperators(ParseTree answerTree, ParseTreeNode node, WordMappings wordReplacementMap) {
+//    private void handleLogicalOperators(ParseTree answerTree, ParseTreeNode node, factorization.WordMappings wordReplacementMap) {
 //        ParseTreeNode logicalOperatorNode = null;
 //        String value = null;
 //        for (ParseTreeNode child : node.children) {
@@ -100,7 +100,7 @@
 //        return siblings;
 //    }
 //
-//    public ParseTree buildSingleDerivationAnswerParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
+//    public ParseTree buildSingleDerivationAnswerParseTree(ParseTree parseTree, factorization.WordMappings wordReplacementMap) {
 //        // Initialize
 //        ParseTree answerTree = initialize(parseTree);
 //        ParseTreeNode objectNode = answerTree.root.children.get(0);
@@ -183,7 +183,7 @@
 //        return answerTree;
 //    }
 //
-//    public ParseTree buildMultipleDerivationAnswerParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
+//    public ParseTree buildMultipleDerivationAnswerParseTree(ParseTree parseTree, factorization.WordMappings wordReplacementMap) {
 //        // Initialize
 //        ParseTree answerTree = initialize(parseTree);
 //        ParseTreeNode objectNode = answerTree.root.children.get(0);
@@ -271,7 +271,7 @@
 //        return answerTree;
 //    }
 //
-//    private String getWordValueMultipleDerivation(WordMappings wordReplacementMap, int wordOrder) {
+//    private String getWordValueMultipleDerivation(factorization.WordMappings wordReplacementMap, int wordOrder) {
 //        Set<String> mappings = getSetOfMappings(wordReplacementMap, wordOrder);
 //        if (mappings.size() == 1) {
 //            return mappings.iterator().next();
@@ -295,7 +295,7 @@
 //        return null;
 //    }
 //
-//    private Set<String> getSetOfMappings(WordMappings wordReplacementMap, int wordOrder) {
+//    private Set<String> getSetOfMappings(factorization.WordMappings wordReplacementMap, int wordOrder) {
 //        Set<String> mappings = new HashSet<>();
 //        for (int i = 0; i < wordReplacementMap.getLastDerivation() + 1; i++) {
 //            if (wordReplacementMap.contains(i, wordOrder)) {

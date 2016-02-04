@@ -1,7 +1,11 @@
 import Top1.DerivationTree2;
+import ansgen.*;
 import dataStructure.Block;
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
+import factorization.Expression;
+import factorization.SimpleFactorizer;
+import factorization.WordMappings;
 import org.deri.iris.api.basics.IAtom;
 import org.deri.iris.api.basics.ILiteral;
 import org.deri.iris.api.basics.ITuple;
@@ -156,7 +160,9 @@ public class NaturalLanguageProvenanceCreator {
         System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationSummarizedAnswerTree));
         System.out.println();
         System.out.println("Multiple Derivation Factorization");
-        System.out.println(wordReplacementMap.createFactorizeExpression());
+        Expression factorizeExpression = new Expression(wordReplacementMap);
+        SimpleFactorizer.getInstance().factorize(factorizeExpression);
+        System.out.println(factorizeExpression);
         System.out.println();
         System.out.println("Multiple Derivation Factorized Answer Tree");
         ParseTree multipleDerivationFactorizedAnswerTree = MultipleDerivationFactorizedAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap);

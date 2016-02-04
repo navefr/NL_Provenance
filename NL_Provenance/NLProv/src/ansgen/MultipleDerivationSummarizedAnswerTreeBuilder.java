@@ -1,4 +1,7 @@
+package ansgen;
+
 import dataStructure.ParseTreeNode;
+import factorization.WordMappings;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.HashSet;

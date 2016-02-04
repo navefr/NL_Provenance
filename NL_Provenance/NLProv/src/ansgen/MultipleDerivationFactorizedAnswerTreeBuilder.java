@@ -1,5 +1,11 @@
+package ansgen;
+
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
+import factorization.Expression;
+import factorization.SimpleFactorizer;
+import factorization.Variable;
+import factorization.WordMappings;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -23,7 +29,9 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
 
     @Override
     public ParseTree buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
-        WordMappings.Expression factorizeExpression = wordReplacementMap.createFactorizeExpression();
+        Expression factorizeExpression = new Expression(wordReplacementMap);
+        SimpleFactorizer.getInstance().factorize(factorizeExpression);
+
         ParseTree answerParseTree = super.buildParseTree(parseTree, wordReplacementMap);
 
         ParseTree finalAnswerTree = handleExpression(answerParseTree, factorizeExpression, true).getLeft();
@@ -31,7 +39,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         return finalAnswerTree;
     }
 
-    private Pair<ParseTree, Collection<ParseTreeNode>> handleExpression(ParseTree initialAnswerTree, WordMappings.Expression expression, boolean firstAnd) {
+    private Pair<ParseTree, Collection<ParseTreeNode>> handleExpression(ParseTree initialAnswerTree, Expression expression, boolean firstAnd) {
         ParseTree finalAnswerTree = copyTree(initialAnswerTree);
 
         Map<Integer, Integer> wordOrderToNodeId = new HashMap<>();
@@ -45,7 +53,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         Collection<ParseTreeNode> nodesCreatedByExpression = new HashSet<>();
         Collection<ParseTreeNode> variableNodes = getVariableNodes(finalAnswerTree, expression, wordOrderToNodeId);
 
-        for (WordMappings.Variable variable : expression.getVariables()) {
+        for (Variable variable : expression.getVariables()) {
             ParseTreeNode variableNode = getOriginalNodeByWordOrder(finalAnswerTree, variable.getWordOrder(), wordOrderToNodeId);
             ParseTreeNode variableNodeSubTreeRoot = variableNode;
             if (variableNode.parent.relationship.equals("prep") && !variableNode.parent.label.equals("ROOT")) {
@@ -82,9 +90,9 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             processedNodeVariables.add(variableNodeSubTreeRoot);
         }
 
-        Collection<WordMappings.Expression> nestedSubExpressions = new ArrayList<>();
-        Collection<WordMappings.Expression> unNestedSubExpressions = new ArrayList<>();
-        for (WordMappings.Expression subExpression : expression.getExpressions()) {
+        Collection<Expression> nestedSubExpressions = new ArrayList<>();
+        Collection<Expression> unNestedSubExpressions = new ArrayList<>();
+        for (Expression subExpression : expression.getExpressions()) {
             if (subExpression.getExpressions().isEmpty()) {
                 unNestedSubExpressions.add(subExpression);
             } else {
@@ -92,9 +100,9 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             }
         }
 
-        Collection<WordMappings.Expression> singleVariableUnNestedSubExpressions = new ArrayList<WordMappings.Expression>();
-        Collection<WordMappings.Expression> multiVariableUnNestedSubExpressions = new ArrayList<WordMappings.Expression>();
-        for (WordMappings.Expression unNestedSubExpression : unNestedSubExpressions) {
+        Collection<Expression> singleVariableUnNestedSubExpressions = new ArrayList<Expression>();
+        Collection<Expression> multiVariableUnNestedSubExpressions = new ArrayList<Expression>();
+        for (Expression unNestedSubExpression : unNestedSubExpressions) {
             if (unNestedSubExpression.getVariables().size() == 1) {
                 singleVariableUnNestedSubExpressions.add(unNestedSubExpression);
             } else {
@@ -103,8 +111,8 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         }
 
         Map<Integer, List<String>> singleVariableWordOrderToValues = new HashMap<Integer, List<String>>();
-        for (WordMappings.Expression singleVariableUnNestedSubExpression : singleVariableUnNestedSubExpressions) {
-            WordMappings.Variable variable = singleVariableUnNestedSubExpression.getVariables().iterator().next();
+        for (Expression singleVariableUnNestedSubExpression : singleVariableUnNestedSubExpressions) {
+            Variable variable = singleVariableUnNestedSubExpression.getVariables().iterator().next();
             List<String> wordOrderValues = singleVariableWordOrderToValues.get(variable.getWordOrder());
             if (wordOrderValues == null) {
                 wordOrderValues = new ArrayList<String>();
@@ -131,10 +139,10 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             nodesCreatedByExpression.add(node);
         }
 
-        for (WordMappings.Expression multiVariableUnNestedSubExpression : multiVariableUnNestedSubExpressions) {
+        for (Expression multiVariableUnNestedSubExpression : multiVariableUnNestedSubExpressions) {
             Collection<ParseTreeNode> nodesInExpression = new ArrayList<ParseTreeNode>();
-            Map<Integer, String> nodeValues = new HashMap<>();
-            for (WordMappings.Variable variable : multiVariableUnNestedSubExpression.getVariables()) {
+            Map<Integer, String> nodeValues = new HashMap<Integer, String>();
+            for (Variable variable : multiVariableUnNestedSubExpression.getVariables()) {
                 ParseTreeNode node = getOriginalNodeByWordOrder(finalAnswerTree, variable.getWordOrder(), wordOrderToNodeId);
                 nodeValues.put(node.nodeID, variable.getValue());
                 nodesInExpression.add(node);
@@ -168,7 +176,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             }
         }
 
-        for (WordMappings.Expression nestedSubExpression : nestedSubExpressions) {
+        for (Expression nestedSubExpression : nestedSubExpressions) {
             // todo nave - theres alot of code reuse - try to unify
             Pair<ParseTree, Collection<ParseTreeNode>> subExpressionResult = handleExpression(initialAnswerTree, nestedSubExpression, firstAnd);
 
@@ -181,7 +189,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
                 ParseTreeNode jointParentFromSubExpressionTree = getJointParent(nodesFromSubExpressionTreeInExpression);
                 Collection<ParseTreeNode> nodesInExpressionSubTreeRoots = new HashSet<>();
                 for (ParseTreeNode potentialSubTreeRoots : jointParentFromSubExpressionTree.children) {
-                    Collection<ParseTreeNode> nodesInSubTree = new HashSet<>();
+                    Collection<ParseTreeNode> nodesInSubTree = new HashSet<ParseTreeNode>();
                     getNodesInSubTree(nodesInSubTree, potentialSubTreeRoots);
                     for (ParseTreeNode node : nodesFromSubExpressionTreeInExpression) {
                         if (nodesInSubTree.contains(node)) {
@@ -220,21 +228,21 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
             }
         }
 
-        return new ImmutablePair<>(finalAnswerTree, nodesCreatedAndNotDeletedByExpression);
+        return new ImmutablePair<ParseTree, Collection<ParseTreeNode>>(finalAnswerTree, nodesCreatedAndNotDeletedByExpression);
     }
 
-    private Collection<ParseTreeNode> getNodesInExpression(ParseTree parseTree, Map<Integer, Integer> wordOrderToNodeId, WordMappings.Expression expression) {
-        Collection<ParseTreeNode> nodesInExpression = new HashSet<>();
+    private Collection<ParseTreeNode> getNodesInExpression(ParseTree parseTree, Map<Integer, Integer> wordOrderToNodeId, Expression expression) {
+        Collection<ParseTreeNode> nodesInExpression = new HashSet<ParseTreeNode>();
         getNodesInExpression(parseTree, wordOrderToNodeId, expression, nodesInExpression);
         return nodesInExpression;
     }
 
-    private void getNodesInExpression(ParseTree parseTree, Map<Integer, Integer> wordOrderToNodeId, WordMappings.Expression expression, Collection<ParseTreeNode> nodesInExpression) {
-        for (WordMappings.Variable variable : expression.getVariables()) {
+    private void getNodesInExpression(ParseTree parseTree, Map<Integer, Integer> wordOrderToNodeId, Expression expression, Collection<ParseTreeNode> nodesInExpression) {
+        for (Variable variable : expression.getVariables()) {
             ParseTreeNode node = getOriginalNodeByWordOrder(parseTree, variable.getWordOrder(), wordOrderToNodeId);
             nodesInExpression.add(node);
         }
-        for (WordMappings.Expression subExpression : expression.getExpressions()) {
+        for (Expression subExpression : expression.getExpressions()) {
             getNodesInExpression(parseTree, wordOrderToNodeId, subExpression, nodesInExpression);
         }
     }
@@ -292,6 +300,10 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
     }
 
     private boolean isJointParent(ParseTreeNode potentialParent, Collection<ParseTreeNode> nodes) {
+        if (nodes.contains(potentialParent)) {
+            return false;
+        }
+
         Collection<ParseTreeNode> nodesInSubTree = new HashSet<>();
         getNodesInSubTree(nodesInSubTree, potentialParent);
         for (ParseTreeNode node : nodes) {
@@ -364,15 +376,15 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         return parseTree.searchNodeByID(nodeId);
     }
 
-    private Collection<ParseTreeNode> getVariableNodes(ParseTree parseTree, WordMappings.Expression expression, Map<Integer, Integer> wordOrderToNodeId) {
+    private Collection<ParseTreeNode> getVariableNodes(ParseTree parseTree, Expression expression, Map<Integer, Integer> wordOrderToNodeId) {
         Collection<ParseTreeNode> variableNodes = new HashSet<>();
 
-        for (WordMappings.Variable variable : expression.getVariables()) {
+        for (Variable variable : expression.getVariables()) {
             ParseTreeNode variableNode = getOriginalNodeByWordOrder(parseTree, variable.getWordOrder(), wordOrderToNodeId);
             variableNodes.add(variableNode);
         }
 
-        for (WordMappings.Expression subExpression : expression.getExpressions()) {
+        for (Expression subExpression : expression.getExpressions()) {
             Collection<ParseTreeNode> subExpressionVariableNodes = getVariableNodes(parseTree, subExpression, wordOrderToNodeId);
             variableNodes.addAll(subExpressionVariableNodes);
         }

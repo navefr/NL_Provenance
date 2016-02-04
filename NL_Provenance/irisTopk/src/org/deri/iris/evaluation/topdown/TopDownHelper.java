@@ -148,7 +148,7 @@ public class TopDownHelper {
 		}
 		for (ITerm term : tuple) {
 			if (term instanceof IVariable) {
-				// Variable
+				// factorization.Variable
 				IVariable variable = (IVariable)term;
 				if (variableMap.containsKey(variable)) {
 					substitutedTuple = TermMatchingAndSubstitution.substituteVariablesInToTuple(tuple , variableMap);
@@ -380,7 +380,7 @@ public class TopDownHelper {
 		
 		List<ITerm> terms = new LinkedList<ITerm>();
 		for (IVariable var : query.getVariables() ) {
-			// For every Variable of the original query, get the mappings
+			// For every factorization.Variable of the original query, get the mappings
 			ITerm term = variableMap.get(var);
 			terms.add(term);
 		}
@@ -582,7 +582,7 @@ public class TopDownHelper {
 				
 				// Create a tuple for each success branch to build the returned relation
 				for (IVariable var : queryVariableList) {
-					// For every Variable of the original query, get the mappings
+					// For every factorization.Variable of the original query, get the mappings
 					ITerm termFromVariableMapping = substitution.get(var);
 					
 					if ( termFromVariableMapping == null && newQueryVariableList.contains(var) ) {

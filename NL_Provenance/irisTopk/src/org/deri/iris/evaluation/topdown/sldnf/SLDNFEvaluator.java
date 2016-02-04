@@ -349,7 +349,7 @@ public class SLDNFEvaluator implements ITopDownEvaluator {
 				
 				// Create a tuple for each success branch to build the returned relation
 				for (IVariable var : queryVariableList) {
-					// For every Variable of the original query, get the mappings
+					// For every factorization.Variable of the original query, get the mappings
 					ITerm termFromVariableMapping = qws.getSubstitution().get(var);
 					
 					if ( termFromVariableMapping == null && newQueryVariableList.contains(var) ) {

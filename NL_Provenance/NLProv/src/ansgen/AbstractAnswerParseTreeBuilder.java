@@ -1,5 +1,8 @@
+package ansgen;
+
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
+import factorization.WordMappings;
 
 import java.util.*;
 

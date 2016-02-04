@@ -1,3 +1,5 @@
+package ansgen;
+
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import simplenlg.framework.DocumentElement;
