@@ -38,7 +38,7 @@ public class GreedyFactorizer implements Factorizer {
                 Expression candidateExpression = currCandidate.getLeft();
                 Variable candidateVariable = currCandidate.getRight();
                 // TODO nave - this factorize only the candidate expression (which may be sub expression) and we would like to factorzie the entire expression
-                Expression candidateExpressionFactorized = factorizeExpressionByVariable(candidateExpression, candidateVariable);
+                Expression candidateExpressionFactorized = factorizeExpressionByVariable(expression, candidateExpression, candidateVariable);
                 int score = calculateExpressionScore(candidateExpressionFactorized);
 
                 if (score > bestScore) {
@@ -48,7 +48,7 @@ public class GreedyFactorizer implements Factorizer {
                 }
             }
 
-            return factorize(bestExpression);
+            return factorize(flatten(bestExpression));
         }
     }
 
@@ -57,20 +57,23 @@ public class GreedyFactorizer implements Factorizer {
         return (int) (Math.random() * 1000);
     }
 
-    private Expression factorizeExpressionByVariable(Expression expression, Variable variable) {
+    private Expression factorizeExpressionByVariable(Expression expression, Expression expressionForFactorization, Variable variableForFactorization) {
         boolean full = true;
-        for (Expression subExpression : expression.getExpressions()) {
-            if (!subExpression.getVariables().contains(variable)) {
+        for (Expression subExpression : expressionForFactorization.getExpressions()) {
+            if (!subExpression.getVariables().contains(variableForFactorization)) {
                 full = false;
             }
         }
-        Expression factorizedExpression = expression.deepCopy();
+        Pair<Expression, Expression> expressionsCopy = copy(expression, expressionForFactorization);
+        Expression expressionCopy = expressionsCopy.getLeft();
+        Expression expressionForFactorizationCopy = expressionsCopy.getRight();
+
         if (full) {
-            factorizeExpressionByVariableFull(factorizedExpression, variable);
+            factorizeExpressionByVariableFull(expressionForFactorizationCopy, variableForFactorization);
         } else {
-            factorizeExpressionByVariablePartial(factorizedExpression, variable);
+            factorizeExpressionByVariablePartial(expressionForFactorizationCopy, variableForFactorization);
         }
-        return factorizedExpression;
+        return expressionCopy;
     }
 
     private void factorizeExpressionByVariableFull(Expression expression, Variable variable) {
@@ -91,7 +94,7 @@ public class GreedyFactorizer implements Factorizer {
     }
 
     private void factorizeExpressionByVariablePartial(Expression expression, Variable variable) {
-        Set<Expression> newExpressions = new HashSet<>();
+        List<Expression> newExpressions = new ArrayList<Expression>();
         Expression variableExpression = new Expression();
         variableExpression.getVariables().add(variable);
         newExpressions.add(variableExpression);
@@ -144,5 +147,56 @@ public class GreedyFactorizer implements Factorizer {
         }
 
         return variableCandidateForFactorization;
+    }
+
+    private Expression flatten(Expression expression) {
+        Expression flattenExpression = expression.deepCopy();
+        flatten(null, flattenExpression);
+        return flattenExpression;
+    }
+
+    private void flatten(Expression parent, Expression child) {
+        // TODO NAve - we can add nodes to the parent while treaversing it?
+        Expression nextParent = child;
+        if (child.getVariables().isEmpty() && parent != null) {
+            parent.getExpressions().remove(child);
+            for (Expression subExpression : child.getExpressions()) {
+                parent.getExpressions().add(subExpression);
+            }
+            nextParent = parent;
+        }
+
+        List<Expression> childSubExpressionCopy = new ArrayList<Expression>();
+        for (Expression childSubExpression : child.getExpressions()) {
+            childSubExpressionCopy.add(childSubExpression);
+        }
+
+        for (Expression subExpression : childSubExpressionCopy) {
+            flatten(nextParent, subExpression);
+        }
+    }
+
+    private Pair<Expression, Expression> copy(Expression expression, Expression subExpression) {
+        Expression expressionCopy = expression.deepCopy();
+        Expression subExpressionCopy = find(expressionCopy, expression, subExpression);
+        return new ImmutablePair<Expression, Expression>(expressionCopy, subExpressionCopy);
+    }
+
+    private Expression find(Expression copyExpression, Expression expression, Expression subExpression) {
+        if (expression.equals(subExpression)) {
+            return copyExpression;
+        }
+
+        Iterator<Expression> expressionIterator = expression.getExpressions().iterator();
+        Iterator<Expression> copyExpressionIterator = copyExpression.getExpressions().iterator();
+
+        while (expressionIterator.hasNext() && copyExpressionIterator.hasNext()) {
+            Expression result = find(copyExpressionIterator.next(), expressionIterator.next(), subExpression);
+            if (result != null) {
+                return result;
+            }
+        }
+
+        return null;
     }
 }

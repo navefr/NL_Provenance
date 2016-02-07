@@ -2,10 +2,7 @@ package factorization;
 
 import utils.MapUtil;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by nfrost on 2/4/2016
@@ -82,7 +79,7 @@ public class SimpleFactorizer implements Factorizer {
         }
 
         if (variableCurrentApps > 1) {
-            Set<Expression> newExpressions = new HashSet<>();
+            List<Expression> newExpressions = new ArrayList<>();
             Expression variableExpression = new Expression();
             variableExpression.getVariables().add(variable);
             newExpressions.add(variableExpression);

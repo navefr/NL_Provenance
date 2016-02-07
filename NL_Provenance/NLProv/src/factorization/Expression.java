@@ -6,11 +6,11 @@ import java.util.*;
  * Created by nfrost on 2/4/2016
  */
 public class Expression {
-    private Set<Expression> expressions;
+    private List<Expression> expressions;
     private Set<Variable> variables;
 
     public Expression() {
-        expressions = new HashSet<>();
+        expressions = new ArrayList<>();
         variables = new TreeSet<Variable>(new Comparator<Variable>() {
             @Override
             public int compare(Variable o1, Variable o2) {
@@ -39,11 +39,11 @@ public class Expression {
 
     }
 
-    public void setExpressions(Set<Expression> expressions) {
+    public void setExpressions(List<Expression> expressions) {
         this.expressions = expressions;
     }
 
-    public Set<Expression> getExpressions() {
+    public List<Expression> getExpressions() {
         return expressions;
     }
 
