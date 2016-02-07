@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title>headliner.treedistance package</title>
+<!--  <author>Stephen Wan</author> -->
+</head>
+<body>
+<H1>Tree Distance module for Headliner</H1>
+<h2>Package Description</h2>
+<p>This package provides implementations of various algorithms for
+      deterimining the 'distance' between two trees.</p>
+<p>Last Modified: Nov 4, 2007</p>
+<H2> Installation and Dependencies </H2>
+<p> You need to have Java 1.5 installed. </p>
+
+<H2> Usage </H2>
+<p> You can run the tool directly from the command line by executing: </br>
+java -classpath treedistance.jar headliner.treedistance.TestZhangShasha "&lt;tree1&gt;"   "&lt;tree2&gt;"
+</p>
+<p>Trees are defined as a series or <i>ordered</i> edges of the form <nodeLabel>-<nodeLabel>. Edges are separated by semicolons.  The first nodeLabel mentioned is assumed to be the root of the tree. NodeLabels can be any string (sans the semicolon character).  The order in which you list them is the ordering that siblings will have in the tree.  In the first example below, the node <i>b</i> precedes <i>c</i>.  Zhang and Shasha's algorithm is for <i>ordered</i> trees.</br>  
+
+Examples:
+<ul>
+<li>a-b;a-c;c-d</li>
+<li>S-NP;S-VP</li>
+</ul>
+
+The onus is on the user to ensure that the edges specifiy a tree (that is, no cycles).  It may be the case that you wish to have multiple distinct nodes with the same "label" (for the purposes of aligning nodes).  For example, a phrase structure parse tree may have multiple Deteriminer Part-of-Speech nodes.  Similarly, a dependency tree might have multiple determiners, and other closed class words. <br>
+
+You can allow distinct nodes to be specified by appending a ":<num>" which turns the node label into a unique identifier.  However, when it comes to matching, only the string <i>before</i> the (last) colon is treated as the node label. <br>
+
+Example: These are identical trees
+<ul>
+<li> r:2-d:2;c:3-p:0</li>
+<li> r-d;c-p</li>
+</ul>
+
+
+
+ <h2>   Licence: </h2>
+ <p>Copyright (C) 2004 Stephen Wan</p>
+
+ <p>This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.</p>
+ 
+ <p>This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ Lesser General Public License for more details.</p>
+ 
+ <p>You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA</p>
+ 
+ <p>To contact the author, send mail to swan@ics.mq.edu.au</p>
+@author Stephen Wan
+</body>
+</html>

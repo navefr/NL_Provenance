@@ -2,10 +2,7 @@ package ansgen;
 
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
-import factorization.Expression;
-import factorization.SimpleFactorizer;
-import factorization.Variable;
-import factorization.WordMappings;
+import factorization.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -16,20 +13,15 @@ import java.util.*;
  */
 public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswerParseTreeBuilder {
 
+    private Factorizer factorizer;
 
-    private static MultipleDerivationFactorizedAnswerTreeBuilder instance = null;
-
-
-    public static MultipleDerivationFactorizedAnswerTreeBuilder getInstance(){
-        if (instance == null) {
-            instance = new MultipleDerivationFactorizedAnswerTreeBuilder();
-        }
-        return instance;
+    public MultipleDerivationFactorizedAnswerTreeBuilder(Factorizer factorizer) {
+        this.factorizer = factorizer;
     }
 
     @Override
     public ParseTree buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
-        Expression factorizeExpression = SimpleFactorizer.getInstance().factorize(wordReplacementMap);
+        Expression factorizeExpression = factorizer.factorize(wordReplacementMap);
 
         ParseTree answerParseTree = super.buildParseTree(parseTree, wordReplacementMap);
 
@@ -38,7 +30,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
         return finalAnswerTree;
     }
 
-    private Pair<ParseTree, Collection<ParseTreeNode>> handleExpression(ParseTree initialAnswerTree, Expression expression, boolean firstAnd) {
+    public Pair<ParseTree, Collection<ParseTreeNode>> handleExpression(ParseTree initialAnswerTree, Expression expression, boolean firstAnd) {
         ParseTree finalAnswerTree = copyTree(initialAnswerTree);
 
         Map<Integer, Integer> wordOrderToNodeId = new HashMap<>();

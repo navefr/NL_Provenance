@@ -1,5 +1,6 @@
 package factorization;
 
+import ansgen.MultipleDerivationFactorizedAnswerTreeBuilder;
 import dataStructure.ParseTree;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -30,20 +31,17 @@ public class GreedyFactorizer implements Factorizer {
         if (candidatesForFactorization.isEmpty()) {
             return expression;
         } else {
-            int bestScore = Integer.MIN_VALUE;
-            Pair<Expression, Variable> bestCandidate = null;
+            double bestScore = -Double.MAX_VALUE;
             Expression bestExpression = null;
 
             for (Pair<Expression, Variable> currCandidate : candidatesForFactorization) {
                 Expression candidateExpression = currCandidate.getLeft();
                 Variable candidateVariable = currCandidate.getRight();
-                // TODO nave - this factorize only the candidate expression (which may be sub expression) and we would like to factorzie the entire expression
                 Expression candidateExpressionFactorized = factorizeExpressionByVariable(expression, candidateExpression, candidateVariable);
-                int score = calculateExpressionScore(candidateExpressionFactorized);
+                double score = calculateExpressionScore(candidateExpressionFactorized);
 
                 if (score > bestScore) {
                     bestScore = score;
-                    bestCandidate = currCandidate;
                     bestExpression = candidateExpressionFactorized;
                 }
             }
@@ -52,9 +50,10 @@ public class GreedyFactorizer implements Factorizer {
         }
     }
 
-    private int calculateExpressionScore(Expression expression) {
-        //            MultipleDerivationAnswerTreeBuilder.getInstance().buildParseTree()
-        return (int) (Math.random() * 1000);
+    private double calculateExpressionScore(Expression expression) {
+        // TODO nave - build it corectly
+        ParseTree answerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(null).handleExpression(parseTree, expression, true).getLeft();
+        return -ParseTreeScorer.score(parseTree, answerTree);
     }
 
     private Expression factorizeExpressionByVariable(Expression expression, Expression expressionForFactorization, Variable variableForFactorization) {

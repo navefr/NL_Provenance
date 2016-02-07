@@ -1,16 +1,18 @@
 package components;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
+import dataStructure.ParseTree;
+import dataStructure.ParseTreeNode;
+import dataStructure.Query;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
-import dataStructure.*; 
-import rdbms.*; 
+import rdbms.MappedSchemaElement;
+import rdbms.RDBMS;
 import tools.BasicFunctions;
 import tools.SimFunctions;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class NodeMapper
 {
@@ -106,36 +108,39 @@ public class NodeMapper
 		}
 	}
 	
-	public static void deleteUseless(Query query)
-	{
+	public static void deleteUseless(Query query) {
 		ParseTree parseTree = query.parseTree; 
-		query.originalParseTree = (ParseTree) BasicFunctions.depthClone(parseTree); 
-		
-		for(int i = 0; i < parseTree.allNodes.size(); i++)
-		{
-			if(parseTree.allNodes.get(i).tokenType.equals("NA") || parseTree.allNodes.get(i).tokenType.equals("QT"))
-			{
-				ParseTreeNode curNode = parseTree.allNodes.get(i); 
-				if(curNode.label.equals("on") || curNode.label.equals("in") || curNode.label.equals("of") || curNode.label.equals("by"))
-				{
-					if(!curNode.children.isEmpty())
-					{
-						curNode.children.get(0).prep = curNode.label; 
-					}
-				}
-				
-				if(curNode.tokenType.equals("QT"))
-				{
-					curNode.parent.QT = curNode.function; 
-				}
-				
-				parseTree.deleteNode(curNode); 
-				i--; 
-			}
-		}
-	}
-	
-	public static void map(Query query, RDBMS db) throws Exception
+		query.originalParseTree = (ParseTree) BasicFunctions.depthClone(parseTree);
+
+        deleteUseless(parseTree);
+    }
+
+    private static void deleteUseless(ParseTree parseTree) {
+        for(int i = 0; i < parseTree.allNodes.size(); i++)
+        {
+            if(parseTree.allNodes.get(i).tokenType.equals("NA") || parseTree.allNodes.get(i).tokenType.equals("QT"))
+            {
+                ParseTreeNode curNode = parseTree.allNodes.get(i);
+                if(curNode.label.equals("on") || curNode.label.equals("in") || curNode.label.equals("of") || curNode.label.equals("by"))
+                {
+                    if(!curNode.children.isEmpty())
+                    {
+                        curNode.children.get(0).prep = curNode.label;
+                    }
+                }
+
+                if(curNode.tokenType.equals("QT"))
+                {
+                    curNode.parent.QT = curNode.function;
+                }
+
+                parseTree.deleteNode(curNode);
+                i--;
+            }
+        }
+    }
+
+    public static void map(Query query, RDBMS db) throws Exception
 	{
 		ParseTree parseTree = query.parseTree; 
 		ArrayList<ParseTreeNode> allNodes = parseTree.allNodes; 
