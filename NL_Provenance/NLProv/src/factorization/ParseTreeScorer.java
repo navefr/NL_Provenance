@@ -16,7 +16,7 @@ public class ParseTreeScorer {
         queryTree = copyTree(queryTree);
         answerTree = copyTree(answerTree);
 
-//        deleteUseless(queryTree);
+        deleteUseless(queryTree);
 //        deleteUseless(answerTree);
 
 
@@ -57,7 +57,6 @@ public class ParseTreeScorer {
         return copyTree;
     }
 
-    // TODO nave - reuse
     private static void deleteUseless(ParseTree parseTree) {
         for(int i = 0; i < parseTree.allNodes.size(); i++) {
             if(parseTree.allNodes.get(i).tokenType.equals("NA") || parseTree.allNodes.get(i).tokenType.equals("QT")) {

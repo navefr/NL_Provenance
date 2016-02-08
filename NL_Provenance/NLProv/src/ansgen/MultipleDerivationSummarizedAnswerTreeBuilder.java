@@ -3,6 +3,7 @@ package ansgen;
 import dataStructure.ParseTreeNode;
 import factorization.WordMappings;
 import org.apache.commons.lang3.math.NumberUtils;
+import utils.StringUtil;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,10 +29,10 @@ public class MultipleDerivationSummarizedAnswerTreeBuilder extends AbstractAnswe
         Set<String> mappings = getSetOfMappings(wordReplacementMap, node.wordOrder);
         Iterator<String> mappingsIterator = mappings.iterator();
         if (mappings.size() == 1) {
-            return getQuoatedString(mappingsIterator.next());
+            return StringUtil.getQuoatedString(mappingsIterator.next());
         } else if (mappings.size() == 2) {
-            String first = getQuoatedString(mappingsIterator.next());
-            String second = getQuoatedString(mappingsIterator.next());
+            String first = StringUtil.getQuoatedString(mappingsIterator.next());
+            String second = StringUtil.getQuoatedString(mappingsIterator.next());
             return String.format("%s and %s", first, second);
         } else if (mappings.size() > 2) {
             if (allNumeric(mappingsIterator)) {
@@ -74,8 +75,8 @@ public class MultipleDerivationSummarizedAnswerTreeBuilder extends AbstractAnswe
 
     private String handleStringValues(ParseTreeNode node, Set<String> mappings) {
         Iterator<String> mappingsIterator = mappings.iterator();
-        String first = getQuoatedString(mappingsIterator.next());
-        String second = getQuoatedString(mappingsIterator.next());
+        String first = StringUtil.getQuoatedString(mappingsIterator.next());
+        String second = StringUtil.getQuoatedString(mappingsIterator.next());
         String firstAndSecond = String.format("%s and %s", first, second);
         return String.valueOf(mappings.size()) + " " + node.label + " such as " + firstAndSecond;
     }

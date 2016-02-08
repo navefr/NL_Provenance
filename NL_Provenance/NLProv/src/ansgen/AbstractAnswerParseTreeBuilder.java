@@ -3,6 +3,7 @@ package ansgen;
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import factorization.WordMappings;
+import utils.ParseTreeUtil;
 
 import java.util.*;
 
@@ -27,7 +28,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
     }
 
     public ParseTree initialize(ParseTree parseTree) {
-        ParseTree answerTree = copyTree(parseTree);
+        ParseTree answerTree = ParseTreeUtil.copyTree(parseTree);
         deleteReturnPhrase(answerTree);
 
         return answerTree;
@@ -58,7 +59,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
         }
 
         if (logicalOperatorNode != null && value != null) {
-            Collection<ParseTreeNode> nodeSiblings = getSiblings(node);
+            Collection<ParseTreeNode> nodeSiblings = ParseTreeUtil.getSiblings(node);
             Collection<ParseTreeNode> siblingsToRemove = new ArrayList<>();
             for (ParseTreeNode nodeSibling : nodeSiblings) {
                 for (ParseTreeNode siblingChild : nodeSibling.children) {
@@ -78,18 +79,6 @@ public abstract class AbstractAnswerParseTreeBuilder {
                 answerTree.deleteSubTree(logicalOperatorNodeInAnswerTree);
             }
         }
-    }
-
-    protected Collection<ParseTreeNode> getSiblings(ParseTreeNode node) {
-        Collection<ParseTreeNode> siblings = new ArrayList<>();
-        if (node.parent != null) {
-            for (ParseTreeNode possibleSibling : node.parent.children) {
-                if (!possibleSibling.equals(node)) {
-                    siblings.add(possibleSibling);
-                }
-            }
-        }
-        return siblings;
     }
 
     public ParseTree buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
@@ -173,17 +162,6 @@ public abstract class AbstractAnswerParseTreeBuilder {
         checkPrep(answerTree, currNode);
     }
 
-    protected ParseTree copyTree(ParseTree parseTree) {
-        ParseTree copyTree = new ParseTree();
-        for (ParseTreeNode node : parseTree.allNodes) {
-            if (node.parent != null) {
-                ParseTreeNode newNode = copyTree.buildNode(new String[]{String.valueOf(node.wordOrder), node.label, node.pos, String.valueOf(node.parent.wordOrder), node.relationship});
-                newNode.tokenType = node.tokenType;
-            }
-        }
-        return copyTree;
-    }
-
     private void deleteReturnPhrase(ParseTree parseTree) {
         ParseTreeNode parseTreeNode1 = parseTree.searchNodeByOrder(1);
         ParseTreeNode parseTreeNode2 = parseTree.searchNodeByOrder(2);
@@ -210,14 +188,4 @@ public abstract class AbstractAnswerParseTreeBuilder {
     }
 
     protected abstract String getNodeValue(WordMappings wordReplacementMap, ParseTreeNode node);
-
-    protected String getQuoatedString(String str) {
-        if (str.startsWith("'") && str.endsWith("'")) {
-            return str;
-        } else if (str.startsWith("\"") && str.endsWith("\"")) {
-            return str;
-        } else {
-            return "\"" + str + "\"";
-        }
-    }
 }

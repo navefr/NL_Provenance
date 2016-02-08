@@ -1,5 +1,6 @@
 package factorization;
 
+import ansgen.FactorizedAnswerTreeBuilder;
 import ansgen.MultipleDerivationFactorizedAnswerTreeBuilder;
 import dataStructure.ParseTree;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -51,8 +52,10 @@ public class GreedyFactorizer implements Factorizer {
     }
 
     private double calculateExpressionScore(Expression expression) {
-        // TODO nave - build it corectly
-        ParseTree answerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(null).handleExpression(parseTree, expression, true).getLeft();
+        // TODO nave - need to use answerTree instead of querytree
+        FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(parseTree);
+        ParseTree answerTree = factorizedAnswerTreeBuilder.handleExpression(expression);
+        // TODO nave - ues better scores?
         return -ParseTreeScorer.score(parseTree, answerTree);
     }
 
