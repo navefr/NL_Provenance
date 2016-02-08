@@ -318,13 +318,13 @@ public class KeyMap2
 					i++;
 				}*/
 				
-				if (tuple.getTree() == null) 
-				{
+				if (tuple.getTrees() == null || tuple.getTrees().isEmpty()) {
 					System.out.println(tuple + " has no trees!!!");
 				}
 				
-				else
-					System.out.println(tuple + "tree size: " + tuple.getTree().size() );
+				else {
+					System.out.println(tuple + "tree size: " + tuple.getTrees().iterator().next().size());
+                }
 			}
 		}
 		
@@ -346,11 +346,11 @@ public class KeyMap2
 		{
 			for (ITuple tuple : this.keyMap.get(key).values()) 
 			{	
-				if (tuple.getTree().size() > maxSize) 
+				if (tuple.getTrees().iterator().next().size() > maxSize)
 				{
 					atom[1] = tuple.toString();
 					atom[0] = key;
-					maxSize = tuple.getTree().size();
+					maxSize = tuple.getTrees().iterator().next().size();
 				}
 			}
 		}
@@ -371,8 +371,8 @@ public class KeyMap2
 		{
 			for (ITuple tuple : map.values()) 
 			{	
-				long childrenSize = (null == tuple.getTree().getChildren()) ? 0 : tuple.getTree().getChildren().size();
-				long ParentsSize = (null == tuple.getTree().getParents()) ? 0 : tuple.getTree().getParents().size();
+				long childrenSize = (null == tuple.getTrees().iterator().next().getChildren()) ? 0 : tuple.getTrees().iterator().next().getChildren().size();
+				long ParentsSize = (null == tuple.getTrees().iterator().next().getParents()) ? 0 : tuple.getTrees().iterator().next().getParents().size();
 				retVal += tupleSize + ( tupleSize + ( childrenSize + ParentsSize ) * tupleSize  ) ;//booleans + weight of rule + terms + tree 
 			}
 		}

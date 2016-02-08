@@ -65,7 +65,7 @@ public class Example
         double durationFullProv = (endTime - startTime);
         System.out.println("Time for seminaive: " + durationFullProv);
         TopKFinder topk = new TopKFinder(cr, 4);
-        topk.TopkFromTree(KeyMap2.getInstance().Get( "dealsWith", KeyMap2.getInstance().Get("dealsWith").iterator().next() ).getTree() );
+        topk.TopkFromTree(KeyMap2.getInstance().Get( "dealsWith", KeyMap2.getInstance().Get("dealsWith").iterator().next() ).getTrees().iterator().next() );
         int size = 0;
         for( IPredicate predicate : facts.getPredicates() )
 			size += facts.get( predicate ).size();
