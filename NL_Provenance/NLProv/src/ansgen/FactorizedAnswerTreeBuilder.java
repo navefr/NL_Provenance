@@ -22,6 +22,9 @@ public class FactorizedAnswerTreeBuilder {
     private Collection<ParseTreeNode> nodesCreatedByExpression;
 
     private Map<Integer, Integer> wordOrderToNodeId;
+    private Map<Integer, ParseTreeNode> nodeIdToOriginalNode;
+
+    private Map<ParseTreeNode, Collection<ParseTreeNode>> nodeMapping;
 
     public FactorizedAnswerTreeBuilder(ParseTree answerTree) {
         initialAnswerTree = answerTree;
@@ -32,11 +35,16 @@ public class FactorizedAnswerTreeBuilder {
         return nodesCreatedByExpression;
     }
 
+    public Map<ParseTreeNode, Collection<ParseTreeNode>> getNodeMapping() {
+        return nodeMapping;
+    }
+
     public ParseTree handleExpression(Expression expression) {
         ParseTree finalAnswerTree = ParseTreeUtil.copyTree(initialAnswerTree);
         nodesCreatedByExpression = new HashSet<>();
+        nodeMapping = new HashMap<>();
 
-        buildWordOrderToNodeId(finalAnswerTree);
+        buildWordOrderNodeIdMaps(finalAnswerTree);
 
         Collection<ParseTreeNode> processedNodeVariables = new ArrayList<>();
         Set<ParseTreeNode> nodesForDeletion = new HashSet<ParseTreeNode>();
@@ -73,6 +81,7 @@ public class FactorizedAnswerTreeBuilder {
             } else {
                 variableNode.label = variable.getValue();
                 nodesCreatedByExpression.add(variableNode);
+                addNodeMapping(variableNode, variableNode);
             }
 
             processedNodeVariables.add(variableNodeSubTreeRoot);
@@ -218,10 +227,13 @@ public class FactorizedAnswerTreeBuilder {
         return finalAnswerTree;
     }
 
-    private void buildWordOrderToNodeId(ParseTree parseTree) {
+    private void buildWordOrderNodeIdMaps(ParseTree parseTree) {
         wordOrderToNodeId = new HashMap<>();
+        nodeIdToOriginalNode = new HashMap<>();
         for (ParseTreeNode node : parseTree.allNodes) {
             wordOrderToNodeId.put(node.wordOrder, node.nodeID);
+            ParseTreeNode originalNode = initialAnswerTree.searchNodeByOrder(node.wordOrder);
+            nodeIdToOriginalNode.put(node.nodeID, originalNode);
         }
     }
 
@@ -260,6 +272,7 @@ public class FactorizedAnswerTreeBuilder {
         shiftWordOrders(parseTree, nodesInSubTree, wordOrder, nodesInSubTree.size());
 
         ParseTreeNode newNode = parseTree.buildNodeByParentId((new String[]{String.valueOf(lastWordOrder + subTreeRoot.wordOrder), nodeValue, "NA", String.valueOf(parent.nodeID), "NA"}));
+        addNodeMapping(subTreeRoot, newNode);
 
         Collection<ParseTreeNode> attachedNodes = new HashSet<>();
         attachedNodes.add(newNode);
@@ -286,6 +299,7 @@ public class FactorizedAnswerTreeBuilder {
             nodeValue = StringUtil.getQuoatedString(nodeValue);
         }
         ParseTreeNode newNode = parseTree.buildNodeByParentId((new String[]{String.valueOf(lastWordOrder + subTreeRoot.wordOrder), nodeValue, "NA", String.valueOf(parent.nodeID), "NA"}));
+        addNodeMapping(subTreeRoot, newNode);
 
         Collection<ParseTreeNode> attachedNodes = new HashSet<>();
         attachedNodes.add(newNode);
@@ -316,6 +330,18 @@ public class FactorizedAnswerTreeBuilder {
             variableNodes.addAll(subExpressionVariableNodes);
         }
         return variableNodes;
+    }
+
+    private void addNodeMapping(ParseTreeNode oldNode, ParseTreeNode newNode) {
+        ParseTreeNode originalNode = nodeIdToOriginalNode.get(oldNode.nodeID);
+        if (originalNode != null) {
+            Collection<ParseTreeNode> mappings = nodeMapping.get(originalNode);
+            if (mappings == null) {
+                mappings = new HashSet<>();
+                nodeMapping.put(originalNode, mappings);
+            }
+            mappings.add(newNode);
+        }
     }
 
 }

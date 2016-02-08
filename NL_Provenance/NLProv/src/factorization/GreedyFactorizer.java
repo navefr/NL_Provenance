@@ -56,7 +56,8 @@ public class GreedyFactorizer implements Factorizer {
         FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(parseTree);
         ParseTree answerTree = factorizedAnswerTreeBuilder.handleExpression(expression);
         // TODO nave - ues better scores?
-        return -ParseTreeScorer.score(parseTree, answerTree);
+
+        return -new ParseTreeScorer(parseTree, answerTree, factorizedAnswerTreeBuilder.getNodeMapping()).score();
     }
 
     private Expression factorizeExpressionByVariable(Expression expression, Expression expressionForFactorization, Variable variableForFactorization) {
