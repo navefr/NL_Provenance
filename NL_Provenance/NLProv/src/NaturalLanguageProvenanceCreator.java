@@ -141,21 +141,21 @@ public class NaturalLanguageProvenanceCreator {
         // TODO nave - Remove
         System.out.println();
         System.out.println("Single Derivation Answer Tree");
-        ParseTree singleDerivationAnswerTree = SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap);
+        ParseTree singleDerivationAnswerTree = SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
         System.out.println(singleDerivationAnswerTree);
         System.out.println();
         System.out.println("Single Derivation Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(singleDerivationAnswerTree));
         System.out.println();
         System.out.println("Multiple Derivation Answer Tree");
-        ParseTree multipleDerivationAnswerTree = MultipleDerivationAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap);
+        ParseTree multipleDerivationAnswerTree = MultipleDerivationAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
         System.out.println(multipleDerivationAnswerTree);
         System.out.println();
         System.out.println("Multiple Derivation Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationAnswerTree));
         System.out.println();
         System.out.println("Multiple Derivation Summarized Answer Tree");
-        ParseTree multipleDerivationSummarizedAnswerTree = MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap);
+        ParseTree multipleDerivationSummarizedAnswerTree = MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
         System.out.println(multipleDerivationSummarizedAnswerTree);
         System.out.println("Multiple Derivation Summarized Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationSummarizedAnswerTree));
@@ -165,7 +165,7 @@ public class NaturalLanguageProvenanceCreator {
         System.out.println(factorizeExpression);
         System.out.println();
         System.out.println("Multiple Derivation Simple Factorized Answer Tree");
-        ParseTree simpleFactorizedAnswerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(new SimpleFactorizer()).buildParseTree(queryOriginalParseTree, wordReplacementMap);
+        ParseTree simpleFactorizedAnswerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(new SimpleFactorizer()).buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
         System.out.println(simpleFactorizedAnswerTree);
         System.out.println("Multiple Derivation Simple Factorized Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(simpleFactorizedAnswerTree));
@@ -174,7 +174,7 @@ public class NaturalLanguageProvenanceCreator {
         factorizeExpression = new GreedyFactorizer(queryOriginalParseTree).factorize(wordReplacementMap);
         System.out.println(factorizeExpression);
         System.out.println("Multiple Derivation Greedy Factorized Answer Tree");
-        ParseTree greedyFactorizedAnswerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(new GreedyFactorizer(queryOriginalParseTree)).buildParseTree(queryOriginalParseTree, wordReplacementMap);
+        ParseTree greedyFactorizedAnswerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(new GreedyFactorizer(queryOriginalParseTree)).buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
         System.out.println(greedyFactorizedAnswerTree);
         System.out.println("Multiple Derivation Greedy Factorized Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(greedyFactorizedAnswerTree));

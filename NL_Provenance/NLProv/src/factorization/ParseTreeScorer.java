@@ -25,7 +25,7 @@ public class ParseTreeScorer {
 
         Transformation transform = treeCorrector.findDistance(convertTreeDS(queryTree), convertTreeDS(answerTree), costs);
 
-        return transform.getCost();
+        return -transform.getCost();
     }
 
     private static BasicTree convertTreeDS(ParseTree parseTree) {

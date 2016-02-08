@@ -176,6 +176,7 @@ public class FactorizedAnswerTreeBuilder {
             FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(initialAnswerTree);
             factorizedAnswerTreeBuilder.handleExpression(nestedSubExpression);
             Collection<ParseTreeNode> nodesFromSubExpressionTreeInExpression = factorizedAnswerTreeBuilder.getNodesCreatedByExpression();
+            //TODO nave - add the node mappings from the rec call
 
             Collection<ParseTreeNode> nodesFromFinalTreeInExpression = getNodesInExpression(finalAnswerTree, nestedSubExpression);
             if (!nodesFromSubExpressionTreeInExpression.isEmpty()) {

@@ -81,7 +81,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
         }
     }
 
-    public ParseTree buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
+    public AnswerTreeBuilderResult buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
         // Initialize
         ParseTree answerTree = initialize(parseTree);
         ParseTreeNode objectNode = answerTree.root.children.get(0);
@@ -145,7 +145,8 @@ public abstract class AbstractAnswerParseTreeBuilder {
             }
         }
 
-        return answerTree;
+        // TODO Nave - add node Mappings
+        return new AnswerTreeBuilderResult(answerTree, null);
     }
 
     private void handleProperties(WordMappings wordReplacementMap, ParseTree answerTree, ParseTreeNode currNode) {

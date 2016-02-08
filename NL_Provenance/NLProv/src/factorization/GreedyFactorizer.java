@@ -1,8 +1,11 @@
 package factorization;
 
+import ansgen.AnswerTreeBuilderResult;
 import ansgen.FactorizedAnswerTreeBuilder;
 import ansgen.MultipleDerivationFactorizedAnswerTreeBuilder;
+import ansgen.SingleDerivationAnswerTreeBuilder;
 import dataStructure.ParseTree;
+import dataStructure.ParseTreeNode;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -22,10 +25,10 @@ public class GreedyFactorizer implements Factorizer {
     @Override
     public Expression factorize(WordMappings wordMappings){
         Expression expression = new Expression(wordMappings);
-        return factorize(expression);
+        return factorize(wordMappings, expression);
     }
 
-    private Expression factorize(Expression initialExpression) {
+    private Expression factorize(WordMappings wordMappings, Expression initialExpression) {
         Expression expression = initialExpression.deepCopy();
         Collection<Pair<Expression, Variable>> candidatesForFactorization = getCandidatesForFactorization(expression);
 
@@ -39,7 +42,7 @@ public class GreedyFactorizer implements Factorizer {
                 Expression candidateExpression = currCandidate.getLeft();
                 Variable candidateVariable = currCandidate.getRight();
                 Expression candidateExpressionFactorized = factorizeExpressionByVariable(expression, candidateExpression, candidateVariable);
-                double score = calculateExpressionScore(candidateExpressionFactorized);
+                double score = calculateExpressionScore(wordMappings, candidateExpressionFactorized);
 
                 if (score > bestScore) {
                     bestScore = score;
@@ -47,17 +50,19 @@ public class GreedyFactorizer implements Factorizer {
                 }
             }
 
-            return factorize(flatten(bestExpression));
+            return factorize(wordMappings, flatten(bestExpression));
         }
     }
 
-    private double calculateExpressionScore(Expression expression) {
-        // TODO nave - need to use answerTree instead of querytree
-        FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(parseTree);
+    private double calculateExpressionScore(WordMappings wordMappings,Expression expression) {
+        AnswerTreeBuilderResult singleDerivationAnswerTreeResult = SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(parseTree, wordMappings);
+        ParseTree singleDerivationAnswerTree = singleDerivationAnswerTreeResult.getParseTree();
+        Map<ParseTreeNode, Collection<ParseTreeNode>> singleDerivationAnswerTreeNodeMappings = singleDerivationAnswerTreeResult.getNodeMappings();
+        FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(singleDerivationAnswerTree);
         ParseTree answerTree = factorizedAnswerTreeBuilder.handleExpression(expression);
-        // TODO nave - ues better scores?
 
-        return -new ParseTreeScorer(parseTree, answerTree, factorizedAnswerTreeBuilder.getNodeMapping()).score();
+        // TODO nave - Mappings are between single Derivation answer tree to answer tree (and not from the query tree) - use singleDerivationAnswerTreeNodeMappings for recreate the mapppings
+        return new ParseTreeScorer(parseTree, answerTree, factorizedAnswerTreeBuilder.getNodeMapping()).score();
     }
 
     private Expression factorizeExpressionByVariable(Expression expression, Expression expressionForFactorization, Variable variableForFactorization) {

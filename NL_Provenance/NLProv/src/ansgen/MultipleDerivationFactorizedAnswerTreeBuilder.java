@@ -20,12 +20,14 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
     }
 
     @Override
-    public ParseTree buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
+    public AnswerTreeBuilderResult buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
         Expression factorizeExpression = factorizer.factorize(wordReplacementMap);
 
-        ParseTree answerParseTree = super.buildParseTree(parseTree, wordReplacementMap);
+        ParseTree answerParseTree = super.buildParseTree(parseTree, wordReplacementMap).getParseTree();
 
-        return new FactorizedAnswerTreeBuilder(answerParseTree).handleExpression(factorizeExpression);
+        FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(answerParseTree);
+        ParseTree factorizedAnswerParseTree = factorizedAnswerTreeBuilder.handleExpression(factorizeExpression);
+        return new AnswerTreeBuilderResult(factorizedAnswerParseTree, factorizedAnswerTreeBuilder.getNodeMapping());
     }
 
 
