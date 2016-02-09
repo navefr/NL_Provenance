@@ -2,14 +2,14 @@ package treedist;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.TreeSet;
 
-/** This is an implementation of the Zhang and Shasha algorithm as
+/**
+ * This is an implementation of the Zhang and Shasha algorithm as
  * described in [FIXME]
- *
+ * <p>
  * SWAN 2007-11-01: I'm pretty sure this code comes from:
  * http://www.cs.queensu.ca/TechReports/Reports/1995-372.pdf and
- *"http://www.inf.unibz.it/dis/teaching/ATA/ata7-handout-1x1.pdf"
+ * "http://www.inf.unibz.it/dis/teaching/ATA/ata7-handout-1x1.pdf"
  * INSERT-LICENCE-INFO
  */
 public class ComparisonZhangShasha {
@@ -23,201 +23,100 @@ public class ComparisonZhangShasha {
             = null;
     private double[][] distance = null;
 
-    public Transformation findDistance
-            (TreeDefinition aTree,
-             TreeDefinition bTree,
-             OpsZhangShasha ops) {
+    public Transformation findDistance (TreeDefinition aTree, TreeDefinition bTree, OpsZhangShasha ops) {
 
         //This is initialised to be n+1 * m+1.  It should really be n*m
         //but because of java's zero indexing, the for loops would
         //look much more readable if the matrix is extended by one
         //column and row.  So, distance[0,*] and distance[*,0] should
         //be permanently zero.
-        distance =
-                new double[aTree.getNodeCount()+1][bTree.getNodeCount()+1];
+        distance = new double[aTree.getNodeCount() + 1][bTree.getNodeCount() + 1];
 
         //Preliminaries
         //1. Find left-most leaf and key roots
-        Hashtable<Integer, Integer> aLeftLeaf =
-                new Hashtable<Integer, Integer>();
-        Hashtable<Integer, Integer> bLeftLeaf =
-                new Hashtable<Integer, Integer>();
-        ArrayList<Integer> aTreeKeyRoots =
-                new ArrayList<Integer>();
-        ArrayList<Integer> bTreeKeyRoots =
-                new ArrayList<Integer>();
+        Hashtable<Integer, Integer> aLeftLeaf = new Hashtable<Integer, Integer>();
+        Hashtable<Integer, Integer> bLeftLeaf = new Hashtable<Integer, Integer>();
+        ArrayList<Integer> aTreeKeyRoots = new ArrayList<Integer>();
+        ArrayList<Integer> bTreeKeyRoots = new ArrayList<Integer>();
 
-        findHelperTables(aTree, aLeftLeaf, aTreeKeyRoots,
-                aTree.getRootID());
+        findHelperTables(aTree, aLeftLeaf, aTreeKeyRoots, aTree.getRootID());
 
-        findHelperTables(bTree, bLeftLeaf, bTreeKeyRoots,
-                bTree.getRootID());
-
-// 	System.out.println("aTree Keyroots");
-//  	for (Integer aKeyroot : aTreeKeyRoots) {
-// 	    System.out.println(aKeyroot);
-// 	}
-
-// 	System.out.println("l(aTree)");
-//  	for (Integer key : new TreeSet<Integer>(aLeftLeaf.keySet())) {
-// 	    System.out.println(key+": "+aLeftLeaf.get(key));
-// 	}
-
-// 	System.out.println("bTree Keyroots");
-// 	for (Integer bKeyroot : bTreeKeyRoots) {
-// 	    System.out.println(bKeyroot);
-// 	}
-
-// 	System.out.println("l(bTree)");
-//  	for (Integer key : new TreeSet<Integer>(bLeftLeaf.keySet())) {
-// 	    System.out.println(key+": "+bLeftLeaf.get(key));
-// 	}
+        findHelperTables(bTree, bLeftLeaf, bTreeKeyRoots, bTree.getRootID());
 
         //Comparison
         for (Integer aKeyroot : aTreeKeyRoots) { //aKeyroot loop
-//   	    System.out.println("aKeyroot: "+aKeyroot);
 
             for (Integer bKeyroot : bTreeKeyRoots) { //bKeyroot loop
-//   		System.out.println("bKeyroot: "+bKeyroot);
 
                 //Re-initialise forest distance tables
-                Hashtable<Integer, Hashtable<Integer, Double>> fD =
-                        new Hashtable<Integer, Hashtable<Integer, Double>>();
+                Hashtable<Integer, Hashtable<Integer, Double>> fD = new Hashtable<Integer, Hashtable<Integer, Double>>();
 
-                setFD(aLeftLeaf.get(aKeyroot),bLeftLeaf.get(bKeyroot),0.0d, fD);
+                setFD(aLeftLeaf.get(aKeyroot), bLeftLeaf.get(bKeyroot), 0.0d, fD);
 
                 //for all descendents of aKeyroot: i
-                for (int i=aLeftLeaf.get(aKeyroot);i <= aKeyroot;i++) {
+                for (int i = aLeftLeaf.get(aKeyroot); i <= aKeyroot; i++) {
                     setFD(i,
-                            bLeftLeaf.get(bKeyroot)-1,
-                            getFD(i-1,bLeftLeaf.get(bKeyroot)-1,fD)+
-                                    ops.getOp(OpsZhangShasha.DELETE).getCost(i,0,aTree,bTree),
+                            bLeftLeaf.get(bKeyroot) - 1,
+                            getFD(i - 1, bLeftLeaf.get(bKeyroot) - 1, fD) +
+                                    ops.getOp(OpsZhangShasha.DELETE).getCost(i, 0, aTree, bTree),
                             fD);
-
-// 		    //trace
-// 		    seeFD(i,bLeftLeaf.get(bKeyroot)-1,fD);
                 }
 
                 //for all descendents of bKeyroot: j
-                for (int j=bLeftLeaf.get(bKeyroot);j <= bKeyroot;j++) {
+                for (int j = bLeftLeaf.get(bKeyroot); j <= bKeyroot; j++) {
 
-                    setFD(aLeftLeaf.get(aKeyroot)-1,j,
-                            getFD(aLeftLeaf.get(aKeyroot)-1,j-1,fD)+
-                                    ops.getOp(OpsZhangShasha.INSERT).getCost(0,j,aTree,bTree),
+                    setFD(aLeftLeaf.get(aKeyroot) - 1, j,
+                            getFD(aLeftLeaf.get(aKeyroot) - 1, j - 1, fD) +
+                                    ops.getOp(OpsZhangShasha.INSERT).getCost(0, j, aTree, bTree),
                             fD);
-
-// 		    //trace
-// 		    seeFD(aLeftLeaf.get(aKeyroot)-1,j,fD);
                 }
 
-// 		System.out.println("BEFORE cross checks: ");
-// 		seeFD(fD);
-
                 //for all descendents of aKeyroot: i
-                for (int i=aLeftLeaf.get(aKeyroot);i<=aKeyroot;i++) {
-//   		    System.out.println("i: "+i);
+                for (int i = aLeftLeaf.get(aKeyroot); i <= aKeyroot; i++) {
 
                     //for all descendents of bKeyroot: j
-                    for (int j=bLeftLeaf.get(bKeyroot);j<=bKeyroot;j++) {
-//   			 System.out.println("j: "+j);
-
-                        //Start Trace
-// 			 System.out.println
-// 			     ("DEL: "+
-// 			      (getFD(i-1,j,fD)+
-// 			      ops.getOp(OpsZhangShasha.DELETE)
-// 			       .getCost(i,0,aTree,bTree)));
-
-// 			 System.out.println
-// 			     ("INS: "+
-// 			      (getFD(i,j-1,fD)+
-// 			      ops.getOp(OpsZhangShasha.INSERT)
-// 			       .getCost(0,j,aTree,bTree)));
-
+                    for (int j = bLeftLeaf.get(bKeyroot); j <= bKeyroot; j++) {
                         //End Trace
                         double min =  //This min compares del vs ins
                                 java.lang.Math.min
                                         (//Option 1: Delete node from aTree
-                                                getFD(i-1,j,fD)+
+                                                getFD(i - 1, j, fD) +
                                                         ops.getOp(OpsZhangShasha.DELETE)
-                                                                .getCost(i,0,aTree,bTree),
+                                                                .getCost(i, 0, aTree, bTree),
 
                                                 //Option 2: Insert node into bTree
-                                                getFD(i,j-1,fD)+
+                                                getFD(i, j - 1, fD) +
                                                         ops.getOp(OpsZhangShasha.INSERT)
-                                                                .getCost(0,j,aTree,bTree)
+                                                                .getCost(0, j, aTree, bTree)
                                         );
-
-// 			 System.out.println("Min: "+min);
 
                         if ((aLeftLeaf.get(i) == aLeftLeaf.get(aKeyroot))
                                 &&
-                                (bLeftLeaf.get(j) == bLeftLeaf.get(bKeyroot)))
-                        {
-
-//   				System.out.println("This is a Left-branch node.");
-
-// 				System.out.println
-// 				    ("REN: "+
-// 				     (getFD(i-1,j-1,fD) +
-// 				     ops.getOp(OpsZhangShasha.RENAME)
-// 				      .getCost(i,j,aTree,bTree)));
-
+                                (bLeftLeaf.get(j) == bLeftLeaf.get(bKeyroot))) {
                             distance[i][j] =
                                     java.lang.Math.min
                                             (min,
-                                                    getFD(i-1,j-1,fD) +
+                                                    getFD(i - 1, j - 1, fD) +
                                                             ops.getOp(OpsZhangShasha.RENAME)
-                                                                    .getCost(i,j,aTree,bTree)
+                                                                    .getCost(i, j, aTree, bTree)
                                             );
 
-//  				System.out.println("D["+i+"]["+j+"]:"+
-//  						   distance[i][j]);
-
-                            setFD(i,j,distance[i][j],fD);
-
-                            //trace
-// 				seeFD(i,j, fD);
-                        }
-                        else {
-
-//  			    System.out.println("Forest Situation");
-
-// 			    System.out.println
-// 				("REN: "+
-// 				 (getFD(aLeftLeaf.get(i)-1,
-// 					bLeftLeaf.get(j)-1,fD)+
-// 				  distance[i][j] ));
-
-                            setFD(i,j,
+                            setFD(i, j, distance[i][j], fD);
+                        } else {
+                            setFD(i, j,
                                     java.lang.Math.min
                                             (min,
-                                                    getFD(aLeftLeaf.get(i)-1,
-                                                            bLeftLeaf.get(j)-1,fD)+
+                                                    getFD(aLeftLeaf.get(i) - 1,
+                                                            bLeftLeaf.get(j) - 1, fD) +
                                                             distance[i][j]
                                             ),
                                     fD
                             );
-
-// 			    seeFD(i, j, fD);
                         }
                     }
                 }
-
-// 		seeFD(fD); //trace
             }
         }
-
-// 	//Return result
-// 	for (int i=0;i<distance.length;i++) {
-// 	    for (int j=0;j<distance[i].length;j++) {
-// 		System.out.print(distance[i][j]+" ");
-// 	    }
-// 	    System.out.println("");
-// 	}
-
-//  	System.out.println("Distance: "
-// 			   +distance[aTree.getNodeCount()][bTree.getNodeCount()]);
 
         Transformation transform = new Transformation();
         transform.setCost(distance[aTree.getNodeCount()][bTree.getNodeCount()]);
@@ -225,117 +124,77 @@ public class ComparisonZhangShasha {
 
     }
 
-    /** The initiating call should be to the root node of the tree.
+    /**
+     * The initiating call should be to the root node of the tree.
      * It fills in an nxn (hash) table of the leftmost leaf for a
      * given node.  It also compiles an array of key roots. The
      * integer values IDs must come from the post-ordering of the
      * nodes in the tree.
      */
-    private void findHelperTables
-    (TreeDefinition someTree,
-     Hashtable<Integer, Integer> leftmostLeaves,
-     ArrayList<Integer> keyroots,
-     int aNodeID) {
+    private void findHelperTables(TreeDefinition someTree, Hashtable<Integer, Integer> leftmostLeaves, ArrayList<Integer> keyroots, int aNodeID) {
 
-        findHelperTablesRecurse(someTree,leftmostLeaves,keyroots,aNodeID);
+        findHelperTablesRecurse(someTree, leftmostLeaves, keyroots, aNodeID);
 
         //add root to keyroots
         keyroots.add(aNodeID);
 
         //add boundary nodes
-        leftmostLeaves.put(0,0);
+        leftmostLeaves.put(0, 0);
 
     }
-    private void findHelperTablesRecurse
-            (TreeDefinition someTree,
-             Hashtable<Integer, Integer> leftmostLeaves,
-             ArrayList<Integer> keyroots,
-             int aNodeID) {
+
+    private void findHelperTablesRecurse(TreeDefinition someTree, Hashtable<Integer, Integer> leftmostLeaves, ArrayList<Integer> keyroots, int aNodeID) {
 
         //If this is a leaf, then it is the leftmost leaf
         if (someTree.isLeaf(aNodeID)) {
-            leftmostLeaves.put(aNodeID, aNodeID);}
-        else {
+            leftmostLeaves.put(aNodeID, aNodeID);
+        } else {
             boolean seenLeftmost = false;
             for (Integer child : someTree.getChildrenIDs(aNodeID)) {
-                findHelperTablesRecurse(someTree, leftmostLeaves,
-                        keyroots, child);
+                findHelperTablesRecurse(someTree, leftmostLeaves, keyroots, child);
                 if (!seenLeftmost) {
-                    leftmostLeaves.put(aNodeID,
-                            leftmostLeaves.get(child));
-                    seenLeftmost = true;}
-                else {
+                    leftmostLeaves.put(aNodeID, leftmostLeaves.get(child));
+                    seenLeftmost = true;
+                } else {
                     keyroots.add(child);
                 }
             }
         }
     }
 
-    /** Returns a String for trace writes */
-    private void seeFD(int a, int b,
-                       Hashtable<Integer, Hashtable<Integer,Double>>
-                               forestDistance) {
-
-        System.out.println("["+a+"],["+b+"]: "+getFD(a,b,forestDistance));
-    }
-
-    /** Returns a String for trace writes */
-    private void seeFD(Hashtable<Integer, Hashtable<Integer,Double>>
-                               forestDistance) {
-        System.out.println("Forest Distance");
-        //Return result
-        for (Integer i : new TreeSet<Integer>(forestDistance.keySet())) {
-            System.out.print(i+": ");
-            for (Integer j : new TreeSet<Integer>(forestDistance.get(i).keySet())) {
-                System.out.print(forestDistance.get(i).get(j)+"("+j+")  ");
-            }
-            System.out.println("");
-        }
-    }
-
-    /** This returns the value in the cell of the ForestDistance table
+    /**
+     * This returns the value in the cell of the ForestDistance table
      */
     private double getFD(int a, int b,
-                         Hashtable<Integer, Hashtable<Integer,Double>>
+                         Hashtable<Integer, Hashtable<Integer, Double>>
                                  forestDistance) {
 
         Hashtable<Integer, Double> rows = null;
         if (!forestDistance.containsKey(a)) {
-//  	    System.out.println("getFD: creating new aStr entry.");
             forestDistance.put(a, new Hashtable<Integer, Double>());
         }
 
         rows = forestDistance.get(a);
         if (!rows.containsKey(b)) {
-// 	    System.out.println("creating new bStr entry.");
             rows.put(b, 0.0);
         }
         return rows.get(b);
     }
 
 
-    /** This sets the value in the cell of the ForestDistance table
+    /**
+     * This sets the value in the cell of the ForestDistance table
      */
     private void setFD(int a, int b,
                        double aValue,
-                       Hashtable<Integer, Hashtable<Integer,Double>>
-                               forestDistance ) {
+                       Hashtable<Integer, Hashtable<Integer, Double>> forestDistance) {
 
         Hashtable<Integer, Double> rows = null;
         if (!forestDistance.containsKey(a)) {
-//  	    System.out.println("setFD: creating new aStr entry.");
             forestDistance.put(a, new Hashtable<Integer, Double>());
         }
 
         rows = forestDistance.get(a);
         rows.put(b, aValue);
-
-//  	for (String key: forestDistance.keySet()) {
-//  	    System.out.println("FD key: "+key);
-// 	    for (String key2: forestDistance.get(key).keySet()) {
-// 		System.out.println("FD key2: "+key2);
-// 	    }
-//  	}
     }
-
 }

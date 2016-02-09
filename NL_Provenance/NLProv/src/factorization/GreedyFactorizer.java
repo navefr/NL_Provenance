@@ -2,7 +2,6 @@ package factorization;
 
 import ansgen.AnswerTreeBuilderResult;
 import ansgen.FactorizedAnswerTreeBuilder;
-import ansgen.MultipleDerivationFactorizedAnswerTreeBuilder;
 import ansgen.SingleDerivationAnswerTreeBuilder;
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
@@ -57,12 +56,14 @@ public class GreedyFactorizer implements Factorizer {
     private double calculateExpressionScore(WordMappings wordMappings,Expression expression) {
         AnswerTreeBuilderResult singleDerivationAnswerTreeResult = SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(parseTree, wordMappings);
         ParseTree singleDerivationAnswerTree = singleDerivationAnswerTreeResult.getParseTree();
-        Map<ParseTreeNode, Collection<ParseTreeNode>> singleDerivationAnswerTreeNodeMappings = singleDerivationAnswerTreeResult.getNodeMappings();
         FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(singleDerivationAnswerTree);
         ParseTree answerTree = factorizedAnswerTreeBuilder.handleExpression(expression);
 
-        // TODO nave - Mappings are between single Derivation answer tree to answer tree (and not from the query tree) - use singleDerivationAnswerTreeNodeMappings for recreate the mapppings
-        return new ParseTreeScorer(parseTree, answerTree, factorizedAnswerTreeBuilder.getNodeMapping()).score();
+        Map<ParseTreeNode, Collection<ParseTreeNode>> queryToSingleDerivationAnswerTreeNodeMappings = singleDerivationAnswerTreeResult.getNodeMappings();
+        Map<ParseTreeNode, Collection<ParseTreeNode>> singleDerivationToFactorizedAnswerTreeNodeMappings = factorizedAnswerTreeBuilder.getNodeMapping();
+        Map<ParseTreeNode, Collection<ParseTreeNode>> queryToFactorizedAnswerTreeNodeMappings = getQueryToFactorizedAnswerTreeNodeMappings(queryToSingleDerivationAnswerTreeNodeMappings, singleDerivationToFactorizedAnswerTreeNodeMappings);
+
+        return new ParseTreeScorer(parseTree, answerTree, queryToFactorizedAnswerTreeNodeMappings).score();
     }
 
     private Expression factorizeExpressionByVariable(Expression expression, Expression expressionForFactorization, Variable variableForFactorization) {
@@ -164,7 +165,6 @@ public class GreedyFactorizer implements Factorizer {
     }
 
     private void flatten(Expression parent, Expression child) {
-        // TODO NAve - we can add nodes to the parent while treaversing it?
         Expression nextParent = child;
         if (child.getVariables().isEmpty() && parent != null) {
             parent.getExpressions().remove(child);
@@ -207,4 +207,25 @@ public class GreedyFactorizer implements Factorizer {
 
         return null;
     }
+
+    private Map<ParseTreeNode, Collection<ParseTreeNode>> getQueryToFactorizedAnswerTreeNodeMappings(Map<ParseTreeNode, Collection<ParseTreeNode>> queryToSingleDerivationAnswerTreeNodeMappings, Map<ParseTreeNode, Collection<ParseTreeNode>> singleDerivationToFactorizedAnswerTreeNodeMappings) {
+        Map<ParseTreeNode, Collection<ParseTreeNode>> queryToFactorizedAnswerTreeNodeMappings = new HashMap<ParseTreeNode, Collection<ParseTreeNode>>();
+        for (Map.Entry<ParseTreeNode, Collection<ParseTreeNode>> entry : queryToSingleDerivationAnswerTreeNodeMappings.entrySet()) {
+            ParseTreeNode queryTreeNode = entry.getKey();
+            Collection<ParseTreeNode> singleDerivationAnswerNodes = entry.getValue();
+            for (ParseTreeNode singleDerivationAnswerNode : singleDerivationAnswerNodes) {
+                if (singleDerivationToFactorizedAnswerTreeNodeMappings.containsKey(singleDerivationAnswerNode)) {
+                    Collection<ParseTreeNode> factorizedAnswerTreeNodes = singleDerivationToFactorizedAnswerTreeNodeMappings.get(singleDerivationAnswerNode);
+                    Collection<ParseTreeNode> queryNodeMappings = queryToFactorizedAnswerTreeNodeMappings.get(queryTreeNode);
+                    if (queryNodeMappings == null) {
+                        queryNodeMappings = new HashSet<ParseTreeNode>();
+                        queryToFactorizedAnswerTreeNodeMappings.put(queryTreeNode, queryNodeMappings);
+                    }
+                    queryNodeMappings.addAll(factorizedAnswerTreeNodes);
+                }
+            }
+        }
+        return queryToFactorizedAnswerTreeNodeMappings;
+    }
+
 }

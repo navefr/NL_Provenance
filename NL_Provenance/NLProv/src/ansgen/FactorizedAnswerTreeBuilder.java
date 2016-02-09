@@ -40,7 +40,7 @@ public class FactorizedAnswerTreeBuilder {
     }
 
     public ParseTree handleExpression(Expression expression) {
-        ParseTree finalAnswerTree = ParseTreeUtil.copyTree(initialAnswerTree);
+        ParseTree finalAnswerTree = ParseTreeUtil.copyTree(initialAnswerTree).getLeft();
         nodesCreatedByExpression = new HashSet<>();
         nodeMapping = new HashMap<>();
 

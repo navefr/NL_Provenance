@@ -3,6 +3,8 @@ package ansgen;
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import factorization.WordMappings;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import utils.ParseTreeUtil;
 
 import java.util.*;
@@ -27,11 +29,18 @@ public abstract class AbstractAnswerParseTreeBuilder {
         logicalOperators.add("or");
     }
 
-    public ParseTree initialize(ParseTree parseTree) {
-        ParseTree answerTree = ParseTreeUtil.copyTree(parseTree);
+    public Pair<ParseTree, Map<ParseTreeNode, ParseTreeNode>> initialize(ParseTree parseTree) {
+        Pair<ParseTree, Map<ParseTreeNode, ParseTreeNode>> copyTreeResult = ParseTreeUtil.copyTree(parseTree);
+        ParseTree answerTree = copyTreeResult.getLeft();
         deleteReturnPhrase(answerTree);
 
-        return answerTree;
+        Map<ParseTreeNode, ParseTreeNode> copyTreeMapping = copyTreeResult.getRight();
+        Map<ParseTreeNode, ParseTreeNode> copyTreeReverseMapping = new HashMap<ParseTreeNode, ParseTreeNode>();
+        for (Map.Entry<ParseTreeNode, ParseTreeNode> entry : copyTreeMapping.entrySet()) {
+            copyTreeReverseMapping.put(entry.getValue(), entry.getKey());
+        }
+
+        return new ImmutablePair<ParseTree, Map<ParseTreeNode, ParseTreeNode>>(answerTree, copyTreeReverseMapping);
     }
 
     private void checkPrep(ParseTree answerTree, ParseTreeNode node) {
@@ -83,7 +92,9 @@ public abstract class AbstractAnswerParseTreeBuilder {
 
     public AnswerTreeBuilderResult buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
         // Initialize
-        ParseTree answerTree = initialize(parseTree);
+        Pair<ParseTree, Map<ParseTreeNode, ParseTreeNode>> initializeResult = initialize(parseTree);
+        ParseTree answerTree = initializeResult.getLeft();
+        Map<ParseTreeNode, ParseTreeNode> copyTreeReverseMapping = initializeResult.getRight();
         ParseTreeNode objectNode = answerTree.root.children.get(0);
 
         // Algorithm
@@ -145,8 +156,19 @@ public abstract class AbstractAnswerParseTreeBuilder {
             }
         }
 
-        // TODO Nave - add node Mappings
-        return new AnswerTreeBuilderResult(answerTree, null);
+        Map<ParseTreeNode, Collection<ParseTreeNode>> answerTreeMapping = new HashMap<ParseTreeNode, Collection<ParseTreeNode>>();
+        for (ParseTreeNode node : answerTree.allNodes) {
+            if (copyTreeReverseMapping.containsKey(node)) {
+                Collection<ParseTreeNode> mappings = answerTreeMapping.get(copyTreeReverseMapping.get(node));
+                if (mappings == null) {
+                    mappings = new HashSet<ParseTreeNode>();
+                    answerTreeMapping.put(copyTreeReverseMapping.get(node), mappings);
+                }
+                mappings.add(node);
+            }
+        }
+
+        return new AnswerTreeBuilderResult(answerTree, answerTreeMapping);
     }
 
     private void handleProperties(WordMappings wordReplacementMap, ParseTree answerTree, ParseTreeNode currNode) {

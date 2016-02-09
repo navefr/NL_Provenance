@@ -2,10 +2,10 @@ package utils;
 
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,15 +15,17 @@ import java.util.HashSet;
  */
 public class ParseTreeUtil {
 
-    public static ParseTree copyTree(ParseTree parseTree) {
+    public static Pair<ParseTree, Map<ParseTreeNode, ParseTreeNode>> copyTree(ParseTree parseTree) {
         ParseTree copyTree = new ParseTree();
+        Map<ParseTreeNode, ParseTreeNode> mapping = new HashMap<ParseTreeNode, ParseTreeNode>();
         for (ParseTreeNode node : parseTree.allNodes) {
             if (node.parent != null) {
                 ParseTreeNode newNode = copyTree.buildNode(new String[]{String.valueOf(node.wordOrder), node.label, node.pos, String.valueOf(node.parent.wordOrder), node.relationship});
                 newNode.tokenType = node.tokenType;
+                mapping.put(node, newNode);
             }
         }
-        return copyTree;
+        return new ImmutablePair<ParseTree, Map<ParseTreeNode, ParseTreeNode>>(copyTree, mapping);
     }
 
     public static Collection<ParseTreeNode> getSiblings(ParseTreeNode node) {
