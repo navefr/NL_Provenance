@@ -19,9 +19,7 @@ public class ComparisonZhangShasha {
     //Each call to findDistance will change these tables.  But each
     //call is independent (and reinitialises this) so the side effect
     //has no real consequence.  ie.  There are NO public side effects.
-    private Hashtable<String, Hashtable<String, Double>> forestDistance
-            = null;
-    private double[][] distance = null;
+    private Hashtable<String, Hashtable<String, Double>> forestDistance = null;
 
     public Transformation findDistance (TreeDefinition aTree, TreeDefinition bTree, OpsZhangShasha ops) {
 
@@ -30,7 +28,7 @@ public class ComparisonZhangShasha {
         //look much more readable if the matrix is extended by one
         //column and row.  So, distance[0,*] and distance[*,0] should
         //be permanently zero.
-        distance = new double[aTree.getNodeCount() + 1][bTree.getNodeCount() + 1];
+        double[][] distance = new double[aTree.getNodeCount() + 1][bTree.getNodeCount() + 1];
 
         //Preliminaries
         //1. Find left-most leaf and key roots
@@ -76,7 +74,7 @@ public class ComparisonZhangShasha {
 
                     //for all descendents of bKeyroot: j
                     for (int j = bLeftLeaf.get(bKeyroot); j <= bKeyroot; j++) {
-                        //End Trace
+
                         double min =  //This min compares del vs ins
                                 java.lang.Math.min
                                         (//Option 1: Delete node from aTree

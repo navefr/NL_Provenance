@@ -7,12 +7,10 @@ package treedist;
 public class BasicDelete extends TreeEditOperation {
 
     public BasicDelete() {
-	super.opName = "DELETE";
+        super.opName = "DELETE";
     }
 
-    public double getCost(int aNodeID, int bNodeID, 
-			  TreeDefinition aTree,
-			  TreeDefinition bTree) {
-	return 1;
+    public double getCost(int aNodeID, int bNodeID, TreeDefinition aTree, TreeDefinition bTree) {
+        return 1;
     }
 }
