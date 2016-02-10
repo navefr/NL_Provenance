@@ -106,4 +106,13 @@ public class ParseTreeUtil {
         }
         return true;
     }
+
+
+    public static void shiftWordOrders(ParseTree parseTree, Collection<ParseTreeNode> exclude, int from, int amount) {
+        for (ParseTreeNode node : parseTree.allNodes) {
+            if (node.wordOrder >= from && !exclude.contains(node)) {
+                node.wordOrder = node.wordOrder + amount;
+            }
+        }
+    }
 }

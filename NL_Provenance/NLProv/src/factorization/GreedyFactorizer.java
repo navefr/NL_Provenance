@@ -53,10 +53,10 @@ public class GreedyFactorizer implements Factorizer {
         }
     }
 
-    private double calculateExpressionScore(WordMappings wordMappings,Expression expression) {
+    private double calculateExpressionScore(WordMappings wordMappings, Expression expression) {
         AnswerTreeBuilderResult singleDerivationAnswerTreeResult = SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(parseTree, wordMappings);
         ParseTree singleDerivationAnswerTree = singleDerivationAnswerTreeResult.getParseTree();
-        FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(singleDerivationAnswerTree);
+        FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(singleDerivationAnswerTree, singleDerivationAnswerTreeResult.getNodeMappings());
         ParseTree answerTree = factorizedAnswerTreeBuilder.handleExpression(expression);
 
         Map<ParseTreeNode, Collection<ParseTreeNode>> queryToSingleDerivationAnswerTreeNodeMappings = singleDerivationAnswerTreeResult.getNodeMappings();

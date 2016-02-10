@@ -5,7 +5,6 @@ import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import factorization.Expression;
 import factorization.GreedyFactorizer;
-import factorization.SimpleFactorizer;
 import factorization.WordMappings;
 import org.deri.iris.api.basics.IAtom;
 import org.deri.iris.api.basics.ILiteral;
@@ -29,7 +28,7 @@ public class NaturalLanguageProvenanceCreator {
 
 
     private Collection<ParseTreeNode> freeQueryNodes = new ArrayList<>();
-    private Map<String, ParseTreeNode> literalToParseTreeNode = new HashMap<>();
+    private Map<String, ParseTreeNode> literalToParseTreeNode = new HashMap<String, ParseTreeNode>();
 
     private Map<String, String> predicateSymbolMapping = new HashMap<>();
 
@@ -55,7 +54,7 @@ public class NaturalLanguageProvenanceCreator {
         // TODO NAVE - add more predicates
         predicateSymbolMapping.put("GREATER", ">");
         predicateSymbolMapping.put("LESS", "<");
-        predicateSymbolMapping.put("EQUAL", "=");
+//        predicateSymbolMapping.put("EQUAL", "=");
 
     }
 
@@ -161,17 +160,7 @@ public class NaturalLanguageProvenanceCreator {
         System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationSummarizedAnswerTree));
         System.out.println();
         System.out.println("Multiple Derivation Simple Factorization");
-        Expression factorizeExpression = SimpleFactorizer.getInstance().factorize(wordReplacementMap);
-        System.out.println(factorizeExpression);
-        System.out.println();
-        System.out.println("Multiple Derivation Simple Factorized Answer Tree");
-        ParseTree simpleFactorizedAnswerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(new SimpleFactorizer()).buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
-        System.out.println(simpleFactorizedAnswerTree);
-        System.out.println("Multiple Derivation Simple Factorized Answer Sentence");
-        System.out.println(SentenceBuilder.getInstance().buildSentence(simpleFactorizedAnswerTree));
-        System.out.println();
-        System.out.println("Multiple Derivation Simple Factorization");
-        factorizeExpression = new GreedyFactorizer(queryOriginalParseTree).factorize(wordReplacementMap);
+        Expression factorizeExpression = new GreedyFactorizer(queryOriginalParseTree).factorize(wordReplacementMap);
         System.out.println(factorizeExpression);
         System.out.println("Multiple Derivation Greedy Factorized Answer Tree");
         ParseTree greedyFactorizedAnswerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(new GreedyFactorizer(queryOriginalParseTree)).buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();

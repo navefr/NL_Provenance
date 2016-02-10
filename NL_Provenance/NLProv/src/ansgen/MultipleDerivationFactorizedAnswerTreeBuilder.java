@@ -2,11 +2,12 @@ package ansgen;
 
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
-import factorization.*;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
+import factorization.Expression;
+import factorization.Factorizer;
+import factorization.WordMappings;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * Created by nfrost on 1/25/2016
@@ -23,9 +24,11 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
     public AnswerTreeBuilderResult buildParseTree(ParseTree parseTree, WordMappings wordReplacementMap) {
         Expression factorizeExpression = factorizer.factorize(wordReplacementMap);
 
-        ParseTree answerParseTree = super.buildParseTree(parseTree, wordReplacementMap).getParseTree();
+        AnswerTreeBuilderResult answerTreeBuilderResult = super.buildParseTree(parseTree, wordReplacementMap);
+        ParseTree answerParseTree = answerTreeBuilderResult.getParseTree();
+        Map<ParseTreeNode, Collection<ParseTreeNode>> nodeMappings = answerTreeBuilderResult.getNodeMappings();
 
-        FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(answerParseTree);
+        FactorizedAnswerTreeBuilder factorizedAnswerTreeBuilder = new FactorizedAnswerTreeBuilder(answerParseTree, nodeMappings);
         ParseTree factorizedAnswerParseTree = factorizedAnswerTreeBuilder.handleExpression(factorizeExpression);
         return new AnswerTreeBuilderResult(factorizedAnswerParseTree, factorizedAnswerTreeBuilder.getNodeMapping());
     }
