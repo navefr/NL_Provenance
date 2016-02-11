@@ -5,6 +5,7 @@ import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import factorization.Expression;
 import factorization.GreedyFactorizer;
+import factorization.QueryBasedFactorizer;
 import factorization.WordMappings;
 import org.deri.iris.api.basics.IAtom;
 import org.deri.iris.api.basics.ILiteral;
@@ -159,7 +160,7 @@ public class NaturalLanguageProvenanceCreator {
         System.out.println("Multiple Derivation Summarized Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(multipleDerivationSummarizedAnswerTree));
         System.out.println();
-        System.out.println("Multiple Derivation Simple Factorization");
+        System.out.println("Multiple Derivation Greedy Factorization");
         Expression factorizeExpression = new GreedyFactorizer(queryOriginalParseTree).factorize(wordReplacementMap);
         System.out.println(factorizeExpression);
         System.out.println("Multiple Derivation Greedy Factorized Answer Tree");
@@ -167,6 +168,14 @@ public class NaturalLanguageProvenanceCreator {
         System.out.println(greedyFactorizedAnswerTree);
         System.out.println("Multiple Derivation Greedy Factorized Answer Sentence");
         System.out.println(SentenceBuilder.getInstance().buildSentence(greedyFactorizedAnswerTree));
+        System.out.println("Multiple Derivation Query Based Factorization");
+        Expression queryBasedFactorizeExpression = new QueryBasedFactorizer(queryOriginalParseTree).factorize(wordReplacementMap);
+        System.out.println(queryBasedFactorizeExpression);
+        System.out.println("Multiple Derivation Query Based Factorized Answer Tree");
+        ParseTree queryBasedFactorizedAnswerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(new QueryBasedFactorizer(queryOriginalParseTree)).buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
+        System.out.println(queryBasedFactorizedAnswerTree);
+        System.out.println("Multiple Derivation Query Based Factorized Answer Sentence");
+        System.out.println(SentenceBuilder.getInstance().buildSentence(queryBasedFactorizedAnswerTree));
 
         return "";
     }

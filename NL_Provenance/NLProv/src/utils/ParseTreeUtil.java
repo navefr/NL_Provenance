@@ -115,4 +115,22 @@ public class ParseTreeUtil {
             }
         }
     }
+
+    public static SortedMap<Integer, Collection<ParseTreeNode>> getNodesByDepth(ParseTree parseTree) {
+        SortedMap<Integer, Collection<ParseTreeNode>> nodesByDepth = new TreeMap<Integer, Collection<ParseTreeNode>>();
+        getNodesByDepth(nodesByDepth, parseTree.root, 0);
+        return nodesByDepth;
+    }
+
+    private static void getNodesByDepth(SortedMap<Integer, Collection<ParseTreeNode>> nodesByDepth, ParseTreeNode node, int depth) {
+        Collection<ParseTreeNode> nodesByCurrDepth = nodesByDepth.get(depth);
+        if (nodesByCurrDepth == null) {
+            nodesByCurrDepth = new LinkedList<ParseTreeNode>();
+            nodesByDepth.put(depth, nodesByCurrDepth);
+        }
+        nodesByCurrDepth.add(node);
+        for (ParseTreeNode child : node.children) {
+            getNodesByDepth(nodesByDepth, child, depth + 1);
+        }
+    }
 }
