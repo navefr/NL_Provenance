@@ -74,14 +74,18 @@ public class FactorizedAnswerTreeBuilder {
                     }
                 }
 
-
+                boolean variableMoved = false;
                 if (!siblingsWithVariable.isEmpty()) {
                     int firstWordOrderInSiblingsSubTrees = ParseTreeUtil.getFirstWordOrderInSubTrees(siblingsWithVariable);
-                    Collection<ParseTreeNode> attachedNodes = attachCopyOfSubTreeBefore(finalAnswerTree, variableNodeSubTreeRoot.parent, variableNodeSubTreeRoot, Collections.singletonMap(variableNode.nodeID, variable.getValue()), firstWordOrderInSiblingsSubTrees);
+                    if (firstWordOrderInSiblingsSubTrees < variableNode.wordOrder) {
+                        Collection<ParseTreeNode> attachedNodes = attachCopyOfSubTreeBefore(finalAnswerTree, variableNodeSubTreeRoot.parent, variableNodeSubTreeRoot, Collections.singletonMap(variableNode.nodeID, variable.getValue()), firstWordOrderInSiblingsSubTrees);
 
-                    nodesForDeletion.add(variableNodeSubTreeRoot);
-                    nodesCreatedByExpression.addAll(attachedNodes);
-                } else {
+                        nodesForDeletion.add(variableNodeSubTreeRoot);
+                        nodesCreatedByExpression.addAll(attachedNodes);
+                        variableMoved = true;
+                    }
+                }
+                if (!variableMoved) {
                     variableNode.label = variable.getValue();
                     nodesCreatedByExpression.add(variableNode);
                     addNodeMapping(variableNode, variableNode);

@@ -123,16 +123,19 @@ public abstract class AbstractAnswerParseTreeBuilder {
         }
 
         String objectValue = getNodeValue(wordReplacementMap, objectNodeInParseTree);
-        if (isNoModifierOrVerbChild) {
+        if (!objectNodeInParseTree.children.isEmpty() && isNoModifierOrVerbChild) {
             if (objectValue != null) {
                 int oldWordOrder = objectNode.wordOrder;
                 ParseTreeUtil.shiftWordOrders(answerTree, Collections.EMPTY_LIST, objectNode.wordOrder, objectNode.wordOrder + 3);
-                answerTree.buildNode((new String[]{String.valueOf(oldWordOrder), objectValue, "NA", String.valueOf(objectNode.wordOrder), "NA"}));
+                ParseTreeNode newObjectNode = answerTree.buildNode((new String[]{String.valueOf(oldWordOrder), objectValue, "NA", String.valueOf(objectNode.wordOrder), "NA"}));
                 answerTree.buildNode((new String[]{String.valueOf(oldWordOrder + 1), "is", "NA", String.valueOf(objectNode.wordOrder), "NA"}));
                 answerTree.buildNode((new String[]{String.valueOf(oldWordOrder + 2), "the", "NA", String.valueOf(objectNode.wordOrder), "NA"}));
                 for (ParseTreeNode child : objectNode.children) {
                     handleProperties(wordReplacementMap, answerTree, child, queryToAnswerNodeMapping);
                 }
+
+                answerToQueryNodeMapping.remove(objectNode);
+                answerToQueryNodeMapping.put(newObjectNode, objectNodeInParseTree);
 
                 for (ParseTreeNode child : objectNode.children) {
                     for (ParseTreeNode grandchild : child.children) {
