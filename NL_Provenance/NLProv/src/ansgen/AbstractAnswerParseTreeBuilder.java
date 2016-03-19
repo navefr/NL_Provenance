@@ -95,7 +95,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
 
         ParseTreeNode objectNode = answerTree.root.children.get(0);
 
-        buildAnswerTree(parseTree, wordReplacementMap, answerTree, objectNode, copyTreeMapping, copyTreeReverseMapping);
+        buildAnswerTree(wordReplacementMap, answerTree, objectNode, copyTreeMapping, copyTreeReverseMapping, true);
 
         Map<ParseTreeNode, Collection<ParseTreeNode>> answerTreeMapping = new HashMap<ParseTreeNode, Collection<ParseTreeNode>>();
         for (ParseTreeNode node : answerTree.allNodes) {
@@ -112,7 +112,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
         return new AnswerTreeBuilderResult(answerTree, answerTreeMapping);
     }
 
-    private void buildAnswerTree(ParseTree parseTree, WordMappings wordReplacementMap, ParseTree answerTree, ParseTreeNode objectNode, Map<ParseTreeNode, ParseTreeNode> queryToAnswerNodeMapping, Map<ParseTreeNode, ParseTreeNode> answerToQueryNodeMapping) {
+    private void buildAnswerTree(WordMappings wordReplacementMap, ParseTree answerTree, ParseTreeNode objectNode, Map<ParseTreeNode, ParseTreeNode> queryToAnswerNodeMapping, Map<ParseTreeNode, ParseTreeNode> answerToQueryNodeMapping, boolean firstCall) {
         // Algorithm
         ParseTreeNode objectNodeInParseTree = answerToQueryNodeMapping.get(objectNode);
         boolean isNoModifierOrVerbChild = true;
@@ -136,7 +136,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
 
                 for (ParseTreeNode child : objectNode.children) {
                     for (ParseTreeNode grandchild : child.children) {
-                        buildAnswerTree(parseTree, wordReplacementMap, answerTree, grandchild, queryToAnswerNodeMapping, answerToQueryNodeMapping);
+                        buildAnswerTree(wordReplacementMap, answerTree, grandchild, queryToAnswerNodeMapping, answerToQueryNodeMapping, false);
                     }
                 }
             }
@@ -162,7 +162,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
                                     handleLogicalOperators(answerTree, grandchild, wordReplacementMap, queryToAnswerNodeMapping);
                                 }
                             }
-                        } else {
+                        } else if (firstCall) {
                             ParseTreeNode grandchildInAnswerTree = queryToAnswerNodeMapping.get(grandchild);
                             if (grandchildInAnswerTree != null) {
                                 answerTree.deleteSubTree(grandchildInAnswerTree);
