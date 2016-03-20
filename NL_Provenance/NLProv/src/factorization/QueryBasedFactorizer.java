@@ -20,14 +20,15 @@ public class QueryBasedFactorizer implements Factorizer {
     @Override
     public Expression factorize(WordMappings wordMappings){
         List<Collection<Integer>> wordOrdersByQueryHierarchy = getWordOrdersByQueryHierarchy(wordMappings);
+        Map<Integer, Collection<Integer>> wordOrdersAncestorMap = getWordOrdersAncestorMap(wordMappings);
         Expression expression = new Expression(wordMappings);
         for (Collection<Integer> wordOrders : wordOrdersByQueryHierarchy) {
             for (Integer wordOrder : wordOrders) {
                 Collection<Variable> variablesForFactorization = getVariablesByWordOrder(expression, wordOrder);
                 for (Variable variableForFactorization : variablesForFactorization) {
-                    Collection<Expression> expressionsForFactorizationByVariable = getExpressionsForFactorizationByVariable(expression, variableForFactorization);
+                    Collection<Expression> expressionsForFactorizationByVariable = getExpressionsForFactorizationByVariable(expression, variableForFactorization, wordOrdersAncestorMap);
                     for (Expression expressionForFactorizationByVariable : expressionsForFactorizationByVariable) {
-                        factorizeExpressionByVariable(expressionForFactorizationByVariable, variableForFactorization);
+                        factorizeExpressionByVariable(expressionForFactorizationByVariable, variableForFactorization, wordOrdersAncestorMap);
                     }
                 }
             }
@@ -54,16 +55,34 @@ public class QueryBasedFactorizer implements Factorizer {
         return wordOrdersByQueryHierarchy;
     }
 
-    private Collection<Expression> getExpressionsForFactorizationByVariable(Expression expression, Variable variable) {
+    private Map<Integer, Collection<Integer>> getWordOrdersAncestorMap(WordMappings wordMappings) {
+        Map<Integer, Collection<Integer>> wordOrdersAncestorMap = new HashMap<>();
+        for (ParseTreeNode node: parseTree.allNodes) {
+            if (wordMappings.get(0, node.wordOrder) != null) {
+                Collection<Integer> ancestors = new LinkedList<Integer>();
+                ParseTreeNode ancestor = node.parent;
+                while (ancestor != null) {
+                    if (wordMappings.get(0, ancestor.wordOrder) != null) {
+                        ancestors.add(ancestor.wordOrder);
+                    }
+                    ancestor = ancestor.parent;
+                }
+                wordOrdersAncestorMap.put(node.wordOrder, ancestors);
+            }
+        }
+        return wordOrdersAncestorMap;
+    }
+
+    private Collection<Expression> getExpressionsForFactorizationByVariable(Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
         Collection<Expression> expressionsForFactorizationByVariable = new LinkedList<Expression>();
-        getExpressionsForFactorizationByVariable(expressionsForFactorizationByVariable, expression, variable);
+        getExpressionsForFactorizationByVariable(expressionsForFactorizationByVariable, expression, variable, wordOrdersAncestorMap);
         return expressionsForFactorizationByVariable;
     }
 
-    private void getExpressionsForFactorizationByVariable(Collection<Expression> expressionsForFactorizationByVariable, Expression expression, Variable variable) {
+    private void getExpressionsForFactorizationByVariable(Collection<Expression> expressionsForFactorizationByVariable, Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
         Collection<Expression> subExpressionWithoutVariable = new LinkedList<>();
         for (Expression subExpression : expression.getExpressions()) {
-            if (!subExpression.getVariables().contains(variable)) {
+            if (!subExpression.getVariables().contains(variable) || containsAncestor(subExpression, variable, wordOrdersAncestorMap)) {
                 subExpressionWithoutVariable.add(subExpression);
             }
         }
@@ -72,14 +91,30 @@ public class QueryBasedFactorizer implements Factorizer {
             expressionsForFactorizationByVariable.add(expression);
         }
         for (Expression subExpression : subExpressionWithoutVariable) {
-            getExpressionsForFactorizationByVariable(expressionsForFactorizationByVariable, subExpression, variable);
+            getExpressionsForFactorizationByVariable(expressionsForFactorizationByVariable, subExpression, variable, wordOrdersAncestorMap);
         }
     }
 
-    private void factorizeExpressionByVariable(Expression expression, Variable variable) {
+    private boolean containsAncestor(Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
+        Collection<Integer> ancestors = wordOrdersAncestorMap.get(variable.getWordOrder());
+        if (ancestors != null) {
+            Set<Integer> expressionVariablesWordOrder = new HashSet<>();
+            for (Variable expressionVariable : expression.getVariables()) {
+                expressionVariablesWordOrder.add(expressionVariable.getWordOrder());
+            }
+            for (Integer ancestor : ancestors) {
+                if (expressionVariablesWordOrder.contains(ancestor)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void factorizeExpressionByVariable(Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
         boolean full = true;
         for (Expression subExpression : expression.getExpressions()) {
-            if (!subExpression.getVariables().contains(variable)) {
+            if (!subExpression.getVariables().contains(variable) || containsAncestor(subExpression, variable, wordOrdersAncestorMap)) {
                 full = false;
             }
         }
@@ -87,7 +122,7 @@ public class QueryBasedFactorizer implements Factorizer {
         if (full) {
             factorizeExpressionByVariableFull(expression, variable);
         } else {
-            factorizeExpressionByVariablePartial(expression, variable);
+            factorizeExpressionByVariablePartial(expression, variable, wordOrdersAncestorMap);
         }
     }
 
@@ -108,14 +143,14 @@ public class QueryBasedFactorizer implements Factorizer {
         }
     }
 
-    private void factorizeExpressionByVariablePartial(Expression expression, Variable variable) {
+    private void factorizeExpressionByVariablePartial(Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
         List<Expression> newExpressions = new ArrayList<Expression>();
         Expression variableExpression = new Expression();
         variableExpression.getVariables().add(variable);
         newExpressions.add(variableExpression);
 
         for (Expression subExpression : expression.getExpressions()) {
-            if (subExpression.getVariables().contains(variable)) {
+            if (subExpression.getVariables().contains(variable) && !containsAncestor(subExpression, variable, wordOrdersAncestorMap)) {
                 subExpression.getVariables().remove(variable);
                 if (!subExpression.getVariables().isEmpty() || !subExpression.getExpressions().isEmpty()) {
                     variableExpression.getExpressions().add(subExpression);
