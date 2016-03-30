@@ -49,6 +49,7 @@ public class NLProvServer {
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
         server.createContext("/", new MainHandler());
         server.createContext("/answer", new AnswerHandler(lexiParser, db, tokens));
+        server.createContext("/explanation", new ExplanationHandler(lexiParser, db, tokens));
         server.setExecutor(null); // creates a default executor
         server.start();
     }
@@ -99,10 +100,13 @@ public class NLProvServer {
                     "\n" +
                     "<p>" + query + "</p>\n";
             if (values != null) {
-                response += "<table style=\"width:100%\">\n";
+                response += "<table style=\"width:40%\">\n";
                 for (String value : values) {
                     response += "  <tr>\n" +
                                 "    <td>" + value + "</td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Single\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Multiple\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Summarized\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
                                 "  </tr>\n";
                 }
                 response += "</table>\n";
@@ -141,69 +145,152 @@ public class NLProvServer {
                 return null;
             }
         }
+    }
 
 
-        private static Map<ITuple, Collection<DerivationTree2>> measSN (String query) throws Exception {
-            KeyMap2.getInstance().Reset();
+//    http://localhost:8000/explanation?query=return%20the%20organization%20of%20authors%20who%20published%20papers%20in%20database%20conferences%20after%202005.&type=single&answer=Tel%20Aviv%20University
+    static class ExplanationHandler implements HttpHandler {
+        private LexicalizedParser lexiParser;
+        private RDBMS db;
+        private Document tokens;
 
-            // Create a Reader on the Datalog program file.
-            Stream<String> lines = Files.lines(Paths.get("NL_Provenance\\resources\\mas_db_subset.iris"));
-            String masDbSubset = lines.map(s -> s).collect(Collectors.joining("\n"));
+        public ExplanationHandler(LexicalizedParser lexiParser, RDBMS db, Document tokens) {
+            this.lexiParser = lexiParser;
+            this.db = db;
+            this.tokens = tokens;
+        }
 
+        @Override
+        public void handle(HttpExchange t) throws IOException {
+            String query = t.getRequestURI().getQuery();
 
-            // Parse the Datalog program.
-            Parser parser = new Parser();
-            parser.parse(masDbSubset + query + '.');
+            Map<String, String> params = new HashMap<>();
+            String[] querySplit = query.split("&");
+            for (String part : querySplit) {
+                String[] partSplit = part.split("=");
+                assert partSplit.length == 2;
+                params.put(partSplit[0], partSplit[1]);
+            }
 
-            // Retrieve the facts, rules and queries from the parsed program.
-            Map<IPredicate, IRelation> factMap = parser.getFacts();
-            List<IRule> rules = parser.getRules();
+            String explanation = null;
+            try {
+                explanation = handleQuery(params.get("query"), params.get("answer"), params.get("type"));
+            } catch (Exception ignored) {}
 
-            // Create a default configuration.
-            Configuration configuration = new Configuration();
+            String response = "<!DOCTYPE html>\n" +
+                    "<html>\n" +
+                    "<body>\n" +
+                    "\n" +
+                    "<p>" + query + "</p>\n";
+            if (explanation != null) {
+//                response += "<table style=\"width:40%\">\n";
+//                for (String value : values) {
+//                    response += "  <tr>\n" +
+//                            "    <td>" + value + "</td>\n" +
+//                            "    <td> <input type=\"submit\" value=\"Single\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
+//                            "    <td> <input type=\"submit\" value=\"Multiple\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
+//                            "    <td> <input type=\"submit\" value=\"Summarized\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
+//                            "  </tr>\n";
+//                }
+//                response += "</table>\n";
+                response += "<p>" + explanation + "</p>\n";
+            }
+            response += "\n" +
+                    "</body>\n" +
+                    "</html>\n";
+            t.sendResponseHeaders(200, response.length());
+            OutputStream os = t.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
+        }
 
-            // Enable Magic Sets together with rule filtering.
-            configuration.programOptmimisers.add(new RuleFilter());
-            configuration.programOptmimisers.add(new MagicSets());
+        private String handleQuery(String querySentence, String answer, String type) throws Exception {
+            Query query = new Query(querySentence, db.schemaGraph);
 
-            // Convert the map from predicate to relation to a IFacts object.
-            IFacts facts = new Facts(factMap, configuration.relationFactory);
+            components.StanfordNLParser.parse(query, lexiParser);
+            components.NodeMapper.phraseProcess(query, db, tokens);
+            components.EntityResolution.entityResolute(query);
+            components.TreeStructureAdjustor.treeStructureAdjust(query, db);
+            components.Explainer.explain(query);
+            System.out.println(query.originalParseTree);
+            components.SQLTranslator.translate(query, db);
 
-            // Evaluate all queries over the knowledge base.
-            List<ICompiledRule> cr = compile(rules, facts, configuration);
-            SemiNaiveEvaluator sn = new SemiNaiveEvaluator();
-            sn.evaluateRules(cr, facts, configuration);
+            if (query.blocks.size() == 1) {
+                Block block = query.blocks.get(0);
+                Map<ITuple, Collection<DerivationTree2>> tupleProvenanceTrees = measSN(block.DATALOGQuery);
 
-            Map<ITuple, Collection<DerivationTree2>> provenanceTrees = new HashMap<>();
-            for (ICompiledRule compiledRule : cr) {
-                for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithTrees : ((CompiledRule) compiledRule).evaluatedProvenanceTrees.entrySet()) {
-                    ITuple tuple = tupleWithTrees.getKey();
-                    Collection<DerivationTree2> trees = tupleWithTrees.getValue();
-                    if (!provenanceTrees.containsKey(tuple)) {
-                        provenanceTrees.put(tuple, new ArrayList<>());
+                Collection<String> ans = new ArrayList<>();
+                for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
+                    if (answer.equals(tupleWithProvenanceTrees.getKey().get(0).getValue().toString())) {
+                        NaturalLanguageProvenanceCreator nlProvenanceCreator = new NaturalLanguageProvenanceCreator(querySentence, block, query.originalParseTree);
+                        return nlProvenanceCreator.getNaturalLanguageProvenance(tupleWithProvenanceTrees.getValue(), type);
                     }
-                    provenanceTrees.get(tuple).addAll(trees);
                 }
-
             }
-            return provenanceTrees;
+            return null;
+        }
+    }
+
+    private static Map<ITuple, Collection<DerivationTree2>> measSN (String query) throws Exception {
+        KeyMap2.getInstance().Reset();
+
+        // Create a Reader on the Datalog program file.
+        Stream<String> lines = Files.lines(Paths.get("NL_Provenance\\resources\\mas_db_subset.iris"));
+        String masDbSubset = lines.map(s -> s).collect(Collectors.joining("\n"));
+
+
+        // Parse the Datalog program.
+        Parser parser = new Parser();
+        parser.parse(masDbSubset + query + '.');
+
+        // Retrieve the facts, rules and queries from the parsed program.
+        Map<IPredicate, IRelation> factMap = parser.getFacts();
+        List<IRule> rules = parser.getRules();
+
+        // Create a default configuration.
+        Configuration configuration = new Configuration();
+
+        // Enable Magic Sets together with rule filtering.
+        configuration.programOptmimisers.add(new RuleFilter());
+        configuration.programOptmimisers.add(new MagicSets());
+
+        // Convert the map from predicate to relation to a IFacts object.
+        IFacts facts = new Facts(factMap, configuration.relationFactory);
+
+        // Evaluate all queries over the knowledge base.
+        List<ICompiledRule> cr = compile(rules, facts, configuration);
+        SemiNaiveEvaluator sn = new SemiNaiveEvaluator();
+        sn.evaluateRules(cr, facts, configuration);
+
+        Map<ITuple, Collection<DerivationTree2>> provenanceTrees = new HashMap<>();
+        for (ICompiledRule compiledRule : cr) {
+            for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithTrees : ((CompiledRule) compiledRule).evaluatedProvenanceTrees.entrySet()) {
+                ITuple tuple = tupleWithTrees.getKey();
+                Collection<DerivationTree2> trees = tupleWithTrees.getValue();
+                if (!provenanceTrees.containsKey(tuple)) {
+                    provenanceTrees.put(tuple, new ArrayList<>());
+                }
+                provenanceTrees.get(tuple).addAll(trees);
+            }
+
+        }
+        return provenanceTrees;
+    }
+
+    private static List<ICompiledRule> compile( List<IRule> rules, IFacts facts, Configuration mConfiguration ) throws EvaluationException
+    {
+        assert rules != null;
+        assert facts != null;
+        assert mConfiguration != null;
+
+        List<ICompiledRule> compiledRules = new ArrayList<ICompiledRule>();
+
+        RuleCompiler rc = new RuleCompiler( facts, mConfiguration.equivalentTermsFactory.createEquivalentTerms(), mConfiguration );
+
+        for (IRule rule : rules) {
+            compiledRules.add(rc.compile( rule ));
         }
 
-        private static List<ICompiledRule> compile( List<IRule> rules, IFacts facts, Configuration mConfiguration ) throws EvaluationException
-        {
-            assert rules != null;
-            assert facts != null;
-            assert mConfiguration != null;
-
-            List<ICompiledRule> compiledRules = new ArrayList<ICompiledRule>();
-
-            RuleCompiler rc = new RuleCompiler( facts, mConfiguration.equivalentTermsFactory.createEquivalentTerms(), mConfiguration );
-
-            for (IRule rule : rules) {
-                compiledRules.add(rc.compile( rule ));
-            }
-
-            return compiledRules;
-        }
+        return compiledRules;
     }
 }

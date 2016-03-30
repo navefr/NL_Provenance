@@ -179,4 +179,87 @@ public class NaturalLanguageProvenanceCreator {
 
         return "";
     }
+
+    public String getNaturalLanguageProvenance(Collection<DerivationTree2> provenanceTrees, String type) {
+        WordMappings wordReplacementMap = new WordMappings();
+
+        for (DerivationTree2 provenanceTree : provenanceTrees) {
+            Set<DerivationTree2> provenanceTreeNodes = new HashSet<>();
+            extractTreeNodes(provenanceTree, provenanceTreeNodes);
+
+            Map<String, DerivationTree2> literalToProvenanceNode = new HashMap<>();
+            for (DerivationTree2 provenanceTreeNode : provenanceTreeNodes) {
+                if (provenanceTreeNode.getLiteral() != null) {
+                    // TODO NAVE - modification in literal string in order to match the same format as in literalToParseTreeNode
+                    IAtom atom = provenanceTreeNode.getLiteral().getAtom();
+                    ITuple tuple = atom.getTuple();
+                    String predicate = atom.getPredicate().getPredicateSymbol();
+                    if (tuple.size() == 2 && predicateSymbolMapping.containsKey(predicate)) {
+                        literalToProvenanceNode.put(String.format("%s %s %s", tuple.get(0), predicateSymbolMapping.get(predicate), tuple.get(1)), provenanceTreeNode);
+                    } else {
+                        literalToProvenanceNode.put(provenanceTreeNode.getLiteral().toString(), provenanceTreeNode);
+                    }
+                }
+            }
+
+            Map<ParseTreeNode, ITerm> freeQueryNodesToValues = new HashMap<ParseTreeNode, ITerm>();
+            for (ParseTreeNode freeQueryNode : freeQueryNodes) {
+                SchemaElement schemaElement = freeQueryNode.mappedElements.get(0).schemaElement;
+                String relevantVariableName = schemaElement.relation.name + schemaElement.name;
+
+                for (DerivationTree2 provenanceTreeNode : provenanceTreeNodes) {
+                    DerivationTree2.Condition condition = provenanceTreeNode.getCondition();
+                    ILiteral literal = provenanceTreeNode.getLiteral();
+                    if (literal != null && (condition == null || !condition.getType().equalsIgnoreCase("JOIN"))) {
+                        boolean foundRelevantVariableName = false;
+                        int relevantVariableIndex = -1;
+                        int currentIndex = 0;
+                        for (IVariable iVariable : literal.getAtom().getTuple().getAllVariables()) {
+                            if (iVariable.getValue().equalsIgnoreCase(relevantVariableName)) {
+                                foundRelevantVariableName = true;
+                                relevantVariableIndex = currentIndex;
+                            }
+                            currentIndex++;
+                        }
+                        if (foundRelevantVariableName) {
+                            ITerm freeNodeTerm = provenanceTreeNode.getDerivedFact().get(relevantVariableIndex);
+                            freeQueryNodesToValues.put(freeQueryNode, freeNodeTerm);
+                        }
+                    }
+                }
+            }
+
+            int derivationIndex = wordReplacementMap.getLastDerivation() + 1;
+            for (String literal : literalToProvenanceNode.keySet()) {
+                if (literalToParseTreeNode.containsKey(literal)) {
+                    ParseTreeNode parseTreeNode = literalToParseTreeNode.get(literal);
+                    wordReplacementMap.add(derivationIndex, parseTreeNode.wordOrder, literalToProvenanceNode.get(literal).getDerivedFact().get(0).toString());
+                } else {
+                    String literalModified = literal.replaceAll("'", "\"");
+                    if (literalToParseTreeNode.containsKey(literalModified)) {
+                        ParseTreeNode parseTreeNode = literalToParseTreeNode.get(literalModified);
+                        wordReplacementMap.add(derivationIndex, parseTreeNode.wordOrder, literalToProvenanceNode.get(literal).getDerivedFact().get(0).toString());
+                    }
+                }
+            }
+
+            for (ParseTreeNode freeQueryNode : freeQueryNodesToValues.keySet()) {
+                wordReplacementMap.add(derivationIndex, freeQueryNode.wordOrder, freeQueryNodesToValues.get(freeQueryNode).getValue().toString());
+            }
+        }
+
+        ParseTree answerTree;
+        switch (type) {
+            case "single":
+                answerTree = SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
+                break;
+            case "multiple":
+                answerTree = new MultipleDerivationFactorizedAnswerTreeBuilder(new QueryBasedFactorizer(queryOriginalParseTree)).buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
+                break;
+            default:
+                answerTree = MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
+                break;
+        }
+        return SentenceBuilder.getInstance().buildSentence(answerTree);
+    }
 }
