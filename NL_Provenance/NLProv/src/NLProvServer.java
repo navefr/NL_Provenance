@@ -64,8 +64,14 @@ public class NLProvServer {
                     "<textarea id=\"question\" rows=\"4\" cols=\"50\">\n" +
                     "Enter your question" +
                     "</textarea>" +
-                    "<input type=\"submit\" value=\"Submit\" onclick=\"location.href='/answer/$('question'.value)'\">\n" +
+                    "<input type=\"submit\" value=\"Submit\" id=\"submit\">\n" +
                     "\n" +
+                    "<script type=\"text/javascript\">\n" +
+                    "    document.getElementById(\"submit\").onclick = function () {\n" +
+                    "        var query = document.getElementById(\"question\").value;\n" +
+                    "        location.href = \"\\answer?\" + query;\n" +
+                    "    };\n" +
+                    "</script>" +
                     "</body>\n" +
                     "</html>\n";
             t.sendResponseHeaders(200, response.length());
@@ -90,7 +96,7 @@ public class NLProvServer {
         @Override
         public void handle(HttpExchange t) throws IOException {
             String query = t.getRequestURI().getQuery();
-            Collection<String> values = null;
+            List<String> values = null;
             try {
                  values = handleQuery(query);
             } catch (Exception ignored) {}
@@ -98,29 +104,46 @@ public class NLProvServer {
                     "<html>\n" +
                     "<body>\n" +
                     "\n" +
-                    "<p>" + query + "</p>\n";
+                    "<p id=\"query\">" + query + "</p>\n";
             if (values != null) {
                 response += "<table style=\"width:40%\">\n";
+                int id = 0;
                 for (String value : values) {
                     response += "  <tr>\n" +
                                 "    <td>" + value + "</td>\n" +
-                                "    <td> <input type=\"submit\" value=\"Single\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
-                                "    <td> <input type=\"submit\" value=\"Multiple\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
-                                "    <td> <input type=\"submit\" value=\"Summarized\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Single\" id=\"single_" + id +"\"> </td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Multiple\" id=\"multiple_" + id +"\"> </td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Summarized\" id=\"summarized_" + id +"\"> </td>\n" +
                                 "  </tr>\n";
+                    id++;
                 }
                 response += "</table>\n";
+
+                response += "\n" +
+                        "<script type=\"text/javascript\">\n";
+                for (int i = 0; i < id; i++) {
+                    response += "    document.getElementById(\"single_" + i + "\").onclick = function () {\n" +
+                                "        location.href = \"\\explanation?query=" + query + "&answer=" + values.get(i) + "&type=single\";\n" +
+                                "    };\n";
+                    response += "    document.getElementById(\"multiple_" + i + "\").onclick = function () {\n" +
+                            "        location.href = \"\\explanation?query=" + query + "&answer=" + values.get(i) + "&type=multiple\";\n" +
+                            "    };\n";
+                    response += "    document.getElementById(\"summarized_" + i + "\").onclick = function () {\n" +
+                            "        location.href = \"\\explanation?query=" + query + "&answer=" + values.get(i) + "&type=summarized\";\n" +
+                            "    };\n";
+                }
+                response += "</script>\n";
             }
-            response += "\n" +
-                    "</body>\n" +
-                    "</html>\n";
+
+            response += "</body>\n" +
+                        "</html>\n";
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
             os.close();
         }
 
-        private Collection<String> handleQuery(String querySentence) throws Exception {
+        private List<String> handleQuery(String querySentence) throws Exception {
             Query query = new Query(querySentence, db.schemaGraph);
 
             components.StanfordNLParser.parse(query, lexiParser);
@@ -135,7 +158,7 @@ public class NLProvServer {
                 Block block = query.blocks.get(0);
                 Map<ITuple, Collection<DerivationTree2>> tupleProvenanceTrees = measSN(block.DATALOGQuery);
 
-                Collection<String> ans = new ArrayList<>();
+                List<String> ans = new ArrayList<>();
                 for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
                     ans.add(tupleWithProvenanceTrees.getKey().get(0).getValue().toString());
                 }
@@ -181,18 +204,9 @@ public class NLProvServer {
                     "<html>\n" +
                     "<body>\n" +
                     "\n" +
-                    "<p>" + query + "</p>\n";
+                    "<p>" + params.get("query") + "</p>\n" +
+                    "<p>" + params.get("answer") + "</p>\n";
             if (explanation != null) {
-//                response += "<table style=\"width:40%\">\n";
-//                for (String value : values) {
-//                    response += "  <tr>\n" +
-//                            "    <td>" + value + "</td>\n" +
-//                            "    <td> <input type=\"submit\" value=\"Single\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
-//                            "    <td> <input type=\"submit\" value=\"Multiple\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
-//                            "    <td> <input type=\"submit\" value=\"Summarized\" onclick=\"location.href='/explanation/$('question'.value)'\"> </td>\n" +
-//                            "  </tr>\n";
-//                }
-//                response += "</table>\n";
                 response += "<p>" + explanation + "</p>\n";
             }
             response += "\n" +
