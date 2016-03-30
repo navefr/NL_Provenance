@@ -175,7 +175,7 @@ public class FactorizedAnswerTreeBuilder {
                 parentNode = jointParent;
                 firstAnd = false;
             } else {
-                parentNode = finalAnswerTree.buildNode((new String[]{String.valueOf(lastWordOrderInParentSubTree + 1), "and\n", "NA", String.valueOf(jointParent.wordOrder), "NA"}));
+                parentNode = finalAnswerTree.buildNode((new String[]{String.valueOf(lastWordOrderInParentSubTree + 1), "\nand", "NA", String.valueOf(jointParent.wordOrder), "NA"}));
                 nodesCreatedByExpression.add(parentNode);
             }
             for (ParseTreeNode node : nodesInExpressionSubTreeRoots) {
@@ -192,6 +192,12 @@ public class FactorizedAnswerTreeBuilder {
 
             Collection<ParseTreeNode> nodesFromFinalTreeInExpression = getNodesInExpression(finalAnswerTree, nestedSubExpression);
             if (!nodesFromSubExpressionTreeInExpression.isEmpty()) {
+                for (ParseTreeNode node : nodesFromSubExpressionTreeInExpression) {
+                    if (node.label.startsWith("\n")) {
+                        node.label = "\n\t" + node.label.substring(1);
+                    }
+                }
+
                 ParseTreeNode jointParentFromFinalTree = ParseTreeUtil.getJointParent(nodesFromFinalTreeInExpression);
                 int lastWordOrderInParentSubTree = ParseTreeUtil.getLastWordOrderInSubTree(jointParentFromFinalTree);
 
@@ -212,7 +218,7 @@ public class FactorizedAnswerTreeBuilder {
                     parentNode = jointParentFromFinalTree;
                     firstAnd = false;
                 } else {
-                    parentNode = finalAnswerTree.buildNode((new String[]{String.valueOf(lastWordOrderInParentSubTree + 1), "and\n", "NA", String.valueOf(jointParentFromFinalTree.wordOrder), "NA"}));
+                    parentNode = finalAnswerTree.buildNode((new String[]{String.valueOf(lastWordOrderInParentSubTree + 1), "\nand", "NA", String.valueOf(jointParentFromFinalTree.wordOrder), "NA"}));
                     nodesCreatedByExpression.add(parentNode);
                 }
                 for (ParseTreeNode node : nodesInExpressionSubTreeRoots) {
