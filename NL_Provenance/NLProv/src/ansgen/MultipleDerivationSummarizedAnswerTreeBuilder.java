@@ -74,11 +74,7 @@ public class MultipleDerivationSummarizedAnswerTreeBuilder extends AbstractAnswe
     }
 
     private String handleStringValues(ParseTreeNode node, Set<String> mappings) {
-        Iterator<String> mappingsIterator = mappings.iterator();
-        String first = StringUtil.getQuoatedString(mappingsIterator.next());
-        String second = StringUtil.getQuoatedString(mappingsIterator.next());
-        String firstAndSecond = String.format("%s and %s", first, second);
-        return String.valueOf(mappings.size()) + " " + node.label + " such as " + firstAndSecond;
+        return String.valueOf(mappings.size()) + " " + node.label;
     }
 
     private Set<String> getSetOfMappings(WordMappings wordReplacementMap, int wordOrder) {
