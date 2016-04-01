@@ -123,13 +123,13 @@ public class NLProvServer {
                         "<script type=\"text/javascript\">\n";
                 for (int i = 0; i < id; i++) {
                     response += "    document.getElementById(\"single_" + i + "\").onclick = function () {\n" +
-                                "        location.href = \"\\explanation?query=" + query + "&answer=" + values.get(i) + "&type=single\";\n" +
+                                "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&answer=" + values.get(i).replaceAll(" ", "%20").replaceAll("\"", "%22") + "&type=single\";\n" +
                                 "    };\n";
                     response += "    document.getElementById(\"multiple_" + i + "\").onclick = function () {\n" +
-                            "        location.href = \"\\explanation?query=" + query + "&answer=" + values.get(i) + "&type=multiple\";\n" +
+                            "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&answer=" + values.get(i).replaceAll(" ", "%20").replaceAll("\"", "%22") + "&type=multiple\";\n" +
                             "    };\n";
                     response += "    document.getElementById(\"summarized_" + i + "\").onclick = function () {\n" +
-                            "        location.href = \"\\explanation?query=" + query + "&answer=" + values.get(i) + "&type=summarized\";\n" +
+                            "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "") + "&answer=" + values.get(i).replaceAll(" ", "%20").replaceAll("\"", "%22") + "&type=summarized\";\n" +
                             "    };\n";
                 }
                 response += "</script>\n";
@@ -207,7 +207,7 @@ public class NLProvServer {
                     "<p>" + params.get("query") + "</p>\n" +
                     "<p>" + params.get("answer") + "</p>\n";
             if (explanation != null) {
-                response += "<p>" + explanation + "</p>\n";
+                response += "<pre>" + explanation + "</pre>\n";
             }
             response += "\n" +
                     "</body>\n" +
@@ -235,7 +235,7 @@ public class NLProvServer {
 
                 Collection<String> ans = new ArrayList<>();
                 for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
-                    if (answer.equals(tupleWithProvenanceTrees.getKey().get(0).getValue().toString())) {
+                    if (answer.equals(tupleWithProvenanceTrees.getKey().get(0).getValue().toString().replaceAll("\"", "%22"))) {
                         NaturalLanguageProvenanceCreator nlProvenanceCreator = new NaturalLanguageProvenanceCreator(querySentence, block, query.originalParseTree);
                         return nlProvenanceCreator.getNaturalLanguageProvenance(tupleWithProvenanceTrees.getValue(), type);
                     }
