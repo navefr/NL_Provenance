@@ -93,6 +93,7 @@ public class Experiments {
                 Map<ITuple, Collection<DerivationTree2>> tupleProvenanceTrees = measSN(block.DATALOGQuery);
 
                 NaturalLanguageProvenanceCreator nlProvenanceCreator = new NaturalLanguageProvenanceCreator(querySentence, block, query.originalParseTree);
+                System.out.println(String.format("%s\t%s\t%s\t%s\t%s", "#Derivations", "#Elements", "SingleTime", "MultipleTime", "SummarizedTime"));
                 for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
                     Collection<DerivationTree2> provenanceTrees = tupleWithProvenanceTrees.getValue();
 
@@ -106,9 +107,9 @@ public class Experiments {
                     nlProvenanceCreator.getNaturalLanguageProvenance(provenanceTrees, "summarized");
                     long endSummarizedTime = System.currentTimeMillis();
 
-                    System.out.println(String.format("%d\t%d\t%d", endSingleTime - startSingleTime, endMultipleTime - startMultipleTime, endSummarizedTime - startSummarizedTime));
-                    System.out.println();
+                    System.out.println(String.format("%d\t%d\t%d\t%d\t%d", provenanceTrees.size(), provenanceTrees.iterator().next().size(), endSingleTime - startSingleTime, endMultipleTime - startMultipleTime, endSummarizedTime - startSummarizedTime));
                 }
+                System.out.println();
             }
         }
     }
