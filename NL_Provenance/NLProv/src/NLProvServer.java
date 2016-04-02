@@ -12,6 +12,7 @@ import org.deri.iris.api.basics.IPredicate;
 import org.deri.iris.api.basics.IRule;
 import org.deri.iris.api.basics.ITuple;
 import org.deri.iris.compiler.Parser;
+import org.deri.iris.compiler.ParserException;
 import org.deri.iris.evaluation.stratifiedbottomup.seminaive.SemiNaiveEvaluator;
 import org.deri.iris.facts.Facts;
 import org.deri.iris.facts.IFacts;
@@ -37,6 +38,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class NLProvServer {
+
+    private static Map<IPredicate, IRelation> factMap = null;
 
     public static void main(String[] args) throws Exception {
 
@@ -245,20 +248,32 @@ public class NLProvServer {
         }
     }
 
+    private static Map<IPredicate, IRelation> getFactMap() throws IOException, ParserException {
+        if (factMap == null) {
+            // Create a Reader on the Datalog program file.
+            Stream<String> lines = Files.lines(Paths.get("NL_Provenance\\resources\\mas_db_subset.iris"));
+            String masDbSubset = lines.map(s -> s).collect(Collectors.joining("\n"));
+
+            // Parse the Datalog program.
+            Parser parser = new Parser();
+            parser.parse(masDbSubset);
+
+            // Retrieve the facts, rules and queries from the parsed program.
+            factMap = parser.getFacts();
+        }
+        Map<IPredicate, IRelation> ans = new HashMap<IPredicate, IRelation>();
+        for (Map.Entry<IPredicate, IRelation> entry : factMap.entrySet()) {
+            ans.put(entry.getKey(), entry.getValue());
+        }
+        return ans;
+    }
+
     private static Map<ITuple, Collection<DerivationTree2>> measSN (String query) throws Exception {
         KeyMap2.getInstance().Reset();
 
-        // Create a Reader on the Datalog program file.
-        Stream<String> lines = Files.lines(Paths.get("NL_Provenance\\resources\\mas_db_subset.iris"));
-        String masDbSubset = lines.map(s -> s).collect(Collectors.joining("\n"));
-
-
-        // Parse the Datalog program.
+        // Parse the query.
         Parser parser = new Parser();
-        parser.parse(masDbSubset + query + '.');
-
-        // Retrieve the facts, rules and queries from the parsed program.
-        Map<IPredicate, IRelation> factMap = parser.getFacts();
+        parser.parse(query + '.');
         List<IRule> rules = parser.getRules();
 
         // Create a default configuration.
@@ -269,7 +284,7 @@ public class NLProvServer {
         configuration.programOptmimisers.add(new MagicSets());
 
         // Convert the map from predicate to relation to a IFacts object.
-        IFacts facts = new Facts(factMap, configuration.relationFactory);
+        IFacts facts = new Facts(getFactMap(), configuration.relationFactory);
 
         // Evaluate all queries over the knowledge base.
         List<ICompiledRule> cr = compile(rules, facts, configuration);
