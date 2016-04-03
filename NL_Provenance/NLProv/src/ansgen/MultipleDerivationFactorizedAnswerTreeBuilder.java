@@ -5,6 +5,7 @@ import dataStructure.ParseTreeNode;
 import factorization.Expression;
 import factorization.Factorizer;
 import factorization.WordMappings;
+import utils.StringUtil;
 
 import java.util.Collection;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class MultipleDerivationFactorizedAnswerTreeBuilder extends AbstractAnswe
     @Override
     protected String getNodeValue(WordMappings wordReplacementMap, ParseTreeNode node) {
         if (wordReplacementMap.contains(0, node.wordOrder)) {
-            return wordReplacementMap.get(0, node.wordOrder);
+            return StringUtil.getQuoatedString(wordReplacementMap.get(0, node.wordOrder));
         } else {
             return null;
         }
