@@ -2,6 +2,7 @@ package ansgen;
 
 import dataStructure.ParseTreeNode;
 import factorization.WordMappings;
+import utils.StringUtil;
 
 /**
  * Created by nfrost on 1/25/2016
@@ -20,7 +21,7 @@ public class SingleDerivationAnswerTreeBuilder extends AbstractAnswerParseTreeBu
     @Override
     protected String getNodeValue(WordMappings wordReplacementMap, ParseTreeNode node) {
         if (wordReplacementMap.contains(0, node.wordOrder)) {
-            return wordReplacementMap.get(0, node.wordOrder);
+            return StringUtil.getQuoatedString(wordReplacementMap.get(0, node.wordOrder));
         } else {
             return null;
         }
