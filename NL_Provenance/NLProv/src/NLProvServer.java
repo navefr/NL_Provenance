@@ -2255,7 +2255,18 @@ public class NLProvServer {
                     "\t</div>\n" +
                     "\t<div>\n";
             if (explanation != null) {
-                response += "<pre style=\"text-align:initial\">" + explanation + "</pre>\n";
+                String[] paragraphs = explanation.split("\n");
+                for (String paragraph : paragraphs) {
+                    int tabs = 0;
+                    while (paragraph.charAt(tabs) == '\t') {
+                        tabs++;
+                    }
+                    if (tabs == 0) {
+                        response += "<p style=\"text-align:initial\">" + paragraph + "</p>\n";
+                    } else {
+                        response += "<p style=\"text-align:initial;margin-left:" + 40 * tabs+ "px\">" + paragraph + "</p>\n";
+                    }
+                }
             }
             response += "\t</div>\n" +
                     "\t</div>\n" +
@@ -2355,7 +2366,7 @@ public class NLProvServer {
         SemiNaiveEvaluator sn = new SemiNaiveEvaluator();
         sn.evaluateRules(cr, facts, configuration);
 
-        Map<ITuple, Collection<DerivationTree2>> provenanceTrees = new HashMap<>();
+        Map<ITuple, Collection<DerivationTree2>> provenanceTrees = new HashMap<ITuple, Collection<DerivationTree2>>();
         for (ICompiledRule compiledRule : cr) {
             for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithTrees : ((CompiledRule) compiledRule).evaluatedProvenanceTrees.entrySet()) {
                 ITuple tuple = tupleWithTrees.getKey();
