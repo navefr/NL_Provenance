@@ -165,7 +165,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
                                     handleLogicalOperators(answerTree, grandchild, wordReplacementMap, queryToAnswerNodeMapping);
                                 }
                             }
-                        } else if (firstCall) {
+                        } else if (firstCall && !(isNoun(grandchild) || isVerb(grandchild))) {
                             ParseTreeNode grandchildInAnswerTree = queryToAnswerNodeMapping.get(grandchild);
                             if (grandchildInAnswerTree != null) {
                                 answerTree.deleteSubTree(grandchildInAnswerTree);
@@ -233,6 +233,10 @@ public abstract class AbstractAnswerParseTreeBuilder {
 
     private boolean isVerb(ParseTreeNode node) {
         return node.pos.startsWith("VB");
+    }
+
+    private boolean isNoun(ParseTreeNode node) {
+        return node.pos.startsWith("NN");
     }
 
     protected abstract String getNodeValue(WordMappings wordReplacementMap, ParseTreeNode node);

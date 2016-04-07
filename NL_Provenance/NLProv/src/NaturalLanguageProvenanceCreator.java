@@ -4,7 +4,6 @@ import dataStructure.Block;
 import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import factorization.Expression;
-import factorization.GreedyFactorizer;
 import factorization.QueryBasedFactorizer;
 import factorization.WordMappings;
 import org.deri.iris.api.basics.IAtom;
