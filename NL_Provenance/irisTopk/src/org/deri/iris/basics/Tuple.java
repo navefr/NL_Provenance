@@ -71,7 +71,7 @@ public class Tuple extends AbstractList<ITerm> implements ITuple {
 	 * @param terms list of terms that create a tuple
 	 * @throws NullPointerException if terms is <code>null</code>
 	 */
-	Tuple(final Collection<ITerm> t){
+	public Tuple(final Collection<ITerm> t){
 		if (t == null) {
 			throw new NullPointerException("Input argument must not be null");
 		}

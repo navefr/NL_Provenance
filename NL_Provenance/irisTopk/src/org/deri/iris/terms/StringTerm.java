@@ -42,7 +42,7 @@ public class StringTerm implements IStringTerm {
 
 	private String value = "";
 
-	StringTerm(final String value) {
+	public StringTerm(final String value) {
 		this.value = value;
 	}
 
