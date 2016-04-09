@@ -113,7 +113,7 @@ public class Experiments {
                     MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
                     long endSummarizedTime = System.currentTimeMillis();
 
-                    System.out.println(String.format("%20d\t%20d\t%20d\t%20d\t%20d", wordMappings.getLastDerivation(), wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, endMultipleTime - startMultipleTime, endSummarizedTime - startSummarizedTime));
+                    System.out.println(String.format("%20d\t%20d\t%20d\t%20d\t%20d", wordMappings.getLastDerivation() + 1, wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, endMultipleTime - startMultipleTime, endSummarizedTime - startSummarizedTime));
                 }
                 System.out.println();
             }
