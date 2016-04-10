@@ -83,7 +83,7 @@ public class Experiments2 {
             if (query.blocks.size() == 1) {
                 Map<ITuple, Pair<WordMappings, Integer>> resultsAndWordMappings = getResultsAndWordMappings(queryName);
 
-                System.out.println(String.format("%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s", "#UniqueValues", "#Derivations", "#Elements", "SingleTime", "MultipleTime", "SummarizedTime", "FactorizationSize"));
+                System.out.println(String.format("%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s", "#UniqueValues", "#Derivations", "#Elements", "SingleTime", "MultipleTime", "FactorizationTime", "SummarizedTime", "FactorizationSize"));
                 for (Map.Entry<ITuple, Pair<WordMappings, Integer>> resultsAndWordMappingsEntry : resultsAndWordMappings.entrySet()) {
                     WordMappings wordMappings = resultsAndWordMappingsEntry.getValue().getLeft();
                     Integer uniqueValues = resultsAndWordMappingsEntry.getValue().getRight();
@@ -92,7 +92,7 @@ public class Experiments2 {
                     SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
                     long endSingleTime = System.currentTimeMillis();
                     long startMultipleTime = System.currentTimeMillis();
-                    new MultipleDerivationFactorizedAnswerTreeBuilder(new QueryBasedFactorizer(query.originalParseTree)).buildParseTree(query.originalParseTree, wordMappings).getParseTree();
+                    long factorizationTime = new MultipleDerivationFactorizedAnswerTreeBuilder(new QueryBasedFactorizer(query.originalParseTree)).buildParseTree(query.originalParseTree, wordMappings).getFactorizationTime();
                     long endMultipleTime = System.currentTimeMillis();
                     long startSummarizedTime = System.currentTimeMillis();
                     MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
@@ -101,7 +101,7 @@ public class Experiments2 {
                     Expression factorize = new QueryBasedFactorizer(query.originalParseTree).factorize(wordMappings);
 
 
-                    System.out.println(String.format("%20d\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d", uniqueValues, wordMappings.getLastDerivation() + 1, wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, endMultipleTime - startMultipleTime, endSummarizedTime - startSummarizedTime, getExpressionSize(factorize)));
+                    System.out.println(String.format("%20d\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d", uniqueValues, wordMappings.getLastDerivation() + 1, wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, endMultipleTime - startMultipleTime, factorizationTime, endSummarizedTime - startSummarizedTime, getExpressionSize(factorize)));
                 }
                 System.out.println();
             }

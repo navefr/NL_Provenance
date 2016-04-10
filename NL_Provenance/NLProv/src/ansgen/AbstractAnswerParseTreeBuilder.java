@@ -109,7 +109,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
             }
         }
 
-        return new AnswerTreeBuilderResult(answerTree, answerTreeMapping);
+        return new AnswerTreeBuilderResult(answerTree, answerTreeMapping, 0);
     }
 
     private void buildAnswerTree(WordMappings wordReplacementMap, ParseTree answerTree, ParseTreeNode objectNode, Map<ParseTreeNode, ParseTreeNode> queryToAnswerNodeMapping, Map<ParseTreeNode, ParseTreeNode> answerToQueryNodeMapping, boolean firstCall) {

@@ -17,10 +17,12 @@ public class AnswerTreeBuilderResult {
 
     private ParseTree parseTree;
     private Map<ParseTreeNode, Collection<ParseTreeNode>> nodeMappings;
+    private long factorizationTime;
 
-    public AnswerTreeBuilderResult(ParseTree parseTree, Map<ParseTreeNode, Collection<ParseTreeNode>> nodeMappings) {
+    public AnswerTreeBuilderResult(ParseTree parseTree, Map<ParseTreeNode, Collection<ParseTreeNode>> nodeMappings, long factorizationTime) {
         this.parseTree = parseTree;
         this.nodeMappings = nodeMappings;
+        this.factorizationTime = factorizationTime;
     }
 
     public ParseTree getParseTree() {
@@ -29,5 +31,9 @@ public class AnswerTreeBuilderResult {
 
     public Map<ParseTreeNode, Collection<ParseTreeNode>> getNodeMappings() {
         return nodeMappings;
+    }
+
+    public long getFactorizationTime() {
+        return factorizationTime;
     }
 }
