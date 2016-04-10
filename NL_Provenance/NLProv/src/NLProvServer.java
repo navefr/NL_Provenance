@@ -530,6 +530,7 @@ public class NLProvServer {
                     "\t\n" +
                     "\t/* Double Border */\n" +
                     "\t.ta6 {\n" +
+                    "\t\tfont-size: 20px;\n" +
                     "\t\tborder: 3px double #CCCCCC;\n" +
                     "\t\twidth: 700px;\n" +
                     "\t\theight: 80px;\n" +
@@ -1218,6 +1219,7 @@ public class NLProvServer {
                     "\t\n" +
                     "\t/* Double Border */\n" +
                     "\t.ta6 {\n" +
+                    "\t\tfont-size: 20px;\n" +
                     "\t\tborder: 3px double #CCCCCC;\n" +
                     "\t\twidth: 700px;\n" +
                     "\t\theight: 80px;\n" +
@@ -2081,6 +2083,7 @@ public class NLProvServer {
                     "\t\n" +
                     "\t/* Double Border */\n" +
                     "\t.ta6 {\n" +
+                    "\t\tfont-size: 20px;\n" +
                     "\t\tborder: 3px double #CCCCCC;\n" +
                     "\t\twidth: 700px;\n" +
                     "\t\theight: 80px;\n" +

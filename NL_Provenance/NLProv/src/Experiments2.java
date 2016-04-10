@@ -48,7 +48,7 @@ public class Experiments2 {
         String query8 = "return the area of conferences";
         String query9 = "return the authors who published papers in database conferences. ";
         String query10 = "return the authors who published papers in database conferences after 2005. ";
-        String query11 = "  . ";
+        String query11 = "return the organization of authors who published papers in database conferences after 2005.";
 
         Map<String, String> querySentences = new TreeMap<>();
         querySentences.put("query00_init", query1);
