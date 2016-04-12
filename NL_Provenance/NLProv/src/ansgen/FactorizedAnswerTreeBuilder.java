@@ -291,12 +291,14 @@ public class FactorizedAnswerTreeBuilder {
 
         Collection<ParseTreeNode> nodesInSubTree = ParseTreeUtil.getNodesInSubTree(subTreeRoot);
         int minWordOrder = Integer.MAX_VALUE;
+        int maxWordOrder = Integer.MIN_VALUE;
         for (ParseTreeNode node : nodesInSubTree) {
             minWordOrder = Math.min(minWordOrder, node.wordOrder);
+            maxWordOrder = Math.max(maxWordOrder, node.wordOrder);
         }
         int lastWordOrder = wordOrder - minWordOrder;
 
-        ParseTreeUtil.shiftWordOrders(parseTree, nodesInSubTree, wordOrder, nodesInSubTree.size());
+        ParseTreeUtil.shiftWordOrders(parseTree, nodesInSubTree, wordOrder, maxWordOrder + 1 - minWordOrder);
 
         ParseTreeNode newNode = parseTree.buildNodeByParentId((new String[]{String.valueOf(lastWordOrder + subTreeRoot.wordOrder), nodeValue, "NA", String.valueOf(parent.nodeID), "NA"}));
         addNodeMapping(subTreeRoot, newNode);

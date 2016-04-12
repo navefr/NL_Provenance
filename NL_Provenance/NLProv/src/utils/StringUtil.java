@@ -12,17 +12,27 @@ public class StringUtil {
 
     public static String getQuoatedString(String str) {
         if (str.startsWith("'") && str.endsWith("'")) {
-            return str;
+            return removeSuffixDot(str);
         } else if (str.startsWith("\"") && str.endsWith("\"")) {
-            return str;
+            return removeSuffixDot(str);
         } else if (isNumeric(str)) {
-            return str;
+            return removeSuffixDot(str);
         } else {
-            return "\"" + str + "\"";
+            return "\"" + removeSuffixDot(str) + "\"";
         }
     }
 
     public static boolean isNumeric(String str) {
         return StringUtils.isNumeric(str);
+    }
+
+    public static String removeSuffixDot(String str) {
+        if (str.endsWith(".\"") || str.endsWith(".'")) {
+            return str.substring(0, str.length() - 2) + str.charAt(str.length() - 1);
+        } else if (str.endsWith(".")) {
+            return str.substring(0, str.length() - 1);
+        } else {
+            return str;
+        }
     }
 }
