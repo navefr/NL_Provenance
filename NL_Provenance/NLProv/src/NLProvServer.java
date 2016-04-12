@@ -6,6 +6,8 @@ import com.sun.net.httpserver.HttpServer;
 import dataStructure.Block;
 import dataStructure.Query;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.deri.iris.Configuration;
 import org.deri.iris.EvaluationException;
 import org.deri.iris.api.basics.IPredicate;
@@ -746,7 +748,7 @@ public class NLProvServer {
         @Override
         public void handle(HttpExchange t) throws IOException {
             String query = t.getRequestURI().getQuery();
-            List<String> values = null;
+            List<Pair<String, Boolean>> values = null;
             try {
                  values = handleQuery(query);
             } catch (Exception ignored) {}
@@ -1510,13 +1512,23 @@ public class NLProvServer {
                 response += "\t\t<table>\n" +
                         "\t\t\t<tbody>\n";
                 int id = 0;
-                for (String value : values) {
-                    response += "  <tr>\n" +
-                            "    <td>" + value + "</td>\n" +
-                            "    <td> <input type=\"submit\" value=\"Single\" id=\"single_" + id + "\"> </td>\n" +
-                            "    <td> <input type=\"submit\" value=\"Multiple\" id=\"multiple_" + id + "\"> </td>\n" +
-                            "    <td> <input type=\"submit\" value=\"Summarized\" id=\"summarized_" + id + "\"> </td>\n" +
-                            "  </tr>\n";
+                for (Pair<String, Boolean>  value: values) {
+                    Boolean isMultiple = value.getValue();
+                    if (isMultiple) {
+                        response += "  <tr>\n" +
+                                "    <td>" + value.getKey() + "</td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Single\" id=\"single_" + id + "\"> </td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Multiple\" id=\"multiple_" + id + "\"> </td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Summarized\" id=\"summarized_" + id + "\"> </td>\n" +
+                                "  </tr>\n";
+                    } else {
+                        response += "  <tr>\n" +
+                                "    <td>" + value.getKey() + "</td>\n" +
+                                "    <td> <input type=\"submit\" value=\"Single\" id=\"single_" + id + "\"> </td>\n" +
+                                "    <td> </td>\n" +
+                                "    <td> </td>\n" +
+                                "  </tr>\n";
+                    }
                     id++;
                 }
                 response += "\t\t\t</tbody>\n" +
@@ -1537,15 +1549,19 @@ public class NLProvServer {
                 response += "\n" +
                         "<script type=\"text/javascript\">\n";
                 for (int i = 0; i < values.size(); i++) {
+                    String answer = values.get(i).getKey().replaceAll(" ", "%20").replaceAll("\"", "%22");
+                    Boolean isMultiple = values.get(i).getValue();
                     response += "    document.getElementById(\"single_" + i + "\").onclick = function () {\n" +
-                                "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&answer=" + values.get(i).replaceAll(" ", "%20").replaceAll("\"", "%22") + "&type=single\";\n" +
+                            "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&answer=" + answer + "&type=single\";\n" +
+                            "    };\n";
+                    if (isMultiple) {
+                        response += "    document.getElementById(\"multiple_" + i + "\").onclick = function () {\n" +
+                                "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&answer=" + answer + "&type=multiple\";\n" +
                                 "    };\n";
-                    response += "    document.getElementById(\"multiple_" + i + "\").onclick = function () {\n" +
-                            "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&answer=" + values.get(i).replaceAll(" ", "%20").replaceAll("\"", "%22") + "&type=multiple\";\n" +
-                            "    };\n";
-                    response += "    document.getElementById(\"summarized_" + i + "\").onclick = function () {\n" +
-                            "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "") + "&answer=" + values.get(i).replaceAll(" ", "%20").replaceAll("\"", "%22") + "&type=summarized\";\n" +
-                            "    };\n";
+                        response += "    document.getElementById(\"summarized_" + i + "\").onclick = function () {\n" +
+                                "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "") + "&answer=" + answer + "&type=summarized\";\n" +
+                                "    };\n";
+                    }
                 }
                 response += "</script>\n";
             }
@@ -1558,7 +1574,7 @@ public class NLProvServer {
             os.close();
         }
 
-        private List<String> handleQuery(String querySentence) throws Exception {
+        private List<Pair<String, Boolean>> handleQuery(String querySentence) throws Exception {
             Query query = new Query(querySentence, db.schemaGraph);
 
             components.StanfordNLParser.parse(query, lexiParser);
@@ -1573,9 +1589,11 @@ public class NLProvServer {
                 Block block = query.blocks.get(0);
                 Map<ITuple, Collection<DerivationTree2>> tupleProvenanceTrees = measSN(block.DATALOGQuery);
 
-                List<String> ans = new ArrayList<>();
+                List<Pair<String, Boolean>> ans = new ArrayList<>();
                 for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
-                    ans.add(tupleWithProvenanceTrees.getKey().get(0).getValue().toString());
+                    String value = tupleWithProvenanceTrees.getKey().get(0).getValue().toString();
+                    boolean isMultiple = tupleWithProvenanceTrees.getValue().size() > 1;
+                    ans.add(new ImmutablePair<>(value, isMultiple));
                 }
 
                 return ans;
