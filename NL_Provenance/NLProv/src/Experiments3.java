@@ -1,13 +1,8 @@
 import ansgen.MultipleDerivationFactorizedAnswerTreeBuilder;
-import ansgen.MultipleDerivationSummarizedAnswerTreeBuilder;
-import ansgen.SingleDerivationAnswerTreeBuilder;
 import dataStructure.Query;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
-import factorization.Expression;
 import factorization.QueryBasedFactorizer;
 import factorization.WordMappings;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import org.deri.iris.api.basics.IPredicate;
 import org.deri.iris.api.basics.ITuple;
 import org.deri.iris.api.terms.ITerm;
@@ -94,8 +89,6 @@ public class Experiments3 {
             ITuple tuple = new Tuple(Arrays.<ITerm>asList(new StringTerm("ans")));
             result.put(tuple, wordMappings);
         } else {
-            WordMappings wordMappings = new WordMappings();
-
             String fileName = "";
             switch (queryName) {
                 case "query03":
@@ -115,6 +108,7 @@ public class Experiments3 {
                 Integer integer = Integer.valueOf((String) line);
 
                 ITuple tuple = new Tuple(Arrays.<ITerm>asList(new StringTerm("ans" + i)));
+                WordMappings wordMappings = new WordMappings();
                 result.put(tuple, wordMappings);
                 for (int j = 0; j < integer; j++) {
                     switch (queryName) {
