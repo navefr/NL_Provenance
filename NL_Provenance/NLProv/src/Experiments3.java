@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by nfrost on 4/1/2016
@@ -40,13 +39,23 @@ public class Experiments3 {
 
         String query1 = "return the homepage of SIGMOD. ";
         String query3 = "return the authors who published papers in SIGMOD after 2005. ";
+        String query4 = "return me the authors from \"Tel Aviv University\" who published papers in VLDB. ";
+        String query6 = "return the authors who published papers in SIGMOD before 2015 and after 2005. ";
+        String query7 = "return the papers which were published in conferences in database area";
+        String query8 = "return the area of conferences";
         String query9 = "return the authors who published papers in database conferences. ";
+        String query10 = "return the authors who published papers in database conferences after 2005. ";
         String query11 = "return the organization of authors who published papers in database conferences after 2005.";
 
         Map<String, String> querySentences = new TreeMap<>();
         querySentences.put("query00_init", query1);
         querySentences.put("query03", query3);
+        querySentences.put("query04", query4);
+        querySentences.put("query06", query6);
+//        querySentences.put("query07", query7);
+        querySentences.put("query08", query8);
         querySentences.put("query09", query9);
+        querySentences.put("query10", query10);
         querySentences.put("query11", query11);
 
         for (Map.Entry<String, String> queryEntry : querySentences.entrySet()) {
@@ -81,7 +90,7 @@ public class Experiments3 {
     }
 
     private static Map<ITuple, WordMappings> getResultsAndWordMappings(String queryName) throws Exception {
-        Map<ITuple, WordMappings> result = new TreeMap<>();
+        Map<ITuple, WordMappings> result = new TreeMap<ITuple, WordMappings>();
 
         if (queryName.equals("query00_init")) {
             WordMappings wordMappings = new WordMappings();
@@ -94,8 +103,23 @@ public class Experiments3 {
                 case "query03":
                     fileName = "q3.txt";
                     break;
+                case "query04":
+                    fileName = "q4.txt";
+                    break;
+                case "query06":
+                    fileName = "q6.txt";
+                    break;
+                case "query07":
+                    fileName = "q7.txt";
+                    break;
+                case "query08":
+                    fileName = "q8.txt";
+                    break;
                 case "query09":
                     fileName = "q9.txt";
+                    break;
+                case "query10":
+                    fileName = "q10.txt";
                     break;
                 case "query11":
                     fileName = "q11.txt";
@@ -117,6 +141,20 @@ public class Experiments3 {
                             wordMappings.add(j, 6, "paper" + j);
                             wordMappings.add(j, 10, "year" + j);
                             break;
+                        case "query04":
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 8, "paper" + j);
+                            break;
+                        case "query06":
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 6, "paper" + j);
+                            wordMappings.add(j, 10, "year" + j);
+                            wordMappings.add(j, 13, "year" + j);
+                            break;
+                        case "query07":
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 8, "conference" + j);
+                            break;
                         case "query08":
                             wordMappings.add(j, 3, "ans" + i);
                             wordMappings.add(j, 5, "conference" + j);
@@ -125,6 +163,12 @@ public class Experiments3 {
                             wordMappings.add(j, 3, "ans" + i);
                             wordMappings.add(j, 6, "paper" + j);
                             wordMappings.add(j, 9, "conference" + j);
+                            break;
+                        case "query10":
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 6, "paper" + j);
+                            wordMappings.add(j, 9, "conference" + j);
+                            wordMappings.add(j, 11, "year" + j);
                             break;
                         case "query11":
                             wordMappings.add(j, 3, "ans" + i);

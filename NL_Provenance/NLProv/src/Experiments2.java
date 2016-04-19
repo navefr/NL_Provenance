@@ -55,13 +55,13 @@ public class Experiments2 {
 //        querySentences.put("query01", query1);
 //        querySentences.put("query02", query2);
         querySentences.put("query03", query3);
-//        querySentences.put("query04", query4);
+        querySentences.put("query04", query4);
 //        querySentences.put("query05", query5);
-//        querySentences.put("query06", query6);
+        querySentences.put("query06", query6);
 //        querySentences.put("query07", query7);
         querySentences.put("query08", query8);
         querySentences.put("query09", query9);
-//        querySentences.put("query10", query10);
+        querySentences.put("query10", query10);
         querySentences.put("query11", query11);
 
         for (Map.Entry<String, String> queryEntry : querySentences.entrySet()) {
@@ -83,7 +83,7 @@ public class Experiments2 {
             if (query.blocks.size() == 1) {
                 Map<ITuple, Pair<WordMappings, Integer>> resultsAndWordMappings = getResultsAndWordMappings(queryName);
 
-                System.out.println(String.format("%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s", "#UniqueValues", "#Derivations", "#Elements", "SingleTime", "MultipleTime", "FactorizationTime", "SummarizedTime", "FactorizationSize"));
+                System.out.println(String.format("%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s", "#UniqueValues", "%SharedValues", "#Derivations", "#Elements", "SingleTime", "MultipleTime", "FactorizationTime", "SummarizedTime", "FactorizationSize"));
                 for (Map.Entry<ITuple, Pair<WordMappings, Integer>> resultsAndWordMappingsEntry : resultsAndWordMappings.entrySet()) {
                     WordMappings wordMappings = resultsAndWordMappingsEntry.getValue().getLeft();
                     Integer uniqueValues = resultsAndWordMappingsEntry.getValue().getRight();
@@ -91,17 +91,25 @@ public class Experiments2 {
                     long startSingleTime = System.currentTimeMillis();
                     SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
                     long endSingleTime = System.currentTimeMillis();
+
+                    int multipleIterations = 3;
+                    long factorizationTime = 0;
                     long startMultipleTime = System.currentTimeMillis();
-                    long factorizationTime = new MultipleDerivationFactorizedAnswerTreeBuilder(new QueryBasedFactorizer(query.originalParseTree)).buildParseTree(query.originalParseTree, wordMappings).getFactorizationTime();
+                    for (int i = 0; i < multipleIterations; i++) {
+                        factorizationTime += new MultipleDerivationFactorizedAnswerTreeBuilder(new QueryBasedFactorizer(query.originalParseTree)).buildParseTree(query.originalParseTree, wordMappings).getFactorizationTime();
+                    }
                     long endMultipleTime = System.currentTimeMillis();
+                    factorizationTime = factorizationTime / multipleIterations;
+                    long multipleTime = (endMultipleTime - startMultipleTime) / multipleIterations;
+
                     long startSummarizedTime = System.currentTimeMillis();
                     MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
                     long endSummarizedTime = System.currentTimeMillis();
 
                     Expression factorize = new QueryBasedFactorizer(query.originalParseTree).factorize(wordMappings);
 
-
-                    System.out.println(String.format("%20d\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d", uniqueValues, wordMappings.getLastDerivation() + 1, wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, endMultipleTime - startMultipleTime, factorizationTime, endSummarizedTime - startSummarizedTime, getExpressionSize(factorize)));
+                    int derivations = wordMappings.getLastDerivation() + 1;
+                    System.out.println(String.format("%20d\t%20s\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d", uniqueValues, 100 * (derivations - uniqueValues) / derivations + "%", derivations, wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, multipleTime, factorizationTime, endSummarizedTime - startSummarizedTime, getExpressionSize(factorize)));
                 }
                 System.out.println();
             }
@@ -117,7 +125,7 @@ public class Experiments2 {
             ITuple tuple = new Tuple(Arrays.<ITerm>asList(new StringTerm("ans")));
             result.put(tuple, new ImmutablePair<WordMappings, Integer>(wordMappings, 1));
         } else {
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 51; i++) {
                 WordMappings wordMappings = new WordMappings();
                 ITuple tuple = new Tuple(Arrays.<ITerm>asList(new StringTerm("ans" + i)));
                 result.put(tuple, new ImmutablePair<WordMappings, Integer>(wordMappings, i * 100));
@@ -129,9 +137,22 @@ public class Experiments2 {
                     switch (queryName) {
                         case "query03":
                             wordMappings.add(j, 3, "ans" + i);
-
                             wordMappings.add(j, 6, "paper" + paper);
                             wordMappings.add(j, 10, "year" + year);
+                            break;
+                        case "query04":
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 8, "paper" + paper);
+                            break;
+                        case "query06":
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 6, "paper" + paper);
+                            wordMappings.add(j, 10, "year" + year);
+                            wordMappings.add(j, 13, "year" + year);
+                            break;
+                        case "query07":
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 8, "conference" + conference);
                             break;
                         case "query08":
                             wordMappings.add(j, 3, "ans" + i);
@@ -141,6 +162,12 @@ public class Experiments2 {
                             wordMappings.add(j, 3, "ans" + i);
                             wordMappings.add(j, 6, "paper" + paper);
                             wordMappings.add(j, 9, "conference" + conference);
+                            break;
+                        case "query10":
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 6, "paper" + paper);
+                            wordMappings.add(j, 9, "conference" + conference);
+                            wordMappings.add(j, 11, "year" + year);
                             break;
                         case "query11":
                             wordMappings.add(j, 3, "ans" + i);
