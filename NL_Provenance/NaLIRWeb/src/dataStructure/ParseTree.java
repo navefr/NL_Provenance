@@ -2,20 +2,24 @@ package dataStructure;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class ParseTree implements Serializable
 {
 	public ParseTreeNode root; 
 	public ArrayList<ParseTreeNode> allNodes = new ArrayList<ParseTreeNode>(); 
-	public ArrayList<ParseTreeNode> deletedNodes = new ArrayList<ParseTreeNode>(); 
+	public ArrayList<ParseTreeNode> deletedNodes = new ArrayList<ParseTreeNode>();
+    private Map<Integer, ParseTreeNode> nodeMapping = new HashMap<>();
 
 	public ParseTree()
 	{
 		root = new ParseTreeNode(0, "ROOT", "ROOT", "ROOT", null); 
-		allNodes.add(root); 
-		root.tokenType = "ROOT"; 
+		allNodes.add(root);
+        nodeMapping.put(root.nodeID, root);
+        root.tokenType = "ROOT";
 	}
 
 	public ParseTreeNode buildNode(String [] input) // add a node when build a tree;
@@ -26,7 +30,8 @@ public class ParseTree implements Serializable
 		{
 			node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], root); 
 			root.children.add(node); 
-			allNodes.add(node); 
+			allNodes.add(node);
+            nodeMapping.put(node.nodeID, node);
 			return node;
 		}
 		else
@@ -40,7 +45,8 @@ public class ParseTree implements Serializable
 				{
 					node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], parent); 
 					parent.children.add(node); 
-					allNodes.add(node); 
+					allNodes.add(node);
+                    nodeMapping.put(node.nodeID, node);
 					return node;
 				}
 				list.addAll(parent.children); 
@@ -53,29 +59,14 @@ public class ParseTree implements Serializable
     {
         ParseTreeNode node;
 
-        if(root.children.isEmpty())
-        {
-            node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], root);
-            root.children.add(node);
+        int parentId = Integer.parseInt(input[3]);
+        if(nodeMapping.containsKey(parentId)) {
+            ParseTreeNode parent = nodeMapping.get(parentId);
+            node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], parent);
+            parent.children.add(node);
             allNodes.add(node);
+            nodeMapping.put(node.nodeID, node);
             return node;
-        }
-        else
-        {
-            LinkedList<ParseTreeNode> list = new LinkedList<ParseTreeNode>();
-            list.add(root);
-            while(!list.isEmpty())
-            {
-                ParseTreeNode parent = list.removeFirst();
-                if(parent.nodeID == Integer.parseInt(input[3]))
-                {
-                    node = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], parent);
-                    parent.children.add(node);
-                    allNodes.add(node);
-                    return node;
-                }
-                list.addAll(parent.children);
-            }
         }
         return null;
     }
