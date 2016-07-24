@@ -40,65 +40,46 @@ public class ParseTreeUtil {
         return siblings;
     }
 
-    public static int getFirstWordOrderInSubTrees(Collection<ParseTreeNode> nodes) {
+    public static int getFirstWordOrderInSubTrees(Collection<ParseTreeNode> nodes, SubTreeTracker subTreeTracker) {
         int firstWordOrder = Integer.MAX_VALUE;
         for (ParseTreeNode currNode : nodes) {
-            firstWordOrder = Math.min(firstWordOrder, getFirstWordOrderInSubTree(currNode));
+            firstWordOrder = Math.min(firstWordOrder, getFirstWordOrderInSubTree(currNode, subTreeTracker));
         }
         return firstWordOrder;
     }
 
-    public static int getFirstWordOrderInSubTree(ParseTreeNode node) {
+    public static int getFirstWordOrderInSubTree(ParseTreeNode node, SubTreeTracker subTreeTracker) {
         int firstWordOrder = Integer.MAX_VALUE;
-        Collection<ParseTreeNode> nodesInSubTree = new HashSet<>();
-        getNodesInSubTree(nodesInSubTree, node);
+        Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(node);
         for (ParseTreeNode currNode : nodesInSubTree) {
             firstWordOrder = Math.min(firstWordOrder, currNode.wordOrder);
         }
         return firstWordOrder;
     }
 
-    public static int getLastWordOrderInSubTree(ParseTreeNode node) {
+    public static int getLastWordOrderInSubTree(ParseTreeNode node, SubTreeTracker subTreeTracker) {
         int lastWordOrder = Integer.MIN_VALUE;
-        Collection<ParseTreeNode> nodesInSubTree = new HashSet<>();
-        getNodesInSubTree(nodesInSubTree, node);
+        Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(node);
         for (ParseTreeNode currNode : nodesInSubTree) {
             lastWordOrder = Math.max(lastWordOrder, currNode.wordOrder);
         }
         return lastWordOrder;
     }
 
-    public static Collection<ParseTreeNode> getNodesInSubTree(ParseTreeNode node) {
-        Collection<ParseTreeNode> nodesInSubTree = new HashSet<ParseTreeNode>();
-        nodesInSubTree.add(node);
-        for (ParseTreeNode child : node.children) {
-            getNodesInSubTree(nodesInSubTree, child);
-        }
-        return nodesInSubTree;
-    }
-
-    private static void getNodesInSubTree(Collection<ParseTreeNode> nodesInSubTree, ParseTreeNode node) {
-        nodesInSubTree.add(node);
-        for (ParseTreeNode child : node.children) {
-            getNodesInSubTree(nodesInSubTree, child);
-        }
-    }
-
-    public static ParseTreeNode getJointParent(Collection<ParseTreeNode> nodes) {
+    public static ParseTreeNode getJointParent(Collection<ParseTreeNode> nodes, SubTreeTracker subTreeTracker) {
         ParseTreeNode aNode = nodes.iterator().next();
-        while (!(aNode.label.equals("ROOT") || isJointParent(aNode, nodes))) {
+        while (!(aNode.label.equals("ROOT") || isJointParent(aNode, nodes, subTreeTracker))) {
             aNode = aNode.parent;
         }
         return aNode;
     }
 
-    private static boolean isJointParent(ParseTreeNode potentialParent, Collection<ParseTreeNode> nodes) {
+    private static boolean isJointParent(ParseTreeNode potentialParent, Collection<ParseTreeNode> nodes, SubTreeTracker subTreeTracker) {
         if (nodes.contains(potentialParent)) {
             return false;
         }
 
-        Collection<ParseTreeNode> nodesInSubTree = new HashSet<>();
-        getNodesInSubTree(nodesInSubTree, potentialParent);
+        Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(potentialParent);
         for (ParseTreeNode node : nodes) {
             if (!nodesInSubTree.contains(node)) {
                 return false;

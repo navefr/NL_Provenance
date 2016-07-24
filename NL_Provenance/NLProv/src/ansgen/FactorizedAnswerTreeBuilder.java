@@ -4,8 +4,10 @@ import dataStructure.ParseTree;
 import dataStructure.ParseTreeNode;
 import factorization.Expression;
 import factorization.Variable;
+import org.apache.commons.lang3.tuple.Pair;
 import utils.ParseTreeUtil;
 import utils.StringUtil;
+import utils.SubTreeTracker;
 
 import java.util.*;
 
@@ -47,6 +49,8 @@ public class FactorizedAnswerTreeBuilder {
         nodeMapping = new HashMap<>();
 
         buildWordOrderNodeIdMaps(finalAnswerTree);
+        SubTreeTracker subTreeTracker = new SubTreeTracker();
+        Collection<Pair<String, Integer>> nodesForCreation = new ArrayList<>();
 
         Collection<ParseTreeNode> processedNodeVariables = new ArrayList<>();
         Set<ParseTreeNode> nodesForDeletion = new HashSet<ParseTreeNode>();
@@ -66,7 +70,7 @@ public class FactorizedAnswerTreeBuilder {
                 }
                 Collection<ParseTreeNode> siblingsWithVariable = new HashSet<>();
                 for (ParseTreeNode sibling : siblings) {
-                    Collection<ParseTreeNode> nodesInSiblingSubTree = ParseTreeUtil.getNodesInSubTree(sibling);
+                    Collection<ParseTreeNode> nodesInSiblingSubTree = subTreeTracker.getNodesInSubTree(sibling);
                     for (ParseTreeNode node : nodesInSiblingSubTree) {
                         if (variableNodes.contains(node)) {
                             siblingsWithVariable.add(sibling);
@@ -76,9 +80,9 @@ public class FactorizedAnswerTreeBuilder {
 
                 boolean variableMoved = false;
                 if (!siblingsWithVariable.isEmpty()) {
-                    int firstWordOrderInSiblingsSubTrees = ParseTreeUtil.getFirstWordOrderInSubTrees(siblingsWithVariable);
+                    int firstWordOrderInSiblingsSubTrees = ParseTreeUtil.getFirstWordOrderInSubTrees(siblingsWithVariable, subTreeTracker);
                     if (firstWordOrderInSiblingsSubTrees < variableNode.wordOrder) {
-                        Collection<ParseTreeNode> attachedNodes = attachCopyOfSubTreeBefore(finalAnswerTree, variableNodeSubTreeRoot.parent, variableNodeSubTreeRoot, Collections.singletonMap(variableNode.nodeID, variable.getValue()), firstWordOrderInSiblingsSubTrees);
+                        Collection<ParseTreeNode> attachedNodes = attachCopyOfSubTreeBefore(finalAnswerTree, variableNodeSubTreeRoot.parent, variableNodeSubTreeRoot, Collections.singletonMap(variableNode.nodeID, variable.getValue()), firstWordOrderInSiblingsSubTrees, subTreeTracker);
 
                         nodesForDeletion.add(variableNodeSubTreeRoot);
                         nodesCreatedByExpression.addAll(attachedNodes);
@@ -156,12 +160,12 @@ public class FactorizedAnswerTreeBuilder {
                     nodesInExpression.add(node);
                 }
             }
-            ParseTreeNode jointParent = ParseTreeUtil.getJointParent(nodesInExpression);
-            int lastWordOrderInParentSubTree = ParseTreeUtil.getLastWordOrderInSubTree(jointParent);
+            ParseTreeNode jointParent = ParseTreeUtil.getJointParent(nodesInExpression, subTreeTracker);
+            int lastWordOrderInParentSubTree = ParseTreeUtil.getLastWordOrderInSubTree(jointParent, subTreeTracker);
 
             Collection<ParseTreeNode> nodesInExpressionSubTreeRoots = new HashSet<ParseTreeNode>();
             for (ParseTreeNode potentialSubTreeRoots : jointParent.children) {
-                Collection<ParseTreeNode> nodesInSubTree = ParseTreeUtil.getNodesInSubTree(potentialSubTreeRoots);
+                Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(potentialSubTreeRoots);
                 for (ParseTreeNode node : nodesInExpression) {
                     if (nodesInSubTree.contains(node)) {
                         nodesInExpressionSubTreeRoots.add(potentialSubTreeRoots);
@@ -198,13 +202,13 @@ public class FactorizedAnswerTreeBuilder {
                     }
                 }
 
-                ParseTreeNode jointParentFromFinalTree = ParseTreeUtil.getJointParent(nodesFromFinalTreeInExpression);
-                int lastWordOrderInParentSubTree = ParseTreeUtil.getLastWordOrderInSubTree(jointParentFromFinalTree);
+                ParseTreeNode jointParentFromFinalTree = ParseTreeUtil.getJointParent(nodesFromFinalTreeInExpression, subTreeTracker);
+                int lastWordOrderInParentSubTree = ParseTreeUtil.getLastWordOrderInSubTree(jointParentFromFinalTree, subTreeTracker);
 
-                ParseTreeNode jointParentFromSubExpressionTree = ParseTreeUtil.getJointParent(nodesFromSubExpressionTreeInExpression);
+                ParseTreeNode jointParentFromSubExpressionTree = ParseTreeUtil.getJointParent(nodesFromSubExpressionTreeInExpression, subTreeTracker);
                 Collection<ParseTreeNode> nodesInExpressionSubTreeRoots = new HashSet<>();
                 for (ParseTreeNode potentialSubTreeRoots : jointParentFromSubExpressionTree.children) {
-                    Collection<ParseTreeNode> nodesInSubTree = ParseTreeUtil.getNodesInSubTree(potentialSubTreeRoots);
+                    Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(potentialSubTreeRoots);
                     for (ParseTreeNode node : nodesFromSubExpressionTreeInExpression) {
                         if (nodesInSubTree.contains(node)) {
                             nodesInExpressionSubTreeRoots.add(potentialSubTreeRoots);
@@ -281,7 +285,7 @@ public class FactorizedAnswerTreeBuilder {
     }
 
 
-    private Collection<ParseTreeNode> attachCopyOfSubTreeBefore(ParseTree parseTree, ParseTreeNode parent, ParseTreeNode subTreeRoot, Map<Integer, String> nodeValues, int wordOrder) {
+    private Collection<ParseTreeNode> attachCopyOfSubTreeBefore(ParseTree parseTree, ParseTreeNode parent, ParseTreeNode subTreeRoot, Map<Integer, String> nodeValues, int wordOrder, SubTreeTracker subTreeTracker) {
         String nodeValue = nodeValues.get(subTreeRoot.wordOrder);
         if (nodeValue == null) {
             nodeValue = subTreeRoot.label;
@@ -289,7 +293,7 @@ public class FactorizedAnswerTreeBuilder {
             nodeValue = StringUtil.getQuoatedString(nodeValue);
         }
 
-        Collection<ParseTreeNode> nodesInSubTree = ParseTreeUtil.getNodesInSubTree(subTreeRoot);
+        Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(subTreeRoot);
         int minWordOrder = Integer.MAX_VALUE;
         int maxWordOrder = Integer.MIN_VALUE;
         for (ParseTreeNode node : nodesInSubTree) {
