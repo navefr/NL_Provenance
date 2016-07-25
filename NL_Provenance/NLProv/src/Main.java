@@ -73,7 +73,9 @@ public class Main {
         String query104 = "return the author with maximum number of papers in VLDB in 2014";
         String query105 = "return the paper with minimum number of citations in SIGMOD in 2013";
 
-        String querySentence = query11;
+        String querySentence = "Return me the papers published after 2005 by authors from \"Tel Aviv University\" whose title contains \"OASSIS\"";
+        querySentence = "Return the database conferences that presented papers published after 2005 by authors from \"Tel Aviv University\"";
+        querySentence = query11;
 
         Query query = new Query(querySentence, db.schemaGraph);
 

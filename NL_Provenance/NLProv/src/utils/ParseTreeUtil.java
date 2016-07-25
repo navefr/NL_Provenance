@@ -40,46 +40,46 @@ public class ParseTreeUtil {
         return siblings;
     }
 
-    public static int getFirstWordOrderInSubTrees(Collection<ParseTreeNode> nodes, SubTreeTracker subTreeTracker) {
+    public static int getFirstWordOrderInSubTrees(ParseTree parseTree, Collection<ParseTreeNode> nodes) {
         int firstWordOrder = Integer.MAX_VALUE;
         for (ParseTreeNode currNode : nodes) {
-            firstWordOrder = Math.min(firstWordOrder, getFirstWordOrderInSubTree(currNode, subTreeTracker));
+            firstWordOrder = Math.min(firstWordOrder, getFirstWordOrderInSubTree(parseTree, currNode));
         }
         return firstWordOrder;
     }
 
-    public static int getFirstWordOrderInSubTree(ParseTreeNode node, SubTreeTracker subTreeTracker) {
+    public static int getFirstWordOrderInSubTree(ParseTree parseTree, ParseTreeNode node) {
         int firstWordOrder = Integer.MAX_VALUE;
-        Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(node);
+        Collection<ParseTreeNode> nodesInSubTree = parseTree.getNodesInSubtree(node);
         for (ParseTreeNode currNode : nodesInSubTree) {
             firstWordOrder = Math.min(firstWordOrder, currNode.wordOrder);
         }
         return firstWordOrder;
     }
 
-    public static int getLastWordOrderInSubTree(ParseTreeNode node, SubTreeTracker subTreeTracker) {
+    public static int getLastWordOrderInSubTree(ParseTree parseTree, ParseTreeNode node) {
         int lastWordOrder = Integer.MIN_VALUE;
-        Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(node);
+        Collection<ParseTreeNode> nodesInSubTree = parseTree.getNodesInSubtree(node);
         for (ParseTreeNode currNode : nodesInSubTree) {
             lastWordOrder = Math.max(lastWordOrder, currNode.wordOrder);
         }
         return lastWordOrder;
     }
 
-    public static ParseTreeNode getJointParent(Collection<ParseTreeNode> nodes, SubTreeTracker subTreeTracker) {
+    public static ParseTreeNode getJointParent(ParseTree parseTree, Collection<ParseTreeNode> nodes) {
         ParseTreeNode aNode = nodes.iterator().next();
-        while (!(aNode.label.equals("ROOT") || isJointParent(aNode, nodes, subTreeTracker))) {
+        while (!(aNode.label.equals("ROOT") || isJointParent(parseTree, aNode, nodes))) {
             aNode = aNode.parent;
         }
         return aNode;
     }
 
-    private static boolean isJointParent(ParseTreeNode potentialParent, Collection<ParseTreeNode> nodes, SubTreeTracker subTreeTracker) {
+    private static boolean isJointParent(ParseTree parseTree, ParseTreeNode potentialParent, Collection<ParseTreeNode> nodes) {
         if (nodes.contains(potentialParent)) {
             return false;
         }
 
-        Collection<ParseTreeNode> nodesInSubTree = subTreeTracker.getNodesInSubTree(potentialParent);
+        Collection<ParseTreeNode> nodesInSubTree = parseTree.getNodesInSubtree(potentialParent);
         for (ParseTreeNode node : nodes) {
             if (!nodesInSubTree.contains(node)) {
                 return false;

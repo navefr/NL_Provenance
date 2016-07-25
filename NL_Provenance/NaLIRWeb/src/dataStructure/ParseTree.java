@@ -1,10 +1,7 @@
 package dataStructure;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 @SuppressWarnings("serial")
 public class ParseTree implements Serializable
@@ -14,12 +11,15 @@ public class ParseTree implements Serializable
 	public ArrayList<ParseTreeNode> deletedNodes = new ArrayList<ParseTreeNode>();
     private Map<Integer, ParseTreeNode> nodeMapping = new HashMap<>();
 
+    private Map<ParseTreeNode, Set<ParseTreeNode>> subTress = new HashMap<ParseTreeNode, Set<ParseTreeNode>>();
+
 	public ParseTree()
 	{
 		root = new ParseTreeNode(0, "ROOT", "ROOT", "ROOT", null); 
 		allNodes.add(root);
-        nodeMapping.put(root.nodeID, root);
         root.tokenType = "ROOT";
+        nodeMapping.put(root.nodeID, root);
+        subTress.put(root, new HashSet<ParseTreeNode>(Arrays.asList(root)));
 	}
 
 	public ParseTreeNode buildNode(String [] input) // add a node when build a tree;
@@ -32,6 +32,7 @@ public class ParseTree implements Serializable
 			root.children.add(node); 
 			allNodes.add(node);
             nodeMapping.put(node.nodeID, node);
+            subTress.put(node, new HashSet<ParseTreeNode>(Arrays.asList(node)));
 			return node;
 		}
 		else
@@ -47,6 +48,8 @@ public class ParseTree implements Serializable
 					parent.children.add(node); 
 					allNodes.add(node);
                     nodeMapping.put(node.nodeID, node);
+                    subTress.put(node, new HashSet<ParseTreeNode>(Arrays.asList(node)));
+                    addToAncestorSubTress(node, parent);
 					return node;
 				}
 				list.addAll(parent.children); 
@@ -55,8 +58,7 @@ public class ParseTree implements Serializable
 		return null;
 	}
 
-    public ParseTreeNode buildNodeByParentId(String [] input) // add a node when build a tree;
-    {
+    public ParseTreeNode buildNodeByParentId(String [] input) {
         ParseTreeNode node;
 
         int parentId = Integer.parseInt(input[3]);
@@ -66,47 +68,12 @@ public class ParseTree implements Serializable
             parent.children.add(node);
             allNodes.add(node);
             nodeMapping.put(node.nodeID, node);
+            subTress.put(node, new HashSet<ParseTreeNode>(Arrays.asList(node)));
+            addToAncestorSubTress(node, parent);
             return node;
         }
         return null;
     }
-
-    public boolean buildParentNode(String [] input) // add a node when build a tree;
-    {
-        ParseTreeNode newParent;
-
-        if(root.children.isEmpty())
-        {
-            newParent = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], root);
-            root.children.add(newParent);
-            allNodes.add(newParent);
-            return true;
-        }
-        else
-        {
-            LinkedList<ParseTreeNode> list = new LinkedList<ParseTreeNode>();
-            list.add(root);
-            while(!list.isEmpty())
-            {
-                ParseTreeNode curr = list.removeFirst();
-                if(curr.wordOrder == Integer.parseInt(input[3]))
-                {
-                    ParseTreeNode oldParent = curr.parent;
-                    newParent = new ParseTreeNode(Integer.parseInt(input[0]), input[1], input[2], input[4], curr);
-                    curr.parent = newParent;
-                    newParent.parent = oldParent;
-                    newParent.children.add(curr);
-                    oldParent.children.add(newParent);
-                    oldParent.children.remove(curr);
-                    allNodes.add(newParent);
-                    return true;
-                }
-                list.addAll(curr.children);
-            }
-        }
-        return false;
-    }
-
 
     public ParseTreeNode searchNodeByOrder(int order)
 	{
@@ -202,4 +169,16 @@ public class ParseTree implements Serializable
 		
 		return result; 
 	}
+
+    public Set<ParseTreeNode> getNodesInSubtree(ParseTreeNode node) {
+        return subTress.get(node);
+    }
+
+    private void addToAncestorSubTress(ParseTreeNode nodeToAdd, ParseTreeNode ancestor) {
+        if (ancestor != null) {
+            Set<ParseTreeNode> subtree = subTress.get(ancestor);
+            subtree.add(nodeToAdd);
+            addToAncestorSubTress(nodeToAdd, ancestor.parent);
+        }
+    }
 }
