@@ -26,6 +26,7 @@ import java.util.TreeMap;
 
 /**
  * Created by nfrost on 4/1/2016
+ * Calculate runtime vs percent of shared values
  */
 public class Experiments2 {
 
@@ -49,6 +50,8 @@ public class Experiments2 {
         String query9 = "return the authors who published papers in database conferences. ";
         String query10 = "return the authors who published papers in database conferences after 2005. ";
         String query11 = "return the organization of authors who published papers in database conferences after 2005.";
+        String query12 = "Return me the papers published after 2005 by authors from \"Tel Aviv University\" whose title contains \"OASSIS\"";
+        String query13 = "Return the database conferences that presented papers published authors from \"Tel Aviv University\" after 2005";
 
         Map<String, String> querySentences = new TreeMap<>();
         querySentences.put("query00_init", query1);
@@ -63,6 +66,8 @@ public class Experiments2 {
         querySentences.put("query09", query9);
         querySentences.put("query10", query10);
         querySentences.put("query11", query11);
+        querySentences.put("query12", query12);
+        querySentences.put("query13", query13);
 
         for (Map.Entry<String, String> queryEntry : querySentences.entrySet()) {
 
@@ -174,6 +179,20 @@ public class Experiments2 {
                             wordMappings.add(j, 5, "author" + author);
                             wordMappings.add(j, 8, "paper" + paper);
                             wordMappings.add(j, 11, "conference" + conference);
+                            wordMappings.add(j, 13, "year" + year);
+                            break;
+                        case "query12":
+                            wordMappings.add(j, 4, "ans" + i);
+                            wordMappings.add(j, 7, "year" + year);
+                            wordMappings.add(j, 9, "author" + author);
+                            wordMappings.add(j, 11, "tau" + i);
+                            wordMappings.add(j, 15, "paper" + paper);
+                            break;
+                        case "query13":
+                            wordMappings.add(j, 4, "ans" + i);
+                            wordMappings.add(j, 7, "paper" + paper);
+                            wordMappings.add(j, 9, "author" + author);
+                            wordMappings.add(j, 11, "tau" + i);
                             wordMappings.add(j, 13, "year" + year);
                             break;
                     }
