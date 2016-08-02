@@ -47,8 +47,8 @@ public class Experiments {
         String query9 = "return the authors who published papers in database conferences. ";
         String query10 = "return the authors who published papers in database conferences after 2005. ";
         String query11 = "return the organization of authors who published papers in database conferences after 2005. ";
-        String query12 = "Return me the papers published after 2005 by authors from \"Tel Aviv University\" whose title contains \"OASSIS\"";
-        String query13 = "Return the database conferences that presented papers published authors from \"Tel Aviv University\" after 2005";
+        String query12 = "Return the conferences that presented papers published in 2005 by authors from organization";
+        String query13 = "Return the years of papers published by authors from IBM";
 
         Map<String, String> querySentences = new TreeMap<>();
         querySentences.put("query00_init", query1);
@@ -115,7 +115,7 @@ public class Experiments {
     }
 
     private static Map<ITuple, WordMappings> getResultsAndWordMappings(String queryName) throws Exception {
-        Map<ITuple, WordMappings> result = new TreeMap<>();
+        Map<ITuple, WordMappings> result = new TreeMap<ITuple, WordMappings>();
 
         if (queryName.equals("query00_init")) {
             WordMappings wordMappings = new WordMappings();
@@ -172,18 +172,17 @@ public class Experiments {
                             wordMappings.add(j, 13, "year" + j);
                             break;
                         case "query12":
-                            wordMappings.add(j, 4, "ans" + i);
-                            wordMappings.add(j, 7, "year" + j);
-                            wordMappings.add(j, 9, "author" + j);
-                            wordMappings.add(j, 11, "tau" + i);
-                            wordMappings.add(j, 15, "paper" + j);
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 6, "paper" + j);
+                            wordMappings.add(j, 9, "year" + j);
+                            wordMappings.add(j, 11, "author" + j);
+                            wordMappings.add(j, 13, "org" + j);
                             break;
                         case "query13":
-                            wordMappings.add(j, 4, "ans" + i);
-                            wordMappings.add(j, 7, "paper" + j);
-                            wordMappings.add(j, 9, "author" + j);
-                            wordMappings.add(j, 11, "tau" + i);
-                            wordMappings.add(j, 13, "year" + j);
+                            wordMappings.add(j, 3, "ans" + i);
+                            wordMappings.add(j, 5, "paper" + j);
+                            wordMappings.add(j, 8, "author" + j);
+                            wordMappings.add(j, 10, "org" + j);
                             break;
                     }
                 }
