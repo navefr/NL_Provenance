@@ -9,6 +9,7 @@ import java.util.*;
 /**
  * Created by nfrost on 2/11/2016
  */
+//TODO Nave - organize and delete previous implementation
 public class QueryBasedFactorizer implements Factorizer {
 
     private ParseTree parseTree;
@@ -24,11 +25,10 @@ public class QueryBasedFactorizer implements Factorizer {
         Expression expression = new Expression(wordMappings);
         for (Collection<Integer> wordOrders : wordOrdersByQueryHierarchy) {
             for (Integer wordOrder : wordOrders) {
-                Collection<Variable> variablesForFactorization = getVariablesByWordOrder(expression, wordOrder);
-                for (Variable variableForFactorization : variablesForFactorization) {
-                    Collection<Expression> expressionsForFactorizationByVariable = getExpressionsForFactorizationByVariable(expression, variableForFactorization, wordOrdersAncestorMap);
-                    for (Expression expressionForFactorizationByVariable : expressionsForFactorizationByVariable) {
-                        factorizeExpressionByVariable(expressionForFactorizationByVariable, variableForFactorization, wordOrdersAncestorMap);
+                Map<Variable, Collection<Expression>> variablesForFactorization = getVariablesByWordOrder(expression, wordOrder, wordOrdersAncestorMap);
+                for (Map.Entry<Variable, Collection<Expression>> variableForFactorization : variablesForFactorization.entrySet()) {
+                    for (Expression expressionForFactorizationByVariable : variableForFactorization.getValue()) {
+                        factorizeExpressionByVariable(expressionForFactorizationByVariable, variableForFactorization.getKey(), wordOrdersAncestorMap);
                     }
                 }
             }
@@ -73,30 +73,9 @@ public class QueryBasedFactorizer implements Factorizer {
         return wordOrdersAncestorMap;
     }
 
-    private Collection<Expression> getExpressionsForFactorizationByVariable(Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
-        Collection<Expression> expressionsForFactorizationByVariable = new LinkedList<Expression>();
-        getExpressionsForFactorizationByVariable(expressionsForFactorizationByVariable, expression, variable, wordOrdersAncestorMap);
-        return expressionsForFactorizationByVariable;
-    }
 
-    private void getExpressionsForFactorizationByVariable(Collection<Expression> expressionsForFactorizationByVariable, Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
-        Collection<Expression> subExpressionWithoutVariable = new LinkedList<>();
-        for (Expression subExpression : expression.getExpressions()) {
-            if (!subExpression.getVariables().contains(variable) || containsAncestor(subExpression, variable, wordOrdersAncestorMap)) {
-                subExpressionWithoutVariable.add(subExpression);
-            }
-        }
-
-        if (subExpressionWithoutVariable.size() < expression.getExpressions().size() - 1) {
-            expressionsForFactorizationByVariable.add(expression);
-        }
-        for (Expression subExpression : subExpressionWithoutVariable) {
-            getExpressionsForFactorizationByVariable(expressionsForFactorizationByVariable, subExpression, variable, wordOrdersAncestorMap);
-        }
-    }
-
-    private boolean containsAncestor(Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
-        Collection<Integer> ancestors = wordOrdersAncestorMap.get(variable.getWordOrder());
+    private boolean containsAncestor(Expression expression, Integer variableWordOrder, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
+        Collection<Integer> ancestors = wordOrdersAncestorMap.get(variableWordOrder);
         if (ancestors != null) {
             Set<Integer> expressionVariablesWordOrder = new HashSet<>();
             for (Variable expressionVariable : expression.getVariables()) {
@@ -114,7 +93,7 @@ public class QueryBasedFactorizer implements Factorizer {
     private void factorizeExpressionByVariable(Expression expression, Variable variable, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
         boolean full = true;
         for (Expression subExpression : expression.getExpressions()) {
-            if (!subExpression.getVariables().contains(variable) || containsAncestor(subExpression, variable, wordOrdersAncestorMap)) {
+            if (!subExpression.getVariables().contains(variable) || containsAncestor(subExpression, variable.getWordOrder(), wordOrdersAncestorMap)) {
                 full = false;
             }
         }
@@ -150,7 +129,7 @@ public class QueryBasedFactorizer implements Factorizer {
         newExpressions.add(variableExpression);
 
         for (Expression subExpression : expression.getExpressions()) {
-            if (subExpression.getVariables().contains(variable) && !containsAncestor(subExpression, variable, wordOrdersAncestorMap)) {
+            if (subExpression.getVariables().contains(variable) && !containsAncestor(subExpression, variable.getWordOrder(), wordOrdersAncestorMap)) {
                 subExpression.getVariables().remove(variable);
                 if (!subExpression.getVariables().isEmpty() || !subExpression.getExpressions().isEmpty()) {
                     variableExpression.getExpressions().add(subExpression);
@@ -189,22 +168,41 @@ public class QueryBasedFactorizer implements Factorizer {
         }
     }
 
-    private Collection<Variable> getVariablesByWordOrder(Expression expression, int wordOrder) {
-        Collection<Variable> variablesByWordOrder = new HashSet<Variable>();
-        getVariablesByWordOrder(variablesByWordOrder, expression, wordOrder);
+    private Map<Variable, Collection<Expression>> getVariablesByWordOrder(Expression expression, int wordOrder, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
+        Map<Variable, Collection<Expression>> variablesByWordOrder = new HashMap<Variable, Collection<Expression>>();
+        getVariablesByWordOrder(variablesByWordOrder, expression, wordOrder, wordOrdersAncestorMap);
         return variablesByWordOrder;
     }
 
-    private void getVariablesByWordOrder(Collection<Variable> variablesByWordOrder, Expression expression, int wordOrder) {
-        for (Variable variable : expression.getVariables()) {
-            if (variable.getWordOrder() == wordOrder) {
-                variablesByWordOrder.add(variable);
+    private void getVariablesByWordOrder(Map<Variable, Collection<Expression>> variablesByWordOrder, Expression expression, int wordOrder, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
+        Map<Variable, Integer> variablesCount = new HashMap<>();
+        for (Expression subExpression : expression.getExpressions()) {
+            if (subExpression.getVariables().size() > 1 && !containsAncestor(subExpression, wordOrder, wordOrdersAncestorMap)) {
+                for (Variable variable : subExpression.getVariables()) {
+                    if (variable.getWordOrder() == wordOrder) {
+                        Integer count = variablesCount.get(variable);
+                        if (count == null) {
+                            count = 0;
+                        }
+                        variablesCount.put(variable, count + 1);
+                    }
+                }
+            }
+
+            getVariablesByWordOrder(variablesByWordOrder, subExpression, wordOrder, wordOrdersAncestorMap);
+        }
+
+        for (Map.Entry<Variable, Integer> variableCount : variablesCount.entrySet()) {
+            if (variableCount.getValue() > 1) {
+                Collection<Expression> expressions = variablesByWordOrder.get(variableCount.getKey());
+                if (expressions == null) {
+                    expressions = new HashSet<>();
+                    variablesByWordOrder.put(variableCount.getKey(), expressions);
+                }
+                expressions.add(expression);
             }
         }
 
-        for (Expression subExpression : expression.getExpressions()) {
-            getVariablesByWordOrder(variablesByWordOrder, subExpression, wordOrder);
-        }
     }
 
 }
