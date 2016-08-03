@@ -139,6 +139,7 @@ public class Experiments2 {
                     int paper = (int) (Math.random() * i * 100);
                     int year = (int) (Math.random() * i * 100);
                     int conference = (int) (Math.random() * i * 100);
+                    int organization = (int) (Math.random() * i * 100);
                     switch (queryName) {
                         case "query03":
                             wordMappings.add(j, 3, "ans" + i);
@@ -183,16 +184,16 @@ public class Experiments2 {
                             break;
                         case "query12":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + j);
-                            wordMappings.add(j, 9, "year" + j);
-                            wordMappings.add(j, 11, "author" + j);
-                            wordMappings.add(j, 13, "org" + j);
+                            wordMappings.add(j, 6, "paper" + paper);
+                            wordMappings.add(j, 9, "year" + year);
+                            wordMappings.add(j, 11, "author" + author);
+                            wordMappings.add(j, 13, "org" + organization);
                             break;
                         case "query13":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 5, "paper" + j);
-                            wordMappings.add(j, 8, "author" + j);
-                            wordMappings.add(j, 10, "org" + j);
+                            wordMappings.add(j, 5, "paper" + paper);
+                            wordMappings.add(j, 8, "author" + author);
+                            wordMappings.add(j, 10, "org" + organization);
                             break;
                     }
                 }
