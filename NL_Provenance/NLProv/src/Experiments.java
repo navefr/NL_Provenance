@@ -182,7 +182,6 @@ public class Experiments {
                             wordMappings.add(j, 3, "ans" + i);
                             wordMappings.add(j, 5, "paper" + j);
                             wordMappings.add(j, 8, "author" + j);
-                            wordMappings.add(j, 10, "org" + j);
                             break;
                     }
                 }

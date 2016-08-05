@@ -154,60 +154,66 @@ public class Experiments3 {
                 WordMappings wordMappings = new WordMappings();
                 result.put(tuple, wordMappings);
                 for (int j = 0; j < integer; j++) {
+
+                    int author = (int) (Math.random() * integer / 2);
+                    int paper = (int) (Math.random() * integer / 2);
+                    int year = (int) (Math.random() * integer / 2);
+                    int conference = (int) (Math.random() * integer / 2);
+                    int organization = (int) (Math.random() * integer / 2);
+
                     switch (queryName) {
                         case "query03":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + j);
-                            wordMappings.add(j, 10, "year" + j);
+                            wordMappings.add(j, 6, "paper" + paper);
+                            wordMappings.add(j, 10, "year" + year);
                             break;
                         case "query04":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 8, "paper" + j);
+                            wordMappings.add(j, 8, "paper" + paper);
                             break;
                         case "query06":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + j);
-                            wordMappings.add(j, 10, "year" + j);
-                            wordMappings.add(j, 13, "year" + j);
+                            wordMappings.add(j, 6, "paper" + paper);
+                            wordMappings.add(j, 10, "year" + year);
+                            wordMappings.add(j, 13, "year" + year);
                             break;
                         case "query07":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 8, "conference" + j);
+                            wordMappings.add(j, 8, "conference" + conference);
                             break;
                         case "query08":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 5, "conference" + j);
+                            wordMappings.add(j, 5, "conference" + conference);
                             break;
                         case "query09":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + j);
-                            wordMappings.add(j, 9, "conference" + j);
+                            wordMappings.add(j, 6, "paper" + paper);
+                            wordMappings.add(j, 9, "conference" + conference);
                             break;
                         case "query10":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + j);
-                            wordMappings.add(j, 9, "conference" + j);
-                            wordMappings.add(j, 11, "year" + j);
+                            wordMappings.add(j, 6, "paper" + paper);
+                            wordMappings.add(j, 9, "conference" + conference);
+                            wordMappings.add(j, 11, "year" + year);
                             break;
                         case "query11":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 5, "author" + j);
-                            wordMappings.add(j, 8, "paper" + j);
-                            wordMappings.add(j, 11, "conference" + j);
-                            wordMappings.add(j, 13, "year" + j);
+                            wordMappings.add(j, 5, "author" + author);
+                            wordMappings.add(j, 8, "paper" + paper);
+                            wordMappings.add(j, 11, "conference" + conference);
+                            wordMappings.add(j, 13, "year" + year);
                             break;
                         case "query12":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + j);
-                            wordMappings.add(j, 9, "year" + j);
-                            wordMappings.add(j, 11, "author" + j);
-                            wordMappings.add(j, 13, "org" + j);
+                            wordMappings.add(j, 6, "paper" + paper);
+                            wordMappings.add(j, 9, "year" + year);
+                            wordMappings.add(j, 11, "author" + author);
+                            wordMappings.add(j, 13, "org" + organization);
                             break;
                         case "query13":
                             wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 5, "paper" + j);
-                            wordMappings.add(j, 8, "author" + j);
-                            wordMappings.add(j, 10, "org" + j);
+                            wordMappings.add(j, 5, "paper" + paper);
+                            wordMappings.add(j, 8, "author" + author);
                             break;
                     }
                 }

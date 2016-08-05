@@ -193,7 +193,6 @@ public class Experiments2 {
                             wordMappings.add(j, 3, "ans" + i);
                             wordMappings.add(j, 5, "paper" + paper);
                             wordMappings.add(j, 8, "author" + author);
-                            wordMappings.add(j, 10, "org" + organization);
                             break;
                     }
                 }
