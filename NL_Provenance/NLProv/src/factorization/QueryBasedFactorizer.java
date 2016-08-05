@@ -177,7 +177,7 @@ public class QueryBasedFactorizer implements Factorizer {
     private void getVariablesByWordOrder(Map<Variable, Collection<Expression>> variablesByWordOrder, Expression expression, int wordOrder, Map<Integer, Collection<Integer>> wordOrdersAncestorMap) {
         Map<Variable, Integer> variablesCount = new HashMap<>();
         for (Expression subExpression : expression.getExpressions()) {
-            if (subExpression.getVariables().size() > 1 && !containsAncestor(subExpression, wordOrder, wordOrdersAncestorMap)) {
+            if (!containsAncestor(subExpression, wordOrder, wordOrdersAncestorMap)) {
                 for (Variable variable : subExpression.getVariables()) {
                     if (variable.getWordOrder() == wordOrder) {
                         Integer count = variablesCount.get(variable);
