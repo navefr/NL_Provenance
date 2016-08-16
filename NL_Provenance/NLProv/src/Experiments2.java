@@ -20,9 +20,7 @@ import rdbms.RDBMS;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Created by nfrost on 4/1/2016
@@ -86,114 +84,111 @@ public class Experiments2 {
             components.SQLTranslator.translate(query, db);
 
             if (query.blocks.size() == 1) {
-                Map<ITuple, Pair<WordMappings, Integer>> resultsAndWordMappings = getResultsAndWordMappings(queryName);
+                Map<ITuple, Pair<Collection<WordMappings>, Integer>> resultsAndWordMappings = getResultsAndWordMappings(queryName, 5);
 
-                System.out.println(String.format("%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s", "#UniqueValues", "%SharedValues", "#Derivations", "#Elements", "SingleTime", "MultipleTime", "FactorizationTime", "SummarizedTime", "FactorizationSize"));
-                for (Map.Entry<ITuple, Pair<WordMappings, Integer>> resultsAndWordMappingsEntry : resultsAndWordMappings.entrySet()) {
-                    WordMappings wordMappings = resultsAndWordMappingsEntry.getValue().getLeft();
+                System.out.println(String.format("%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s\t%20s", "#UniqueValues", "%SharedValues", "#Derivations", "#Elements", "TotalTime", "FactorizationTime", "SentenceTime", "FactorizationSize"));
+                for (Map.Entry<ITuple, Pair<Collection<WordMappings>, Integer>> resultsAndWordMappingsEntry : resultsAndWordMappings.entrySet()) {
+                    Collection<WordMappings> allWordMappings = resultsAndWordMappingsEntry.getValue().getLeft();
                     Integer uniqueValues = resultsAndWordMappingsEntry.getValue().getRight();
 
-                    long startSingleTime = System.currentTimeMillis();
-                    SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
-                    long endSingleTime = System.currentTimeMillis();
-
-                    int multipleIterations = 3;
                     long factorizationTime = 0;
                     long startMultipleTime = System.currentTimeMillis();
-                    for (int i = 0; i < multipleIterations; i++) {
+                    for (WordMappings wordMappings : allWordMappings) {
                         factorizationTime += new MultipleDerivationFactorizedAnswerTreeBuilder(new QueryBasedFactorizer(query.originalParseTree)).buildParseTree(query.originalParseTree, wordMappings).getFactorizationTime();
                     }
                     long endMultipleTime = System.currentTimeMillis();
-                    factorizationTime = factorizationTime / multipleIterations;
-                    long multipleTime = (endMultipleTime - startMultipleTime) / multipleIterations;
+                    factorizationTime = factorizationTime / allWordMappings.size();
+                    long multipleTime = (endMultipleTime - startMultipleTime) / allWordMappings.size();
 
-                    long startSummarizedTime = System.currentTimeMillis();
-                    MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
-                    long endSummarizedTime = System.currentTimeMillis();
+                    WordMappings wordMappingsRepresentative = allWordMappings.iterator().next();
 
-                    Expression factorize = new QueryBasedFactorizer(query.originalParseTree).factorize(wordMappings);
+                    Expression factorize = new QueryBasedFactorizer(query.originalParseTree).factorize(wordMappingsRepresentative);
 
-                    int derivations = wordMappings.getLastDerivation() + 1;
-                    System.out.println(String.format("%20d\t%20s\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d", uniqueValues, 100 * (derivations - uniqueValues) / derivations + "%", derivations, wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, multipleTime, factorizationTime, endSummarizedTime - startSummarizedTime, getExpressionSize(factorize)));
+                    int derivations = wordMappingsRepresentative.getLastDerivation() + 1;
+                    System.out.println(String.format("%20d\t%20s\t%20d\t%20d\t%20d\t%20d\t%20d\t%20d", uniqueValues, 100 * (derivations - uniqueValues) / derivations + "%", derivations, wordMappingsRepresentative.getWordMappingByDerivation().get(0).size(), multipleTime, factorizationTime, multipleTime - factorizationTime, getExpressionSize(factorize)));
                 }
                 System.out.println();
             }
         }
     }
 
-    private static Map<ITuple, Pair<WordMappings, Integer>> getResultsAndWordMappings(String queryName) throws Exception {
-        Map<ITuple, Pair<WordMappings, Integer>> result = new TreeMap<>();
+    private static Map<ITuple, Pair<Collection<WordMappings>, Integer>> getResultsAndWordMappings(String queryName, int executionsAmount) throws Exception {
+        Map<ITuple, Pair<Collection<WordMappings>, Integer>> result = new TreeMap<>();
 
         if (queryName.equals("query00_init")) {
             WordMappings wordMappings = new WordMappings();
             wordMappings.add(0, 3, "ans");
             ITuple tuple = new Tuple(Arrays.<ITerm>asList(new StringTerm("ans")));
-            result.put(tuple, new ImmutablePair<WordMappings, Integer>(wordMappings, 1));
+            result.put(tuple, new ImmutablePair<Collection<WordMappings>, Integer>(Arrays.asList(wordMappings), 1));
         } else {
             for (int i = 0; i < 51; i++) {
-                WordMappings wordMappings = new WordMappings();
                 ITuple tuple = new Tuple(Arrays.<ITerm>asList(new StringTerm("ans" + i)));
-                result.put(tuple, new ImmutablePair<WordMappings, Integer>(wordMappings, i * 100));
-                for (int j = 0; j < 5000; j++) {
-                    int author = (int) (Math.random() * i * 100);
-                    int paper = (int) (Math.random() * i * 100);
-                    int year = (int) (Math.random() * i * 100);
-                    int conference = (int) (Math.random() * i * 100);
-                    int organization = (int) (Math.random() * i * 100);
-                    switch (queryName) {
-                        case "query03":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + paper);
-                            wordMappings.add(j, 10, "year" + year);
-                            break;
-                        case "query04":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 8, "paper" + paper);
-                            break;
-                        case "query06":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + paper);
-                            wordMappings.add(j, 10, "year" + year);
-                            wordMappings.add(j, 13, "year" + year);
-                            break;
-                        case "query07":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 8, "conference" + conference);
-                            break;
-                        case "query08":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 5, "conference" + conference);
-                            break;
-                        case "query09":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + paper);
-                            wordMappings.add(j, 9, "conference" + conference);
-                            break;
-                        case "query10":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + paper);
-                            wordMappings.add(j, 9, "conference" + conference);
-                            wordMappings.add(j, 11, "year" + year);
-                            break;
-                        case "query11":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 5, "author" + author);
-                            wordMappings.add(j, 8, "paper" + paper);
-                            wordMappings.add(j, 11, "conference" + conference);
-                            wordMappings.add(j, 13, "year" + year);
-                            break;
-                        case "query12":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 6, "paper" + paper);
-                            wordMappings.add(j, 9, "year" + year);
-                            wordMappings.add(j, 11, "author" + author);
-                            wordMappings.add(j, 13, "org" + organization);
-                            break;
-                        case "query13":
-                            wordMappings.add(j, 3, "ans" + i);
-                            wordMappings.add(j, 5, "paper" + paper);
-                            wordMappings.add(j, 8, "author" + author);
-                            break;
+                Collection<WordMappings> allWordMappings = new ArrayList<>();
+                result.put(tuple, new ImmutablePair<Collection<WordMappings>, Integer>(allWordMappings, i * 100));
+                for (int executionNum = 0; executionNum < executionsAmount; executionNum++) {
+                    WordMappings wordMappings = new WordMappings();
+                    allWordMappings.add(wordMappings);
+                    for (int j = 0; j < 5000; j++) {
+                        int author = (int) (Math.random() * i * 100);
+                        int paper = (int) (Math.random() * i * 100);
+                        int year = (int) (Math.random() * i * 100);
+                        int conference = (int) (Math.random() * i * 100);
+                        int organization = (int) (Math.random() * i * 100);
+                        switch (queryName) {
+                            case "query03":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 6, "paper" + paper);
+                                wordMappings.add(j, 10, "year" + year);
+                                break;
+                            case "query04":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 8, "paper" + paper);
+                                break;
+                            case "query06":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 6, "paper" + paper);
+                                wordMappings.add(j, 10, "year" + year);
+                                wordMappings.add(j, 13, "year" + year);
+                                break;
+                            case "query07":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 8, "conference" + conference);
+                                break;
+                            case "query08":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 5, "conference" + conference);
+                                break;
+                            case "query09":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 6, "paper" + paper);
+                                wordMappings.add(j, 9, "conference" + conference);
+                                break;
+                            case "query10":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 6, "paper" + paper);
+                                wordMappings.add(j, 9, "conference" + conference);
+                                wordMappings.add(j, 11, "year" + year);
+                                break;
+                            case "query11":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 5, "author" + author);
+                                wordMappings.add(j, 8, "paper" + paper);
+                                wordMappings.add(j, 11, "conference" + conference);
+                                wordMappings.add(j, 13, "year" + year);
+                                break;
+                            case "query12":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 6, "paper" + paper);
+                                wordMappings.add(j, 9, "year" + year);
+                                wordMappings.add(j, 11, "author" + author);
+                                wordMappings.add(j, 13, "org" + organization);
+                                break;
+                            case "query13":
+                                wordMappings.add(j, 3, "ans" + i);
+                                wordMappings.add(j, 5, "paper" + paper);
+                                wordMappings.add(j, 8, "author" + author);
+                                break;
+                        }
                     }
                 }
             }
