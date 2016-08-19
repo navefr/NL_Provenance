@@ -170,7 +170,7 @@ public class Experiments {
                         case "query12":
                             wordMappings.add(j, 3, "ans" + i);
                             wordMappings.add(j, 6, "paper" + j);
-                            wordMappings.add(j, 9, "year" + j);
+                            wordMappings.add(j, 9, "year" + i);
                             wordMappings.add(j, 11, "author" + j);
                             wordMappings.add(j, 13, "org" + j);
                             break;
