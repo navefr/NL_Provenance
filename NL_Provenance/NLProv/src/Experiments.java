@@ -85,7 +85,7 @@ public class Experiments {
             if (query.blocks.size() == 1) {
                 Map<ITuple, WordMappings> resultsAndWordMappings = getResultsAndWordMappings(queryName);
 
-                System.out.println(String.format("%20s\t%20s\t%20s\t%20s\t%20s\t%20s", "#Derivations", "#Elements", "SingleTime", "MultipleTime", "FactorizationTime", "SummarizedTime"));
+                System.out.println(String.format("%20s\t%20s\t%20s\t%20s\t%20s\t%20s", "#Derivations", "#Elements", "SingleTime", "TotalTime", "FactorizationTime", "SentenceTime"));
                 for (Map.Entry<ITuple, WordMappings> resultsAndWordMappingsEntry : resultsAndWordMappings.entrySet()) {
                     WordMappings wordMappings = resultsAndWordMappingsEntry.getValue();
 
@@ -93,7 +93,7 @@ public class Experiments {
                     SingleDerivationAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
                     long endSingleTime = System.currentTimeMillis();
 
-                    int multipleIterations = 3;
+                    int multipleIterations = 15;
                     long factorizationTime = 0;
                     long startMultipleTime = System.currentTimeMillis();
                     for (int i = 0; i < multipleIterations; i++) {
@@ -103,11 +103,7 @@ public class Experiments {
                     factorizationTime = factorizationTime / multipleIterations;
                     long multipleTime = (endMultipleTime - startMultipleTime) / multipleIterations;
 
-                    long startSummarizedTime = System.currentTimeMillis();
-                    MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(query.originalParseTree, wordMappings).getParseTree();
-                    long endSummarizedTime = System.currentTimeMillis();
-
-                    System.out.println(String.format("%20d\t%20d\t%20d\t%20d\t%20d\t%20d", wordMappings.getLastDerivation() + 1, wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, multipleTime, factorizationTime, endSummarizedTime - startSummarizedTime));
+                    System.out.println(String.format("%20d\t%20d\t%20d\t%20d\t%20d\t%20d", wordMappings.getLastDerivation() + 1, wordMappings.getWordMappingByDerivation().get(0).size(), endSingleTime - startSingleTime, multipleTime, factorizationTime, multipleTime - factorizationTime));
                 }
                 System.out.println();
             }
