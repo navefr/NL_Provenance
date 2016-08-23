@@ -1398,7 +1398,7 @@ public class NLProvServer {
                     "\tbackground: #f5f5f5;\n" +
                     "\tborder-collapse: separate;\n" +
                     "\tbox-shadow: inset 0 1px 0 #fff;\n" +
-                    "\tfont-size: 12px;\n" +
+                    "\tfont-size: 18px;\n" +
                     "\tline-height: 24px;\n" +
                     "\tmargin: 30px auto;\n" +
                     "\ttext-align: left;\n" +

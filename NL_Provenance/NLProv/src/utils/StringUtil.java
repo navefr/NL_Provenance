@@ -18,7 +18,12 @@ public class StringUtil {
         } else if (isNumeric(str)) {
             return removeSuffixDot(str);
         } else {
-            return "\"" + removeSuffixDot(str) + "\"";
+            String[] strSplit = str.split(" ");
+            if (strSplit.length <= 3) {
+                return removeSuffixDot(str);
+            } else {
+                return "\"" + removeSuffixDot(str) + "\"";
+            }
         }
     }
 
