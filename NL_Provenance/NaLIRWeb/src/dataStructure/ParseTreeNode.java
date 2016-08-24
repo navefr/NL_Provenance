@@ -25,8 +25,9 @@ public class ParseTreeNode implements Serializable
 	public ArrayList<MappedSchemaElement> mappedElements = new ArrayList<MappedSchemaElement>(); 
 	public int choice = -1; 
 	public boolean isAdded = false; 
-	
-	public ParseTreeNode(int wordOrder, String label, String pos, String relationship, ParseTreeNode parent) // node exist in sentence;
+	public boolean isBold = false;
+
+    public ParseTreeNode(int wordOrder, String label, String pos, String relationship, ParseTreeNode parent) // node exist in sentence;
 	{
 		this.nodeID = NODEID;
 		NODEID++; 
@@ -82,5 +83,14 @@ public class ParseTreeNode implements Serializable
 		{
 			return label; 
 		}
-	}	
+	}
+
+    public void setBold(boolean bold) {
+        isBold = bold;
+    }
+
+    public boolean isBold() {
+        return isBold;
+    }
+
 }

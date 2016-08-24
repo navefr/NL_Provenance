@@ -259,6 +259,6 @@ public class NaturalLanguageProvenanceCreator {
                 answerTree = MultipleDerivationSummarizedAnswerTreeBuilder.getInstance().buildParseTree(queryOriginalParseTree, wordReplacementMap).getParseTree();
                 break;
         }
-        return SentenceBuilder.getInstance().buildSentence(answerTree);
+        return SentenceBuilder.getInstance().buildSentenceBold(answerTree);
     }
 }

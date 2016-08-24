@@ -90,6 +90,7 @@ public class FactorizedAnswerTreeBuilder {
                 }
                 if (!variableMoved) {
                     variableNode.label = variable.getValue();
+                    variableNode.setBold(true);
                     nodesCreatedByExpression.add(variableNode);
                     addNodeMapping(variableNode, variableNode);
                 }
@@ -144,7 +145,7 @@ public class FactorizedAnswerTreeBuilder {
                 }
 
                 node.label = sb.toString();
-
+                node.setBold(true);
                 nodesCreatedByExpression.add(node);
             }
         }
@@ -179,6 +180,7 @@ public class FactorizedAnswerTreeBuilder {
                 firstAnd = false;
             } else {
                 parentNode = finalAnswerTree.buildNode((new String[]{String.valueOf(lastWordOrderInParentSubTree + 1), "\nand", "NA", String.valueOf(jointParent.wordOrder), "NA"}));
+                parentNode.setBold(true);
                 nodesCreatedByExpression.add(parentNode);
             }
             for (ParseTreeNode node : nodesInExpressionSubTreeRoots) {
@@ -286,10 +288,12 @@ public class FactorizedAnswerTreeBuilder {
 
     private Collection<ParseTreeNode> attachCopyOfSubTreeBefore(ParseTree parseTree, ParseTreeNode parent, ParseTreeNode subTreeRoot, Map<Integer, String> nodeValues, int wordOrder) {
         String nodeValue = nodeValues.get(subTreeRoot.wordOrder);
+        boolean isNewValue = false;
         if (nodeValue == null) {
             nodeValue = subTreeRoot.label;
         } else {
             nodeValue = StringUtil.getQuoatedString(nodeValue);
+            isNewValue = true;
         }
 
         Collection<ParseTreeNode> nodesInSubTree = parseTree.getNodesInSubtree(subTreeRoot);
@@ -304,6 +308,7 @@ public class FactorizedAnswerTreeBuilder {
         ParseTreeUtil.shiftWordOrders(parseTree, nodesInSubTree, wordOrder, maxWordOrder + 1 - minWordOrder);
 
         ParseTreeNode newNode = parseTree.buildNodeByParentId((new String[]{String.valueOf(lastWordOrder + subTreeRoot.wordOrder), nodeValue, "NA", String.valueOf(parent.nodeID), "NA"}));
+        newNode.setBold(isNewValue);
         addNodeMapping(subTreeRoot, newNode);
 
         Collection<ParseTreeNode> attachedNodes = new HashSet<>();
@@ -317,12 +322,16 @@ public class FactorizedAnswerTreeBuilder {
 
     private Collection<ParseTreeNode> attachCopyOfSubTree(ParseTree parseTree, ParseTreeNode parent, ParseTreeNode subTreeRoot, Map<Integer, String> nodeValues, int lastWordOrder) {
         String nodeValue = nodeValues.get(subTreeRoot.nodeID);
+        boolean isBold = false;
         if (nodeValue == null) {
             nodeValue = subTreeRoot.label;
+            isBold = subTreeRoot.isBold();
         } else {
             nodeValue = StringUtil.getQuoatedString(nodeValue);
+            isBold = true;
         }
         ParseTreeNode newNode = parseTree.buildNodeByParentId((new String[]{String.valueOf(lastWordOrder + subTreeRoot.wordOrder), nodeValue, "NA", String.valueOf(parent.nodeID), "NA"}));
+        newNode.setBold(isBold);
         addNodeMapping(subTreeRoot, newNode);
 
         Collection<ParseTreeNode> attachedNodes = new HashSet<>();

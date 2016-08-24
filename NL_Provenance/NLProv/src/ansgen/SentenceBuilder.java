@@ -36,6 +36,62 @@ public class SentenceBuilder {
         realiser = new Realiser(lexicon);
     }
 
+    public String buildSentenceBold(ParseTree parseTree) {
+
+        ArrayList<ParseTreeNode> orderedTreeNodes = new ArrayList<>();
+        for (ParseTreeNode originalParseTreeNode : parseTree.allNodes) {
+            orderedTreeNodes.add(originalParseTreeNode);
+        }
+        Collections.sort(orderedTreeNodes, new Comparator<ParseTreeNode>() {
+            public int compare(ParseTreeNode o1, ParseTreeNode o2) {
+                return o1.wordOrder - o2.wordOrder;
+            }
+        });
+
+        StringBuilder sentence = new StringBuilder();
+        for (ParseTreeNode parseTreeNode : orderedTreeNodes) {
+            if (parseTreeNode.parent != null && !parseTreeNode.tokenType.equals("CMT")) {
+                if (parseTreeNode.label.trim().toLowerCase().equals("and")) {
+                    sentence.append(parseTreeNode.label).append(" ");
+                } else {
+                    String[] valuesSeparateByAnd = parseTreeNode.label.split("and");
+                    boolean isFirst = !parseTreeNode.label.startsWith("and");
+                    boolean isMiddleOfQuote = false;
+                    for (String valueSeparatedByAnd : valuesSeparateByAnd) {
+                        if (isFirst) {
+                            isFirst = false;
+                        } else {
+                            if (isMiddleOfQuote && parseTreeNode.isBold()) {
+                                sentence.append("<b><i>");
+                            }
+                            sentence.append("and ");
+                            if (isMiddleOfQuote && parseTreeNode.isBold()) {
+                                sentence.append("</i></b>");
+                            }
+                        }
+                        if (parseTreeNode.isBold()) {
+                            sentence.append("<b><i>");
+                        }
+                        sentence.append(valueSeparatedByAnd).append(" ");
+                        if (parseTreeNode.isBold()) {
+                            sentence.append("</i></b>");
+                        }
+                        if ((valueSeparatedByAnd.trim().startsWith("\"") && !valueSeparatedByAnd.trim().endsWith("\"")) ||
+                                (valueSeparatedByAnd.trim().startsWith("\'") && !valueSeparatedByAnd.trim().endsWith("\'"))) {
+                            isMiddleOfQuote = true;
+                        }
+                        if (isMiddleOfQuote &&
+                                (!valueSeparatedByAnd.trim().startsWith("\"") && valueSeparatedByAnd.trim().endsWith("\"")) ||
+                                (!valueSeparatedByAnd.trim().startsWith("\'") && valueSeparatedByAnd.trim().endsWith("\'"))) {
+                            isMiddleOfQuote = false;
+                        }
+                    }
+                }
+            }
+        }
+        return sentence.toString();
+    }
+
     public String buildSentence(ParseTree parseTree) {
 
         ArrayList<ParseTreeNode> orderedTreeNodes = new ArrayList<>();

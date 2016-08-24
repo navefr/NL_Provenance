@@ -130,6 +130,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
                 ParseTreeNode newObjectNode = answerTree.buildNode((new String[]{String.valueOf(oldWordOrder), objectValue, "NA", String.valueOf(objectNode.wordOrder), "NA"}));
                 answerTree.buildNode((new String[]{String.valueOf(oldWordOrder + 1), "is", "NA", String.valueOf(objectNode.wordOrder), "NA"}));
                 answerTree.buildNode((new String[]{String.valueOf(oldWordOrder + 2), "the", "NA", String.valueOf(objectNode.wordOrder), "NA"}));
+                newObjectNode.setBold(true);
                 for (ParseTreeNode child : objectNode.children) {
                     handleProperties(wordReplacementMap, answerTree, child, queryToAnswerNodeMapping);
                 }
@@ -146,6 +147,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
         } else {
             if (objectValue != null) {
                 objectNode.label = objectValue;
+                objectNode.setBold(true);
             }
 
             for (ParseTreeNode child : objectNodeInParseTree.children) {
@@ -197,6 +199,7 @@ public abstract class AbstractAnswerParseTreeBuilder {
         ParseTreeNode nodeInAnswerTree = queryToAnswerNodeMapping.get(queryNode);
         if (nodeInAnswerTree != null) {
             nodeInAnswerTree.label = nodeValue;
+            nodeInAnswerTree.setBold(true);
 
             Collection<ParseTreeNode> nodesForDeletion = new LinkedList<ParseTreeNode>();
             for (ParseTreeNode childInAnswerTree : nodeInAnswerTree.children) {
