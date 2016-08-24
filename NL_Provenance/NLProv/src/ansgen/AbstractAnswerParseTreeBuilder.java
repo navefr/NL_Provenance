@@ -44,6 +44,10 @@ public abstract class AbstractAnswerParseTreeBuilder {
             if (!queryNode.function.equals("NA")) {
                 if (prepMap.containsKey(queryNode.label.toLowerCase())) {
                     replaceNodeValue(answerTree, queryNode, prepMap.get(queryNode.label.toLowerCase()), queryToAnswerNodeMapping);
+                    ParseTreeNode prepNode = queryToAnswerNodeMapping.get(queryNode);
+                    if (prepNode != null) {
+                        prepNode.setBold(false);
+                    }
                 }
             }
         }
