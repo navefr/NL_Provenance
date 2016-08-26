@@ -10,6 +10,15 @@ author(1498107,"Moti Yung",3276,"http://research.google.com/pubs/author3060.html
 author(1499564,"Lotfi A. Zadeh",566,"http://www.eecs.berkeley.edu/~zadeh/").
 author(1510276,"HongJiang Zhang",23014,"http://research.microsoft.com/en-us/um/people/hjzhang/").
 author(1531855,"Andrew Zisserman",13881,"http://www.robots.ox.ac.uk/~az/").
+author(53933,"Walid G. Aref",14369,"http://www.cs.purdue.edu/homes/aref/").
+author(64866,"S. Auer",0,"").
+author(237786,"Chi-Yin Chow",6206,"http://www.cs.cityu.edu.hk/~chiychow").
+author(285594,"Susan B. Davidson",18264,"http://www.cis.upenn.edu/~susan/").
+author(480630,"Alon Y. Halevy",3276,"http://www.cs.washington.edu/homes/alon/").
+author(583056,"H. V. Jagadish",17233,"http://www.eecs.umich.edu/~jag/").
+author(905774,"Mohamed F. Mokbel",17249,"http://www-users.cs.umn.edu/~mokbel/").
+author(1187542,"David Schwalb",0,"").
+author(1273644,"Ion Stoica",566,"http://www.cs.berkeley.edu/~istoica/").
 domain_author(298776,18).
 domain_author(631341,1).
 domain_author(631341,18).
@@ -35,6 +44,21 @@ domain_author(1499564,5).
 domain_author(1499564,9).
 domain_author(1510276,13).
 domain_author(1531855,11).
+domain_author(53933,7).
+domain_author(53933,18).
+domain_author(237786,14).
+domain_author(237786,18).
+domain_author(285594,18).
+domain_author(480630,5).
+domain_author(480630,18).
+domain_author(583056,7).
+domain_author(583056,18).
+domain_author(905774,7).
+domain_author(905774,18).
+domain_author(1187542,18).
+domain_author(1273644,14).
+domain_author(1273644,16).
+domain_author(1273644,17).
 organization(114,"Universidad de Buenos Aires","South America","http://www.uba.ar/").
 organization(566,"University of California Berkeley","North America","http://www.berkeley.edu/").
 organization(964,"Carnegie Mellon University","North America","http://www.cmu.edu/").
@@ -43,6 +67,13 @@ organization(3907,"University of Illinois Chicago","North America","http://www.u
 organization(13881,"University of Oxford","Europe","http://www.ox.ac.uk/").
 organization(16045,"Tel Aviv University","Asia & Oceania","http://www.tau.ac.il/").
 organization(23014,"Kingsoft","","http://www.kingsoft.com/").
+organization(566,"University of California Berkeley","North America","http://www.berkeley.edu/").
+organization(3276,"Google Inc.","North America","http://www.google.com/").
+organization(6206,"City University of Hong Kong","Asia & Oceania","http://www.cityu.edu.hk/").
+organization(14369,"Purdue University","North America","http://www.purdue.edu/").
+organization(17233,"University of Michigan","North America","http://www.umich.edu/").
+organization(17249,"University of Minnesota","North America","http://www.umn.edu/").
+organization(18264,"University of Pennsylvania","North America","http://www.upenn.edu/").
 writes(298776,225802).
 writes(298776,337824).
 writes(298776,701369).
@@ -2919,6 +2950,1174 @@ writes(1531855,2498055).
 writes(1531855,2498699).
 writes(1531855,2507138).
 writes(1531855,2523824).
+writes(53933,28).
+writes(53933,5646).
+writes(53933,140338).
+writes(53933,225734).
+writes(53933,228374).
+writes(53933,228538).
+writes(53933,230753).
+writes(53933,330727).
+writes(53933,337563).
+writes(53933,346187).
+writes(53933,347041).
+writes(53933,360697).
+writes(53933,370920).
+writes(53933,392487).
+writes(53933,392488).
+writes(53933,392851).
+writes(53933,392854).
+writes(53933,392855).
+writes(53933,393574).
+writes(53933,393630).
+writes(53933,467545).
+writes(53933,514611).
+writes(53933,514612).
+writes(53933,514613).
+writes(53933,514614).
+writes(53933,514615).
+writes(53933,514642).
+writes(53933,514705).
+writes(53933,515379).
+writes(53933,515441).
+writes(53933,515442).
+writes(53933,700533).
+writes(53933,700582).
+writes(53933,700583).
+writes(53933,701469).
+writes(53933,701472).
+writes(53933,701473).
+writes(53933,701474).
+writes(53933,701475).
+writes(53933,701667).
+writes(53933,701832).
+writes(53933,702016).
+writes(53933,702436).
+writes(53933,702893).
+writes(53933,702894).
+writes(53933,702895).
+writes(53933,702896).
+writes(53933,703108).
+writes(53933,703647).
+writes(53933,703648).
+writes(53933,704206).
+writes(53933,704208).
+writes(53933,704485).
+writes(53933,706182).
+writes(53933,706183).
+writes(53933,772819).
+writes(53933,861970).
+writes(53933,1061457).
+writes(53933,1164707).
+writes(53933,1165232).
+writes(53933,1165233).
+writes(53933,1165556).
+writes(53933,1165557).
+writes(53933,1186032).
+writes(53933,1186039).
+writes(53933,1193827).
+writes(53933,1199283).
+writes(53933,1199301).
+writes(53933,1201248).
+writes(53933,1288027).
+writes(53933,1293073).
+writes(53933,1402777).
+writes(53933,1404142).
+writes(53933,1404850).
+writes(53933,1405456).
+writes(53933,1414239).
+writes(53933,1447846).
+writes(53933,1453000).
+writes(53933,1453071).
+writes(53933,1453117).
+writes(53933,1453204).
+writes(53933,1453359).
+writes(53933,1453360).
+writes(53933,1453374).
+writes(53933,1453572).
+writes(53933,1453675).
+writes(53933,1453676).
+writes(53933,1454304).
+writes(53933,1459475).
+writes(53933,1498638).
+writes(53933,1505606).
+writes(53933,1505648).
+writes(53933,1506523).
+writes(53933,1506640).
+writes(53933,1506641).
+writes(53933,1507206).
+writes(53933,1507207).
+writes(53933,1507688).
+writes(53933,1599574).
+writes(53933,1702402).
+writes(53933,1735822).
+writes(53933,1786057).
+writes(53933,1786738).
+writes(53933,1834261).
+writes(53933,1848802).
+writes(53933,1877645).
+writes(53933,1877646).
+writes(53933,1896093).
+writes(53933,1896608).
+writes(53933,1916553).
+writes(53933,1916554).
+writes(53933,1916597).
+writes(53933,1919539).
+writes(53933,1934906).
+writes(53933,1935152).
+writes(53933,2029568).
+writes(53933,2029676).
+writes(53933,2029800).
+writes(53933,2029801).
+writes(53933,2208892).
+writes(53933,2308617).
+writes(53933,2308624).
+writes(53933,2324301).
+writes(53933,2433427).
+writes(53933,2433724).
+writes(53933,2434137).
+writes(53933,2458183).
+writes(53933,2524682).
+writes(53933,2532197).
+writes(53933,2532522).
+writes(53933,2591422).
+writes(53933,2591912).
+writes(53933,2611355).
+writes(53933,2655582).
+writes(53933,2726004).
+writes(53933,2749853).
+writes(53933,2749854).
+writes(53933,2750428).
+writes(53933,2750434).
+writes(53933,2750559).
+writes(53933,2751622).
+writes(53933,2757964).
+writes(53933,2765732).
+writes(53933,2765855).
+writes(53933,2765934).
+writes(53933,2829373).
+writes(53933,2829406).
+writes(53933,2829522).
+writes(53933,2829627).
+writes(53933,2829628).
+writes(53933,2855231).
+writes(53933,2855232).
+writes(53933,2855957).
+writes(53933,2855958).
+writes(53933,2855959).
+writes(53933,2856895).
+writes(53933,2856984).
+writes(53933,2856985).
+writes(53933,2860889).
+writes(64866,1640499).
+writes(237786,5920).
+writes(237786,61379).
+writes(237786,514796).
+writes(237786,514797).
+writes(237786,515373).
+writes(237786,515815).
+writes(237786,515884).
+writes(237786,515885).
+writes(237786,515929).
+writes(237786,515930).
+writes(237786,697780).
+writes(237786,699260).
+writes(237786,700388).
+writes(237786,701090).
+writes(237786,702895).
+writes(237786,802746).
+writes(237786,1064164).
+writes(237786,1164739).
+writes(237786,1164845).
+writes(237786,1164846).
+writes(237786,1165617).
+writes(237786,1403354).
+writes(237786,1453048).
+writes(237786,1453049).
+writes(237786,1453337).
+writes(237786,1507206).
+writes(237786,1935279).
+writes(237786,2020219).
+writes(237786,2029641).
+writes(237786,2029642).
+writes(237786,2217997).
+writes(237786,2365020).
+writes(237786,2588874).
+writes(237786,2601869).
+writes(237786,2601870).
+writes(237786,2601871).
+writes(237786,2751087).
+writes(237786,2753229).
+writes(237786,2753230).
+writes(237786,2765732).
+writes(237786,2829225).
+writes(237786,2856761).
+writes(237786,2856762).
+writes(285594,89250).
+writes(285594,111548).
+writes(285594,146756).
+writes(285594,225730).
+writes(285594,225796).
+writes(285594,225985).
+writes(285594,228808).
+writes(285594,228854).
+writes(285594,229064).
+writes(285594,336979).
+writes(285594,337781).
+writes(285594,337782).
+writes(285594,356340).
+writes(285594,356358).
+writes(285594,361688).
+writes(285594,392663).
+writes(285594,419084).
+writes(285594,486305).
+writes(285594,697092).
+writes(285594,697783).
+writes(285594,698781).
+writes(285594,700653).
+writes(285594,700772).
+writes(285594,700776).
+writes(285594,700899).
+writes(285594,701085).
+writes(285594,701086).
+writes(285594,701317).
+writes(285594,701318).
+writes(285594,703768).
+writes(285594,710374).
+writes(285594,710396).
+writes(285594,710452).
+writes(285594,710453).
+writes(285594,710454).
+writes(285594,973232).
+writes(285594,973254).
+writes(285594,1216756).
+writes(285594,1293183).
+writes(285594,1293309).
+writes(285594,1293403).
+writes(285594,1293521).
+writes(285594,1337816).
+writes(285594,1338307).
+writes(285594,1353329).
+writes(285594,1353361).
+writes(285594,1363756).
+writes(285594,1375505).
+writes(285594,1388643).
+writes(285594,1389848).
+writes(285594,1402740).
+writes(285594,1402859).
+writes(285594,1402860).
+writes(285594,1403107).
+writes(285594,1403274).
+writes(285594,1403498).
+writes(285594,1405558).
+writes(285594,1453388).
+writes(285594,1453532).
+writes(285594,1453533).
+writes(285594,1453534).
+writes(285594,1453871).
+writes(285594,1454199).
+writes(285594,1471563).
+writes(285594,1471573).
+writes(285594,1505800).
+writes(285594,1505859).
+writes(285594,1505909).
+writes(285594,1506043).
+writes(285594,1507849).
+writes(285594,1508086).
+writes(285594,1548338).
+writes(285594,1548355).
+writes(285594,1588831).
+writes(285594,1675539).
+writes(285594,1763328).
+writes(285594,1792774).
+writes(285594,1793920).
+writes(285594,1813835).
+writes(285594,1827201).
+writes(285594,1834270).
+writes(285594,1838446).
+writes(285594,1845306).
+writes(285594,1865239).
+writes(285594,1896864).
+writes(285594,1915966).
+writes(285594,1915967).
+writes(285594,1919663).
+writes(285594,2054549).
+writes(285594,2209026).
+writes(285594,2209083).
+writes(285594,2210684).
+writes(285594,2210685).
+writes(285594,2212052).
+writes(285594,2255840).
+writes(285594,2264821).
+writes(285594,2293397).
+writes(285594,2293658).
+writes(285594,2293659).
+writes(285594,2336651).
+writes(285594,2351143).
+writes(285594,2351193).
+writes(285594,2487235).
+writes(285594,2532201).
+writes(285594,2532202).
+writes(285594,2532246).
+writes(285594,2532247).
+writes(285594,2533312).
+writes(285594,2550775).
+writes(285594,2551197).
+writes(285594,2652437).
+writes(285594,2654276).
+writes(285594,2654278).
+writes(285594,2765667).
+writes(285594,2765767).
+writes(285594,2765768).
+writes(285594,2765842).
+writes(285594,2766073).
+writes(480630,1981).
+writes(480630,4728).
+writes(480630,5604).
+writes(480630,5857).
+writes(480630,10700).
+writes(480630,11544).
+writes(480630,11987).
+writes(480630,12349).
+writes(480630,12352).
+writes(480630,12353).
+writes(480630,12354).
+writes(480630,12665).
+writes(480630,43129).
+writes(480630,85542).
+writes(480630,85544).
+writes(480630,104312).
+writes(480630,133781).
+writes(480630,133782).
+writes(480630,133790).
+writes(480630,133903).
+writes(480630,148417).
+writes(480630,158960).
+writes(480630,225742).
+writes(480630,225811).
+writes(480630,225842).
+writes(480630,225843).
+writes(480630,225916).
+writes(480630,225917).
+writes(480630,228528).
+writes(480630,229535).
+writes(480630,246983).
+writes(480630,330059).
+writes(480630,343826).
+writes(480630,358433).
+writes(480630,372338).
+writes(480630,387824).
+writes(480630,388717).
+writes(480630,393003).
+writes(480630,393211).
+writes(480630,393527).
+writes(480630,406291).
+writes(480630,411511).
+writes(480630,424134).
+writes(480630,442174).
+writes(480630,510359).
+writes(480630,700387).
+writes(480630,701396).
+writes(480630,701415).
+writes(480630,701828).
+writes(480630,702749).
+writes(480630,703316).
+writes(480630,703489).
+writes(480630,703491).
+writes(480630,918791).
+writes(480630,918895).
+writes(480630,919097).
+writes(480630,919236).
+writes(480630,919638).
+writes(480630,920693).
+writes(480630,920760).
+writes(480630,920903).
+writes(480630,921360).
+writes(480630,1098556).
+writes(480630,1136476).
+writes(480630,1136823).
+writes(480630,1136861).
+writes(480630,1224572).
+writes(480630,1293125).
+writes(480630,1293389).
+writes(480630,1293497).
+writes(480630,1293519).
+writes(480630,1293681).
+writes(480630,1293682).
+writes(480630,1293683).
+writes(480630,1293684).
+writes(480630,1293685).
+writes(480630,1293686).
+writes(480630,1293745).
+writes(480630,1353399).
+writes(480630,1376413).
+writes(480630,1376414).
+writes(480630,1403124).
+writes(480630,1403127).
+writes(480630,1403308).
+writes(480630,1403565).
+writes(480630,1403578).
+writes(480630,1403580).
+writes(480630,1403586).
+writes(480630,1403685).
+writes(480630,1403686).
+writes(480630,1403707).
+writes(480630,1403716).
+writes(480630,1403858).
+writes(480630,1403968).
+writes(480630,1404170).
+writes(480630,1404171).
+writes(480630,1404172).
+writes(480630,1404209).
+writes(480630,1404493).
+writes(480630,1404792).
+writes(480630,1405313).
+writes(480630,1405314).
+writes(480630,1405316).
+writes(480630,1405356).
+writes(480630,1405598).
+writes(480630,1405599).
+writes(480630,1418431).
+writes(480630,1418432).
+writes(480630,1499946).
+writes(480630,1505618).
+writes(480630,1505746).
+writes(480630,1506079).
+writes(480630,1506245).
+writes(480630,1506246).
+writes(480630,1506247).
+writes(480630,1506333).
+writes(480630,1506334).
+writes(480630,1506335).
+writes(480630,1506516).
+writes(480630,1506517).
+writes(480630,1506968).
+writes(480630,1506969).
+writes(480630,1506970).
+writes(480630,1506971).
+writes(480630,1506972).
+writes(480630,1507087).
+writes(480630,1507424).
+writes(480630,1507740).
+writes(480630,1529685).
+writes(480630,1548301).
+writes(480630,1548344).
+writes(480630,1548376).
+writes(480630,1548378).
+writes(480630,1548381).
+writes(480630,1548390).
+writes(480630,1548400).
+writes(480630,1548403).
+writes(480630,1548444).
+writes(480630,1548535).
+writes(480630,1589251).
+writes(480630,1589660).
+writes(480630,1590619).
+writes(480630,1590620).
+writes(480630,1590621).
+writes(480630,1591269).
+writes(480630,1612681).
+writes(480630,1612682).
+writes(480630,1612683).
+writes(480630,1612684).
+writes(480630,1612685).
+writes(480630,1615636).
+writes(480630,1615973).
+writes(480630,1615974).
+writes(480630,1616693).
+writes(480630,1697404).
+writes(480630,1697464).
+writes(480630,1698741).
+writes(480630,1699984).
+writes(480630,1701569).
+writes(480630,1763865).
+writes(480630,1800232).
+writes(480630,1809203).
+writes(480630,1857914).
+writes(480630,1915984).
+writes(480630,1916035).
+writes(480630,1916095).
+writes(480630,1916146).
+writes(480630,1916147).
+writes(480630,1916220).
+writes(480630,1916221).
+writes(480630,1916365).
+writes(480630,1916490).
+writes(480630,1916491).
+writes(480630,1916579).
+writes(480630,1935356).
+writes(480630,1935357).
+writes(480630,1935358).
+writes(480630,1935359).
+writes(480630,2007158).
+writes(480630,2237136).
+writes(480630,2239753).
+writes(480630,2257508).
+writes(480630,2294620).
+writes(480630,2294809).
+writes(480630,2324637).
+writes(480630,2335646).
+writes(480630,2351193).
+writes(480630,2429027).
+writes(480630,2477981).
+writes(480630,2532319).
+writes(480630,2532320).
+writes(480630,2532524).
+writes(480630,2532567).
+writes(480630,2532570).
+writes(480630,2532648).
+writes(480630,2532987).
+writes(480630,2533135).
+writes(480630,2533370).
+writes(480630,2533371).
+writes(480630,2536804).
+writes(480630,2588889).
+writes(480630,2590890).
+writes(480630,2590919).
+writes(480630,2590943).
+writes(480630,2591029).
+writes(480630,2591115).
+writes(480630,2591116).
+writes(480630,2591170).
+writes(480630,2591279).
+writes(480630,2591280).
+writes(480630,2591351).
+writes(480630,2591360).
+writes(480630,2591383).
+writes(480630,2591475).
+writes(480630,2591476).
+writes(480630,2592027).
+writes(480630,2592251).
+writes(480630,2750674).
+writes(480630,2766257).
+writes(480630,2808947).
+writes(480630,2829166).
+writes(480630,2829187).
+writes(480630,2829236).
+writes(480630,2829283).
+writes(480630,2829286).
+writes(480630,2829296).
+writes(480630,2829306).
+writes(480630,2829369).
+writes(480630,2829370).
+writes(480630,2829371).
+writes(480630,2829410).
+writes(480630,2829578).
+writes(480630,2829606).
+writes(480630,2844118).
+writes(480630,2844169).
+writes(480630,2855645).
+writes(480630,2855646).
+writes(480630,2870128).
+writes(583056,4414).
+writes(583056,4583).
+writes(583056,5652).
+writes(583056,12380).
+writes(583056,148831).
+writes(583056,225820).
+writes(583056,225943).
+writes(583056,228285).
+writes(583056,229762).
+writes(583056,231497).
+writes(583056,316030).
+writes(583056,324614).
+writes(583056,330371).
+writes(583056,337881).
+writes(583056,360646).
+writes(583056,361718).
+writes(583056,362963).
+writes(583056,392494).
+writes(583056,392713).
+writes(583056,392778).
+writes(583056,392796).
+writes(583056,392864).
+writes(583056,392991).
+writes(583056,393078).
+writes(583056,393243).
+writes(583056,393405).
+writes(583056,393755).
+writes(583056,393813).
+writes(583056,393917).
+writes(583056,394022).
+writes(583056,394023).
+writes(583056,395988).
+writes(583056,397526).
+writes(583056,405683).
+writes(583056,478807).
+writes(583056,629895).
+writes(583056,673427).
+writes(583056,700462).
+writes(583056,700467).
+writes(583056,700501).
+writes(583056,700720).
+writes(583056,701116).
+writes(583056,701299).
+writes(583056,701300).
+writes(583056,702048).
+writes(583056,702049).
+writes(583056,702050).
+writes(583056,702051).
+writes(583056,702052).
+writes(583056,702071).
+writes(583056,702557).
+writes(583056,702632).
+writes(583056,703120).
+writes(583056,703150).
+writes(583056,703671).
+writes(583056,704122).
+writes(583056,704123).
+writes(583056,704124).
+writes(583056,704170).
+writes(583056,704296).
+writes(583056,704311).
+writes(583056,704377).
+writes(583056,704401).
+writes(583056,802308).
+writes(583056,877854).
+writes(583056,941899).
+writes(583056,973240).
+writes(583056,1052186).
+writes(583056,1052187).
+writes(583056,1053432).
+writes(583056,1109470).
+writes(583056,1109471).
+writes(583056,1124825).
+writes(583056,1124945).
+writes(583056,1124949).
+writes(583056,1126681).
+writes(583056,1127704).
+writes(583056,1179924).
+writes(583056,1224571).
+writes(583056,1242066).
+writes(583056,1257392).
+writes(583056,1293528).
+writes(583056,1293574).
+writes(583056,1293575).
+writes(583056,1293576).
+writes(583056,1293577).
+writes(583056,1365337).
+writes(583056,1398530).
+writes(583056,1400085).
+writes(583056,1402664).
+writes(583056,1402707).
+writes(583056,1402958).
+writes(583056,1403231).
+writes(583056,1403234).
+writes(583056,1403235).
+writes(583056,1403767).
+writes(583056,1403797).
+writes(583056,1403923).
+writes(583056,1404176).
+writes(583056,1404177).
+writes(583056,1404178).
+writes(583056,1404179).
+writes(583056,1404180).
+writes(583056,1404181).
+writes(583056,1404182).
+writes(583056,1404183).
+writes(583056,1404184).
+writes(583056,1404185).
+writes(583056,1404186).
+writes(583056,1404187).
+writes(583056,1404188).
+writes(583056,1404392).
+writes(583056,1404545).
+writes(583056,1404557).
+writes(583056,1404582).
+writes(583056,1404604).
+writes(583056,1404624).
+writes(583056,1404918).
+writes(583056,1405055).
+writes(583056,1405057).
+writes(583056,1405138).
+writes(583056,1405469).
+writes(583056,1405979).
+writes(583056,1453736).
+writes(583056,1453811).
+writes(583056,1471638).
+writes(583056,1505573).
+writes(583056,1505574).
+writes(583056,1505575).
+writes(583056,1505576).
+writes(583056,1506052).
+writes(583056,1506302).
+writes(583056,1506303).
+writes(583056,1506402).
+writes(583056,1506403).
+writes(583056,1506404).
+writes(583056,1506462).
+writes(583056,1506671).
+writes(583056,1506672).
+writes(583056,1506673).
+writes(583056,1506674).
+writes(583056,1506675).
+writes(583056,1506676).
+writes(583056,1506677).
+writes(583056,1506678).
+writes(583056,1506679).
+writes(583056,1506680).
+writes(583056,1506681).
+writes(583056,1506854).
+writes(583056,1507037).
+writes(583056,1507222).
+writes(583056,1507261).
+writes(583056,1507293).
+writes(583056,1507324).
+writes(583056,1507372).
+writes(583056,1507740).
+writes(583056,1507849).
+writes(583056,1508056).
+writes(583056,1508057).
+writes(583056,1508058).
+writes(583056,1508062).
+writes(583056,1548382).
+writes(583056,1548470).
+writes(583056,1593410).
+writes(583056,1677256).
+writes(583056,1677263).
+writes(583056,1678757).
+writes(583056,1682163).
+writes(583056,1686927).
+writes(583056,1688074).
+writes(583056,1690270).
+writes(583056,1702291).
+writes(583056,1735375).
+writes(583056,1786648).
+writes(583056,1788758).
+writes(583056,1809183).
+writes(583056,1857967).
+writes(583056,1915709).
+writes(583056,1915761).
+writes(583056,1915891).
+writes(583056,1916073).
+writes(583056,1916110).
+writes(583056,1916369).
+writes(583056,1916379).
+writes(583056,1916740).
+writes(583056,1916911).
+writes(583056,1934976).
+writes(583056,1935037).
+writes(583056,1935335).
+writes(583056,1935336).
+writes(583056,1935337).
+writes(583056,1935338).
+writes(583056,1935339).
+writes(583056,1935340).
+writes(583056,1935341).
+writes(583056,2199885).
+writes(583056,2209985).
+writes(583056,2210248).
+writes(583056,2210292).
+writes(583056,2245356).
+writes(583056,2294324).
+writes(583056,2308410).
+writes(583056,2320438).
+writes(583056,2404554).
+writes(583056,2456729).
+writes(583056,2459380).
+writes(583056,2487232).
+writes(583056,2487253).
+writes(583056,2516386).
+writes(583056,2532169).
+writes(583056,2532721).
+writes(583056,2532722).
+writes(583056,2532723).
+writes(583056,2532724).
+writes(583056,2532725).
+writes(583056,2532726).
+writes(583056,2532730).
+writes(583056,2532851).
+writes(583056,2532902).
+writes(583056,2532930).
+writes(583056,2532935).
+writes(583056,2532969).
+writes(583056,2532970).
+writes(583056,2533064).
+writes(583056,2533157).
+writes(583056,2533255).
+writes(583056,2533521).
+writes(583056,2590890).
+writes(583056,2591024).
+writes(583056,2591463).
+writes(583056,2591551).
+writes(583056,2591552).
+writes(583056,2591553).
+writes(583056,2591554).
+writes(583056,2591555).
+writes(583056,2592024).
+writes(583056,2651134).
+writes(583056,2653606).
+writes(583056,2653607).
+writes(583056,2749799).
+writes(583056,2749811).
+writes(583056,2750443).
+writes(583056,2750838).
+writes(583056,2750845).
+writes(583056,2751416).
+writes(583056,2765570).
+writes(583056,2765885).
+writes(583056,2765949).
+writes(583056,2765950).
+writes(583056,2765951).
+writes(583056,2766080).
+writes(583056,2766423).
+writes(583056,2802162).
+writes(583056,2828584).
+writes(583056,2829322).
+writes(583056,2829411).
+writes(583056,2829412).
+writes(583056,2829481).
+writes(583056,2829485).
+writes(583056,2829734).
+writes(583056,2855617).
+writes(583056,2856830).
+writes(905774,5920).
+writes(905774,225907).
+writes(905774,229959).
+writes(905774,230222).
+writes(905774,230753).
+writes(905774,231154).
+writes(905774,393209).
+writes(905774,394007).
+writes(905774,514553).
+writes(905774,514557).
+writes(905774,514558).
+writes(905774,514583).
+writes(905774,514796).
+writes(905774,514797).
+writes(905774,514896).
+writes(905774,514984).
+writes(905774,515071).
+writes(905774,515072).
+writes(905774,515441).
+writes(905774,515442).
+writes(905774,515628).
+writes(905774,700388).
+writes(905774,701090).
+writes(905774,701326).
+writes(905774,701455).
+writes(905774,701469).
+writes(905774,701667).
+writes(905774,701832).
+writes(905774,702169).
+writes(905774,702244).
+writes(905774,702245).
+writes(905774,702509).
+writes(905774,702512).
+writes(905774,702513).
+writes(905774,702514).
+writes(905774,702690).
+writes(905774,702752).
+writes(905774,702753).
+writes(905774,702891).
+writes(905774,702892).
+writes(905774,702893).
+writes(905774,702894).
+writes(905774,702895).
+writes(905774,702896).
+writes(905774,704208).
+writes(905774,857221).
+writes(905774,861970).
+writes(905774,1159078).
+writes(905774,1164707).
+writes(905774,1164739).
+writes(905774,1164846).
+writes(905774,1165231).
+writes(905774,1165232).
+writes(905774,1165233).
+writes(905774,1165359).
+writes(905774,1165360).
+writes(905774,1165557).
+writes(905774,1199347).
+writes(905774,1207797).
+writes(905774,1364561).
+writes(905774,1402603).
+writes(905774,1402712).
+writes(905774,1403208).
+writes(905774,1403354).
+writes(905774,1404525).
+writes(905774,1404642).
+writes(905774,1404850).
+writes(905774,1405318).
+writes(905774,1453048).
+writes(905774,1453049).
+writes(905774,1453071).
+writes(905774,1453204).
+writes(905774,1453205).
+writes(905774,1453261).
+writes(905774,1453360).
+writes(905774,1453985).
+writes(905774,1454304).
+writes(905774,1459475).
+writes(905774,1505606).
+writes(905774,1507206).
+writes(905774,1507207).
+writes(905774,1749722).
+writes(905774,1915974).
+writes(905774,1916362).
+writes(905774,1916551).
+writes(905774,1916552).
+writes(905774,1916553).
+writes(905774,1916554).
+writes(905774,1916597).
+writes(905774,1934902).
+writes(905774,1935152).
+writes(905774,2029641).
+writes(905774,2029642).
+writes(905774,2029676).
+writes(905774,2029800).
+writes(905774,2029801).
+writes(905774,2029855).
+writes(905774,2334836).
+writes(905774,2505477).
+writes(905774,2532139).
+writes(905774,2532519).
+writes(905774,2532687).
+writes(905774,2532881).
+writes(905774,2532883).
+writes(905774,2532966).
+writes(905774,2533034).
+writes(905774,2533221).
+writes(905774,2533222).
+writes(905774,2588874).
+writes(905774,2601854).
+writes(905774,2601869).
+writes(905774,2601917).
+writes(905774,2601960).
+writes(905774,2750559).
+writes(905774,2750911).
+writes(905774,2751105).
+writes(905774,2751789).
+writes(905774,2753229).
+writes(905774,2753230).
+writes(905774,2765732).
+writes(905774,2766051).
+writes(905774,2829225).
+writes(905774,2829522).
+writes(905774,2855957).
+writes(905774,2855958).
+writes(905774,2855959).
+writes(905774,2856895).
+writes(905774,2856984).
+writes(905774,2856985).
+writes(1187542,44213).
+writes(1187542,329977).
+writes(1187542,330748).
+writes(1187542,331000).
+writes(1187542,703536).
+writes(1187542,1506313).
+writes(1187542,1506314).
+writes(1187542,1506315).
+writes(1187542,1506316).
+writes(1187542,1506317).
+writes(1187542,1507602).
+writes(1187542,1507603).
+writes(1187542,1824846).
+writes(1187542,2532843).
+writes(1273644,225868).
+writes(1273644,246926).
+writes(1273644,246931).
+writes(1273644,246939).
+writes(1273644,246966).
+writes(1273644,247023).
+writes(1273644,247072).
+writes(1273644,275442).
+writes(1273644,275448).
+writes(1273644,275578).
+writes(1273644,275579).
+writes(1273644,275721).
+writes(1273644,326043).
+writes(1273644,326044).
+writes(1273644,367102).
+writes(1273644,439976).
+writes(1273644,441861).
+writes(1273644,441868).
+writes(1273644,441934).
+writes(1273644,442112).
+writes(1273644,452358).
+writes(1273644,461506).
+writes(1273644,524951).
+writes(1273644,526746).
+writes(1273644,570982).
+writes(1273644,571026).
+writes(1273644,571037).
+writes(1273644,571095).
+writes(1273644,571104).
+writes(1273644,571105).
+writes(1273644,571106).
+writes(1273644,571114).
+writes(1273644,571460).
+writes(1273644,571461).
+writes(1273644,571473).
+writes(1273644,571483).
+writes(1273644,571492).
+writes(1273644,571504).
+writes(1273644,571570).
+writes(1273644,571571).
+writes(1273644,571628).
+writes(1273644,571639).
+writes(1273644,571697).
+writes(1273644,571699).
+writes(1273644,571855).
+writes(1273644,697090).
+writes(1273644,698298).
+writes(1273644,791445).
+writes(1273644,791870).
+writes(1273644,943162).
+writes(1273644,943927).
+writes(1273644,943928).
+writes(1273644,946302).
+writes(1273644,947350).
+writes(1273644,947351).
+writes(1273644,948764).
+writes(1273644,985462).
+writes(1273644,985654).
+writes(1273644,986372).
+writes(1273644,986393).
+writes(1273644,986405).
+writes(1273644,986439).
+writes(1273644,986475).
+writes(1273644,986476).
+writes(1273644,986507).
+writes(1273644,1113787).
+writes(1273644,1122267).
+writes(1273644,1125855).
+writes(1273644,1190291).
+writes(1273644,1198939).
+writes(1273644,1200013).
+writes(1273644,1201997).
+writes(1273644,1202345).
+writes(1273644,1202498).
+writes(1273644,1238750).
+writes(1273644,1238757).
+writes(1273644,1238758).
+writes(1273644,1238759).
+writes(1273644,1238851).
+writes(1273644,1238852).
+writes(1273644,1238861).
+writes(1273644,1238863).
+writes(1273644,1238893).
+writes(1273644,1238907).
+writes(1273644,1239003).
+writes(1273644,1239092).
+writes(1273644,1239093).
+writes(1273644,1239144).
+writes(1273644,1246190).
+writes(1273644,1246285).
+writes(1273644,1246298).
+writes(1273644,1246315).
+writes(1273644,1246461).
+writes(1273644,1246534).
+writes(1273644,1246580).
+writes(1273644,1276936).
+writes(1273644,1292450).
+writes(1273644,1292868).
+writes(1273644,1299699).
+writes(1273644,1338192).
+writes(1273644,1377804).
+writes(1273644,1378047).
+writes(1273644,1378249).
+writes(1273644,1378292).
+writes(1273644,1386245).
+writes(1273644,1386246).
+writes(1273644,1386305).
+writes(1273644,1386327).
+writes(1273644,1386341).
+writes(1273644,1386408).
+writes(1273644,1386409).
+writes(1273644,1386410).
+writes(1273644,1386476).
+writes(1273644,1386577).
+writes(1273644,1386586).
+writes(1273644,1386587).
+writes(1273644,1386620).
+writes(1273644,1386729).
+writes(1273644,1386789).
+writes(1273644,1386831).
+writes(1273644,1386886).
+writes(1273644,1386908).
+writes(1273644,1387087).
+writes(1273644,1387145).
+writes(1273644,1387256).
+writes(1273644,1387257).
+writes(1273644,1387258).
+writes(1273644,1387259).
+writes(1273644,1387260).
+writes(1273644,1387264).
+writes(1273644,1387405).
+writes(1273644,1393251).
+writes(1273644,1393254).
+writes(1273644,1401529).
+writes(1273644,1402077).
+writes(1273644,1402361).
+writes(1273644,1402651).
+writes(1273644,1402833).
+writes(1273644,1402834).
+writes(1273644,1402835).
+writes(1273644,1403374).
+writes(1273644,1403637).
+writes(1273644,1404117).
+writes(1273644,1404654).
+writes(1273644,1405864).
+writes(1273644,1405866).
+writes(1273644,1442711).
+writes(1273644,1442824).
+writes(1273644,1442982).
+writes(1273644,1443038).
+writes(1273644,1443189).
+writes(1273644,1452769).
+writes(1273644,1493784).
+writes(1273644,1494066).
+writes(1273644,1494160).
+writes(1273644,1506619).
+writes(1273644,1507049).
+writes(1273644,1507799).
+writes(1273644,1697664).
+writes(1273644,1697843).
+writes(1273644,1697859).
+writes(1273644,1699987).
+writes(1273644,1703396).
+writes(1273644,1725265).
+writes(1273644,1725267).
+writes(1273644,1725441).
+writes(1273644,1725752).
+writes(1273644,1726062).
+writes(1273644,1765229).
+writes(1273644,1765757).
+writes(1273644,1779098).
+writes(1273644,1826247).
+writes(1273644,1829865).
+writes(1273644,1830937).
+writes(1273644,1838034).
+writes(1273644,1840606).
+writes(1273644,1851395).
+writes(1273644,1879809).
+writes(1273644,1903021).
+writes(1273644,2059387).
+writes(1273644,2162044).
+writes(1273644,2197189).
+writes(1273644,2211413).
+writes(1273644,2211414).
+writes(1273644,2360733).
+writes(1273644,2365387).
+writes(1273644,2365388).
+writes(1273644,2366761).
+writes(1273644,2467944).
+writes(1273644,2493446).
+writes(1273644,2504468).
+writes(1273644,2532154).
+writes(1273644,2532231).
+writes(1273644,2532232).
+writes(1273644,2532233).
+writes(1273644,2772679).
+writes(1273644,2773056).
+writes(1273644,2773844).
+writes(1273644,2773845).
+writes(1273644,2773846).
+writes(1273644,2773847).
+writes(1273644,2774082).
+writes(1273644,2829154).
+writes(1273644,2839670).
 publication(118,"Active Learning: A Survey.","",2014,0,0,0,0).
 publication(353,"Efficient Direct Mining of Selective Discriminative Patterns for Classification.","",2013,0,0,0,0).
 publication(2628,"Tag-Based Social Image Search: Toward Relevant and Diverse Results.","",2011,0,0,30,0).
@@ -4857,6 +6056,771 @@ publication(1865742,"Deep Structured Output Learning for Unconstrained Text Reco
 publication(1865743,"Speeding up Convolutional Neural Networks with Low Rank Expansions.","",2014,0,189,0,0).
 publication(1866582,"Min-Cost Flow Duality in Planar Networks.","",2013,0,189,0,0).
 publication(1866583,"Fibonacci Heaps Revisited.","",2014,0,189,0,0).
+publication(28,"Spatial Data Models and Query Processing.","",1995,0,0,0,19).
+publication(4414,"Active Database Facilities in Ode.","",1996,0,0,5,18).
+publication(4583,"Content-Based Indexing and Retrieval.","",1997,0,0,0,5).
+publication(4728,"Uncertainty in Data Integration and Dataspace Support Platforms.","",2011,0,0,32,1).
+publication(5604,"Ontology Matching: A Machine Learning Approach.","",2004,0,0,24,97).
+publication(5646,"Ink as a First-Class Datatype in Multimedia Databases.","",1996,0,0,0,2).
+publication(5652,"Indexing for Retrieval by Similarity.","",1996,0,0,0,4).
+publication(5857,"Combibining Artificial Intelligence and Databases for Data Integration.","",1999,0,0,53,12).
+publication(5920,"Privacy of Spatial Trajectories.","",2011,0,0,0,0).
+publication(10700,"Navigational Plans For Data Integration.","",1999,14,0,0,0).
+publication(11544,"Automated Model Selection for Simulation.","",1994,14,0,7,9).
+publication(11987,"P-CLASSIC: A Tractable Probablistic Description Logic.","",1997,14,0,14,50).
+publication(12349,"Creating Abstractions Using Relevance Reasoning.","",1994,14,0,16,10).
+publication(12352,"The Limits on Combining Recursive Horn Rules with Description Logics.","",1996,14,0,3,21).
+publication(12353,"Verification of Knowledge Bases Based on Containment Checking.","",1996,14,0,7,15).
+publication(12354,"Query-Answering Algorithms for Information Agents.","",1996,14,0,8,116).
+publication(12380,"Enabling Domain-Awareness for a Generic Natural Language Interface.","",2007,14,0,8,1).
+publication(12665,"Representing and Reasoning about Mappings between Domain Models.","",2002,14,0,20,95).
+publication(43129,"Recent Progress in Data Integration - A Tutorial.","",1998,82,0,0,5).
+publication(44213,"Split Dictionaries for In-memory Column Stores in Mixed Workload Environments.","",2014,84,0,0,0).
+publication(61379,"Cache Signatures for Peer-to-Peer Cooperative Caching in Mobile Environments.","",2004,146,0,12,7).
+publication(85542,"A model for data integration systems of biomedical data applied to online genetic databases.","",2001,197,0,2,23).
+publication(85544,"PQL: a declarative query language over dynamic biological schemata.","",2002,197,0,7,12).
+publication(89250,"Keyword Search in Workflow Repositories with Access Control.","",2011,211,0,0,0).
+publication(104312,"Structured Data on the Web.","",2010,256,0,3,0).
+publication(111548,"Active XML and Data Activation.","",2005,282,0,0,0).
+publication(133781,"Catching the boat with Strudel: experiences with a Web Site management system.","",1998,342,0,15,20).
+publication(133782,"Warehousing and incremental evaluation for Web Site management.","",1998,342,0,14,3).
+publication(133790,"Query Optimization in the Presence of Limited Access Patterns.","",1999,342,0,16,0).
+publication(140338,"Knowledge cubes - A proposal for scalable and semantically-guided management of Big Data.","",2013,364,0,0,0).
+publication(146756,"To Show or Not to Show in Workflow Provenance.","",2013,382,0,0,0).
+publication(148417,"Data Modeling in Dataspace Support Platforms.","",2009,382,0,20,0).
+publication(148831,"Provenance in a Modifiable Data Set.","",2013,382,0,0,0).
+publication(158960,"Data Integration: A Status Report.","",2003,412,0,0,19).
+publication(225730,"Managing General and Individual Knowledge in Crowd Mining Applications.","",2015,557,0,0,0).
+publication(225734,"bdbms - A Database Management System for Biological Data.","",2007,557,0,29,11).
+publication(225742,"Applying WebTables in Practice.","",2015,557,0,0,0).
+publication(225796,"Enabling Privacy in Provenance-Aware Workflow Systems.","",2011,557,0,0,1).
+publication(225811,"A Platform for Personal Information Management and Integration.","",2005,557,0,24,53).
+publication(225820,"Using Data for Systemic Financial Risk Management.","",2011,557,0,0,0).
+publication(225842,"Data Publishing and Sharing using Fusion Tables.","",2013,557,0,0,0).
+publication(225843,"Crossing the Structure Chasm.","",2003,557,0,40,44).
+publication(225868,"The Architecture of PIER: an Internet-Scale Query Processor.","",2005,557,0,64,66).
+publication(225907,"Deuteronomy: Transaction Support for Cloud Data.","",2011,557,0,23,2).
+publication(225916,"Harnessing the Deep Web: Present and Future.","",2009,557,0,0,0).
+publication(225917,"Web-Scale Data Integration: You can afford to Pay as You Go.","",2007,557,0,22,63).
+publication(225943,"Qunits: queried units in database search.","",2009,557,0,0,0).
+publication(225985,"Understanding Local Structure in Ranked Datasets.","",2013,557,0,0,0).
+publication(228285,"Multi-level operator combination in XML query processing.","",2002,571,0,11,10).
+publication(228374,"Hashing by Proximity to Process Duplicates in Spatial Databases.","",1994,571,0,9,11).
+publication(228528,"Channeling the deluge: research challenges for big data and information systems.","",2013,571,0,0,0).
+publication(228538,"An Access Control Model for Video Database Systems.","",2000,571,0,8,19).
+publication(228808,"XKvalidator: a constraint validator for XML.","",2002,571,0,5,13).
+publication(228854,"EXPedite: a system for encoded XML processing.","",2004,571,0,21,4).
+publication(229064,"Facilitating Transformations in a Human Genome Project Database.","",1994,571,0,15,2).
+publication(229535,"Structured data in web search.","",2013,571,0,0,0).
+publication(229762,"Flexible List Management in a Directory.","",1998,571,0,8,3).
+publication(229959,"Skyline query processing for uncertain data.","",2010,571,0,19,1).
+publication(230222,"Preference query evaluation over expensive attributes.","",2010,571,0,20,1).
+publication(230753,"Irregularity in Multi-Dimensional Space-Filling Curves with Applications in Multimedia Databases.","",2001,571,0,39,7).
+publication(231154,"Towards efficient search on unstructured data: an intelligent-storage approach.","",2007,571,0,4,3).
+publication(231497,"Run-Time Parallelization of Sequential Database Programs.","",1995,571,0,5,1).
+publication(246926,"True elasticity in multi-tenant data-intensive compute clusters.","",2012,620,0,0,0).
+publication(246931,"The potential dangers of causal consistency and an explicit solution.","",2012,620,0,0,0).
+publication(246939,"Hierarchical scheduling for diverse datacenter workloads.","",2013,620,0,0,0).
+publication(246966,"Adaptive Stream Processing using Dynamic Batch Sizing.","",2014,620,0,0,0).
+publication(247072,"Cake: enabling high-level SLOs on shared storage systems.","",2012,620,0,0,0).
+publication(275442,"Shedding light on the structure of internet video quality problems in the wild.","",2013,689,0,0,0).
+publication(275448,"Modeling the adoption of new network architectures.","",2007,689,0,8,6).
+publication(275578,"Macroscope: end-point approach to networked application dependency discovery.","",2009,689,0,12,1).
+publication(275579,"A cost comparison of datacenter network architectures.","",2010,689,0,0,0).
+publication(275721,"Tradeoffs in CDN designs for throughput oriented traffic.","",2012,689,0,0,0).
+publication(316030,"Architecture and Design of the MARS Hardware Accelerator.","",1987,794,0,2,3).
+publication(324614,"The Design of a Back-end Object Management System.","",1991,798,0,0,0).
+publication(326043,"06131 Executive Summary -- Peer-to-Peer-Systems and -Applications.","",2006,798,0,0,0).
+publication(326044,"06131 Abstracts Collection -- Peer-to -Peer -Systems and -Applications.","",2006,798,0,0,0).
+publication(329977,"Vertical Bit-Packing: Optimizing Operations on Bit-Packed Vectors Leveraging SIMD Instructions.","",2014,813,0,0,0).
+publication(330059,"Dataspaces: A New Abstraction for Information Management.","",2006,813,0,0,1).
+publication(330371,"Object Semantics for XML Keyword Search.","",2014,813,0,0,0).
+publication(330748,"Physical Column Organization in In-Memory Column Stores.","",2013,813,0,0,0).
+publication(331000,"Concurrent Execution of Mixed Enterprise Workloads on In-Memory Databases.","",2014,813,0,0,0).
+publication(336979,"View Maintenance for Hierarchical Semistructured Data.","",2000,821,0,13,23).
+publication(337563,"The Palm-tree Index: Indexing with the crowd.","",2013,824,0,0,0).
+publication(337781,"Reasoning about Keys for XML.","",2001,828,0,27,93).
+publication(337782,"Programming Constructs for Unstructured Data.","",1995,828,0,8,50).
+publication(337881,"TAX: A Tree Algebra for XML.","",2001,828,0,25,88).
+publication(346187,"On Multi-dimensional Sorting Orders.","",2000,867,0,8,4).
+publication(347041,"Efficient Evaluation of Continuous Range Queries on Moving Objects.","",2002,867,0,28,48).
+publication(356340,"A User-Centric Framework for Accessing Biological Sources and Tools.","",2005,891,0,12,3).
+publication(356358,"Towards a Model of Provenance and User Views in Scientific Workflows.","",2006,891,0,13,20).
+publication(358433,"Switching Terminologies - Creating a New View of An Old World: Preliminary Report.","",1996,906,0,8,0).
+publication(360646,"Incompleteness in Data Mining.","",2000,915,0,7,0).
+publication(360697,"ClassMiner: Mining Medical Video Content Structure and Events Towards Efficient Access and Scalable Skimming.","",2002,915,0,17,6).
+publication(361688,"Hiding Data and Structure in Workflow Provenance.","",2011,924,0,0,0).
+publication(361718,"Organic Databases.","",2011,924,0,0,0).
+publication(362963,"Multiprocessor Transitive Closure Algorithms.","",1988,930,0,22,33).
+publication(367102,"Automating the debugging of datacenter applications with ADDA.","",2013,949,0,0,0).
+publication(370920,"Multiple and Partial Periodicity Mining in Time Series Databases.","",2002,980,0,11,7).
+publication(372338,"CARIN: A Representation Language Combining Horn Rules and Description Logics.","",1996,980,0,25,66).
+publication(387824,"XML and Object Technology.","",2000,1005,0,5,1).
+publication(388717,"Information Gathering Plans With Sensing Actions.","",1997,1007,0,10,11).
+publication(392487,"Cost Estimation of Spatial k-Nearest-Neighbor Operators.","",2015,1019,0,0,0).
+publication(392488,"JISC: Adaptive Stream Processing Using Just-In-Time State Completion.","",2014,1019,0,0,0).
+publication(392494,"On Bounding-Schemas for LDAP Directories.","",2000,1019,0,10,5).
+publication(392663,"Theoretical Aspects of Schema Merging.","",1992,1019,0,11,55).
+publication(392713,"On High Dimensional Skylines.","",2006,1019,0,16,62).
+publication(392778,"Compacting music signatures for efficient music retrieval.","",2008,1019,0,27,3).
+publication(392796,"CQL++: A SQL for the Ode Object-Oriented DBMS.","",1992,1019,0,22,10).
+publication(392851,"Using Convolution to Mine Obscure Periodic Patterns in One Pass.","",2004,1019,0,16,20).
+publication(392854,"Supporting annotations on relations.","",2009,1019,0,14,5).
+publication(392855,"The SBC-tree: an index for run-length compressed sequences.","",2008,1019,0,43,6).
+publication(392864,"Hybrid Index Organizations for Text Databases.","",1992,1019,0,12,18).
+publication(392991,"Data Integration using Self-Maintainable Views.","",1996,1019,0,17,67).
+publication(393003,"Towards an ecosystem of structured data on the web.","",2012,1019,0,0,0).
+publication(393078,"Expressive query specification through form customization.","",2008,1019,0,21,5).
+publication(393209,"RecStore: an extensible and adaptive framework for online recommender queries inside the database engine.","",2012,1019,0,0,0).
+publication(393211,"Reasoning with Aggregation Constraints.","",1996,1019,0,20,14).
+publication(393243,"Constructing a Generic Natural Language Interface for an XML Database.","",2006,1019,0,25,15).
+publication(393405,"Fine-granularity Locking and Client-Based Logging for Distributed Architectures.","",1996,1019,0,20,5).
+publication(393527,"Data integration with dependent sources.","",2011,1019,0,23,0).
+publication(393574,"Exploiting similarity-aware grouping in decision support systems.","",2009,1019,0,3,1).
+publication(393630,"Efficient Processing of Hamming-Distance-Based Similarity-Search Queries Over MapReduce.","",2015,1019,0,0,0).
+publication(393755,"Estimating Answer Sizes for XML Queries.","",2002,1019,0,13,52).
+publication(393813,"Lost source provenance.","",2010,1019,0,14,0).
+publication(393917,"BPI: XML query evaluation using bitmapped path indices.","",2009,1020,0,23,1).
+publication(394007,"Continuous Query Processing in Spatio-Temporal Databases.","",2004,1020,0,34,6).
+publication(394022,"Grouping in XML.","",2002,1020,0,15,22).
+publication(394023,"The Importance of Algebra for XML Query Processing.","",2006,1020,0,13,0).
+publication(395988,"A Compressed Transitive Closure Technique for Efficient Fixed-Point Query Processing.","",1988,1028,0,0,11).
+publication(397526,"The Michigan Benchmark: A Microbenchmark for XML Query Processing Systems.","",2002,1037,0,4,10).
+publication(405683,"Regular Expression Learning for Information Extraction.","",2008,1078,0,16,3).
+publication(406291,"ReNoun: Fact Extraction for Nominal Attributes.","",2014,1078,0,0,0).
+publication(411511,"Best-Effort Modeling of Structured Data on the Web.","",2011,1099,0,0,0).
+publication(419084,"Layer Decomposition: An Effective Structure-Based Approach for Scientific Workflow Similarity.","",2014,1112,0,0,0).
+publication(424134,"Bringing (Web) Databases to the Masses.","",2012,1135,0,0,0).
+publication(439976,"Evaluating the Hyperbolic Model on a Variety of Architectures.","",1996,1173,0,7,2).
+publication(441861,"BlinkDB: queries with bounded errors and bounded response times on very large data.","",2013,1183,0,0,0).
+publication(441868,"Scarlett: coping with skewed content popularity in mapreduce clusters.","",2011,1183,0,21,2).
+publication(441934,"Choosy: max-min fair sharing for datacenter jobs with constraints.","",2013,1183,0,0,0).
+publication(442112,"Delay scheduling: a simple technique for achieving locality and fairness in cluster scheduling.","",2010,1183,0,15,15).
+publication(442174,"Verification of Knowledge Bases: a Unifying Logical View.","",1997,1184,0,8,5).
+publication(452358,"Non-Transitive Connectivity and DHTs.","",2005,1231,0,13,27).
+publication(461506,"The NEBULA Future Internet Architecture.","",2013,1259,0,0,0).
+publication(467545,"Estimating Selectivity Factors of Spatial Operations.","",1993,1289,0,0,2).
+publication(478807,"Term Disambiguation in Natural Language Query for XML.","",2006,1322,0,17,2).
+publication(486305,"Language constructs for timed atomic commitment.","",1989,1333,0,9,0).
+publication(510359,"Adaptive Query Processing: Enabling Web-based Query Processing.","",2001,1382,0,0,0).
+publication(514557,"GeoRank: an efficient location-aware news feed ranking system.","",2013,1386,0,0,0).
+publication(514558,"Location-based and preference-aware recommendation using sparse geo-social networking data.","",2012,1386,0,0,0).
+publication(514583,"TAREEG: a MapReduce-based system for extracting spatial data from OpenStreetMap.","",2014,1386,0,0,0).
+publication(514611,"Pipelined spatial join processing for quadtree-based indexes.","",2007,1386,0,4,0).
+publication(514612,"Location-aware privacy and more: a systems approach using context-aware database management systems.","",2009,1386,0,46,0).
+publication(514613,"A Cost Model for Query Optimization Using R-Trees.","",1994,1386,0,0,18).
+publication(514614,"A Window Retrieval Algorithm for Spatial Databases Using Quadtrees.","",1995,1386,0,15,0).
+publication(514615,"Cascaded Spatial Join Algorithms with Spatially Sorted Output.","",1996,1386,0,11,3).
+publication(514642,"On Local Heuristics to Speed Up Polygon-Polygon Intersection Tests.","",1999,1386,0,6,7).
+publication(514705,"Multi-dimensional phenomenon-aware stream query processing.","",2009,1386,0,0,0).
+publication(514796,"Towards location-based social networking services.","",2010,1386,0,34,2).
+publication(514797,"A peer-to-peer spatial cloaking algorithm for anonymous location-based service.","",2006,1386,0,0,0).
+publication(514896,"CG_Hadoop: computational geometry in MapReduce.","",2013,1386,0,0,0).
+publication(514984,"VisCAT: spatio-temporal visualization and aggregation of categorical attributes in twitter data.","",2014,1386,0,0,0).
+publication(515071,"Panda: a predictive spatio-temporal query processor.","",2012,1386,0,0,0).
+publication(515072,"Predictive spatio-temporal queries: a comprehensive survey and future directions.","",2012,1386,0,0,0).
+publication(515373,"Using multi-criteria decision making for personalized point-of-interest recommendations.","",2014,1386,0,0,0).
+publication(515379,"Indexing recent trajectories of moving objects.","",2014,1386,0,0,0).
+publication(515441,"Towards scalable location-aware services: requirements and research issues.","",2003,1386,0,35,15).
+publication(515442,"Performance of multi-dimensional space-filling curves.","",2002,1386,0,13,5).
+publication(515628,"Can an inter-disciplinary research community on location privacy be successful?","",2009,1386,0,0,0).
+publication(515815,"Exploring cell tower data dumps for supervised learning-based point-of-interest prediction.","",2014,1386,0,0,0).
+publication(515884,"MobiFeed: a location-aware news feed system for mobile users.","",2012,1386,0,0,0).
+publication(515885,"CALBA: capacity-aware location-based advertising in temporary social networks.","",2013,1386,0,0,0).
+publication(515929,"iGSLR: personalized geo-social location recommendation: a kernel density estimation approach.","",2013,1386,0,0,0).
+publication(515930,"LORE: exploiting sequential influence for location recommendations.","",2014,1386,0,0,0).
+publication(524951,"Packet marking for Web traffic in networks with RIO routers.","",2001,1394,0,6,5).
+publication(526746,"Gambling heuristic on a chord ring.","",2005,1394,0,0,0).
+publication(570982,"Why Let Resources Idle? Aggressive Cloning of Jobs with Dolly.","",2012,1482,0,0,0).
+publication(571026,"A Common Substrate for Cluster Computing.","",2009,1482,0,0,0).
+publication(571037,"A Case for Performance-Centric Network Allocation.","",2012,1482,0,0,0).
+publication(571095,"Sweet Storage SLOs with Frosting.","",2012,1482,0,0,0).
+publication(571104,"Spark: Cluster Computing with Working Sets.","",2010,1482,0,0,0).
+publication(571105,"Discretized Streams: An Efficient and Fault-Tolerant Model for Stream Processing on Large Clusters.","",2012,1482,0,0,0).
+publication(571106,"The Datacenter Needs an Operating System.","",2011,1482,0,0,0).
+publication(571114,"Focus Replay Debugging Effort on the Control Plane.","",2010,1483,0,0,0).
+publication(571460,": sharing the network in cloud computing.","",2011,1485,0,0,0).
+publication(571473,"A quest for an Internet video quality-of-experience metric.","",2012,1485,0,0,0).
+publication(571483,"Coflow: a networking abstraction for cluster applications.","",2012,1485,0,0,0).
+publication(571492,"Wireless ACK Collisions Not Considered Harmful.","",2008,1485,0,0,0).
+publication(571504,"Pathlet Routing.","",2008,1485,0,0,0).
+publication(571570,"HTTP as the narrow waist of the future internet.","",2010,1485,0,19,3).
+publication(571571,"CloudPolice: taking access control out of the network.","",2010,1485,0,17,0).
+publication(571628,"Disk-Locality in Datacenter Computing Considered Irrelevant.","",2011,1486,0,0,0).
+publication(571697,"Towards a Sensor Network Architecture: Lowering the Waistline.","",2005,1486,0,23,37).
+publication(571855,"The Case for Tiny Tasks in Compute Clusters.","",2013,1486,0,0,0).
+publication(629895,"On hardware description from block diagrams.","",1984,1581,0,0,0).
+publication(673427,"Unified Fine-Granularity Buffering of Index and Data: Approach and Implementation.","",2000,1600,0,10,3).
+publication(697090,"LagOver: Latency Gradated Overlays.","",2007,1629,0,6,9).
+publication(697092,"A protocol for timed atomic commitment.","",1989,1629,0,8,10).
+publication(697780,"Dash: A Novel Search Engine for Database-Generated Dynamic Web Pages.","",2012,1629,0,0,0).
+publication(697783,"Generalized I/O with Timing Constraints.","",1987,1629,0,0,0).
+publication(698298,"Adaptive Distributed Time-Slot Based Scheduling for Fairness in Multi-Hop Wireless Networks.","",2008,1629,0,16,4).
+publication(698781,"Deadlock Prevention in the RTC Programming System for Distributed Real-Time Applications.","",1993,1629,0,2,1).
+publication(699260,"Peer-to-Peer Cooperative Caching in Mobile Environments.","",2004,1630,0,11,15).
+publication(700387,"Recent progress towards an ecosystem of structured data on the Web.","",2013,1631,0,0,0).
+publication(700388,"GeoFeed: A Location Aware News Feed System.","",2012,1631,0,0,0).
+publication(700462,"Composition of Database Relations.","",1989,1631,0,13,6).
+publication(700467,"Materialization and Incremental Update of Path Information.","",1989,1631,0,14,23).
+publication(700501,"Structural Joins: A Primitive for Efficient XML Query Pattern Matching.","",2002,1631,0,23,353).
+publication(700533,"M3: Stream Processing on Main-Memory MapReduce.","",2012,1631,0,0,0).
+publication(700582,"Efficient Processing of Proximity Queries for Large Databases.","",1995,1631,0,11,11).
+publication(700583,"A Distributed Database Server for Continuous Media.","",2002,1631,0,0,5).
+publication(700653,"Differencing Provenance in Scientific Workflows.","",2009,1631,0,31,5).
+publication(700720,"Independent Quantization: An Index Compression Technique for High-Dimensional Data Spaces.","",2000,1631,0,19,99).
+publication(700772,"Designing and Evaluating an XPath Dialect for Linguistic Queries.","",2006,1631,0,11,8).
+publication(700776,"Querying and Managing Provenance through User Views in Scientific Workflows.","",2008,1631,0,20,27).
+publication(700899,"Scientific Data Management: An Orphan in the Database Community?","",2008,1631,0,0,1).
+publication(701085,"ViteX: A Streaming XPath Processing System.","",2005,1631,0,0,2).
+publication(701086,"An Efficient XPath Query Processor for XML Streams.","",2006,1631,0,22,34).
+publication(701090,"Probabilistic Verifiers: Evaluating Constrained Nearest-Neighbor Queries over Uncertain Data.","",2008,1631,0,14,34).
+publication(701116,"Counting Twig Matches in a Tree.","",2001,1631,0,12,69).
+publication(701299,"Optimization of Generalized Transitive Closure Queries.","",1991,1631,0,25,8).
+publication(701300,"A Spanning Tree Transitive Closure Algorithm.","",1992,1631,0,26,14).
+publication(701317,"Propagating XML Constraints to Relations.","",2003,1631,0,18,34).
+publication(701318,"WOL: A Language for Database Transformations and Constraints.","",1997,1631,0,24,30).
+publication(701326,"SARD: A statistical approach for ranking database tuning parameters.","",2008,1631,0,23,2).
+publication(701396,"Efficiently Ordering Query Plans for Data Integration.","",2002,1631,0,20,16).
+publication(701415,"The Nimble XML Data Integration System.","",2001,1631,0,16,28).
+publication(701455,"Pigeon: A spatial MapReduce language.","",2014,1631,0,0,0).
+publication(701469,"Chameleon: Context-Awareness inside DBMSs.","",2009,1631,0,44,2).
+publication(701472,"A database server for next-generation scientific data management.","",2010,1631,0,28,0).
+publication(701473,"Supporting real-world activities in database management systems.","",2010,1631,0,17,0).
+publication(701474,"Space-Partitioning Trees in PostgreSQL: Realization and Performance.","",2006,1631,0,38,7).
+publication(701475,"Managing Biological Data using BDBMS.","",2008,1631,0,5,2).
+publication(701667,"Bulk Operations for Space-Partitioning Trees.","",2004,1631,0,0,13).
+publication(701828,"Schema Mediation in Peer Data Management Systems.","",2003,1631,0,22,193).
+publication(701832,"Nile: A Query Processing Engine for Data Streams.","",2004,1631,0,3,38).
+publication(702016,"Rank-Aware Query Processing and Optimization.","",2005,1631,0,0,4).
+publication(702048,"Spatial Search with Polyhedra.","",1990,1631,0,14,50).
+publication(702049,"Scalable Versioning in Distributed Databases with Commuting Updates.","",1997,1631,0,18,5).
+publication(702050,"Asynchronous Version Advancement in a Distributed Three-Version Database.","",1998,1631,0,13,1).
+publication(702051,"ItCompress: An Iterative Semantic Compression Algorithm.","",2004,1631,0,12,11).
+publication(702052,"VBI-Tree: A Peer-to-Peer Framework for Supporting Multi-Dimensional Indexing Schemes.","",2006,1631,0,17,55).
+publication(702071,"Automating the Design and Construction of Query Forms.","",2006,1631,0,0,7).
+publication(702169,"Continuous Evaluation of Monochromatic and Bichromatic Reverse Nearest Neighbors.","",2007,1631,0,28,28).
+publication(702244,"Skyline Query Processing for Incomplete Data.","",2008,1631,0,21,12).
+publication(702245,"PrefJoin: An efficient preference-aware join operator.","",2011,1631,0,33,0).
+publication(702436,"Realizing Privacy-Preserving Features in Hippocratic Databases.","",2007,1631,0,8,1).
+publication(702509,"PermJoin: An Efficient Algorithm for Producing Early Results in Multi-join Query Plans.","",2008,1631,0,11,3).
+publication(702512,"CareDB: A context and preference-aware location-based database system.","",2010,1631,0,23,0).
+publication(702513,"FlexPref: A framework for extensible preference evaluation in database systems.","",2010,1631,0,39,4).
+publication(702514,"LARS: A Location-Aware Recommender System.","",2012,1631,0,0,0).
+publication(702557,"SPRITE: A Learning-Based Text Retrieval System in DHT Networks.","",2007,1631,0,16,4).
+publication(702632,"A Spreadsheet Algebra for a Direct Data Manipulation Query Interface.","",2009,1631,0,15,5).
+publication(702690,"Transaction Time Support Inside a Database Engine.","",2006,1631,0,24,16).
+publication(702749,"Corpus-based Schema Matching.","",2005,1631,0,20,116).
+publication(702752,"Mars: Real-time spatio-temporal queries on microblogs.","",2014,1631,0,0,0).
+publication(702753,"Mercury: A memory-constrained spatio-temporal real-time search on microblogs.","",2014,1631,0,0,0).
+publication(702891,"Towards Privacy-Aware Location-Based Database Servers.","",2006,1631,0,40,15).
+publication(702892,"A demonstration of MNTG - A web-based road network traffic generator.","",2014,1631,0,0,0).
+publication(702893,"Scalable Multimedia Disk Scheduling.","",2004,1631,0,17,7).
+publication(702894,"Spectral LPM: An Optimal Locality-Preserving Mapping using the Spectral (not Fractal) Order.","",2003,1631,0,2,3).
+publication(702895,"The New Casper: A Privacy-Aware Location-Based Database Server.","",2007,1631,0,3,6).
+publication(702896,"Hash-Merge Join: A Non-blocking Join Algorithm for Producing Fast and Early Join Results.","",2004,1631,0,21,39).
+publication(703108,"Hippocratic PostgreSQL.","",2009,1631,0,8,0).
+publication(703120,"Client-Based Logging for High Performance Distributed Architectures.","",1996,1631,0,17,13).
+publication(703150,"SIGOPT: Using Schema to Optimize XML Query Processing.","",2007,1631,0,10,2).
+publication(703316,"WWW and the Internet - Did We Miss the Boat? (Panel).","",1998,1631,0,0,0).
+publication(703489,"Working Models for Uncertain Data.","",2006,1631,0,25,103).
+publication(703491,"Crowd-powered find algorithms.","",2014,1631,0,0,0).
+publication(703536,"Leveraging in-memory technology for interactive analyses of point-of-sales data.","",2014,1631,0,0,0).
+publication(703647,"Similarity Group-By.","",2009,1631,0,25,5).
+publication(703648,"The similarity join database operator.","",2010,1631,0,30,3).
+publication(703671,"SWST: A Disk Based Index for Sliding Window Spatio-Temporal Data.","",2012,1631,0,0,0).
+publication(703768,"Deriving probabilistic databases with inference ensembles.","",2011,1631,0,21,0).
+publication(704122,"A Query Processing Architecture for an XML Data Warehouse.","",2008,1631,0,1,0).
+publication(704123,"Making Designer Schemas with Colors.","",2006,1631,0,10,2).
+publication(704124,"X: A Cube Operator for XML OLAP.","",2007,1631,0,18,15).
+publication(704170,"Structural Join Order Selection for XML Query Optimization.","",2003,1631,0,16,69).
+publication(704206,"R-trees with Update Memos.","",2006,1631,0,25,26).
+publication(704208,"SEA-CNN: Scalable Processing of Continuous K-Nearest Neighbor Queries in Spatio-temporal Databases.","",2005,1631,0,32,124).
+publication(704296,"Efficient Retrieval of Similar Time Sequences Under Time Warping.","",1998,1631,0,10,195).
+publication(704311,"Online Data Mining for Co-Evolving Time Sequences.","",2000,1631,0,12,62).
+publication(704377,"Breaking out of the MisMatch trap.","",2014,1631,0,0,0).
+publication(704401,"Revision provenance in text documents of asynchronous collaboration.","",2013,1631,0,0,0).
+publication(706182,"WARP: Time Warping for Periodicity Detection.","",2005,1637,0,11,8).
+publication(706183,"STAGGER: Periodicity Mining of Data Streams Using Expanding Sliding Windows.","",2006,1637,0,8,2).
+publication(710374,"Optimizing user views for workflows.","",2009,1643,0,11,5).
+publication(710396,"Adding Structure to Unstructured Data.","",1997,1643,0,15,182).
+publication(710452,"Using the crowd for top-k and group-by queries.","",2013,1643,0,0,0).
+publication(710453,"On provenance and privacy.","",2011,1643,0,32,2).
+publication(710454,"A propagation model for provenance views of public/private workflows.","",2013,1643,0,0,0).
+publication(772819,"Search-based buffer management policies for streaming in continuous media servers.","",2002,1715,0,6,3).
+publication(791445,"Backup Path Allocation Based on a Correlated Link Failure Probability Model in Overlay Networks.","",2002,1727,0,9,28).
+publication(791870,"Reducing Congestion Effects in Wireless Networks by Multipath Routing.","",2006,1727,0,19,19).
+publication(802308,"Impact of Advanced VLSI Packaging on the Design of a Large Parallel Computer.","",1989,1744,0,0,4).
+publication(802746,"Group-Based Cooperative Cache Management for Mobile Clients in a Mobile Environment.","",2004,1744,0,15,9).
+publication(857221,"RDF Data-Centric Storage.","",2009,1811,0,21,4).
+publication(861970,"Scalable QoS-Aware Disk-Scheduling.","",2002,1821,0,20,7).
+publication(877854,"Multiple step social structure analysis with Cytoscape.","",2009,1852,0,1,1).
+publication(918791,"Efficiently Ordering Query Plans for Data Integration.","",1999,1948,0,19,5).
+publication(918895,"Recursive Plans for Information Gathering.","",1997,1948,0,10,61).
+publication(919097,"Verifying Integrity Constraints on Web Sites.","",1999,1948,0,7,27).
+publication(919236,"Navigational Plans for Data Integration.","",1999,1948,0,21,86).
+publication(919638,"Corpus-Based Knowledge Representation.","",2003,1948,0,27,12).
+publication(920693,"Exploiting Irrelevance Reasoning to Guide Problem Solving.","",1993,1948,0,15,5).
+publication(920760,"Synthesizing Union Tables from the Web.","",2013,1948,0,0,0).
+publication(920903,"Corpus-based Schema Matching.","",2003,1948,0,22,83).
+publication(921360,"A Semantic Theory of Abstractions.","",1995,1948,0,15,18).
+publication(941899,"Integration of IR into an XML Database.","",2002,1995,0,16,5).
+publication(943162,"Characterizing Selfishly Constructed Overlay Routing Networks.","",2004,1996,0,12,28).
+publication(943927,"Load Balancing in Dynamic Structured P2P Systems.","",2004,1996,0,14,106).
+publication(943928,"Heterogeneity and load balance in distributed hash tables.","",2005,1996,0,25,45).
+publication(946302,"Packet Fair Queueing Algorithms for Wireless Networks with Location-Dependent Errors.","",1998,1996,0,10,171).
+publication(947350,"REUNITE: A Recursive Unicast Approach to Multicast.","",2000,1996,0,4,61).
+publication(947351,"Self-Verifying CSFQ.","",2002,1996,0,9,9).
+publication(948764,"On failure detection algorithms in overlay networks.","",2005,1996,0,16,30).
+publication(973232,"A Model for User-Oriented Data Provenance in Pipelined Scientific Workflows.","",2006,2029,0,14,36).
+publication(973240,"Provenance and the Price of Identity.","",2008,2029,0,18,2).
+publication(973254,"On Provenance and Privacy.","",2010,2029,0,0,0).
+publication(985462,"Micro power meter for energy monitoring of wireless sensor networks at scale.","",2007,2044,0,11,20).
+publication(985654,"Beacon location service: a location service for point-to-point routing in wireless sensor networks.","",2007,2044,0,18,2).
+publication(986372,"Towards a Common API for Structured Peer-to-Peer Overlays.","",2003,2049,0,10,163).
+publication(986393,"Group Therapy for Systems: Using Link Attestations to Manage Failures.","",2006,2049,0,15,1).
+publication(986405,"Complex Queries in DHT-based Peer-to-Peer Networks.","",2002,2049,0,14,158).
+publication(986439,"The Case for a Hybrid P2P Search Infrastructure.","",2004,2049,0,5,76).
+publication(986475,"Load Balancing in Structured P2P Systems.","",2003,2049,0,8,143).
+publication(986476,"Routing Algorithms for DHTs: Some Open Questions.","",2002,2049,0,13,115).
+publication(986507,"Internet Indirection Infrastructure.","",2002,2049,0,14,5).
+publication(1052186,"ISMB 2005.","",2005,2125,0,0,0).
+publication(1052187,"ISMB 2005 Organization.","",2005,2125,0,0,0).
+publication(1053432,"Indexing Hidden Markov Models for Music Retrieval.","",2002,2127,0,0,2).
+publication(1061457,"Distributed Framework for Real-Time Multimedia Object Communication.","",2000,2136,0,0,2).
+publication(1064164,"Peer-to-Peer Cooperative Caching in a Hybrid Data Delivery Environment.","",2004,2140,0,13,2).
+publication(1098556,"User-focused database management.","",2009,2201,0,6,0).
+publication(1109470,"Recovery Algorithms for Database Machines with Nonvolatile Main Memory.","",1989,2230,0,3,4).
+publication(1109471,"An Intelligent Memory Transaction Engine.","",1989,2230,0,11,1).
+publication(1113787,"COPS: Quality of Service vs. Any Service at All.","",2005,2254,0,6,1).
+publication(1122267,"A Microeconomic Scheduler for Parallel Computers.","",1995,2297,0,7,22).
+publication(1124825,"Independence Diagrams: A Technique for Visual Data Mining.","",1998,2305,0,12,16).
+publication(1124945,"From labor to trader: opinion elicitation via online crowds as a market.","",2014,2305,0,0,0).
+publication(1124949,"WiseMarket: a new paradigm for managing wisdom of online social users.","",2013,2305,0,0,0).
+publication(1125855,"A general bootstrap performance diagnostic.","",2013,2305,0,0,0).
+publication(1126681,"Algebraic visual analysis: the Catalano phone call data set case study.","",2009,2305,0,7,1).
+publication(1127704,"Logic-enhanced memory for high performance databases.","",1997,2310,0,13,0).
+publication(1136476,"Dataspaces: Co-existence with Heterogeneity.","",2006,2329,0,0,0).
+publication(1136823,"Reasoning About Web-Site Structure.","",1998,2331,0,11,6).
+publication(1136861,"Using Description Logics to Model and Reason About Views.","",1996,2331,0,4,4).
+publication(1159078,"On accurate and efficient statistical counting in sensor-based surveillance systems.","",2008,2437,0,0,0).
+publication(1164707,"Phenomenon-Aware Stream Query Processing.","",2007,2470,0,21,0).
+publication(1164739,"Efficient Evaluation of k-Range Nearest Neighbor Queries in Road Networks.","",2010,2470,0,23,1).
+publication(1164845,"Distributed group-based cooperative caching in a mobile broadcast environment.","",2005,2470,0,23,11).
+publication(1164846,"Aggregate Location Monitoring for Wireless Sensor Networks: A Histogram-Based Approach.","",2009,2470,0,34,2).
+publication(1165231,"Privacy in Location-Based Services: State-of-the-Art and Research Directions.","",2007,2470,0,0,4).
+publication(1165232,"GPAC: generic and progressive processing of mobile queries over mobile data.","",2005,2470,0,38,16).
+publication(1165233,"Location-Aware Query Processing and Optimization.","",2007,2470,0,0,0).
+publication(1165359,"PLUTUS: Leveraging Location-Based Social Networks to Recommend Potential Customers to Venues.","",2013,2470,0,0,0).
+publication(1165360,"Social Networking and Mobility: A Data Management Perspective.","",2013,2470,0,0,0).
+publication(1165556,"Place: A Distributed Spatio-Temporal Data Stream Management System for Moving Objects.","",2007,2470,0,32,5).
+publication(1165557,"LUGrid: Update-tolerant Grid-based Indexing for Moving Objects.","",2006,2470,0,26,9).
+publication(1165617,"Differentially Private Location Recommendations in Geosocial Networks.","",2014,2470,0,0,0).
+publication(1179924,"The trap as a control flow mechanism.","",1988,2504,0,5,1).
+publication(1186032,"Autonomous Disks: The Building Block for a Scalable Distributed File System.","",1999,2524,0,12,0).
+publication(1186039,"A Video Database Management System for Advancing Video Database Research.","",2002,2524,0,35,5).
+publication(1190291,"Support for service composition in .","",2004,2543,0,9,6).
+publication(1193827,"Video query processing in the VDBMS testbed for video database research.","",2003,2551,0,27,4).
+publication(1198939,"Geographic routing without location information.","",2003,2566,0,20,259).
+publication(1199283,"SPASS: scalable and energy-efficient data acquisition in sensor databases.","",2005,2567,0,26,1).
+publication(1199301,"Challenges in spatiotemporal stream query optimization.","",2006,2567,0,37,4).
+publication(1199347,"Toward context and preference-aware location-based services.","",2009,2567,0,32,4).
+publication(1200013,"Balancing traffic load in wireless networks with curveball routing.","",2007,2569,0,23,24).
+publication(1201248,"Data management challenges for computational transportation.","",2008,2576,0,0,0).
+publication(1201997,"Blue-Fi: enhancing Wi-Fi performance using bluetooth signals.","",2009,2579,0,19,10).
+publication(1202345,"An overlay MAC layer for 802.11 networks.","",2005,2579,0,30,40).
+publication(1202498,"Host Mobility Using an Internet Indirection Infrastructure.","",2003,2579,0,19,28).
+publication(1207797,"Deferred updates for flash-based storage.","",2010,2622,0,14,1).
+publication(1216756,"CCSR 92: Calculus for Communicating Shared Resources with Dynamic Priorities.","",1992,2653,0,0,1).
+publication(1224571,"Maintenance and Self Maintenance of Outer-Join Views.","",1997,2687,0,0,8).
+publication(1224572,"Structured Data on the Web.","",2009,2687,0,2,1).
+publication(1238750,"Reoptimizing Data Parallel Computing.","",2012,2725,0,0,0).
+publication(1238757,"Effective Straggler Mitigation: Attack of the Clones.","",2013,2725,0,0,0).
+publication(1238758,"PACMan: Coordinated Memory Caching for Parallel Jobs.","",2012,2725,0,0,0).
+publication(1238759,"GRASS: Trimming Stragglers in Approximation Analytics.","",2014,2725,0,0,0).
+publication(1238851,"X-Trace: A Pervasive Network Tracing Framework.","",2007,2725,0,14,44).
+publication(1238852,"Beacon Vector Routing: Scalable Point-to-Point Routing in Wireless Sensornets.","",2005,2725,0,37,79).
+publication(1238861,"Friday: Global Comprehension for Distributed Replay.","",2007,2725,0,26,13).
+publication(1238863,"Dominant Resource Fairness: Fair Allocation of Multiple Resource Types.","",2011,2725,0,0,0).
+publication(1238893,"Mesos: A Platform for Fine-Grained Resource Sharing in the Data Center.","",2011,2725,0,0,0).
+publication(1238907,"OCALA: An Architecture for Supporting Legacy Applications over Overlays.","",2006,2725,0,29,24).
+publication(1239003,"SAAR: A Shared Control Plane for Overlay Multicast.","",2007,2725,0,36,5).
+publication(1239092,"Listen and Whisper: Security Mechanisms for BGP (Awarded Best Student Paper!).","",2004,2725,0,13,5).
+publication(1239093,"OverQoS: An Overlay Based Architecture for Enhancing Internet QoS.","",2004,2725,0,23,69).
+publication(1239144,"Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing.","",2012,2725,0,0,0).
+publication(1242066,"Composite Events in a Distributed Object-Oriented Database.","",1992,2757,0,0,6).
+publication(1246190,"Reining in the Outliers in Map-Reduce Clusters using Mantri.","",2010,2772,0,23,6).
+publication(1246285,"A Modular Network Layer for Sensornets.","",2006,2772,0,19,18).
+publication(1246298,"Quanto: Tracking Energy in Networked Embedded Systems.","",2008,2772,0,33,22).
+publication(1246315,"GraphX: Graph Processing in a Distributed Dataflow Framework.","",2014,2772,0,0,0).
+publication(1246461,"Building Extensible Networks with Rule-Based Forwarding.","",2010,2772,0,0,0).
+publication(1246534,"The Power of Choice in Data-Aware Cluster Scheduling.","",2014,2772,0,0,0).
+publication(1246580,"Improving MapReduce Performance in Heterogeneous Environments.","",2008,2772,0,15,74).
+publication(1257392,"Incompleteness in Data Mining.","",2001,2796,0,0,0).
+publication(1276936,"The SAHARA Model for Service Composition across Multiple Providers.","",2002,2848,0,10,33).
+publication(1288027,"On the Discovery of Weak Periodicities in Large Time Series.","",2002,2867,0,13,7).
+publication(1292450,"Brief announcement: towards a secure indirection infrastructure.","",2004,2877,0,1,0).
+publication(1292868,"Reliable broadcast in unknown fixed-identity networks.","",2005,2877,0,20,8).
+publication(1293073,"Efficient Processing of Window Queries in The Pyramid Data Structure.","",1990,2879,0,1,18).
+publication(1293125,"Rewriting Queries Using Views in Description Logics.","",1997,2879,0,25,76).
+publication(1293183,"A Semantics for Complex Objects and Approximate Queries.","",1988,2879,0,12,23).
+publication(1293309,"Provenance views for module privacy.","",2011,2879,0,0,0).
+publication(1293389,"Query Containment for Conjunctive Queries with Regular Expressions.","",1998,2879,0,35,60).
+publication(1293403,"Is Byzantine Agreement Useful in a Distributed Database?","",1984,2879,0,14,4).
+publication(1293497,"The view selection problem for XML content based routing.","",2003,2879,0,12,5).
+publication(1293519,"Principles of dataspace systems.","",2006,2879,0,46,83).
+publication(1293521,"Reasoning about Nested Functional Dependencies.","",1999,2879,0,15,31).
+publication(1293528,"Optimal indexing using near-minimal space.","",2003,2879,0,17,4).
+publication(1293574,"Similarity-Based Queries.","",1995,2879,0,11,68).
+publication(1293575,"Managing Rule Conflicts in an Active Database.","",1996,2879,0,16,3).
+publication(1293576,"View Maintenance Issues for the Chronicle Data Model.","",1995,2879,0,20,57).
+publication(1293577,"Substring Selectivity Estimation.","",1999,2879,0,11,29).
+publication(1293682,"Answering Queries Using Views.","",1995,2879,0,23,358).
+publication(1293683,"Answering Queries Using Limited External Processors.","",1996,2879,0,29,53).
+publication(1293684,"Constraints and Redundancy in Datalog.","",1992,2879,0,18,41).
+publication(1293685,"Semantic Query Optimization in Datalog Programs.","",1995,2879,0,12,34).
+publication(1293686,"Deciding Containment for Queries with Complex Objects.","",1997,2879,0,35,28).
+publication(1293745,"Query Containment for Data Integration Systems.","",2000,2879,0,47,43).
+publication(1299699,"Modeling Communication in Cluster Computing.","",1995,2894,0,0,1).
+publication(1337816,"Protocols for Timed Synchronous Process Communications.","",1986,3029,0,0,2).
+publication(1338307,"RTC: language support for real-time concurrency.","",1991,3029,0,3,12).
+publication(1353329,"UXQuery: Building Updatable XML Views over Relational Databases.","",2003,3070,0,19,5).
+publication(1353361,"Constraints for XML.","",2001,3070,0,0,0).
+publication(1353399,"Dataspaces: A New Paradigm for Data Integration.","",2007,3070,0,0,0).
+publication(1363756,"Semantics of Database Transformations.","",1995,3115,0,36,9).
+publication(1364561,"Identifying Unsafe Routes for Network-Based Trajectory Privacy.","",2009,3120,0,18,4).
+publication(1365337,"Using Delay to Defend Against Database Extraction.","",2004,3121,0,17,0).
+publication(1375505,"On User Views in Scientific Workflow Systems.","",2009,3149,0,0,0).
+publication(1376413,"Mangrove: Enticing Ordinary People onto the Semantic Web via Instant Gratification.","",2003,3149,0,2,13).
+publication(1376414,"The Specification of Agent Behavior by Ordinary People: A Case Study.","",2004,3149,0,26,1).
+publication(1377804,"The design and implementation of a declarative sensor network system.","",2007,3154,0,36,45).
+publication(1378047,"Flush: a reliable bulk transport protocol for multihop wireless networks.","",2007,3154,0,29,39).
+publication(1378249,"Carat: collaborative energy diagnosis for mobile devices.","",2013,3154,0,0,0).
+publication(1378292,"A unifying link abstraction for wireless sensor networks.","",2005,3154,0,61,101).
+publication(1386245,"Developing a predictive model of quality of experience for internet video.","",2013,3192,0,0,0).
+publication(1386246,"A layered naming architecture for the internet.","",2004,3192,0,37,62).
+publication(1386305,"Surviving failures in bandwidth-constrained datacenters.","",2012,3192,0,23,0).
+publication(1386327,"Endpoint admission control: Architectural issues and performance.","",2000,3192,0,14,147).
+publication(1386341,"ROFL: routing on flat labels.","",2006,3192,0,31,54).
+publication(1386408,"Leveraging endpoint flexibility in data-intensive clusters.","",2013,3192,0,0,0).
+publication(1386409,"Managing data transfers in computer clusters with orchestra.","",2011,3192,0,0,0).
+publication(1386410,"Efficient coflow scheduling with Varys.","",2014,3192,0,0,0).
+publication(1386476,"Understanding the impact of video quality on user engagement.","",2011,3192,0,0,0).
+publication(1386577,"Multi-resource fair queueing for packet processing.","",2012,3192,0,0,0).
+publication(1386586,"Pathlet routing.","",2009,3192,0,17,12).
+publication(1386587,"Minimizing churn in distributed systems.","",2006,3192,0,30,69).
+publication(1386620,"The impact of DHT routing geometry on resilience and proximity.","",2003,3192,0,21,225).
+publication(1386729,"A policy-aware switching layer for data centers.","",2008,3192,0,17,16).
+publication(1386789,"A data-oriented (and beyond) network architecture.","",2007,3192,0,21,53).
+publication(1386831,"Achieving convergence-free routing using failure-carrying packets.","",2007,3192,0,16,22).
+publication(1386886,"A case for a coordinated internet video control plane.","",2012,3192,0,0,0).
+publication(1386908,"Declarative routing: extensible routing with declarative queries.","",2005,3192,0,14,49).
+publication(1387087,"FairCloud: sharing the network in cloud computing.","",2012,3192,0,0,0).
+publication(1387145,"OpenDHT: a public DHT service and its uses.","",2005,3192,0,28,168).
+publication(1387256,"Internet indirection infrastructure.","",2002,3192,0,28,255).
+publication(1387257,"Chord: A scalable peer-to-peer lookup service for internet applications.","",2001,3192,0,28,3391).
+publication(1387258,"-Stateless Fair Queueing: Achieving Approximately Fair Bandwidth Allocations in High Speed Networks.","",1998,3192,0,14,168).
+publication(1387259,"Providing Guaranteed Services without Per Flow Management.","",1999,3192,0,22,223).
+publication(1387264,"HLP: a next generation inter-domain routing protocol.","",2005,3192,0,24,48).
+publication(1387405,"One more bit is enough.","",2005,3192,0,46,45).
+publication(1389848,"A cascading mentoring pedagogy in a CS service learning course to broaden participation and perceptions.","",2013,3194,0,0,0).
+publication(1393251,"Hidden-action in multi-hop routing.","",2005,3197,0,22,17).
+publication(1393254,"Robust incentive techniques for peer-to-peer networks.","",2004,3197,0,15,147).
+publication(1398530,"Getting work done on the web: supporting transactional queries.","",2006,3199,0,17,6).
+publication(1400085,"Querying XML using structures and keywords in timber.","",2003,3199,0,2,4).
+publication(1401529,"Denial-of-service resilience in peer-to-peer file sharing systems.","",2005,3203,0,13,41).
+publication(1402077,"Supporting Best-Effort Traffic With Fair Service Curve.","",1999,3203,0,18,10).
+publication(1402361,"Conquering big data with spark and BDAS.","",2014,3203,0,0,0).
+publication(1402603,"Exploiting Geo-tagged Tweets to Understand Localized Language Diversity.","",2014,3204,0,0,0).
+publication(1402664,"Efficient Management of Transitive Relationships in Large Data and Knowledge Bases.","",1989,3204,0,25,133).
+publication(1402707,"Querying Structured Text in an XML Database.","",2003,3204,0,19,52).
+publication(1402712,"TAREEG: a MapReduce-based web service for extracting spatial data from OpenStreetMap.","",2014,3204,0,0,0).
+publication(1402740,"OASSIS: query driven crowd mining.","",2014,3204,0,0,0).
+publication(1402777,"The Handwritten Trie: Indexing Electronic Ink.","",1995,3204,0,5,10).
+publication(1402833,"Scalable atomic visibility with RAMP transactions.","",2014,3204,0,0,0).
+publication(1402834,"Bolt-on causal consistency.","",2013,3204,0,0,0).
+publication(1402835,"PBS at work: advancing data management with consistency metrics.","",2013,3204,0,0,0).
+publication(1402859,"An optimal labeling scheme for workflow provenance using skeleton labels.","",2010,3204,0,17,0).
+publication(1402860,"Labeling recursive workflow executions on-the-fly.","",2011,3204,0,0,0).
+publication(1402958,"ASSET: A System for Supporting Extended Transactions.","",1994,3204,0,17,57).
+publication(1403107,"A Query Language and Optimization Techniques for Unstructured Data.","",1996,3204,0,16,337).
+publication(1403124,"Web data management.","",2011,3204,0,0,0).
+publication(1403127,"Personal information management with SEMEX.","",2005,3204,0,6,21).
+publication(1403208,"StreamRec: a real-time recommender system.","",2011,3204,0,7,0).
+publication(1403231,"Finding k-dominant skylines in high dimensional space.","",2006,3204,0,17,91).
+publication(1403234,"Why not?","",2009,3204,0,16,7).
+publication(1403235,"Efficient provenance storage.","",2008,3204,0,22,36).
+publication(1403274,"BLAS: An Efficient XPath Processing System.","",2004,3204,0,23,29).
+publication(1403308,"Exploring schema repositories with schemr.","",2009,3204,0,5,5).
+publication(1403354,"Tinycasper: a privacy-preserving aggregate location monitoring system in wireless sensor networks.","",2008,3204,0,8,4).
+publication(1403374,"Querying at Internet-Scale.","",2004,3204,0,5,1).
+publication(1403498,"Provenance and scientific workflows: challenges and opportunities.","",2008,3204,0,27,46).
+publication(1403565,"Reconciling Schemas of Disparate Data Sources: A Machine-Learning Approach.","",2001,3204,0,19,310).
+publication(1403578,"Indexing dataspaces.","",2007,3204,0,38,25).
+publication(1403580,"Reference Reconciliation in Complex Information Spaces.","",2005,3204,0,26,145).
+publication(1403586,"The Nimble Integration Engine.","",2001,3204,0,6,9).
+publication(1403637,"Shark: fast data analysis using coarse-grained distributed memory.","",2012,3204,0,0,0).
+publication(1403685,"STRUDEL: A Web-site Management System.","",1997,3204,0,16,69).
+publication(1403686,"Catching the Boat with Strudel: Experiences with a Web-Site Management System.","",1998,3204,0,24,195).
+publication(1403707,"Query Optimization in the Presence of Limited Access Patterns.","",1999,3204,0,27,81).
+publication(1403716,"Rethinking the Conference Reviewing Process - Panel.","",2004,3204,0,0,1).
+publication(1403767,"DSH: data sensitive hashing for high-dimensional k-nnsearch.","",2014,3204,0,0,0).
+publication(1403797,"Event Specification in an Active Object-Oriented Database.","",1992,3204,0,20,129).
+publication(1403858,"Google fusion tables: web-centered data management and collaboration.","",2010,3204,0,4,5).
+publication(1403923,"Approximate XML joins.","",2002,3204,0,12,57).
+publication(1404117,"Sharing aggregate computation for distributed queries.","",2007,3204,0,17,14).
+publication(1404142,"Rank-aware Query Optimization.","",2004,3204,0,31,59).
+publication(1404170,"An Adaptive Query Execution System for Data Integration.","",1999,3204,0,30,203).
+publication(1404171,"Adapting to Source Properties in Processing Data Integration Queries.","",2004,3204,0,25,41).
+publication(1404172,"Self-Organizing Data Sharing Communities with SAGRES.","",2000,3204,0,0,6).
+publication(1404176,"Incorporating Hierarchy in a Relational Model of Data.","",1989,3204,0,18,9).
+publication(1404177,"Linear Clustering of Objects with Multiple Atributes.","",1990,3204,0,18,146).
+publication(1404178,"A Retrieval Technique for Similar Shapes.","",1991,3204,0,14,119).
+publication(1404179,"Issues in Multimedia Datbases (Panel).","",1993,3204,0,0,0).
+publication(1404180,"Databases for Networks.","",1994,3204,0,0,1).
+publication(1404181,"A Study of Transitive Closure As a Recursion Mechanism.","",1987,3204,0,18,53).
+publication(1404182,"Making database systems usable.","",2007,3204,0,71,29).
+publication(1404183,"Global Optimization of Histograms.","",2001,3204,0,16,29).
+publication(1404184,"On Effective Multi-Dimensional Indexing for Strings.","",2000,3204,0,19,25).
+publication(1404185,"Querying Network Directories.","",1999,3204,0,18,33).
+publication(1404186,"Snakes and Sandwiches: Optimal Clustering Strategies for a Data Warehouse.","",1999,3204,0,20,15).
+publication(1404188,"Speeding up search in peer-to-peer networks with a multi-way tree structure.","",2006,3204,0,19,24).
+publication(1404209,"Pay-as-you-go user feedback for dataspace systems.","",2008,3204,0,23,22).
+publication(1404392,"Efficiently Supporting Ad Hoc Queries in Large Datasets of Time Sequences.","",1997,3204,0,17,138).
+publication(1404493,"iMAP: Discovering Complex Mappings between Database Schemas.","",2004,3204,0,19,49).
+publication(1404525,"A demonstration of FlexPref: extensible preference evaluation inside the DBMS engine.","",2010,3204,0,6,0).
+publication(1404545,"DaNaLIX: a domain-adaptive natural language interface for querying XML.","",2007,3204,0,2,3).
+publication(1404557,"NaLIR: an interactive natural language interface for querying relational databases.","",2014,3204,0,0,0).
+publication(1404582,"Schema-free SQL.","",2014,3204,0,0,0).
+publication(1404604,"DataLens: making a good first impression.","",2009,3204,0,12,1).
+publication(1404624,"NaLIX: an interactive natural language interface for querying XML.","",2005,3204,0,5,29).
+publication(1404642,"Immortal DB: transaction time support for SQL server.","",2005,3204,0,3,12).
+publication(1404792,"Supporting Executable Mappings in Model Management.","",2005,3204,0,34,49).
+publication(1404850,"SINA: Scalable Incremental Processing of Continuous Queries in Spatio-temporal Databases.","",2004,3204,0,34,160).
+publication(1404918,"Assisted querying using instant-response interfaces.","",2007,3204,0,5,10).
+publication(1405055,"TIMBER: A Native System for Querying XML.","",2003,3204,0,8,18).
+publication(1405057,"Tree Logical Classes for Efficient Evaluation of XQuery.","",2004,3204,0,14,41).
+publication(1405138,"Sample-driven schema mapping.","",2012,3204,0,0,0).
+publication(1405313,"Bootstrapping pay-as-you-go data integration systems.","",2008,3204,0,27,41).
+publication(1405314,"Finding related tables.","",2012,3204,0,0,0).
+publication(1405316,"Efficient spatial sampling of large geographical tables.","",2012,3204,0,0,0).
+publication(1405318,"Sindbad: a location-based social networking system.","",2012,3204,0,0,0).
+publication(1405356,"OpenII: an open source information integration toolkit.","",2010,3204,0,9,4).
+publication(1405456,"SimDB: a similarity-aware database system.","",2010,3204,0,3,0).
+publication(1405469,"Skimmer: rapid scrolling of relational query results.","",2012,3204,0,0,0).
+publication(1405558,"Detecting and resolving unsound workflow views for correct provenance analysis.","",2009,3204,0,25,2).
+publication(1405598,"Efficient Query Reformulation in Peer-Data Management Systems.","",2004,3204,0,24,86).
+publication(1405599,"Updating XML.","",2001,3204,0,14,185).
+publication(1405864,"GraphX: a resilient distributed graph system on Spark.","",2013,3204,0,0,0).
+publication(1405866,"Shark: SQL and rich analytics at scale.","",2013,3204,0,0,0).
+publication(1405979,"CrowdMatcher: crowd-assisted schema matching.","",2014,3204,0,0,0).
+publication(1414239,"The Similarity-Aware Relational Intersect Database Operator.","",2014,3231,0,0,0).
+publication(1418431,"Combining Rules and Description Logics: An Overview of CARIN.","",1995,3240,0,0,0).
+publication(1418432,"Semantic Query Optimization in Datalog Programs.","",1994,3240,0,0,0).
+publication(1442711,"ODR: output-deterministic replay for multicore debugging.","",2009,3300,0,16,11).
+publication(1442824,"Wide-Area Cooperative Storage with CFS.","",2001,3300,0,20,673).
+publication(1442982,"Implementing declarative overlays.","",2005,3300,0,35,74).
+publication(1443189,"Discretized streams: fault-tolerant streaming computation at scale.","",2013,3300,0,0,0).
+publication(1447846,"Hierarchical video summarization for medical data.","",2002,3315,0,12,8).
+publication(1452769,"Analyzing Cooperative Containment of Fast Scanning Worms.","",2005,3328,0,13,9).
+publication(1453000,"Extending a DBMS with Spatial Operations.","",1991,3332,0,25,25).
+publication(1453048,"Enabling Private Continuous Queries for Revealed User Locations.","",2007,3332,0,12,36).
+publication(1453049,"Approximate Evaluation of Range Nearest Neighbor Queries with Quality Guarantee.","",2009,3332,0,20,2).
+publication(1453071,"Spatio-temporal Histograms.","",2005,3332,0,45,6).
+publication(1453117,"Query Processing in Broadcasted Spatial Index Trees.","",2001,3332,0,8,25).
+publication(1453204,"On Querz Processing and Optimality Using Spectral Locality-Preserving Mappings.","",2003,3332,0,21,1).
+publication(1453205,"MNTG: An Extensible Web-Based Traffic Generator.","",2013,3332,0,0,0).
+publication(1453261,"FAST: A Generic Framework for Flash-Aware Spatial Trees.","",2011,3332,0,23,0).
+publication(1453337,"Efficient Evaluation of k-NN Queries Using Spatial Mashups.","",2011,3332,0,18,0).
+publication(1453359,"Scalability Management in Sensor-Network PhenomenaBases.","",2006,3333,0,22,3).
+publication(1453360,"Detection and Tracking of Discrete Phenomena in Sensor-Network Databases.","",2005,3333,0,25,11).
+publication(1453374,"An Extensible Index for Spatial Databases.","",2001,3333,0,33,8).
+publication(1453388,"Education and career paths for data scientists.","",2013,3333,0,0,0).
+publication(1453532,"Tale of Two Cultures: Are There Database Research Issues in Bioinformatics?","",2002,3333,0,0,2).
+publication(1453533,"Search and result presentation in scientific workflow repositories.","",2013,3333,0,0,0).
+publication(1453534,"Efficiently Supporting Structure Queries on Phylogenetic Trees.","",2005,3333,0,9,2).
+publication(1453572,"Duplicate Elimination in Space-partitioning Tree Indexes.","",2007,3333,0,17,1).
+publication(1453675,"Stream Window Join: Tracking Moving Objects in Sensor-Network Databases.","",2003,3333,0,15,44).
+publication(1453676,"Optimizing In-Order Execution of Continuous Queries over Streamed Sensor Data.","",2005,3333,0,16,6).
+publication(1453736,"Some Challenges in Integrating Information on Protein Interactions and a Partial Solution.","",2007,3333,0,0,0).
+publication(1453811,"Range Selectivity Estimation for Continuous Attributes.","",1999,3333,0,14,20).
+publication(1453871,"Specifying Updates in Biomedical Databases.","",1999,3333,0,10,7).
+publication(1453985,"Pantheon: Exascale File System Search for Scientific Computing.","",2011,3333,0,11,0).
+publication(1454199,"Learning to explore scientific workflow repositories.","",2013,3333,0,0,0).
+publication(1454304,"Scalable Spatio-temporal Continuous Query Processing for Location-aware Services.","",2004,3333,0,23,26).
+publication(1459475,"Continuous Query Processing of Spatio-temporal Data Streams in PLACE.","",2004,3352,0,67,8).
+publication(1471563,"Approximated Provenance for Complex Applications.","",2014,3410,0,0,0).
+publication(1471573,"A Fine-Grained Workflow Model with Provenance-Aware Security Views.","",2011,3410,0,0,0).
+publication(1471638,"Provenance in Dynamic Data Systems.","",2011,3410,0,0,0).
+publication(1493784,"Replay Debugging for Distributed Applications (Awarded Best Paper!).","",2006,3512,0,0,1).
+publication(1494066,"Cloud Terminal: Secure Access to Sensitive Applications from Untrusted Systems.","",2012,3512,0,0,0).
+publication(1494160,"A Waypoint Service Approach to Connect Heterogeneous Internet Address Spaces.","",2001,3512,0,3,16).
+publication(1498638,"Discovering Consensus Patterns in Biological Databases.","",2006,3532,0,15,0).
+publication(1499946,"The World Wide Web as a Collection of Views: Query Processing in the Information Manifold.","",1996,3541,0,0,19).
+publication(1505573,"Direct Algorithms for Computing the Transitive Closure of Database Relations.","",1987,3558,0,16,56).
+publication(1505574,"Efficient Search in Very Large Databases.","",1988,3558,0,5,9).
+publication(1505575,"On Correctly Configuring Versioned Objects.","",1989,3558,0,10,8).
+publication(1505576,"Hybrid Transitive Closure Algorithms.","",1990,3558,0,25,28).
+publication(1505606,"NILE-PDT: A Phenomenon Detection and Tracking Framework for Data Stream Management Systems.","",2005,3558,0,4,15).
+publication(1505618,"What does Web 2.0 have to do with databases?","",2007,3558,0,0,1).
+publication(1505648,"Optimization for Spatial Query Processing.","",1991,3558,0,10,18).
+publication(1505746,"ULDBs: Databases with Uncertainty and Lineage.","",2006,3558,0,38,164).
+publication(1505800,"Zoom*UserViews: Querying Relevant Provenance in Workflow Systems.","",2007,3558,0,4,12).
+publication(1505859,"From XML View Updates to Relational View Updates: old solutions to a new problem.","",2004,3558,0,22,27).
+publication(1505909,"A Data Transformation System for Biological Data Sources.","",1995,3558,0,28,62).
+publication(1506043,"RRXF: Redundancy reducing XML storage in relations.","",2003,3558,0,16,21).
+publication(1506052,"From Tree Patterns to Generalized Tree Patterns: On Efficient Evaluation of XQuery.","",2003,3558,0,21,60).
+publication(1506079,"A Formal Perspective on the View Selection Problem.","",2001,3558,0,23,50).
+publication(1506245,"Simlarity Search for Web Services.","",2004,3558,0,13,217).
+publication(1506246,"Containment of Nested XML Queries.","",2004,3558,0,34,19).
+publication(1506247,"Data Integration with Uncertainty.","",2007,3558,0,32,59).
+publication(1506302,"On B-Tree Indices for Skewed Distributions.","",1992,3558,0,7,26).
+publication(1506303,"Recovering Information from Summary Data.","",1997,3558,0,20,41).
+publication(1506313,"Fast Column Scans: Paged Indices for In-Memory Column Stores.","",2013,3558,0,0,0).
+publication(1506314,"Fast Column Scans: Paged Indices for In-Memory Column Stores.","",2013,3558,0,0,0).
+publication(1506316,"Composite Group-Keys: Space-efficient Indexing of Multiple Columns for Compressed In-Memory Column Stores.","",2014,3558,0,0,0).
+publication(1506317,"Composite Group-Keys - Space-Efficient Indexing of Multiple Columns for Compressed In-Memory Column Stores.","",2014,3558,0,0,0).
+publication(1506333,"Using Probabilistic Information in Data Integration.","",1997,3558,0,12,54).
+publication(1506334,"Is Web-site Management a Database Problem?","",1998,3558,0,0,0).
+publication(1506335,"Optimization of Run-time Management of Data Intensive Web-sites.","",1999,3558,0,27,35).
+publication(1506402,"Ode as an Active Database: Constraints and Triggers.","",1991,3558,0,25,142).
+publication(1506403,"OdeFS: A File System Interface to an Object-Oriented Database.","",1994,3558,0,15,13).
+publication(1506404,"Composite Event Specification in Active Databases: Model & Implementation.","",1992,3558,0,13,175).
+publication(1506462,"Approximate String Joins in a Database (Almost) for Free.","",2001,3558,0,16,168).
+publication(1506517,"Data Integration: The Teenage Years.","",2006,3558,0,108,84).
+publication(1506523,"Scheduling for shared window joins over data streams.","",2003,3558,0,8,55).
+publication(1506619,"Querying the Internet with PIER.","",2003,3558,0,28,247).
+publication(1506640,"Joining Ranked Inputs in Practice.","",2002,3558,0,8,44).
+publication(1506641,"Supporting Top-k Join Queries in Relational Databases.","",2003,3558,0,24,115).
+publication(1506671,"On Indexing Line Segments.","",1990,3558,0,16,23).
+publication(1506672,"Optimal Histograms with Quality Guarantees.","",1998,3558,0,11,187).
+publication(1506673,"Multi-Dimensional Substring Selectivity Estimation.","",1999,3558,0,16,16).
+publication(1506674,"Dal: A High Performance Main Memory Storage Manager.","",1994,3558,0,17,40).
+publication(1506675,"What can Hierarchies do for Data Warehouses?","",1999,3558,0,23,40).
+publication(1506676,"Semantic Compression and Pattern Extraction with Fascicles.","",1999,3558,0,17,31).
+publication(1506677,"Incremental Organization for Data Recording and Warehousing.","",1997,3558,0,7,32).
+publication(1506678,"BATON: A Balanced Tree Structure for Peer-to-Peer Networks.","",2005,3558,0,14,119).
+publication(1506679,"Integrity Maintenance in Object-Oriented Databases.","",1992,3558,0,26,23).
+publication(1506680,"Proclamation-Based Model for Cooperating Transactions.","",1992,3558,0,15,3).
+publication(1506681,"Recovering from Main-Memory Lapses.","",1993,3558,0,14,21).
+publication(1506854,"Mining Deviants in a Time Series Database.","",1999,3558,0,9,34).
+publication(1506968,"Obtaining Complete Answers from Incomplete Databases.","",1996,3558,0,23,59).
+publication(1506969,"Query Optimization by Predicate Move-Around.","",1994,3558,0,16,57).
+publication(1506970,"Querying Heterogeneous Information Sources Using Source Descriptions.","",1996,3558,0,27,617).
+publication(1506971,"Queries Independent of Updates.","",1993,3558,0,11,101).
+publication(1506972,"Challenges for Global Information Systems.","",1994,3558,0,0,1).
+publication(1507037,"Schema-Free XQuery.","",2004,3558,0,17,133).
+publication(1507049,"Enhancing P2P File-Sharing with an Internet-Scale Query Processor.","",2004,3558,0,16,65).
+publication(1507087,"Composing Mappings Among Data Sources.","",2003,3558,0,30,112).
+publication(1507206,"The New Casper: Query Processing for Location Services without Compromising Privacy.","",2006,3558,0,38,184).
+publication(1507207,"PLACE: A Query Processor for Handling Real-time Spatio-temporal Data Streams.","",2004,3558,0,10,16).
+publication(1507222,"Efficient Skyline Computation over Low-Cardinality Domains.","",2007,3558,0,24,39).
+publication(1507261,"Effective Phrase Prediction.","",2007,3558,0,30,14).
+publication(1507293,"ProTDB: Probabilistic Data in XML.","",2002,3558,0,15,61).
+publication(1507324,"Indexing the Distance: An Efficient Method to KNN Processing.","",2001,3558,0,8,105).
+publication(1507372,"Pattern Tree Algebras: Sets or Sequences?","",2005,3558,0,17,18).
+publication(1507424,"A Scalable Algorithm for Answering Queries Using Views.","",2000,3558,0,28,119).
+publication(1507602,"Efficient Transaction Processing for Hyrise in Mixed Workload Environments.","",2014,3558,0,0,0).
+publication(1507603,"Efficient Transaction Processing for Hyrise in Mixed Workload Environments.","",2014,3558,0,0,0).
+publication(1507688,"Similarity-aware Query Processing and Optimization.","",2009,3558,0,0,1).
+publication(1507740,"Answering Queries with Aggregation Using Views.","",1996,3558,0,24,138).
+publication(1507799,"Record Placement Based on Data Skew Using Solid State Drives.","",2014,3558,0,0,0).
+publication(1508056,"Efficient Discovery of XML Data Redundancies.","",2006,3558,0,23,13).
+publication(1508057,"Schema Summarization.","",2006,3558,0,9,33).
+publication(1508058,"Querying Complex Structured Databases.","",2007,3558,0,18,15).
+publication(1508062,"Compressed Accessibility Map: Efficient Access Control for XML.","",2002,3558,0,20,33).
+publication(1508086,"Crimson: A Data Management System to Support Evaluating Phylogenetic Tree Reconstruction Algorithms.","",2006,3558,0,6,0).
+publication(1529685,"XML-QL.","",1998,3591,0,0,1).
+publication(1548301,"Declarative Web Site Management with Tiramisu.","",1999,3643,0,8,17).
+publication(1548338,"On the updatability of XML views over relational databases.","",2003,3643,0,23,19).
+publication(1548344,"Uncovering the Relational Web.","",2008,3643,0,14,21).
+publication(1548355,"Constraints preserving schema mapping from XML to relations.","",2002,3643,0,0,9).
+publication(1548376,"Learning Source Description for Data Integration.","",2000,3643,0,14,52).
+publication(1548378,"Malleable Schemas: A Preliminary Report.","",2005,3643,0,20,7).
+publication(1548381,"Semantic Email: Adding Lightweight Data Manipulation Capabilities to the Email Habitat.","",2003,3643,0,0,11).
+publication(1548382,"PrivatePond: Outsourced Management of Web Corpuses.","",2009,3643,0,22,0).
+publication(1548390,"Run-Time Management of Data Intensive Web Sites.","",1999,3643,0,12,5).
+publication(1548400,"What Can Database Do for Peer-to-Peer?","",2001,3643,0,8,71).
+publication(1548403,"View Selection for Stream Processing.","",2002,3643,0,23,8).
+publication(1548444,"Answering Structured Queries on Unstructured Data.","",2006,3643,0,18,14).
+publication(1548470,"Evaluating Structural Similarity in XML Documents.","",2002,3643,0,9,143).
+publication(1548535,"Functional Dependency Generation and Applications in Pay-As-You-Go Data Integration Systems.","",2009,3643,0,14,4).
+publication(1588831,"Keys for XML.","",2001,3777,0,7,140).
+publication(1589251,"Learning to map between ontologies on the semantic web.","",2002,3777,0,26,320).
+publication(1589660,"Piazza: data management infrastructure for semantic web applications.","",2003,3777,0,31,140).
+publication(1590619,"Evolving the Semantic Web with Mangrove.","",2003,3777,0,36,3).
+publication(1590620,"Specifying Semantic Email Processes.","",2004,3777,0,6,0).
+publication(1590621,"Semantic email.","",2004,3777,0,30,18).
+publication(1591269,"Clustering query refinements by user intent.","",2010,3777,0,22,9).
+publication(1593410,"BPI-TWIG: XML Twig Query Evaluation.","",2009,3788,0,6,0).
+publication(1599574,"Decomposing a Window into Maximal Quadtree Blocks.","",1993,0,14,1,11).
+publication(1612681,"Speeding up Inferences Using Relevance Reasoning: A Formalism and Algorithms.","",1997,0,36,25,18).
+publication(1612682,"Automated Model Selection for Simulation Based on Relevance Reasoning.","",1997,0,36,13,6).
+publication(1612683,"Verification of Knowledge Bases Based on Containment Checking.","",1998,0,36,9,13).
+publication(1612684,"Combining Horn Rules and Description Logics in CARIN.","",1998,0,36,11,172).
+publication(1612685,"Intelligent Internet systems.","",2000,0,36,108,31).
+publication(1615636,"Reports of the AAAI 2010 Conference Workshops.","",2010,0,41,0,0).
+publication(1615973,"Semantic Integration Research in the Database Community: A Brief Survey.","",2005,0,41,70,105).
+publication(1615974,"Semantic Integration Workshop at the Second International Semantic Web Conference (ISWC-2003).","",2004,0,41,0,1).
+publication(1616693,"Semantic Integration.","",2005,0,41,0,38).
+publication(1640499,"Applications and extensions of cost curves to marine container inspection.","",2011,0,63,11,0).
+publication(1675539,"BioGuideSRS: querying multiple sources with a user-centric perspective.","",2007,0,93,3,7).
+publication(1677256,"Integrating and annotating the interactome using the MiMI plugin for cytoscape.","",2009,0,93,4,4).
+publication(1677263,"Metscape: a Cytoscape plug-in for visualizing and interpreting metabolomic data in the context of human metabolic networks.","",2010,0,93,2,0).
+publication(1678757,"Metscape 2 bioinformatics tool for the analysis and visualization of metabolomics and gene expression data.","",2012,0,93,0,0).
+publication(1682163,"ConceptGen: a gene set enrichment and gene set relation mapping tool.","",2010,0,93,3,1).
+publication(1686927,"Network analysis of genes regulated in renal diseases: implications for a molecular-based classification.","",2009,0,98,5,2).
+publication(1688074,"THINK Back: KNowledge-based Interpretation of High Throughput data.","",2012,0,98,0,0).
+publication(1690270,"Appearance frequency modulated gene set enrichment testing.","",2011,0,98,0,0).
+publication(1697404,"The Lowell database research self-assessment.","",2005,0,107,0,0).
+publication(1697464,"The Claremont report on database research.","",2009,0,107,0,12).
+publication(1697664,"A view of cloud computing.","",2010,0,107,0,85).
+publication(1697843,"Quantifying eventual consistency with PBS.","",2014,0,107,0,0).
+publication(1697859,"Looking up data in P2P systems.","",2003,0,107,14,213).
+publication(1698741,"Structured data on the web.","",2011,0,107,18,0).
+publication(1699984,"Crowdsourcing systems on the World-Wide Web.","",2011,0,107,0,2).
+publication(1699987,"Understanding the impact of video quality on user engagement.","",2013,0,107,0,0).
+publication(1701569,"Technical perspective - Schema mappings: rules for mixing data.","",2010,0,107,0,2).
+publication(1702291,"Big data and its technical challenges.","",2014,0,107,0,0).
+publication(1702402,"Security models for web-based applications.","",2001,0,107,8,64).
+publication(1703396,"Declarative networking.","",2009,0,107,0,3).
+publication(1725265,"A brief overview of the NEBULA future internet architecture.","",2014,0,124,0,0).
+publication(1725267,"Design guidelines for robust Internet protocols.","",2003,0,124,11,7).
+publication(1725441,"Making the world (of communications) a different place.","",2005,0,124,0,11).
+publication(1725752,"Taming IP packet flooding attacks.","",2004,0,124,22,39).
+publication(1726062,"OverQoS: offering Internet QoS using overlays.","",2003,0,124,9,40).
+publication(1735375,"A Graph Algebra for Scalable Visual Analytics.","",2012,0,133,0,0).
+publication(1735822,"An Algorithm for Perspective Viewing of Objects Represented by Octrees.","",1995,0,134,1,3).
+publication(1749722,"An Abstract Semantically Rich Compiler Collocative and Interpretative Model for OpenMP Programs.","",2011,0,146,0,0).
+publication(1763328,"Keys for XML.","",2002,0,161,1,68).
+publication(1763865,"A Query Language for XML.","",1999,0,161,4,211).
+publication(1765229,"End-host controlled multicast routing.","",2006,0,161,23,2).
+publication(1765757,"TCP-aware packet marking in networks with DiffServ support.","",2003,0,161,10,9).
+publication(1779098,"An efficient packet service algorithm for high-speed ATM switches.","",1998,0,169,9,0).
+publication(1786057,"Databases Deepen the Web.","",2004,0,177,0,9).
+publication(1786648,"An Object Model for Image Recognition.","",1989,0,177,6,10).
+publication(1786738,"Digital Government Security Infrastructure Design Challenges.","",2001,0,177,9,39).
+publication(1788758,"The RightPages Image-Based Electronic Library for Alerting and Browsing.","",1992,0,177,0,38).
+publication(1792774,"Addressing the provenance challenge using ZOOM.","",2008,0,184,17,10).
+publication(1793920,"Special Issue: The First Provenance Challenge.","",2008,0,184,5,17).
+publication(1800232,"Identifying Aspects for Web-Search Queries.","",2014,0,189,0,0).
+publication(1809183,"Qunits: queried units in database search.","",2009,0,189,29,2).
+publication(1809203,"Harnessing the Deep Web: Present and Future.","",2009,0,189,14,7).
+publication(1813835,"Preserving Module Privacy in Workflow Provenance.","",2010,0,189,28,1).
+publication(1824846,"Fast Updates on Read-Optimized Databases Using Multi-Core CPUs.","",2011,0,189,0,0).
+publication(1826247,"Faster and More Accurate Sequence Alignment with SNAP.","",2011,0,189,0,0).
+publication(1827201,"Putting Lipstick on Pig: Enabling Database-style Workflow Provenance.","",2012,0,189,0,0).
+publication(1829865,"BlinkDB: Queries with Bounded Errors and Bounded Response Times on Very Large Data.","",2012,0,189,0,0).
+publication(1830937,"Probabilistically Bounded Staleness for Practical Partial Quorums.","",2012,0,189,0,0).
+publication(1834261,"Spatial Queries with Two kNN Predicates.","",2012,0,189,0,0).
+publication(1834270,"Labeling Workflow Views with Fine-Grained Dependencies.","",2012,0,189,0,0).
+publication(1838034,"Shark: SQL and Rich Analytics at Scale.","",2012,0,189,0,0).
+publication(1838446,"A Propagation Model for Provenance Views of Public/Private Workflows.","",2012,0,189,0,0).
+publication(1845306,"Search and Result Presentation in Scientific Workflow Repositories.","",2013,0,189,0,0).
+publication(1848802,"bdbms - A Database Management System for Biological Data.","",2006,0,189,0,0).
+publication(1851395,"Coordination-Avoiding Database Systems.","",2014,0,189,0,0).
+publication(1857914,"The Lowell Database Research Self Assessment.","",2003,0,189,6,55).
+publication(1857967,"The Asilomar Report on Database Research.","",1998,0,189,0,0).
+publication(1865239,"Answering Regular Path Queries on Workflow Provenance.","",2014,0,189,0,0).
 conference(14,"AAAI","http://www.aaai.org/Conferences/AAAI/aaai11.php").
 conference(16,"AAAISS","").
 conference(35,"ACCV","http://www.accv2010.org/").

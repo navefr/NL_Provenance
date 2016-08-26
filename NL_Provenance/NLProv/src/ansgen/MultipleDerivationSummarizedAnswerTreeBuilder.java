@@ -28,20 +28,17 @@ public class MultipleDerivationSummarizedAnswerTreeBuilder extends AbstractAnswe
     protected String getNodeValue(WordMappings wordReplacementMap, ParseTreeNode node) {
         Set<String> mappings = getSetOfMappings(wordReplacementMap, node.wordOrder);
         Iterator<String> mappingsIterator = mappings.iterator();
-        if (mappings.size() == 1) {
+        if (mappings.size() == 0) {
+            return null;
+        } else if (mappings.size() == 1) {
             return StringUtil.getQuoatedString(mappingsIterator.next());
-        } else if (mappings.size() == 2) {
-            String first = StringUtil.getQuoatedString(mappingsIterator.next());
-            String second = StringUtil.getQuoatedString(mappingsIterator.next());
-            return String.format("%s and %s", first, second);
-        } else if (mappings.size() > 2) {
+        } else {
             if (allNumeric(mappingsIterator)) {
                 return handleNumericValues(mappings);
             } else {
                 return handleStringValues(node, mappings);
             }
         }
-        return null;
     }
 
     private boolean allNumeric(Iterator<String> mappingsIterator) {
