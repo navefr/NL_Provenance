@@ -1552,14 +1552,14 @@ public class NLProvServer {
                     String answer = values.get(i).getKey().replaceAll(" ", "%20").replaceAll("\"", "%22");
                     Boolean isMultiple = values.get(i).getValue();
                     response += "    document.getElementById(\"single_" + i + "\").onclick = function () {\n" +
-                            "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&answer=" + answer + "&type=single\";\n" +
+                            "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&&answer=" + answer + "&&type=single\";\n" +
                             "    };\n";
                     if (isMultiple) {
                         response += "    document.getElementById(\"multiple_" + i + "\").onclick = function () {\n" +
-                                "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&answer=" + answer + "&type=multiple\";\n" +
+                                "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "%22") + "&&answer=" + answer + "&&type=multiple\";\n" +
                                 "    };\n";
                         response += "    document.getElementById(\"summarized_" + i + "\").onclick = function () {\n" +
-                                "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "") + "&answer=" + answer + "&type=summarized\";\n" +
+                                "        location.href = \"\\explanation?query=" + query.replaceAll(" ", "%20").replaceAll("\"", "") + "&&answer=" + answer + "&&type=summarized\";\n" +
                                 "    };\n";
                     }
                 }
@@ -1620,7 +1620,7 @@ public class NLProvServer {
             String query = t.getRequestURI().getQuery();
 
             Map<String, String> params = new HashMap<>();
-            String[] querySplit = query.split("&");
+            String[] querySplit = query.split("&&");
             for (String part : querySplit) {
                 String[] partSplit = part.split("=");
                 assert partSplit.length == 2;
