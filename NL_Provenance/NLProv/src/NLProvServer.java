@@ -749,9 +749,12 @@ public class NLProvServer {
         public void handle(HttpExchange t) throws IOException {
             String query = t.getRequestURI().getQuery();
             List<Pair<String, Boolean>> values = null;
+            String errorMessage = null;
             try {
                  values = handleQuery(query);
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                errorMessage = e.getMessage();
+            }
             String response = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n" +
                     "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                     "<head>\n" +
@@ -1533,6 +1536,8 @@ public class NLProvServer {
                 }
                 response += "\t\t\t</tbody>\n" +
                         "\t\t</table>\n";
+            } else if (errorMessage != null) {
+                response += errorMessage;
             }
 
             response += "\t</div>\n" +
@@ -1575,6 +1580,26 @@ public class NLProvServer {
         }
 
         private List<Pair<String, Boolean>> handleQuery(String querySentence) throws Exception {
+            Collection<Block> blocks = executeQuery(querySentence);
+            if (blocks.size() == 1) {
+                Block block = blocks.iterator().next();
+                Map<ITuple, Collection<DerivationTree2>> tupleProvenanceTrees = measSN(block.DATALOGQuery);
+
+                List<Pair<String, Boolean>> ans = new ArrayList<>();
+                for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
+                    String value = tupleWithProvenanceTrees.getKey().get(0).getValue().toString();
+                    boolean isMultiple = tupleWithProvenanceTrees.getValue().size() > 1;
+                    ans.add(new ImmutablePair<>(value, isMultiple));
+                }
+                return ans;
+            } else if (blocks.size() == 0){
+                throw new RuntimeException("Error :(\nFailed to convert question to query");
+            } else {
+                throw new RuntimeException("Error :(\nAggregation is not supported. Wait for version 2.0");
+            }
+        }
+
+        private Collection<Block> executeQuery(String querySentence) throws Exception {
             Query query = new Query(querySentence, db.schemaGraph);
 
             components.StanfordNLParser.parse(query, lexiParser);
@@ -1585,21 +1610,7 @@ public class NLProvServer {
             System.out.println(query.originalParseTree);
             components.SQLTranslator.translate(query, db);
 
-            if (query.blocks.size() == 1) {
-                Block block = query.blocks.get(0);
-                Map<ITuple, Collection<DerivationTree2>> tupleProvenanceTrees = measSN(block.DATALOGQuery);
-
-                List<Pair<String, Boolean>> ans = new ArrayList<>();
-                for (Map.Entry<ITuple, Collection<DerivationTree2>> tupleWithProvenanceTrees : tupleProvenanceTrees.entrySet()) {
-                    String value = tupleWithProvenanceTrees.getKey().get(0).getValue().toString();
-                    boolean isMultiple = tupleWithProvenanceTrees.getValue().size() > 1;
-                    ans.add(new ImmutablePair<>(value, isMultiple));
-                }
-
-                return ans;
-            } else {
-                return null;
-            }
+            return query.blocks;
         }
     }
 
