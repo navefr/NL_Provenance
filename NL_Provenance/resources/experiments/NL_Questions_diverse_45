@@ -1,0 +1,46 @@
+Question,TotalTime
+"return the homepage of SIGMOD.",39
+"return the conferences in database area.",12
+"return the authors who published papers in SIGMOD after 2005.",1894
+"return me the authors from \"Tel Aviv University\" who published papers in VLDB.",2529
+"return the papers whose title contains \"OASSIS\"",371
+"return the authors who published papers in SIGMOD before 2015 and after 2005.",2321
+"return the papers which were published in conferences in database area",2297
+"return the area of conferences",403
+"return the authors who published papers in database conferences.",1162
+"return the authors who published papers in database conferences after 2005.",2088
+"return the organization of authors who published papers in database conferences after 2005.",3690
+"Return the conferences that presented papers published in 2005 by authors from organization",3611
+"Return the years of papers published by authors from IBM",2632
+"Return the authors who published papers in VLDB or SIGMOD after 2005",1975
+"Return me the authors from \"Tel Aviv University\" or \"Hebrew University of Jerusalem\" who published papers in VLDB or SIGMOD.",774
+"Return me the papers published by authors from \"Tel Aviv University\" or \"Hebrew University of Jerusalem\".",2643
+"Return the homepage of \"Tova Milo\".",5
+"Return the organization of \"Tova Milo\".",6
+"Return the homepage of authors from \"Tel Aviv University\".",1527
+"Return the homepage of authors from \"Tel Aviv University\" or \"Hebrew University of Jerusalem\".",3749
+"Return the domain of SIGMOD.",7
+"Return the conferences with papers published after 2005.",1185
+"Return the conferences with papers published in 2005.",2010
+"Return the papers of \"Tova Milo\" published in VLDB after 2005.",436
+"Return the papers of \"Tova Milo\" published in VLDB in 2005.",10
+"Return the organization of authors who published papers in database conferences in 2005.",3007
+"Return the conferences presenting papers of authors from \"Tel Aviv University\".",2502
+"Return the conferences presenting papers by \"Tova Milo\".",608
+"Return the conferences presenting papers by \"Tova Milo\" and \"Daniel Deutch\".",625
+"Return the conferences presenting papers by \"Tova Milo\" or \"Daniel Deutch\".",620
+"Return the homepage of database conferences.",1702
+"Return the homepage of conferences who presented papers by \"Tova Milo\".",2781
+"Return the homepage of conferences who presented papers by \"Tova Milo\" after 2005.",3379
+"Return the publication year of \"OASSIS: query driven crowd mining\".",6
+"Return the papers who were presented in database conferences after 2005.",1775
+"Return the domain of conferences presenting papers by \"Tova Milo\".",1993
+"Return the domain of conferences presenting papers by \"Tova Milo\" in 2005.",2737
+"Return the domain of conferences presenting papers by \"Tova Milo\" after 2005.",3863
+"Return the authors from \"Tel Aviv University\".",6
+"Return the domain of conferences presenting papers by authors from \"Tel Aviv University\".",3216
+"Return the domain of conferences presenting papers by authors from \"Tel Aviv University\" after 2005.",4694
+"Return the domain of conferences presenting papers by authors from \"Tel Aviv University\" in 2005.",4140
+"Return the authors who published papers in VLDB.",549
+"Return the authors who published papers in VLDB in 2005.",611
+"Return the authors who published papers in VLDB after 2005.",1712
